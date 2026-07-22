@@ -1,4 +1,6 @@
 @extends('layouts.master')
+@section('page_title', 'Giới thiệu | ' . data_get($infor, 'name', 'Personal Brand'))
+@section('og_title', 'Giới thiệu | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
 <style>
     .about-grid-card {

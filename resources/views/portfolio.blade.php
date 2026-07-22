@@ -1,4 +1,6 @@
 @extends('layouts.master')
+@section('page_title', 'Case Study | ' . data_get($infor, 'name', 'Personal Brand'))
+@section('og_title', 'Case Study | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
 <section class="about-section-inner">
     <div class="container">

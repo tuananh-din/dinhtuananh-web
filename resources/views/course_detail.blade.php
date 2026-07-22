@@ -1,4 +1,24 @@
 @extends('layouts.master')
+@php
+    // A-4: SEO cho từng khoá học. Ưu tiên seo_title/seo_description do admin nhập,
+    // fallback dần short_description → description → content (155 ký tự).
+    $courseTitle = $course->seo_title ?: $course->title;
+    $courseDescription = \Illuminate\Support\Str::limit(
+        strip_tags(
+            $course->seo_description
+                ?: ($course->short_description ?: ($course->description ?: ($course->content ?? '')))
+        ),
+        155
+    );
+    $courseBrand = data_get($infor, 'name', 'Personal Brand');
+@endphp
+@section('page_title', $courseTitle . ' | ' . $courseBrand)
+@section('meta_description', $courseDescription)
+@section('og_title', $courseTitle)
+@section('og_description', $courseDescription)
+@if(!empty($course->thumbnail))
+    @section('og_image', \Illuminate\Support\Str::startsWith($course->thumbnail, ['http://','https://','//']) ? $course->thumbnail : asset(ltrim($course->thumbnail, '/')))
+@endif
 @section('content')
 <style>
     .course-detail-shell {

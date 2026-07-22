@@ -8,6 +8,11 @@
     $faviconUrl = \Illuminate\Support\Str::startsWith($favicon, ['http://', 'https://', '//', '/'])
         ? $favicon
         : asset($favicon);
+    // A-4: fallback ảnh OG dùng logo site (chuẩn hóa URL tuyệt đối giống favicon).
+    $defaultOgImage = data_get($siteInfo, 'logo', 'app/assets/images/others/thumb-16.jpg');
+    $defaultOgImageUrl = \Illuminate\Support\Str::startsWith($defaultOgImage, ['http://', 'https://', '//'])
+        ? $defaultOgImage
+        : asset(ltrim($defaultOgImage, '/'));
 @endphp
 <!DOCTYPE html>
 <html lang="vi">
@@ -17,10 +22,15 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Gramentheme">
-        <meta name="description" content="{{ $seoDescription }}">
+        <meta name="description" content="@yield('meta_description', $seoDescription)">
         <!-- ======== Page title ============ -->
-        <title>{{ $siteName }}</title>
+        <title>@yield('page_title', $siteName)</title>
+        <!-- ========== Open Graph ========== -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="@yield('og_title', $siteName)">
+        <meta property="og:description" content="@yield('og_description', $seoDescription)">
+        <meta property="og:image" content="@yield('og_image', $defaultOgImageUrl)">
+        <meta property="og:url" content="{{ url()->current() }}">
         <!--<< Favcion >>-->
         <link rel="shortcut icon" href="{{ $faviconUrl }}" type="image/x-icon" />
         <!--<< Bootstrap min.css >>-->

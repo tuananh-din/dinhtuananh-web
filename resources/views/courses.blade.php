@@ -1,4 +1,6 @@
 @extends('layouts.master')
+@section('page_title', 'Khóa học | ' . data_get($infor, 'name', 'Personal Brand'))
+@section('og_title', 'Khóa học | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
 <style>
     .course-list-shell {

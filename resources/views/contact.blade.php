@@ -1,4 +1,6 @@
 @extends('layouts.master')
+@section('page_title', 'Liên hệ | ' . data_get($infor, 'name', 'Personal Brand'))
+@section('og_title', 'Liên hệ | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
 <style>
     .contact-shell {

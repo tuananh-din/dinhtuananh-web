@@ -1,4 +1,6 @@
 @extends('layouts.master')
+@section('page_title', 'Blog | ' . data_get($infor, 'name', 'Personal Brand'))
+@section('og_title', 'Blog | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
 <section class="news-grid-section1 fix">
     <div class="container">

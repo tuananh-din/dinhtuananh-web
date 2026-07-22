@@ -1,4 +1,6 @@
 @extends('layouts.master')
+@section('page_title', 'Cuộc sống | ' . data_get($infor, 'name', 'Personal Brand'))
+@section('og_title', 'Cuộc sống | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
         <!-- Project Section Start -->
         <section class="project-section tp-project-5-2-area fix section-padding">
