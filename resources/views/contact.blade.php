@@ -2,45 +2,6 @@
 @section('page_title', 'Liên hệ | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('og_title', 'Liên hệ | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
-<style>
-    .contact-shell {
-        padding: 110px 0;
-    }
-
-    .contact-card {
-        max-width: 760px;
-        margin: 0 auto;
-        background: #121212;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        padding: 28px;
-    }
-
-    .contact-card .form-clt {
-        margin-bottom: 12px;
-    }
-
-    .contact-card input,
-    .contact-card textarea {
-        width: 100%;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background: #0e0e0e;
-        color: #fff;
-        padding: 11px 12px;
-    }
-
-    .contact-card textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-
-    .contact-note {
-        color: #bdbdbd;
-        margin-top: 10px;
-    }
-</style>
-
 <section class="contact-shell fix">
     <div class="container">
         <div class="contact-card">

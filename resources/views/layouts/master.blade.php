@@ -49,6 +49,7 @@
         <link rel="stylesheet" href="{{ asset('site/assets/css/nice-select.css') }}">
         <!--<< Main.css >>-->
         <link rel="stylesheet" href="{{ asset('site/assets/css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('site/assets/css/custom.css') }}">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     </head>
