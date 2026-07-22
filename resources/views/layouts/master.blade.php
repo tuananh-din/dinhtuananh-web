@@ -40,7 +40,6 @@
         <!--<< Main.css >>-->
         <link rel="stylesheet" href="{{ asset('site/assets/css/main.css') }}">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     </head>
     <body>
@@ -103,5 +102,7 @@
                 toastr.error(@json(session('error')));
             @endif
         </script>
+        {{-- Slot cho các view push script phụ thuộc jQuery/main.js đã nạp xong. --}}
+        @stack('scripts')
     </body>
 </html>

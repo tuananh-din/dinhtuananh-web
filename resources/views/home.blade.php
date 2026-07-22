@@ -642,6 +642,10 @@
         </div>
     </div>
 </section>
+@endsection
+
+{{-- Đẩy typing effect xuống cuối body (sau khi jQuery local nạp) để tránh $ undefined. --}}
+@push('scripts')
 <script>
 $(document).ready(function () {
     const $el = $("#typing-text");
@@ -680,4 +684,4 @@ $(document).ready(function () {
     interval = setInterval(typeEffect, 150);
 });
 </script>
-@endsection
+@endpush
