@@ -1,0 +1,47 @@
+.file-input {
+	font-family: sans-serif;
+	display: inline-block;
+	text-align: left;
+	padding: 8px 0;
+	position: relative;
+	width: 100%;
+}
+.file-input > [type="file"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	z-index: 10;
+	cursor: pointer;
+}
+.file-input > .button {
+	display: inline-block;
+	cursor: pointer;
+	background: #ccc;
+	padding: 8px 16px;
+	border-radius: 2px;
+	margin-right: 8px;
+	font-size: 14px;
+}
+.file-input:hover > .button {
+	background: #263238;
+	color: #fff;
+}
+.file-input > .label {
+	color: #333;
+	white-space: nowrap;
+	opacity: .7;
+	font-size: 13px;
+}
+#preview {
+	max-width: 180px;
+}
+
+.richtexteditor {
+    min-height: 500px;
+}
+.ck-editor__editable {
+	min-height: 250px;
+}

@@ -1,0 +1,693 @@
+.footer-wrapper {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 40px;
+    margin-top: 60px;
+    
+    .footer-menu-list {
+        @include flex;
+        gap: 40px;
+        justify-content: center;
+
+        @include breakpoint (max-md){
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        li {
+            a {
+                color: $text-color;
+
+                &:hover {
+                    color: $theme-color;
+                }
+            }
+        }
+    }
+
+    .icon-items-area {
+        margin-top: 60px;
+        @include flex;
+        gap: 25px;
+        justify-content: center;
+
+         @include breakpoint (max-md){
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .icon-items {
+            @include flex;
+            gap: 10px;
+
+            .icon {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                display: inline-block;
+                text-align: center;
+                border-radius: 50%;
+                background-color: #171914;
+                @include transition;
+
+                &:hover {
+                    background-color: $theme-color;
+                    color: #060606;
+                }
+            }
+
+            a {
+                text-transform: capitalize;
+                font-family: $body-font;
+                color: $text-color;
+                @include transition;
+
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+    }
+}
+
+.footer-bottom {
+    @include flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.20);
+    padding: 30px 0;
+    margin-top: 40px;
+
+     @include breakpoint (max-md){
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    p {
+        span {
+            color: $theme-color;
+        }
+    }
+
+    ul {
+        @include flex;
+        gap: 20px;
+
+        li {
+            font-size: 14px;
+            font-weight: 400;
+
+            a {
+                color: $text-color;
+            }
+        }
+    }
+}
+
+.footer-wrapper-2 {
+    border-radius: 20px;
+    background: #1A1A1A;
+    padding: 120px 0 40px;
+    margin: 0 60px;
+
+    @include breakpoint (max-xxxl){
+        margin: 0 25px;
+        padding: 100px 0 25px;
+    }
+
+     @include breakpoint (max-xl){
+        margin: 0 15px;
+        padding: 100px 0 20px;
+    }
+
+    .footer-logo {
+        @include breakpoint (max-lg){
+            img {
+                width: 280px;
+            }
+        }
+
+          @include breakpoint (max-md){
+            img {
+                width: 220px;
+            }
+        }
+
+        @include breakpoint (max-sm){
+            img {
+                width: 180px;
+            }
+        }
+    }
+
+    .content {
+        margin-top: 50px;
+
+        p {
+            color: $white;
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 11.52px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+
+            @include breakpoint (max-lg){
+             font-size: 18px;
+            }
+        }
+
+        h2 {
+            color: #888;
+            font-size: 150px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+
+            @include breakpoint (max-xl){
+                font-size: 120px;
+            }
+
+             @include breakpoint (max-lg){
+                font-size: 90px;
+            }
+
+            @include breakpoint (max-md){
+                font-size: 70px;
+            }
+
+            @include breakpoint (max-sm){
+                font-size: 60px;
+            }
+
+             @include breakpoint (max-xxs){
+                font-size: 45px;
+            }
+
+            span {
+                color: #888;
+                text-decoration: underline !important;
+            }
+        }
+    }
+
+    .footer-link-area {
+        border-top: 1px solid rgba(255, 255, 255, 0.20);
+        margin-top: 60px;
+        padding-top: 40px;
+        
+        .link-item {
+            .widget-title {
+                color: $white;
+                font-family: $body-font;
+                font-size: 18px;
+                font-weight: 500;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                margin-bottom: 25px;
+            }
+
+            .menu-item {
+                @include flex;
+                gap: 20px;
+
+                @include breakpoint (max-xxl){
+                    flex-wrap: wrap;
+                    gap: 14px;
+                }
+
+                li {
+                    font-size: 14px;
+                    font-weight: 500;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+
+                    a {
+                        color: #888;
+
+                        &:hover {
+                            color: $theme-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .location-text {
+            margin-left: -30px;
+            border-right: none;
+
+            @include breakpoint (max-xxl){
+                margin-left: 0;
+            }
+
+            p {
+                color: #888;
+                font-size: 16px;
+                font-weight: 500;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+.footer-bottom-2 {
+    .footer-bottom-wrapper-2 {
+        @include flex;
+        justify-content: space-between;
+        padding: 30px 0;
+
+        @include breakpoint (max-xl){
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        @include breakpoint (max-md){
+           justify-content: center;
+        }
+
+         p {
+            span {
+                color: $theme-color;
+            }
+        }
+
+        ul {
+            @include flex;
+            gap: 20px;
+
+            li {
+                font-size: 14px;
+                font-weight: 400;
+
+                a {
+                    color: $text-color;
+
+                    &:hover {
+                        color: $theme-color;
+                    }
+                }
+            }
+        }
+
+        .icon-items-area {
+            @include flex;
+            gap: 25px;
+            justify-content: center;
+
+            @include breakpoint (max-sm){
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .icon-items {
+                @include flex;
+                gap: 10px;
+
+                .icon {
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    display: inline-block;
+                    text-align: center;
+                    border-radius: 50%;
+                    background-color: #171914;
+                    @include transition;
+                }
+
+                a {
+                    text-transform: capitalize;
+                    font-family: $body-font;
+                    color: $text-color;
+                    @include transition;
+                }
+
+                &:hover {
+                    .icon {
+                        background-color: $theme-color;
+                        color: #060606;
+                    }
+                   a {
+                     color: $white;
+                   }
+                }
+            }
+        }
+    }
+}
+
+.footer-box-items {
+    border-radius: 10px;
+    background: #1A1A1A;
+    padding: 60px 0 0;
+
+    .icon {
+        width: 138px;
+        height: 138px;
+        border-radius: 50%;
+        background: #060606;
+        text-align: center;
+        line-height: 138px;
+        margin: 0 auto;
+    }
+
+    .content {
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 30px;
+        padding: 0 60px;
+
+         @include breakpoint (max-lg){
+            padding: 0 35px;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+          @include breakpoint (max-sm){
+            padding: 0 30px;
+        }
+
+        p {
+            color: $white;
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 4.8px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+
+              @include breakpoint (max-sm){
+               font-size: 18px;
+            }
+        }
+
+        h2 {
+            color: #888;
+            font-size: 80px;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+            text-transform: uppercase;
+
+            @include breakpoint (max-md){
+                font-size: 60px;
+            }
+
+             @include breakpoint (max-sm){
+                font-size: 50px;
+            }
+        }
+
+        .icon-items-area {
+            @include flex;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 45px;
+
+             @include breakpoint (max-xl){
+              gap: 15px;
+              margin-top: 20px;
+              flex-wrap: wrap;
+            }
+
+            .icon-items {
+                @include flex;
+                gap: 10px;
+
+                .icon {
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    display: inline-block;
+                    text-align: center;
+                    border-radius: 50%;
+                    background-color: #171914;
+                    @include transition;
+                }
+
+                a {
+                    text-transform: capitalize;
+                    font-family: $body-font;
+                    color: $text-color;
+                    @include transition;
+                }
+
+                &:hover {
+                    .icon {
+                        background-color: $theme-color;
+                        color: #060606;
+                    }
+                   a {
+                     color: $white;
+                   }
+                }
+            }
+        }
+    }
+
+    .f-bottom-text {
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.20);
+        padding: 20px 0;
+    }
+}
+
+.revox-image {
+    margin-top: 30px;
+    display: inline-block;
+
+     @include breakpoint (max-xxl){
+        display: block;
+        
+        img {
+            @include imgw;
+        }
+    }
+    
+    img {
+        @include imgw;
+    }
+}
+
+.footer-section {
+    position: relative;
+
+    .like-shape {
+        position: absolute;
+        top: 14%;
+        right: 9%;
+
+        @include breakpoint (max-xl){
+            display: none;
+        }
+    }
+}
+
+
+.footer-wrapper-4 {
+    border-radius: 20px;
+    background: #060606;
+    padding: 0;
+    margin: 0 60px;
+
+    @include breakpoint (max-xxxl){
+        margin: 0 25px;
+    }
+
+     @include breakpoint (max-xl){
+        margin: 0 15px;
+    }
+
+    .footer-logo {
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+
+        @include breakpoint (max-lg){
+            img {
+                width: 280px;
+            }
+        }
+
+          @include breakpoint (max-md){
+            img {
+                width: 220px;
+            }
+        }
+
+        @include breakpoint (max-sm){
+            img {
+                width: 180px;
+            }
+        }
+    }
+
+    .content {
+        margin-top: 50px;
+        text-align: center;
+
+        h2 {
+            color: #888;
+            font-size: 150px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+
+            @include breakpoint (max-xl){
+                font-size: 120px;
+            }
+
+             @include breakpoint (max-lg){
+                font-size: 90px;
+            }
+
+            @include breakpoint (max-md){
+                font-size: 70px;
+            }
+
+            @include breakpoint (max-sm){
+                font-size: 60px;
+            }
+
+             @include breakpoint (max-xxs){
+                font-size: 45px;
+            }
+
+            span {
+                color: #888;
+                text-decoration: underline !important;
+            }
+        }
+    }
+
+    .footer-link-area {
+        border-top: 1px solid rgba(255, 255, 255, 0.20);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+        margin-top: 40px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        
+        .link-item {
+            .widget-title {
+                color: $white;
+                font-family: $body-font;
+                font-size: 18px;
+                font-weight: 500;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                margin-bottom: 25px;
+            }
+
+            .menu-item {
+                @include flex;
+                gap: 20px;
+
+                @include breakpoint (max-xxl){
+                    flex-wrap: wrap;
+                    gap: 14px;
+                }
+
+                li {
+                    font-size: 14px;
+                    font-weight: 500;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+
+                    a {
+                        color: #888;
+
+                        &:hover {
+                            color: $theme-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .location-text {
+            margin-left: -30px;
+            border-right: none;
+
+            @include breakpoint (max-xxl){
+                margin-left: 0;
+            }
+
+            p {
+                color: #888;
+                font-size: 16px;
+                font-weight: 500;
+                text-transform: uppercase;
+            }
+        }
+
+        .icon-items-area {
+            @include flex;
+            gap: 25px;
+            justify-content: end;
+
+            @include breakpoint (max-xxl){
+                justify-content: start;
+            }
+
+            @include breakpoint (max-sm){
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .icon-items {
+                @include flex;
+                gap: 10px;
+
+                .icon {
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    display: inline-block;
+                    text-align: center;
+                    border-radius: 50%;
+                    background-color: #171914;
+                    @include transition;
+                }
+
+                a {
+                    text-transform: capitalize;
+                    font-family: $body-font;
+                    color: $text-color;
+                    @include transition;
+                }
+
+                &:hover {
+                    .icon {
+                        background-color: $theme-color;
+                        color: #060606;
+                    }
+                   a {
+                     color: $white;
+                   }
+                }
+            }
+        }
+    }
+}
+
+.footer-bottom-4 {
+    .footer-bottom-wrapper-4 {
+       text-align: center;
+        padding: 30px 0;
+
+        @include breakpoint (max-xl){
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        @include breakpoint (max-md){
+           justify-content: center;
+        }
+
+         p {
+            span {
+                color: $theme-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,142 @@
+.cta-text-items {
+    padding: 0 20px;
+
+    .icon {
+        width: 132px;
+        height: 132px;
+        line-height: 132px;
+        border-radius: 50%;
+        text-align: center;
+        background-color: #1A1A1A;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-size: 171px;
+        font-weight: 700;
+        color: $text-color;
+        letter-spacing: -1.71px;
+
+         @include breakpoint (max-xxxl){
+            font-size: 130px;
+        }
+
+        @include breakpoint (max-lg){
+            font-size: 100px;
+        }
+
+        @include breakpoint (max-md){
+            font-size: 70px;
+        }
+
+        @include breakpoint (max-sm){
+            font-size: 50px;
+        }
+    }
+
+    h3 {
+        font-size: 171px;
+        font-weight: 700;
+        letter-spacing: -1.71px;
+        border-bottom: 3px solid $theme-color;
+        display: inline-block;
+        line-height: 1;
+        margin-bottom: 50px;
+
+        a {
+            color: $theme-color;
+        }
+
+        @include breakpoint (max-xxl){
+            font-size: 130px;
+            margin-bottom: 30px;
+        }
+
+        @include breakpoint (max-lg){
+            font-size: 100px;
+        }
+
+        @include breakpoint (max-md){
+            font-size: 70px;
+        }
+
+        @include breakpoint (max-sm){
+            font-size: 50px;
+        }
+    }
+
+
+    .cta-btn {
+        @include flex;
+        gap: 20px;
+        margin-top: 50px;
+        justify-content: center;
+
+         @include breakpoint (max-xl){
+          margin-top: 30px;
+          flex-wrap: wrap;
+        }
+    }
+}
+
+.cta-section {
+    position: relative;
+    z-index: 9;
+
+     @include breakpoint (max-xl){
+        br {
+            display: none;
+        }
+    }
+
+    .shape-1 {
+        position: absolute;
+        z-index: -1;
+        top: 23%;
+        left: -3%;
+
+         @include breakpoint (max-xl){
+           display: none;
+        }
+    }
+
+    .shape-2 {
+        position: absolute;
+        z-index: -1;
+        top: 18%;
+        left: 8%;
+    }
+
+    .shape-3 {
+        position: absolute;
+        z-index: -1;
+        bottom: 33%;
+        left: 20%;
+
+        @include breakpoint (max-xl){
+           display: none;
+        }
+    }
+
+    .shape-4 {
+        position: absolute;
+        z-index: -1;
+        bottom: 0%;
+        left: 45%;
+    }
+
+    .shape-5 {
+        position: absolute;
+        z-index: -1;
+        bottom: 25%;
+        right: 20%;
+    }
+
+    .shape-6 {
+        position: absolute;
+        z-index: -1;
+        top: 13%;
+        right: 8%;
+    }
+}
