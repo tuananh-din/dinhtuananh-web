@@ -3,6 +3,9 @@
 @section('og_title', 'Blog | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
 <section class="news-grid-section1 fix">
+    <style>
+        .post-date { font-size: 0.8rem; color: #999; display: block; margin-bottom: 8px; }
+    </style>
     <div class="container">
         <h1>Blog</h1>
         <div class="row bb-bottom">
@@ -15,7 +18,12 @@
                         </a>
                     </div>
                     <div class="content">
+                        <span class="post-date">{{ optional($row->created_at)->format('d/m/Y') }}</span>
                         <h3><a href="{{ route('blog', $row->slug) }}">{{ $row->title }}</a></h3>
+                        @if($row->description)
+                        <p>{{ $row->description }}</p>
+                        @endif
+                        <a href="{{ route('blog', $row->slug) }}" class="theme-btn">&#272;&#7885;c b&#224;i vi&#7871;t <i class="fa-solid fa-arrow-up-right"></i></a>
                     </div>
                 </div>
             </div>
