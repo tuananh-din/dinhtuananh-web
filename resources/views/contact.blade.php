@@ -19,6 +19,11 @@
 
             <form action="{{ route('lead.store') }}" method="POST" class="mt-4">
                 @csrf
+                {{-- Honeypot chống bot: bot điền, user thật không thấy. --}}
+                <div class="hp-wrap" aria-hidden="true">
+                    <label for="hp-website-contact">Website</label>
+                    <input type="text" name="website" id="hp-website-contact" tabindex="-1" autocomplete="off">
+                </div>
                 <input type="hidden" name="source_page" value="contact_page">
                 <div class="form-clt">
                     <input type="text" name="name" placeholder="H&#7885; v&#224; t&#234;n (*)" value="{{ old('name') }}" required>

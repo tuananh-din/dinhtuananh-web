@@ -304,3 +304,5 @@
         color: #bdbdbd;
         margin-top: 10px;
     }
+/* === honeypot (B-4) === */
+.hp-wrap { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
