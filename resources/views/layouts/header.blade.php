@@ -85,7 +85,7 @@
                     <img src="{{ $siteLogoUrl }}" alt="logo">
                 </a>
                 <div class="header-right justify-content-end align-items-center">
-                    <div class="mean__menu-wrapper d-none">
+                    <div class="mean__menu-wrapper d-none d-lg-block">
                         <div class="main-menu">
                             <nav id="mobile-menus">
                                 <ul>

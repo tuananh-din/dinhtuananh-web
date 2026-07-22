@@ -18,7 +18,9 @@
 
        $('#mobile-menus').meanmenu({
         meanMenuContainer: '.mobile-menus',
-        meanScreenWidth: "19920",
+        // Chỉ dùng phiên bản mean (dropdown) ở mobile (<=991px);
+        // từ 992px trở lên hiển thị menu ngang gốc trong header.
+        meanScreenWidth: "991",
         meanExpand: ['<i class="far fa-plus"></i>'],
     });
 
