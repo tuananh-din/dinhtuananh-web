@@ -273,7 +273,7 @@
 
 <section class="hero-section hero-1 hero-section1 fix">
     <div class="line-shape">
-        <img src="site/assets/img/home-1/hero/line-shape.png" alt="img">
+        <img src="{{ asset('site/assets/img/home-1/hero/line-shape.png') }}" alt="img">
     </div>
 
     <div class="container">
@@ -593,13 +593,13 @@
 
 <section class="cta-section section-padding fix pt-0" id="final-cta">
     <div class="shape-1">
-        <img src="site/assets/img/home-1/cta/cta-shape-1.png" alt="img">
+        <img src="{{ asset('site/assets/img/home-1/cta/cta-shape-1.png') }}" alt="img">
     </div>
     <div class="shape-2">
-        <img src="site/assets/img/home-1/cta/shape-1.png" alt="img">
+        <img src="{{ asset('site/assets/img/home-1/cta/shape-1.png') }}" alt="img">
     </div>
     <div class="shape-3">
-        <img src="site/assets/img/home-1/cta/shape-2.png" alt="img">
+        <img src="{{ asset('site/assets/img/home-1/cta/shape-2.png') }}" alt="img">
     </div>
     <div class="row">
         <div class="col-xl-12">

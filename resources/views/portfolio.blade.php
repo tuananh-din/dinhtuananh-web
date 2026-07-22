@@ -44,7 +44,7 @@
         <div class="favorite-tools-wrapper">
             <h3><span>Core</span> Expertise</h3>
             <div class="vec-shape">
-                <img src="site/assets/img/vec.png" alt="img">
+                <img src="{{ asset('site/assets/img/vec.png') }}" alt="img">
             </div>
             <div class="favorite-tools-items">
                 @foreach ($skills as $row)

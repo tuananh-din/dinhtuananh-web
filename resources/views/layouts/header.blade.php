@@ -2,6 +2,11 @@
     $siteInfo = $infor ?? null;
     $contactInfo = $contact ?? null;
     $siteLogo = data_get($siteInfo, 'logo', 'app/assets/images/others/thumb-16.jpg');
+    // Logo có thể là URL tuyệt đối, đường dẫn "/storage/..." hoặc chuỗi tương đối.
+    // Chỉ bọc asset() khi là đường dẫn tương đối, tránh lặp URL với các giá trị đã tuyệt đối.
+    $siteLogoUrl = \Illuminate\Support\Str::startsWith($siteLogo, ['http://', 'https://', '//', '/'])
+        ? $siteLogo
+        : asset($siteLogo);
     $brandName = data_get($contactInfo, 'name') ?: data_get($siteInfo, 'name', 'Brand');
     $phone = data_get($contactInfo, 'tel', '');
     $email = data_get($contactInfo, 'email', '');
@@ -28,7 +33,7 @@
     <div class="header-offcanvas-border">
         <div class="offcanvas__info">
             <a href="{{ route('index') }}" class="offcanvas__logo">
-                <img src="{{ $siteLogo }}" height="100px" alt="logo">
+                <img src="{{ $siteLogoUrl }}" height="100px" alt="logo">
             </a>
             <div class="offcanvas__close">
                 <button>
@@ -77,7 +82,7 @@
         <div class="mega-menu-wrapper">
             <div class="header-main">
                 <a href="{{ route('index') }}" class="offcanvas__logo">
-                    <img src="{{ $siteLogo }}" alt="logo">
+                    <img src="{{ $siteLogoUrl }}" alt="logo">
                 </a>
                 <div class="header-right justify-content-end align-items-center">
                     <div class="mean__menu-wrapper d-none">
@@ -97,7 +102,7 @@
                     <a href="{{ route('index') }}#final-cta" class="theme-btn">&#272;&#259;ng k&#253; h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
                     <div class="header__hamburger my-auto">
                         <div class="sidebar__toggle">
-                            <img src="site/assets/img/bar.svg" alt="menu">
+                            <img src="{{ asset('site/assets/img/bar.svg') }}" alt="menu">
                         </div>
                     </div>
                 </div>

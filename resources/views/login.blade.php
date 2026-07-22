@@ -7,12 +7,12 @@
     <title>NVH - Admin Dashboard Template</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="app/assets/images/logo/favicon.png">
+    <link rel="shortcut icon" href="{{ asset('app/assets/images/logo/favicon.png') }}">
 
     <!-- page css -->
 
     <!-- Core css -->
-    <link href="app/assets/css/app.min.css" rel="stylesheet">
+    <link href="{{ asset('app/assets/css/app.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -26,7 +26,7 @@
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between m-b-30">
-                                        <img class="img-fluid" alt="" src="app/assets/images/logo/logo.png">
+                                        <img class="img-fluid" alt="" src="{{ asset('app/assets/images/logo/logo.png') }}">
                                         <h2 class="m-b-0">Sign In</h2>
                                     </div>
                                     @if ($errors->any())
@@ -77,12 +77,12 @@
 
     
     <!-- Core Vendors JS -->
-    <script src="app/assets/js/vendors.min.js"></script>
+    <script src="{{ asset('app/assets/js/vendors.min.js') }}"></script>
 
     <!-- page js -->
 
     <!-- Core JS -->
-    <script src="app/assets/js/app.min.js"></script>
+    <script src="{{ asset('app/assets/js/app.min.js') }}"></script>
 
 </body>
 
