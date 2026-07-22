@@ -14,6 +14,7 @@ class BlogController extends Controller
 
     public function detail($slug){
         $blog = Blog::where('slug',$slug)->firstOrFail();
-        return view('blog_detail',compact('blog'));
+        $otherBlogs = Blog::where('id','!=',$blog->id)->orderBy('id','DESC')->limit(3)->get();
+        return view('blog_detail',compact('blog','otherBlogs'));
     }
 }
