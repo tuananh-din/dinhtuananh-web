@@ -12,6 +12,22 @@
     <div class="card">
         <div class="card-body">
             <h4>Danh s&#225;ch lead &#273;&#259;ng k&#253;</h4>
+            <div class="d-flex flex-wrap align-items-center justify-content-between m-b-15">
+                <div class="lead-counts">
+                    <span class="badge badge-primary m-r-5">Tổng {{ $total }}</span>
+                    @foreach(\App\Models\Lead::STATUSES as $sValue => $sLabel)
+                        <span class="badge badge-default m-r-5">{{ $sLabel }}: {{ $counts[$sValue] ?? 0 }}</span>
+                    @endforeach
+                </div>
+                <form method="GET" action="{{ route('admin.lead') }}" class="lead-filter">
+                    <select name="status" class="form-control" onchange="this.form.submit()">
+                        <option value="">Tất cả trạng thái</option>
+                        @foreach(\App\Models\Lead::STATUSES as $sValue => $sLabel)
+                            <option value="{{ $sValue }}" {{ ($status ?? '') === $sValue ? 'selected' : '' }}>{{ $sLabel }}</option>
+                        @endforeach
+                    </select>
+                </form>
+            </div>
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -42,23 +58,14 @@
                             </td>
                             <td>
                                 {{ $lead->source_page ?: '-' }}<br>
-                                @if($lead->course_id)Course ID: {{ $lead->course_id }}@endif
+                                @if($lead->course_id){{ $lead->course?->title ?? ('Course #'.$lead->course_id) }}@endif
                             </td>
                             <td>
                                 <form action="{{ route('lead.update', $lead->id) }}" method="POST">
                                     @csrf
                                     <select name="status" class="form-control">
-                                        @php
-                                            $statuses = [
-                                                'new' => 'M&#7899;i',
-                                                'contacted' => '&#272;&#227; li&#234;n h&#7879;',
-                                                'qualified' => 'Ti&#7873;m n&#259;ng',
-                                                'won' => 'Ch&#7889;t th&#224;nh c&#244;ng',
-                                                'lost' => 'Kh&#244;ng ch&#7889;t',
-                                            ];
-                                        @endphp
-                                        @foreach($statuses as $value => $label)
-                                            <option value="{{ $value }}" {{ $lead->status == $value ? 'selected' : '' }}>{!! $label !!}</option>
+                                        @foreach(\App\Models\Lead::STATUSES as $value => $label)
+                                            <option value="{{ $value }}" {{ $lead->status == $value ? 'selected' : '' }}>{{ $label }}</option>
                                         @endforeach
                                     </select>
                             </td>

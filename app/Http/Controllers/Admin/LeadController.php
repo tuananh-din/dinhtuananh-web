@@ -8,10 +8,22 @@ use Illuminate\Http\Request;
 
 class LeadController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $leads = Lead::orderBy('id', 'DESC')->paginate(20);
-        return view('admin.lead.index', compact('leads'));
+        $status = $request->query('status');
+        if (!array_key_exists($status, Lead::STATUSES)) {
+            $status = null;
+        }
+
+        $leads = Lead::with('course')
+            ->when($status, fn($q) => $q->where('status', $status))
+            ->orderBy('id', 'DESC')
+            ->paginate(20)
+            ->withQueryString();
+        $counts = Lead::selectRaw('status, COUNT(*) as c')->groupBy('status')->pluck('c', 'status');
+        $total = $counts->sum();
+
+        return view('admin.lead.index', compact('leads', 'status', 'counts', 'total'));
     }
 
     public function update(Request $request, $id)
