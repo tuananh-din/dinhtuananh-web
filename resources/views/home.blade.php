@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@push('structured_data')
+    @include('partials.jsonld-person', ['about' => $about])
+@endpush
 @section('content')
 <section class="hero-section hero-1 hero-section1 fix">
     <div class="line-shape">

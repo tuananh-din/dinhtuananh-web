@@ -14,6 +14,9 @@
 @if(!empty($blog->image))
     @section('og_image', \Illuminate\Support\Str::startsWith($blog->image, ['http://','https://','//']) ? $blog->image : asset(ltrim($blog->image, '/')))
 @endif
+@push('structured_data')
+    @include('partials.jsonld-article', ['blog' => $blog])
+@endpush
 @section('content')
 <section class="news-grid-section1 fix">
     <div class="container">

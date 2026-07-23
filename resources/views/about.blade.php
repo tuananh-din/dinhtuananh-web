@@ -1,6 +1,9 @@
 @extends('layouts.master')
 @section('page_title', 'Giới thiệu | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('og_title', 'Giới thiệu | ' . data_get($infor, 'name', 'Personal Brand'))
+@push('structured_data')
+    @include('partials.jsonld-person', ['about' => $about])
+@endpush
 @section('content')
 <section class="about-section-inner">
     <div class="container">
