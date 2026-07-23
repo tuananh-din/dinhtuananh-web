@@ -42,11 +42,12 @@
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </a>
-                                <a href="{{ route('course.delete', $row->id) }}" onclick="return confirm('B&#7841;n c&#243; ch&#7855;c mu&#7889;n x&#243;a?')">
-                                    <button class="btn btn-icon btn-danger btn-rounded btn-tone">
+                                <form action="{{ route('course.delete', $row->id) }}" method="POST" style="display:inline" onsubmit="return confirm('B&#7841;n c&#243; ch&#7855;c mu&#7889;n x&#243;a?')">
+                                    @csrf
+                                    <button type="submit" class="btn btn-icon btn-danger btn-rounded btn-tone">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                </a>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

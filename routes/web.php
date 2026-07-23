@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [AdminBlogController::class, 'create'])->name('blog.create');
             Route::get('/edit/{id}', [AdminBlogController::class, 'edit'])->name('blog.edit');
             Route::post('store', [AdminBlogController::class, 'store'])->name('blog.store');
-            Route::get('/delete/{id}', [AdminBlogController::class, 'delete'])->name('blog.delete');
+            Route::post('/delete/{id}', [AdminBlogController::class, 'delete'])->name('blog.delete');
         });
 
         Route::prefix('course')->group(function () {
@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [AdminCourseController::class, 'create'])->name('course.create');
             Route::get('/edit/{id}', [AdminCourseController::class, 'edit'])->name('course.edit');
             Route::post('store', [AdminCourseController::class, 'store'])->name('course.store');
-            Route::get('/delete/{id}', [AdminCourseController::class, 'delete'])->name('course.delete');
+            Route::post('/delete/{id}', [AdminCourseController::class, 'delete'])->name('course.delete');
         });
 
         Route::prefix('lead')->group(function () {
@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [AdminTestimonialController::class, 'create'])->name('testimonial.create');
             Route::get('/edit/{id}', [AdminTestimonialController::class, 'edit'])->name('testimonial.edit');
             Route::post('store', [AdminTestimonialController::class, 'store'])->name('testimonial.store');
-            Route::get('/delete/{id}', [AdminTestimonialController::class, 'delete'])->name('testimonial.delete');
+            Route::post('/delete/{id}', [AdminTestimonialController::class, 'delete'])->name('testimonial.delete');
         });
 
         Route::prefix('service')->group(function () { 
@@ -88,7 +88,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [AdminServiceController::class, 'create'])->name('service.create');
             Route::get('/edit/{id}', [AdminServiceController::class, 'edit'])->name('service.edit');
             Route::post('store', [AdminServiceController::class, 'store'])->name('service.store');
-            Route::get('/delete/{id}', [AdminServiceController::class, 'delete'])->name('service.delete');
+            Route::post('/delete/{id}', [AdminServiceController::class, 'delete'])->name('service.delete');
         });
 
         Route::prefix('skill')->group(function () { 
@@ -96,7 +96,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [AdminSkillController::class, 'create'])->name('skill.create');
             Route::get('/edit/{id}', [AdminSkillController::class, 'edit'])->name('skill.edit');
             Route::post('store', [AdminSkillController::class, 'store'])->name('skill.store');
-            Route::get('/delete/{id}', [AdminSkillController::class, 'delete'])->name('skill.delete');
+            Route::post('/delete/{id}', [AdminSkillController::class, 'delete'])->name('skill.delete');
         });
 
         Route::prefix('image')->group(function () { 
@@ -104,7 +104,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [AdminImageController::class, 'create'])->name('image.create');
             Route::get('/edit/{id}', [AdminImageController::class, 'edit'])->name('image.edit');
             Route::post('store', [AdminImageController::class, 'store'])->name('image.store');
-            Route::get('/delete/{id}', [AdminImageController::class, 'delete'])->name('image.delete');
+            Route::post('/delete/{id}', [AdminImageController::class, 'delete'])->name('image.delete');
         });
 
     });

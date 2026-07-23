@@ -39,11 +39,12 @@
                                             <i class="fas fa-edit"></i>
                                         </button> 
                                     </a>
-                                    <a href="{{ route('image.delete',$row->id) }}"  onclick="return confirm('Bạn có chắc muốn xoá?')">
-                                        <button class="btn btn-icon btn-danger btn-rounded btn-tone">
+                                    <form action="{{ route('image.delete',$row->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xoá?')">
+                                        @csrf
+                                        <button type="submit" class="btn btn-icon btn-danger btn-rounded btn-tone">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                    </a>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

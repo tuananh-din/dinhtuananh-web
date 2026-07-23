@@ -80,7 +80,11 @@ class BlogController extends Controller
     }
     public function delete($id){
         $n = Blog::where('id',$id)->first();
-        $n->delete();
-        return redirect()->back();
+        if ($n) {
+            $n->delete();
+            return redirect()->back()->with('success', 'Xóa bài viết thành công.');
+        }
+
+        return redirect()->back()->with('error', 'Không tìm thấy bài viết để xóa.');
     }
 }

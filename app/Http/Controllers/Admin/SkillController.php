@@ -35,7 +35,11 @@ class SkillController extends Controller
     }
     public function delete($id){
         $n = Skill::where('id',$id)->first();
-        $n->delete();
-        return redirect()->back();
+        if ($n) {
+            $n->delete();
+            return redirect()->back()->with('success', 'Xóa kỹ năng thành công.');
+        }
+
+        return redirect()->back()->with('error', 'Không tìm thấy kỹ năng để xóa.');
     }
 }

@@ -35,7 +35,11 @@ class ServiceController extends Controller
     }
     public function delete($id){
         $n = Service::where('id',$id)->first();
-        $n->delete();
-        return redirect()->back();
+        if ($n) {
+            $n->delete();
+            return redirect()->back()->with('success', 'Xóa ngành nghề thành công.');
+        }
+
+        return redirect()->back()->with('error', 'Không tìm thấy ngành nghề để xóa.');
     }
 }

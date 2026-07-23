@@ -55,8 +55,12 @@ class ImageController extends Controller
     }
     public function delete($id){
         $n = ModelsImage::where('id',$id)->first();
-        Storage::delete($n->path);
-        $n->delete();
-        return redirect()->back();
+        if ($n) {
+            Storage::delete($n->path);
+            $n->delete();
+            return redirect()->back()->with('success', 'Xóa hình ảnh thành công.');
+        }
+
+        return redirect()->back()->with('error', 'Không tìm thấy hình ảnh để xóa.');
     }
 }
