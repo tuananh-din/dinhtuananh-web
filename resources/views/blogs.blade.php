@@ -11,7 +11,7 @@
                 <div class="news-box-items-2">
                     <div class="thumb">
                         <a href="{{ route('blog', $row->slug) }}">
-                            <img src="{{ $row->image ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $row->title }}">
+                            <img src="{{ $row->image_url }}" alt="{{ $row->title }}">
                         </a>
                     </div>
                     <div class="content">

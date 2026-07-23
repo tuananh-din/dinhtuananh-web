@@ -241,7 +241,7 @@
             @foreach ($blogs as $row)
             <div class="col-lg-4">
                 <div class="blog-mini-card">
-                    <img src="{{ $row->image ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $row->title }}">
+                    <img src="{{ $row->image_url }}" alt="{{ $row->title }}">
                     <div class="content">
                         <span class="post-date">{{ optional($row->created_at)->format('d/m/Y') }}</span>
                         <h3><a href="{{ route('blog', $row->slug) }}">{{ $row->title }}</a></h3>
