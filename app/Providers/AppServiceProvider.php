@@ -27,8 +27,19 @@ class AppServiceProvider extends ServiceProvider
 
 
         view()->composer('*', function ($view) {
-            $view->with('contact',About::first());
-            $view->with('infor',Setting::first());
+            // C-6: query 1 lan/request, cac view sau dung lai (null-safe khi bang rong).
+            static $contact = false, $infor = false;
+
+            if ($contact === false) {
+                $contact = About::first();
+            }
+
+            if ($infor === false) {
+                $infor = Setting::first();
+            }
+
+            $view->with('contact', $contact);
+            $view->with('infor', $infor);
         });
     }
 }
