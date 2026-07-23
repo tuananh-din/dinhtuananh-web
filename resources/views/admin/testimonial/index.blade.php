@@ -31,13 +31,13 @@
                             <td>{{ $row->name }}</td>
                             <td>{{ \Illuminate\Support\Str::limit($row->content, 80) }}</td>
                             <td>{{ $row->rating ?: '-' }}</td>
-                            <td>{{ $row->is_featured ? 'C&#243;' : 'Kh&#244;ng' }}</td>
-                            <td>{{ $row->is_active ? 'C&#243;' : 'Kh&#244;ng' }}</td>
+                            <td>{{ $row->is_featured ? 'Có' : 'Không' }}</td>
+                            <td>{{ $row->is_active ? 'Có' : 'Không' }}</td>
                             <td>
                                 <a href="{{ route('testimonial.edit', $row->id) }}">
                                     <button class="btn btn-icon btn-primary btn-rounded btn-tone"><i class="fas fa-edit"></i></button>
                                 </a>
-                                <form action="{{ route('testimonial.delete', $row->id) }}" method="POST" style="display:inline" onsubmit="return confirm('B&#7841;n c&#243; ch&#7855;c mu&#7889;n x&#243;a?')">
+                                <form action="{{ route('testimonial.delete', $row->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa?')">
                                     @csrf
                                     <button type="submit" class="btn btn-icon btn-danger btn-rounded btn-tone"><i class="fas fa-trash"></i></button>
                                 </form>

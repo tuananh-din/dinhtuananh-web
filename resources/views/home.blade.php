@@ -116,8 +116,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="brand-card wow fadeInUp" data-wow-delay=".3s">
-                        <h3>N&#7897;i dung v&#224; uy t&#237;n l&#224; 2 t&#7847;ng quan tr&#7885;ng nh&#7845;t</h3>
-                        <p>Version 1 c&#7911;a website n&#224;y s&#7869; t&#7853;p trung gi&#250;p b&#7841;n b&#225;n kh&#243;a h&#7885;c nhanh h&#417;n b&#7857;ng c&#225;ch tr&#236;nh b&#224;y r&#245; n&#259;ng l&#7921;c, blog ki&#7871;n th&#7913;c, case study v&#224; CTA &#273;&#259;ng k&#253;.</p>
+                        <h3>Nội dung và uy tín — nền tảng để khách tin và đăng ký</h3>
+                        <p>Trình bày rõ năng lực, blog kiến thức và case study thực tế, cùng lối đăng ký nhanh giúp bạn dễ ra quyết định.</p>
                         <div class="content mt-4">
                             {!! $about->content !!}
                         </div>
@@ -132,7 +132,7 @@
     <div class="container">
         <div class="section-title">
             <h6>Kh&#243;a h&#7885;c n&#7893;i b&#7853;t</h6>
-            <h2>D&#7919; li&#7879;u kh&#243;a h&#7885;c &#273;ang l&#7845;y t&#7915; module courses th&#7853;t</h2>
+            <h2>Khóa học đang mở đăng ký</h2>
         </div>
         <div class="row g-4 mt-4">
             @if($featuredCourse)
@@ -222,8 +222,8 @@
             @empty
             <div class="col-lg-12">
                 <div class="placeholder-card">
-                    <h3>Ch&#7901; case study th&#7921;c t&#7871;</h3>
-                    <p>N&#7871;u ch&#432;a c&#243; d&#7919; li&#7879;u, section n&#224;y v&#7851;n gi&#7919; ch&#7895; &#273;&#7875; sau &#273;&#243; ch&#7881; c&#7847;n th&#234;m h&#236;nh &#7843;nh v&#224; m&#244; t&#7843; trong admin l&#224; hi&#7879;n ra ngay.</p>
+                    <h3>Case study sẽ được cập nhật sớm</h3>
+                    <p>Các kết quả và hình ảnh dự án thực tế đang được bổ sung. Để lại thông tin để được tư vấn ngay.</p>
                 </div>
             </div>
             @endforelse

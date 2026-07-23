@@ -29,8 +29,8 @@
                         <tr>
                             <th scope="row">{{ $row->title }}</th>
                             <td>{{ $row->slug }}</td>
-                            <td>{{ $row->is_featured ? 'C&#243;' : 'Kh&#244;ng' }}</td>
-                            <td>{{ $row->is_active ? 'C&#243;' : 'Kh&#244;ng' }}</td>
+                            <td>{{ $row->is_featured ? 'Có' : 'Không' }}</td>
+                            <td>{{ $row->is_active ? 'Có' : 'Không' }}</td>
                             <td>
                                 <a href="{{ route('course.edit', $row->id) }}">
                                     <button class="btn btn-icon btn-primary btn-rounded btn-tone">
@@ -42,7 +42,7 @@
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </a>
-                                <form action="{{ route('course.delete', $row->id) }}" method="POST" style="display:inline" onsubmit="return confirm('B&#7841;n c&#243; ch&#7855;c mu&#7889;n x&#243;a?')">
+                                <form action="{{ route('course.delete', $row->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa?')">
                                     @csrf
                                     <button type="submit" class="btn btn-icon btn-danger btn-rounded btn-tone">
                                         <i class="fas fa-trash"></i>
