@@ -28,6 +28,9 @@ class AboutController extends Controller
             $img = Image::read($file);
             Storage::put($path, (string) $img->encode());   
             $avatar = Storage::url($path);
+            if (!empty($about?->avatar) && $about->avatar !== $avatar) {
+                $this->deleteManagedUpload($about->avatar);
+            }
         }else{
             $avatar = $about->avatar ?? null;
         }

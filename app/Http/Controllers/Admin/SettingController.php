@@ -32,6 +32,9 @@ class SettingController extends Controller
             $img = Image::read($file);
             Storage::put($path, (string) $img->encode());   
             $logo = Storage::url($path);
+            if (!empty($setting?->logo) && $setting->logo !== $logo) {
+                $this->deleteManagedUpload($setting->logo);
+            }
         }else{
             $logo = $setting->logo ?? null;
         }
@@ -42,6 +45,9 @@ class SettingController extends Controller
             $img = Image::read($file);
             Storage::put($path, (string) $img->encode());   
             $favicon = Storage::url($path);
+            if (!empty($setting?->favicon) && $setting->favicon !== $favicon) {
+                $this->deleteManagedUpload($setting->favicon);
+            }
         }else{
             $favicon = $setting->favicon ?? null;
         }

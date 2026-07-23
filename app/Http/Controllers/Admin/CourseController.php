@@ -59,6 +59,9 @@ class CourseController extends Controller
             $img = Image::read($file);
             Storage::put($path, (string) $img->encode());
             $thumbnail = Storage::url($path);
+            if (!empty($course?->thumbnail) && $course->thumbnail !== $thumbnail) {
+                $this->deleteManagedUpload($course->thumbnail);
+            }
         } else {
             $thumbnail = $course->thumbnail ?? null;
         }
@@ -116,6 +119,7 @@ class CourseController extends Controller
     {
         $course = Course::where('id', $id)->first();
         if ($course) {
+            $this->deleteManagedUpload($course->thumbnail);
             $course->delete();
             return redirect()->back()->with('success', 'Xóa khóa học thành công.');
         }

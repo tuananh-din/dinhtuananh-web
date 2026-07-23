@@ -37,6 +37,9 @@ class BlogController extends Controller
             $img = Image::read($file);
             Storage::put($path, (string) $img->encode());
             $image = Storage::url($path);
+            if (!empty($blog?->image) && $blog->image !== $image) {
+                $this->deleteManagedUpload($blog->image);
+            }
         }else{
             $image = $blog->image ?? null;
         }
@@ -82,6 +85,7 @@ class BlogController extends Controller
     public function delete($id){
         $n = Blog::where('id',$id)->first();
         if ($n) {
+            $this->deleteManagedUpload($n->image);
             $n->delete();
             return redirect()->back()->with('success', 'Xóa bài viết thành công.');
         }

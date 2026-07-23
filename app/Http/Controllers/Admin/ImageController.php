@@ -36,6 +36,9 @@ class ImageController extends Controller
             $img = Image::read($file);
             Storage::put($path, (string) $img->encode());   
             $image = Storage::url($path);
+            if (!empty($imageModel?->image) && $imageModel->image !== $image) {
+                $this->deleteManagedUpload($imageModel->image);
+            }
         }else{
             $image = $imageModel->image ?? null;
             $path = $imageModel->path ?? '';

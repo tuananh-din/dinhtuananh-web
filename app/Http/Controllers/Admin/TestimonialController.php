@@ -51,6 +51,9 @@ class TestimonialController extends Controller
             $img = Image::read($file);
             Storage::put($path, (string) $img->encode());
             $avatar = Storage::url($path);
+            if (!empty($testimonial?->avatar) && $testimonial->avatar !== $avatar) {
+                $this->deleteManagedUpload($testimonial->avatar);
+            }
         } else {
             $avatar = $testimonial->avatar ?? null;
         }
@@ -87,6 +90,7 @@ class TestimonialController extends Controller
             return redirect()->back()->with('error', $errorMessage);
         }
 
+        $this->deleteManagedUpload($testimonial->avatar);
         $testimonial->delete();
         $successMessage = html_entity_decode('X&#243;a testimonial th&#224;nh c&#244;ng.', ENT_QUOTES, 'UTF-8');
         return redirect()->back()->with('success', $successMessage);
