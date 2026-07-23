@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productBrand">Code Body</label>
-                        <textarea rows="6" class="form-control" id="productContent" name="code_body">{{ $setting->code_body ?? null}}</textarea>
+                        <textarea rows="6" class="form-control" id="productContent" name="code_footer">{{ $setting->code_footer ?? null}}</textarea>
                     </div>
                
                     <div class="form-group">

@@ -42,7 +42,7 @@ class SettingController extends Controller
 
         // Chuẩn bị dữ liệu sản phẩm
         $data = array_merge($request->only([
-            'name', 'url','code_header','code_body','slogan','note', 'title_seo', 
+            'name', 'url','code_header','code_footer','slogan','note', 'title_seo', 
             'desc_seo', 'key_seo'
         ]), [
             'logo' => $logo,
