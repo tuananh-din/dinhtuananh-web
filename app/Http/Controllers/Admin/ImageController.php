@@ -29,7 +29,7 @@ class ImageController extends Controller
         ]);
 
         $id = $request->id;
-        $image = ModelsImage::find($id);
+        $imageModel = ModelsImage::find($id);
         if($request->hasFile('image')){
             $file = $request->file('image');
             $path = $file->hashName('public/images');
@@ -37,8 +37,8 @@ class ImageController extends Controller
             Storage::put($path, (string) $img->encode());   
             $image = Storage::url($path);
         }else{
-            $image = $image->image ?? null;
-            $path = $image->path ?? '';
+            $image = $imageModel->image ?? null;
+            $path = $imageModel->path ?? '';
         }
         
 
