@@ -79,14 +79,14 @@
 <script src="{{ asset('app/assets/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
 {{-- <script src="https://cdn.tiny.cloud/1/lt5xqigvc4dhm8ov8o1d1657z3mpluws5ozsa6bo4ukjkjby/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<script>window.ckUploadConfig = { url: '{{ route("image.upload") }}', token: '{{ csrf_token() }}' };</script>
+<script src="{{ asset('app/assets/js/ckeditor-csrf-upload-adapter.js') }}"></script>
 
 <script>
     let myEditor;
     ClassicEditor
         .create( document.querySelector( '#content' ),{
-            ckfinder: {
-                uploadUrl: '{{route('image.upload').'?_token='.csrf_token()}}',
-            }
+            extraPlugins: [ CsrfUploadAdapterPlugin ],
         })  
         .then( editor => {
             myEditor = editor;
