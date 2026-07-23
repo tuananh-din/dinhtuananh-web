@@ -650,3 +650,52 @@ html[data-theme="light"] .lead-form-box input {
 html[data-theme="light"] .text_invert-2 > div {
     background-image: linear-gradient(to right, #14171a 50%, #c9cdd3 50%);
 }
+
+/* === Light mode: fix cac vung con lai (theo audit tuong phan) === */
+/* Section / card nen toi hardcode -> sang */
+html[data-theme="light"] .choose-us-section {
+    background-color: #ffffff;
+    box-shadow: 0 6px 24px rgba(20, 23, 31, 0.06);
+}
+html[data-theme="light"] .brand-card,
+html[data-theme="light"] .blog-mini-card {
+    background: #ffffff;
+    border-color: #e4e7ec;
+}
+/* Heading trang hardcode -> dam (span accent giu mau xanh do specificity cao hon) */
+html[data-theme="light"] .about-inner-wrapper .about-head h1,
+html[data-theme="light"] .section-title h2,
+html[data-theme="light"] .section-title-area h2,
+html[data-theme="light"] .section-title-2 h2 {
+    color: var(--header);
+}
+/* Chu xam qua nhat -> dam vua du doc (AA) */
+html[data-theme="light"] .course-placeholder-note,
+html[data-theme="light"] .lead-form-shell .form-note,
+html[data-theme="light"] .course-price .old,
+html[data-theme="light"] .course-price-box .old,
+html[data-theme="light"] .post-date,
+html[data-theme="light"] span.old {
+    color: #6b7280;
+}
+html[data-theme="light"] .hero-bullets li,
+html[data-theme="light"] .cta-list li,
+html[data-theme="light"] .contact-list li,
+html[data-theme="light"] .about-inner-wrapper li {
+    color: var(--body);
+}
+/* Offcanvas menu (bam ≡) GIU nen toi -> khoi phuc bien chu ve sang trong container
+   (cascade) de khong bi den-tren-den khi mo o light mode; accent lime lai. */
+html[data-theme="light"] .offcanvas__info,
+html[data-theme="light"] .offcanvas__wrapper {
+    --white: #ffffff;
+    --header: #ffffff;
+    --black: #ffffff;
+    --body: #e7e7e7;
+    --text: #a6adb5;
+    --theme: #BFF747;
+}
+html[data-theme="light"] .offcanvas__info .contact-list li,
+html[data-theme="light"] .offcanvas__info a {
+    color: var(--white);
+}
