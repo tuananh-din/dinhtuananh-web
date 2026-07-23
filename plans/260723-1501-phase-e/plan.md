@@ -1,7 +1,7 @@
 ---
 title: "Phase E - Fix ton dong audit + social columns + nang cap lead admin"
 description: "9 hang muc: 4 fix nho an toan (A10-A13), 1 migration social columns sua bug profile save, jsonld sameAs, don dead code Social, loc lead admin, og:type article"
-status: pending
+status: done
 priority: P1
 effort: 4h
 branch: master
@@ -23,11 +23,11 @@ build-out có căn cứ từ code thật. Mọi mục đụng schema / xoá modu
 | E-02 | JSON-LD thêm `JSON_HEX_TAG` chống thoát `</script>` | P1 | Không | Không | Không | **Done (chờ QC mắt)** | [phase-e-02](./phase-e-02-jsonld-hex-tag.md) |
 | E-03 | CKEditor uploadUrl: bỏ `?_token=`, dùng header X-CSRF-TOKEN (A12) | P1 | Không | Không | Không | **Done (chờ QC mắt)** | [phase-e-03](./phase-e-03-ckeditor-csrf-header.md) |
 | E-04 | Dọn login.blade: bỏ footer template, title brand, thêm remember (A13) | P1 | Không | Không | Không | **Done (chờ QC mắt)** | [phase-e-04](./phase-e-04-login-page-cleanup-remember.md) |
-| E-05 | Migration thêm cột `facebook/instagram/linkedin/x` vào `about` — sửa bug 500 lưu profile | **P0** | **CÓ** | Không | **CÓ** (schema) | Pending | [phase-e-05](./phase-e-05-about-social-columns-migration.md) |
-| E-06 | JSON-LD Person thêm `sameAs` từ 4 cột social | P2 | Không | Không | Không | Pending | [phase-e-06](./phase-e-06-jsonld-sameas.md) |
-| E-07 | Xoá dead code `SocialController` + model `Social` (GIỮ bảng `socials`) (A11) | P2 | Không | **CÓ** (xoá file) | **CÓ** (xoá module) | Pending | [phase-e-07](./phase-e-07-remove-social-dead-code.md) |
-| E-08 | Admin lead: lọc theo status + hiện tên khoá học + đếm theo trạng thái | P2 | Không | Không | Không | Pending | [phase-e-08](./phase-e-08-admin-lead-filter-course-name.md) |
-| E-09 | `og:type=article` cho blog detail + `twitter:card` | P2 | Không | Không | Không | Pending | [phase-e-09](./phase-e-09-og-type-article-twitter-card.md) |
+| E-05 | Migration thêm cột `facebook/instagram/linkedin/x` vào `about` — sửa bug 500 lưu profile | **P0** | **CÓ** | Không | **CÓ** (schema) | **Done (migrate chạy, verify)** | [phase-e-05](./phase-e-05-about-social-columns-migration.md) |
+| E-06 | JSON-LD Person thêm `sameAs` từ 4 cột social | P2 | Không | Không | Không | **Done (test sameAs OK)** | [phase-e-06](./phase-e-06-jsonld-sameas.md) |
+| E-07 | Xoá dead code `SocialController` + model `Social` (GIỮ bảng `socials`) (A11) | P2 | Không | **CÓ** (xoá file) | **CÓ** (xoá module) | **Done (route:list OK)** | [phase-e-07](./phase-e-07-remove-social-dead-code.md) |
+| E-08 | Admin lead: lọc theo status + hiện tên khoá học + đếm theo trạng thái | P2 | Không | Không | Không | **Done (chờ QC mắt admin)** | [phase-e-08](./phase-e-08-admin-lead-filter-course-name.md) |
+| E-09 | `og:type=article` cho blog detail + `twitter:card` | P2 | Không | Không | Không | **Done (verify HTML)** | [phase-e-09](./phase-e-09-og-type-article-twitter-card.md) |
 
 ## Thứ tự & phụ thuộc (mỗi mục 1 commit)
 
