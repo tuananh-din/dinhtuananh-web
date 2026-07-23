@@ -348,3 +348,198 @@
         padding: 90px 0;
     }
 }
+
+/* C-4: shared .post-date from home.blade.php, blogs.blade.php, blog_detail.blade.php */
+.post-date {
+    font-size: 0.85rem;
+    color: #999;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* C-4: from blog_detail.blade.php */
+.blog-share {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.blog-share a,
+.blog-share button {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f2f2f2;
+    color: #333;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.blog-share a:hover,
+.blog-share button:hover {
+    background: #e0e0e0;
+}
+
+.other-blogs h3 {
+    margin-bottom: 8px;
+}
+
+/* C-4: from courses.blade.php */
+.course-list-shell {
+    padding: 110px 0;
+}
+
+.course-card {
+    background: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-thumb {
+    position: relative;
+}
+
+.course-thumb img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.course-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #ff7a00;
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    z-index: 2;
+}
+
+.course-content {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.course-content h3 {
+    margin-bottom: 10px;
+}
+
+.course-content .desc {
+    flex: 1;
+    margin-bottom: 14px;
+}
+
+.course-price {
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.course-price .old {
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 8px;
+    font-weight: 400;
+}
+
+/* C-4: from course_detail.blade.php */
+.course-detail-shell {
+    padding: 110px 0;
+}
+
+.course-main-card {
+    background: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    padding: 28px;
+}
+
+.course-detail-shell .course-side-card {
+    background: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    padding: 28px;
+}
+
+.course-meta-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.course-meta-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.course-price-box {
+    margin-bottom: 18px;
+}
+
+.course-price-box .old {
+    text-decoration: line-through;
+    color: #9a9a9a;
+    margin-right: 8px;
+}
+
+.cta-stack {
+    display: grid;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.lead-form-box {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lead-form-box .form-clt {
+    margin-bottom: 10px;
+}
+
+.lead-form-box input,
+.lead-form-box textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #0e0e0e;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+.lead-form-box textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.lead-form-box .lead-note {
+    font-size: 13px;
+    color: #bdbdbd;
+    margin-top: 8px;
+}
+
+/* C-4: from about.blade.php */
+.about-grid-card {
+    background: #121212;
+    border-radius: 22px;
+    padding: 28px;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-counter-section .cta-inline {
+    margin-top: 24px;
+}

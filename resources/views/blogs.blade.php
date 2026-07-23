@@ -3,9 +3,6 @@
 @section('og_title', 'Blog | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
 <section class="news-grid-section1 fix">
-    <style>
-        .post-date { font-size: 0.8rem; color: #999; display: block; margin-bottom: 8px; }
-    </style>
     <div class="container">
         <h1>Blog</h1>
         <div class="row bb-bottom">

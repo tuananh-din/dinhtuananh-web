@@ -2,32 +2,6 @@
 @section('page_title', 'Giới thiệu | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('og_title', 'Giới thiệu | ' . data_get($infor, 'name', 'Personal Brand'))
 @section('content')
-<style>
-    .about-grid-card {
-        background: #121212;
-        border-radius: 22px;
-        padding: 28px;
-        height: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .cta-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .cta-list li {
-        margin-bottom: 12px;
-    }
-
-    .cta-inline {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-top: 24px;
-    }
-</style>
 <section class="about-section-inner">
     <div class="container">
         <div class="about-inner-wrapper">

@@ -232,9 +232,6 @@
 </section>
 
 <section class="section-shell pt-0">
-    <style>
-        .post-date { font-size: 0.8rem; color: #999; display: block; margin-bottom: 8px; }
-    </style>
     <div class="container">
         <div class="section-title">
             <h6>Blog n&#7893;i b&#7853;t</h6>

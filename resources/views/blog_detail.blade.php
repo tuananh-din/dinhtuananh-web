@@ -16,13 +16,6 @@
 @endif
 @section('content')
 <section class="news-grid-section1 fix">
-    <style>
-    .post-date { font-size: 0.85rem; color: #999; display: block; margin-bottom: 8px; }
-    .blog-share { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
-    .blog-share a, .blog-share button { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: #f2f2f2; color: #333; text-decoration: none; border: none; cursor: pointer; }
-    .blog-share a:hover, .blog-share button:hover { background: #e0e0e0; }
-    .other-blogs h3 { margin-bottom: 8px; }
-    </style>
     <div class="container">
         <h1>{{ $blog->title }}</h1>
         <span class="post-date">{{ optional($blog->created_at)->format('d/m/Y') }}</span>
