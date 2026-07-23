@@ -26,11 +26,15 @@
         <!-- ======== Page title ============ -->
         <title>@yield('page_title', $siteName)</title>
         <!-- ========== Open Graph ========== -->
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="@yield('og_type', 'website')">
         <meta property="og:title" content="@yield('og_title', $siteName)">
         <meta property="og:description" content="@yield('og_description', $seoDescription)">
         <meta property="og:image" content="@yield('og_image', $defaultOgImageUrl)">
         <meta property="og:url" content="{{ url()->current() }}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="@yield('og_title', $siteName)">
+        <meta name="twitter:description" content="@yield('og_description', $seoDescription)">
+        <meta name="twitter:image" content="@yield('og_image', $defaultOgImageUrl)">
         <link rel="canonical" href="@yield('canonical', url()->current())">
         <!--<< Favcion >>-->
         <link rel="shortcut icon" href="{{ $faviconUrl }}" type="image/x-icon" />

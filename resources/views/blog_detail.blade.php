@@ -11,6 +11,7 @@
 @section('meta_description', $blogDescription)
 @section('og_title', $blog->title)
 @section('og_description', $blogDescription)
+@section('og_type', 'article')
 @if(!empty($blog->image))
     @section('og_image', \Illuminate\Support\Str::startsWith($blog->image, ['http://','https://','//']) ? $blog->image : asset(ltrim($blog->image, '/')))
 @endif
