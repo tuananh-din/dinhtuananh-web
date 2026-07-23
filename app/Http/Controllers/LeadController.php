@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewLeadNotification;
 use App\Models\Course;
 use App\Models\Lead;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class LeadController extends Controller
 {
@@ -33,7 +36,7 @@ class LeadController extends Controller
             $courseId = $course ? $course->id : null;
         }
 
-        Lead::create([
+        $lead = Lead::create([
             'course_id' => $courseId,
             'name' => $request->name,
             'phone' => $request->phone,
@@ -42,6 +45,13 @@ class LeadController extends Controller
             'source_page' => $sourcePage,
             'status' => 'new',
         ]);
+
+        try {
+            Mail::to(config('mail.lead_notify'))
+                ->send(new NewLeadNotification($lead));
+        } catch (\Throwable $e) {
+            Log::error('Lead mail failed: ' . $e->getMessage());
+        }
 
         return redirect()->back()->with('success', $successMessage);
     }
