@@ -456,7 +456,9 @@
 
 /* C-4: from course_detail.blade.php */
 .course-detail-shell {
-    padding: 110px 0;
+    /* Trang khong co hero -> padding-top lon hon header (position:absolute ~150px)
+       de tieu de sidebar/noi dung khong bi header de len. */
+    padding: 160px 0 110px;
 }
 
 .course-main-card {
@@ -698,4 +700,28 @@ html[data-theme="light"] .offcanvas__wrapper {
 html[data-theme="light"] .offcanvas__info .contact-list li,
 html[data-theme="light"] .offcanvas__info a {
     color: var(--white);
+}
+/* Nut .theme-btn: goc dung vien trang + chu --text -> tang hinh tren nen sang. Cho vien+chu dam. */
+html[data-theme="light"] .theme-btn {
+    border-color: rgba(20, 23, 31, 0.22);
+    color: var(--header);
+}
+/* CTA chinh trong form lead: nen dac de noi bat (nut quan trong nhat) */
+html[data-theme="light"] .lead-form-shell button.theme-btn,
+html[data-theme="light"] .lead-form-box button.theme-btn {
+    background-color: var(--theme);
+    border-color: var(--theme);
+    color: #ffffff;
+}
+/* Khung form lead: goc nen toi trong suot -> nen trang sach */
+html[data-theme="light"] .lead-form-shell {
+    background: #ffffff;
+    border-color: #e4e7ec;
+}
+html[data-theme="light"] .lead-form-box {
+    border-top-color: #e4e7ec;
+}
+html[data-theme="light"] .lead-form-box .lead-note,
+html[data-theme="light"] .lead-form-shell .form-note {
+    color: #6b7280;
 }
