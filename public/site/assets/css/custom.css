@@ -546,14 +546,15 @@
 
 /* ============================================================
    DARK / LIGHT MODE
-   Theme goc dung --white lam MAU CHU trang (123 cho) -> GIU nguyen --white.
-   Chi doi cac bien CHU (--black/--body/--text) sang sang + set nen toi.
-   Cac hop dung background:var(--white) duoc override rieng ben duoi.
+   LUU Y: theme GOC vốn thiết kế nền TỐI (dark) -> [data-theme="dark"]
+   giữ nguyên bản gốc (không override). Chỉ dựng LIGHT skin bên dưới.
+   Theme dùng --white/--header lam MAU CHU sang tren nen toi -> light mode
+   dao cac bien nay sang mau TOI (chu dam tren nen sang).
    ============================================================ */
 .theme-toggle {
     background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    color: var(--black);
+    border: 1px solid currentColor;
+    color: var(--header);
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -565,76 +566,87 @@
     cursor: pointer;
     margin-right: 14px;
     flex: 0 0 auto;
-    transition: background .2s, color .2s, border-color .2s;
+    opacity: .85;
+    transition: background .2s, color .2s, border-color .2s, opacity .2s;
 }
 .theme-toggle:hover {
     background: var(--theme);
     color: #060606;
     border-color: var(--theme);
+    opacity: 1;
 }
 
-html[data-theme="dark"] {
-    /* CHU KY: --header cung la mau chu heading (h1-h6) + nen dropdown -> KHONG override o day.
-       Chi doi cac bien chu than/phu; --white giu trang (chu trang tren nen toi). */
-    --body: #e7e7e7;    /* chu than */
-    --text: #a6adb5;    /* chu phu */
-    --border: #2a2d31;
-    --bg3: #16181c;     /* section mau kem -> toi */
-    --box-shadow: 0px 1px 14px 0px rgba(0, 0, 0, 0.6);
+/* ===== LIGHT MODE (skin nen sang, toi uu do tuong phan / thuan mat) ===== */
+html[data-theme="light"] {
+    --white: #21252b;   /* chu von trang -> slate dam (diu hon #000) */
+    --header: #171a1f;  /* heading */
+    --body: #3f454d;    /* chu than (AA tren nen sang) */
+    --text: #6b7280;    /* chu phu */
+    --theme: #5f8f16;   /* accent lime GOC choi tren nen trang -> xanh brand dam, doc duoc */
+    --bg: #eef1f5;      /* section toi -> sang */
+    --bg3: #f7f8fa;
+    --border: #e4e7ec;
+    --box-shadow: 0 6px 24px rgba(20, 23, 31, 0.08);
 }
-html[data-theme="dark"] body {
-    background-color: #0f1113;
+html[data-theme="light"] body {
+    background-color: #f6f7f9; /* off-white diu mat, card trang noi khoi */
     color: var(--body);
 }
-/* Tieu de: theme goc dat color qua var(--header)/var(--black) (co the toi) -> ep sang.
-   Cac span accent (.section-title h2 span...) do specificity cao hon nen giu mau --theme. */
-html[data-theme="dark"] h1,
-html[data-theme="dark"] h2,
-html[data-theme="dark"] h3,
-html[data-theme="dark"] h4,
-html[data-theme="dark"] h5,
-html[data-theme="dark"] h6,
-html[data-theme="dark"] h1 a,
-html[data-theme="dark"] h2 a,
-html[data-theme="dark"] h3 a,
-html[data-theme="dark"] h4 a,
-html[data-theme="dark"] h5 a,
-html[data-theme="dark"] h6 a {
-    color: #f2f2f2;
+html[data-theme="light"] .theme-toggle:hover {
+    color: #ffffff;
 }
-/* Header nen toi + menu chu sang (goc hardcode #060606 -> chim) */
-html[data-theme="dark"] #header-sticky,
-html[data-theme="dark"] .header-1 {
-    background-color: #14161a;
+/* Header sang */
+html[data-theme="light"] #header-sticky,
+html[data-theme="light"] .header-1 {
+    background-color: #ffffff;
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
 }
-html[data-theme="dark"] .main-menu ul li a {
-    color: #e7e7e7;
-}
-html[data-theme="dark"] .theme-toggle {
-    border-color: rgba(255, 255, 255, 0.22);
-    color: #f2f2f2;
-}
-/* Cac hop nen trang -> chuyen toi (giu chu sang doc duoc) */
-html[data-theme="dark"] .card,
-html[data-theme="dark"] .bg-white,
-html[data-theme="dark"] .course-side-card,
-html[data-theme="dark"] .cta-inline {
-    background-color: #16181c;
-    border-color: #2a2d31;
+/* Cards / hop noi dung -> nen sang */
+html[data-theme="light"] .card,
+html[data-theme="light"] .course-side-card,
+html[data-theme="light"] .cta-inline {
+    background-color: #ffffff;
+    border-color: #e3e6ea;
 }
 /* Input/textarea/select */
-html[data-theme="dark"] input,
-html[data-theme="dark"] textarea,
-html[data-theme="dark"] select {
-    background-color: #1b1d21;
+html[data-theme="light"] input,
+html[data-theme="light"] textarea,
+html[data-theme="light"] select {
+    background-color: #ffffff;
     color: var(--body);
-    border-color: #2a2d31;
+    border-color: #d5d9df;
 }
-html[data-theme="dark"] input::placeholder,
-html[data-theme="dark"] textarea::placeholder {
-    color: #7c828a;
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder {
+    color: #9aa0a8;
 }
-/* Duong ke */
-html[data-theme="dark"] hr {
-    border-color: #2a2d31;
+html[data-theme="light"] hr {
+    border-color: #e3e6ea;
+}
+/* Cac card custom (phase truoc) hardcode nen toi -> dao sang trong light mode */
+html[data-theme="light"] .placeholder-card,
+html[data-theme="light"] .brand-metrics .metric,
+html[data-theme="light"] .case-card,
+html[data-theme="light"] .course-side-card,
+html[data-theme="light"] .testimonial-card,
+html[data-theme="light"] .contact-card,
+html[data-theme="light"] .course-card,
+html[data-theme="light"] .course-main-card,
+html[data-theme="light"] .course-detail-shell .course-side-card,
+html[data-theme="light"] .about-grid-card {
+    background: #ffffff;
+    border-color: #e3e6ea;
+}
+html[data-theme="light"] .contact-card textarea,
+html[data-theme="light"] .lead-form-box textarea,
+html[data-theme="light"] .contact-card input,
+html[data-theme="light"] .lead-form-box input {
+    background: #f5f6f8;
+    color: var(--body);
+    border-color: #d5d9df;
+}
+/* Hieu ung reveal "text_invert-2" fill mau TRANG (clip-to-text) -> tang hinh tren nen sang.
+   Doi mau chu da reveal sang TOI, phan chua reveal thanh xam nhat. */
+html[data-theme="light"] .text_invert-2 > div {
+    background-image: linear-gradient(to right, #14171a 50%, #c9cdd3 50%);
 }
