@@ -120,6 +120,10 @@
                             <div class="form-clt">
                                 <textarea name="message" placeholder="Nhu c&#7847;u c&#7911;a b&#7841;n (kh&#244;ng b&#7855;t bu&#7897;c)">{{ old('message') }}</textarea>
                             </div>
+                            <div class="hp-wrap" aria-hidden="true">
+                                <label for="hp-website-home">Website</label>
+                                <input type="text" name="website" id="hp-website-home" tabindex="-1" autocomplete="off">
+                            </div>
                             <button type="submit" class="theme-btn">&#272;&#259;ng k&#253; t&#432; v&#7845;n <i class="fa-solid fa-arrow-up-right"></i></button>
                             <p class="lead-note">Ch&#250;ng t&#244;i s&#7869; li&#234;n h&#7879; s&#7899;m &#273;&#7875; t&#432; v&#7845;n l&#7897; tr&#236;nh ph&#249; h&#7907;p.</p>
                         </form>
