@@ -10,19 +10,19 @@ return new class extends Migration
     {
         Schema::table('about', function (Blueprint $table) {
             if (!Schema::hasColumn('about', 'facebook')) {
-                $table->string('facebook', 191)->nullable()->after('address');
+                $table->string('facebook', 255)->nullable()->after('address');
             }
 
             if (!Schema::hasColumn('about', 'instagram')) {
-                $table->string('instagram', 191)->nullable();
+                $table->string('instagram', 255)->nullable();
             }
 
             if (!Schema::hasColumn('about', 'linkedin')) {
-                $table->string('linkedin', 191)->nullable();
+                $table->string('linkedin', 255)->nullable();
             }
 
             if (!Schema::hasColumn('about', 'x')) {
-                $table->string('x', 191)->nullable();
+                $table->string('x', 255)->nullable();
             }
         });
     }

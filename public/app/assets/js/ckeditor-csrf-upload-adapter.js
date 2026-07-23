@@ -17,6 +17,9 @@
                 xhr.open('POST', config.url, true);
                 xhr.responseType = 'json';
                 xhr.setRequestHeader('X-CSRF-TOKEN', config.token || '');
+                // Buoc Laravel tra JSON 422 (thay vi redirect HTML) khi validate loi -> doc duoc message
+                xhr.setRequestHeader('Accept', 'application/json');
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                 xhr.onerror = function () { reject('Network error'); };
                 xhr.onabort = function () { reject('Upload aborted'); };
                 xhr.onload = function () {
@@ -26,7 +29,7 @@
                         return;
                     }
 
-                    reject((res.error && res.error.message) || 'Upload failed');
+                    reject((res.error && res.error.message) || res.message || 'Upload failed');
                 };
 
                 data.append('upload', file);
