@@ -19,6 +19,10 @@ class AboutController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'avatar' => 'nullable|image|max:5120',
+            'facebook' => 'nullable|url|max:255',
+            'instagram' => 'nullable|url|max:255',
+            'linkedin' => 'nullable|url|max:255',
+            'x' => 'nullable|url|max:255',
         ]);
 
         $about = About::first();
