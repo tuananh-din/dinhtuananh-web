@@ -99,6 +99,9 @@
                             </nav>
                         </div>
                     </div>
+                    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Chuy&#7875;n giao di&#7879;n s&#225;ng/t&#7889;i" title="S&#225;ng/T&#7889;i" aria-pressed="false">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
                     <a href="{{ route('index') }}#final-cta" class="theme-btn">&#272;&#259;ng k&#253; h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
                     <div class="header__hamburger my-auto">
                         <div class="sidebar__toggle">

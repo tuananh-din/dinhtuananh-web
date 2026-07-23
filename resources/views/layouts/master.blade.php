@@ -38,6 +38,18 @@
         <link rel="canonical" href="@yield('canonical', url()->current())">
         <!--<< Favcion >>-->
         <link rel="shortcut icon" href="{{ $faviconUrl }}" type="image/x-icon" />
+        {{-- Dark/Light: set data-theme SỚM (trước CSS) để tránh nháy sáng (FOUC). Ưu tiên lựa chọn đã lưu, fallback theo OS. --}}
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem('theme');
+                    if (t !== 'dark' && t !== 'light') {
+                        t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    }
+                    document.documentElement.setAttribute('data-theme', t);
+                } catch (e) {}
+            })();
+        </script>
         <!--<< Bootstrap min.css >>-->
         <link rel="stylesheet" href="{{ asset('site/assets/css/bootstrap.min.css') }}">
         <!--<< All Min Css >>-->
@@ -119,6 +131,26 @@
             @if(session('error'))
                 toastr.error(@json(session('error')));
             @endif
+        </script>
+        {{-- Dark/Light toggle: đổi + lưu localStorage, cập nhật icon. --}}
+        <script>
+            (function () {
+                var btn = document.getElementById('theme-toggle');
+                if (!btn) return;
+                var icon = btn.querySelector('i');
+                function sync() {
+                    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+                    if (icon) icon.className = dark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+                    btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+                }
+                sync();
+                btn.addEventListener('click', function () {
+                    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    try { localStorage.setItem('theme', next); } catch (e) {}
+                    sync();
+                });
+            })();
         </script>
         {{-- Slot cho các view push script phụ thuộc jQuery/main.js đã nạp xong. --}}
         @stack('scripts')

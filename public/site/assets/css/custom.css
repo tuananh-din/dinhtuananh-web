@@ -543,3 +543,98 @@
 .about-counter-section .cta-inline {
     margin-top: 24px;
 }
+
+/* ============================================================
+   DARK / LIGHT MODE
+   Theme goc dung --white lam MAU CHU trang (123 cho) -> GIU nguyen --white.
+   Chi doi cac bien CHU (--black/--body/--text) sang sang + set nen toi.
+   Cac hop dung background:var(--white) duoc override rieng ben duoi.
+   ============================================================ */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: var(--black);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    margin-right: 14px;
+    flex: 0 0 auto;
+    transition: background .2s, color .2s, border-color .2s;
+}
+.theme-toggle:hover {
+    background: var(--theme);
+    color: #060606;
+    border-color: var(--theme);
+}
+
+html[data-theme="dark"] {
+    /* CHU KY: --header cung la mau chu heading (h1-h6) + nen dropdown -> KHONG override o day.
+       Chi doi cac bien chu than/phu; --white giu trang (chu trang tren nen toi). */
+    --body: #e7e7e7;    /* chu than */
+    --text: #a6adb5;    /* chu phu */
+    --border: #2a2d31;
+    --bg3: #16181c;     /* section mau kem -> toi */
+    --box-shadow: 0px 1px 14px 0px rgba(0, 0, 0, 0.6);
+}
+html[data-theme="dark"] body {
+    background-color: #0f1113;
+    color: var(--body);
+}
+/* Tieu de: theme goc dat color qua var(--header)/var(--black) (co the toi) -> ep sang.
+   Cac span accent (.section-title h2 span...) do specificity cao hon nen giu mau --theme. */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html[data-theme="dark"] h1 a,
+html[data-theme="dark"] h2 a,
+html[data-theme="dark"] h3 a,
+html[data-theme="dark"] h4 a,
+html[data-theme="dark"] h5 a,
+html[data-theme="dark"] h6 a {
+    color: #f2f2f2;
+}
+/* Header nen toi + menu chu sang (goc hardcode #060606 -> chim) */
+html[data-theme="dark"] #header-sticky,
+html[data-theme="dark"] .header-1 {
+    background-color: #14161a;
+}
+html[data-theme="dark"] .main-menu ul li a {
+    color: #e7e7e7;
+}
+html[data-theme="dark"] .theme-toggle {
+    border-color: rgba(255, 255, 255, 0.22);
+    color: #f2f2f2;
+}
+/* Cac hop nen trang -> chuyen toi (giu chu sang doc duoc) */
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] .course-side-card,
+html[data-theme="dark"] .cta-inline {
+    background-color: #16181c;
+    border-color: #2a2d31;
+}
+/* Input/textarea/select */
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+    background-color: #1b1d21;
+    color: var(--body);
+    border-color: #2a2d31;
+}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+    color: #7c828a;
+}
+/* Duong ke */
+html[data-theme="dark"] hr {
+    border-color: #2a2d31;
+}
