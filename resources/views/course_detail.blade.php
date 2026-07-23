@@ -72,8 +72,8 @@
                     </div>
 
                     <ul class="course-meta-list">
-                        <li><strong>N&#7873;n t&#7843;ng:</strong> {{ $course->platform ?: '&#272;a n&#7873;n t&#7843;ng' }}</li>
-                        <li><strong>C&#7845;p &#273;&#7897;:</strong> {{ $course->level ?: 'Ph&#249; h&#7907;p ng&#432;&#7901;i m&#7899;i' }}</li>
+                        <li><strong>N&#7873;n t&#7843;ng:</strong> {{ $course->platform ?: 'Đa nền tảng' }}</li>
+                        <li><strong>C&#7845;p &#273;&#7897;:</strong> {{ $course->level ?: 'Phù hợp người mới' }}</li>
                         <li><strong>Th&#7901;i l&#432;&#7907;ng:</strong> {{ $course->duration_text ?: 'Theo l&#7897; tr&#236;nh th&#7921;c t&#7871;' }}</li>
                         <li><strong>H&#236;nh th&#7913;c:</strong> {{ $course->format ?: 'Online / t&#432; v&#7845;n tr&#7921;c ti&#7871;p' }}</li>
                     </ul>

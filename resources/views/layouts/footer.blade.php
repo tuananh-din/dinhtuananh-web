@@ -3,7 +3,7 @@
     $contactInfo = $contact ?? null;
     $siteLogo = data_get($siteInfo, 'logo', 'app/assets/images/others/thumb-16.jpg');
     $brandName = data_get($contactInfo, 'name') ?: data_get($siteInfo, 'name', 'Personal Brand');
-    $siteSlogan = data_get($siteInfo, 'slogan', 'X&#226;y d&#7921;ng th&#432;&#417;ng hi&#7879;u c&#225; nh&#226;n, chia s&#7867; ki&#7871;n th&#7913;c ads v&#224; t&#432; v&#7845;n chi&#7871;n l&#432;&#7907;c th&#7921;c chi&#7871;n.');
+    $siteSlogan = data_get($siteInfo, 'slogan', 'Xây dựng thương hiệu cá nhân, chia sẻ kiến thức ads và tư vấn chiến lược thực chiến.');
     $phone = data_get($contactInfo, 'tel', '');
     $email = data_get($contactInfo, 'email', '');
 @endphp

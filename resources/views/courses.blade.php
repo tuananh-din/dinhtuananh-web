@@ -24,7 +24,7 @@
 
                     <div class="course-content">
                         <h3><a href="{{ route('course.detail', $row->slug) }}">{{ $row->title }}</a></h3>
-                        <p class="desc">{{ $row->short_description ?: 'Xem chi ti&#7871;t &#273;&#7875; bi&#7871;t l&#7897; tr&#236;nh h&#7885;c ph&#249; h&#7907;p v&#7899;i m&#7909;c ti&#234;u c&#7911;a b&#7841;n.' }}</p>
+                        <p class="desc">{{ $row->short_description ?: 'Xem chi tiết để biết lộ trình học phù hợp với mục tiêu của bạn.' }}</p>
 
                         <p class="course-price">
                             @if(!is_null($row->sale_price))
