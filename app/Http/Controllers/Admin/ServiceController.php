@@ -17,7 +17,7 @@ class ServiceController extends Controller
         return view('admin.service.create');
     }
     public function edit($id){
-        $service = Service::find($id);
+        $service = Service::findOrFail($id);
         return view('admin.service.edit',compact('service'));
     }
     public function store(Request $request){

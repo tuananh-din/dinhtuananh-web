@@ -20,7 +20,7 @@ class BlogController extends Controller
         return view('admin.blog.create');
     }
     public function edit($id){
-        $blog = Blog::find($id);
+        $blog = Blog::findOrFail($id);
         return view('admin.blog.edit',compact('blog'));
     }
     public function store(Request $request){

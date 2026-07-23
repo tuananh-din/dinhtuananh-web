@@ -20,7 +20,7 @@ class ImageController extends Controller
         return view('admin.image.create');
     }
     public function edit($id){
-        $image = ModelsImage::find($id);
+        $image = ModelsImage::findOrFail($id);
         return view('admin.image.edit',compact('image'));
     }
     public function store(Request $request){

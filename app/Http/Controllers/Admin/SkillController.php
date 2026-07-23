@@ -17,7 +17,7 @@ class SkillController extends Controller
         return view('admin.skill.create');
     }
     public function edit($id){
-        $skill = Skill::find($id);
+        $skill = Skill::findOrFail($id);
         return view('admin.skill.edit',compact('skill'));
     }
     public function store(Request $request){
