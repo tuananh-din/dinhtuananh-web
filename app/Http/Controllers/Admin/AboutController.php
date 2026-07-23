@@ -16,6 +16,10 @@ class AboutController extends Controller
     }
 
     public function updateProfile(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'avatar' => 'nullable|image|max:5120',
+        ]);
 
         $about = About::first();
         if($request->hasFile('avatar')){

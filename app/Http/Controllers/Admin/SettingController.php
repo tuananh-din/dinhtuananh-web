@@ -18,6 +18,12 @@ class SettingController extends Controller
     }
 
     public function updateSetting(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'url' => 'required|string|max:255',
+            'logo' => 'nullable|image|max:5120',
+            'favicon' => 'nullable|image|max:5120',
+        ]);
 
         $setting = Setting::first();
         if($request->hasFile('logo')){

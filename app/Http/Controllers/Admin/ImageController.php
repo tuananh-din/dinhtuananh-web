@@ -24,6 +24,10 @@ class ImageController extends Controller
         return view('admin.image.edit',compact('image'));
     }
     public function store(Request $request){
+        $request->validate([
+            'image' => 'nullable|image|max:5120',
+        ]);
+
         $id = $request->id;
         $image = ModelsImage::find($id);
         if($request->hasFile('image')){

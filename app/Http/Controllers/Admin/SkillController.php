@@ -21,6 +21,11 @@ class SkillController extends Controller
         return view('admin.skill.edit',compact('skill'));
     }
     public function store(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'number' => 'nullable|integer',
+        ]);
+
         $id = $request->id;
         // Chuẩn bị dữ liệu sản phẩm
         $data = array_merge($request->only([

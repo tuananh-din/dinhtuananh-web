@@ -21,6 +21,10 @@ class ServiceController extends Controller
         return view('admin.service.edit',compact('service'));
     }
     public function store(Request $request){
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
         $id = $request->id;
         // Chuẩn bị dữ liệu sản phẩm
         $data = array_merge($request->only([
