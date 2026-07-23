@@ -37,7 +37,7 @@ Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/blog',[BlogController::class,'blogs'])->name('blogs');
 Route::get('/courses',[CourseController::class,'index'])->name('courses');
 Route::get('/courses/{slug}',[CourseController::class,'detail'])->name('course.detail');
-Route::post('/lead/store',[LeadController::class,'store'])->name('lead.store');
+Route::post('/lead/store',[LeadController::class,'store'])->middleware('throttle:5,1')->name('lead.store');
 Route::get('/{slug}.html',[BlogController::class,'detail'])->name('blog');
 
 Route::get('/login',[LoginController::class,'login'])->name('login');
