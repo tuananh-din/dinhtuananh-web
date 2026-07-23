@@ -306,3 +306,45 @@
     }
 /* === honeypot (B-4) === */
 .hp-wrap { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+
+/* === errors/404.blade.php === */
+.error-page {
+    padding: 120px 0;
+}
+
+.error-page__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.error-page__code {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.error-page__inner h1 {
+    margin-bottom: 16px;
+}
+
+.error-page__inner p {
+    margin: 0 auto;
+    max-width: 560px;
+}
+
+.error-page__actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+@media (max-width: 767px) {
+    .error-page {
+        padding: 90px 0;
+    }
+}
