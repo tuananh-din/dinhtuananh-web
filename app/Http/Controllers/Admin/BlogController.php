@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
-use Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
+use Str;
+
 class BlogController extends Controller
 {
     public function index(){
@@ -23,26 +24,51 @@ class BlogController extends Controller
         return view('admin.blog.edit',compact('blog'));
     }
     public function store(Request $request){
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
         $id = $request->id;
         $blog = Blog::find($id);
         if($request->hasFile('image')){
             $file = $request->file('image');
             $path = $file->hashName('public/images');
             $img = Image::read($file);
-            Storage::put($path, (string) $img->encode());   
+            Storage::put($path, (string) $img->encode());
             $image = Storage::url($path);
         }else{
             $image = $blog->image ?? null;
         }
-        
+
+        if ($blog) {
+            $slug = $blog->slug;
+        } else {
+            $baseSlug = Str::slug($request->title);
+            if (!$baseSlug) {
+                $baseSlug = 'blog';
+            }
+
+            $slug = $baseSlug;
+            $counter = 1;
+            while (
+                Blog::where('slug', $slug)
+                    ->when($id, function ($query) use ($id) {
+                        $query->where('id', '!=', $id);
+                    })
+                    ->exists()
+            ) {
+                $slug = $baseSlug . '-' . $counter;
+                $counter++;
+            }
+        }
 
         // Chuẩn bị dữ liệu sản phẩm
         $data = array_merge($request->only([
-            'title', 'description','content', 'title_seo', 
+            'title', 'description','content', 'title_seo',
             'desc_seo', 'key_seo'
         ]), [
             'image' => $image,
-            'slug' => Str::slug($request->title),
+            'slug' => $slug,
 
         ]);
 
