@@ -88,7 +88,9 @@ class PublicLeadSubmissionTest extends TestCase
             ->andThrow(new RuntimeException('Mail unavailable'));
         Log::shouldReceive('error')
             ->once()
-            ->withArgs(fn ($message) => str_contains($message, 'Lead mail failed: Mail unavailable'));
+            ->withArgs(fn ($message, $context) => $message === 'Lead notification email failed.'
+                && is_int($context['lead_id'])
+                && $context['exception_class'] === RuntimeException::class);
 
         $response = $this->post(route('lead.store'), [
             'name' => 'Nguyen Van C',

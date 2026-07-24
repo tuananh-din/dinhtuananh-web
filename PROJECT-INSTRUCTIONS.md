@@ -231,6 +231,7 @@ Lệnh vận hành local chỉ chạy sau khi nói rõ mục đích. Tham khảo
 - `docs/deployment-guide.md` là checklist triển khai chuẩn. Chỉ đánh dấu một bước là hoàn tất khi có bằng chứng kiểm tra, nhưng không ghi password, token, mailbox hay dữ liệu khách hàng vào Git.
 - Chưa có bằng chứng trong repo rằng SMTP thật, mailbox nhận lead, backup/restore hoặc staging/production đã được kiểm tra end-to-end. Đây là việc **cần xác minh** với người sở hữu hạ tầng, không được suy đoán từ test `Mail::fake()`.
 - Lead được lưu trước khi gửi `NewLeadNotification`; nếu gửi lỗi, app log lỗi và vẫn báo thành công. Sau khi cấu hình SMTP thật, cần kiểm tra cả hai nhánh: email nhận được khi bình thường và lead vẫn lưu khi SMTP lỗi.
+- Log lỗi email lead chỉ dùng event cố định `Lead notification email failed.` cùng `lead_id` và `exception_class`; không ghi raw exception message, credential SMTP hoặc PII của lead vào log.
 - Trước deploy: backup DB, xác nhận `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL` đúng host, migration phù hợp, storage link và cache. Sau deploy: smoke test public/admin/sitemap/upload/lead theo deployment guide và chuẩn bị cách rollback.
 
 ## 11. Checklist thêm tính năng

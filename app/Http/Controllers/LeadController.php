@@ -50,7 +50,10 @@ class LeadController extends Controller
             Mail::to(config('mail.lead_notify'))
                 ->send(new NewLeadNotification($lead));
         } catch (\Throwable $e) {
-            Log::error('Lead mail failed: ' . $e->getMessage());
+            Log::error('Lead notification email failed.', [
+                'lead_id' => $lead->id,
+                'exception_class' => $e::class,
+            ]);
         }
 
         return redirect()->back()->with('success', $successMessage);
