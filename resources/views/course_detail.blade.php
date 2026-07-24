@@ -81,7 +81,7 @@
                     <div class="cta-stack">
                         @if($course->cta_link)
                         <a href="{{ $course->cta_link }}" class="theme-btn">
-                            {{ $course->cta_text ?: '&#272;&#259;ng k&#253; h&#7885;c ngay' }}
+                            {{ $course->cta_text ?: 'Đăng ký học ngay' }}
                             <i class="fa-solid fa-arrow-up-right"></i>
                         </a>
                         @else

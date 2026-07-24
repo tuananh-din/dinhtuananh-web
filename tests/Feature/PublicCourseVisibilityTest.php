@@ -31,13 +31,26 @@ class PublicCourseVisibilityTest extends TestCase
         $this->get(route('course.detail', $inactiveCourse->slug))->assertNotFound();
     }
 
-    private function createCourse(string $slug, bool $isActive): Course
+    public function test_course_cta_link_uses_a_readable_fallback_when_its_text_is_empty(): void
     {
-        return Course::create([
+        $course = $this->createCourse('khoa-hoc-cta-mac-dinh', true, [
+            'cta_link' => 'https://example.com/register',
+            'cta_text' => null,
+        ]);
+
+        $response = $this->get(route('course.detail', $course->slug));
+
+        $response->assertOk();
+        $response->assertSee('Đăng ký học ngay');
+    }
+
+    private function createCourse(string $slug, bool $isActive, array $attributes = []): Course
+    {
+        return Course::create(array_merge([
             'title' => 'Khóa học '.$slug,
             'slug' => $slug,
             'short_description' => 'Mô tả ngắn.',
             'is_active' => $isActive,
-        ]);
+        ], $attributes));
     }
 }

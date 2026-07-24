@@ -159,7 +159,7 @@
                     </p>
                     <a href="{{ route('course.detail', $featuredCourse->slug) }}" class="theme-btn">Xem chi ti&#7871;t <i class="fa-solid fa-arrow-up-right"></i></a>
                     @if($featuredCourse->cta_link)
-                    <a href="{{ $featuredCourse->cta_link }}" class="theme-btn border-btn">{{ $featuredCourse->cta_text ?: '&#272;&#259;ng k&#253; h&#7885;c' }} <i class="fa-solid fa-arrow-up-right"></i></a>
+                    <a href="{{ $featuredCourse->cta_link }}" class="theme-btn border-btn">{{ $featuredCourse->cta_text ?: 'Đăng ký học' }} <i class="fa-solid fa-arrow-up-right"></i></a>
                     @else
                     <a href="{{ route('contact', ['course' => $featuredCourse->slug]) }}" class="theme-btn border-btn">Li&#234;n h&#7879; t&#432; v&#7845;n <i class="fa-solid fa-arrow-up-right"></i></a>
                     @endif
