@@ -3,6 +3,19 @@ const readURL = (input) => {
       const reader = new FileReader()
       reader.onload = (e) => {
         $('#preview').attr('src', e.target.result)
+
+        if ($(input).attr('name') === 'thumbnail') {
+          const image = new Image()
+          image.onload = () => {
+            const ratio = image.naturalWidth / image.naturalHeight
+            const isNearSixteenByNine = Math.abs(ratio - (16 / 9)) <= 0.08
+            const warning = $('#thumbnail-aspect-warning')
+
+            warning.prop('hidden', isNearSixteenByNine)
+            warning.text(isNearSixteenByNine ? '' : 'Ảnh này không gần tỷ lệ 16:9; thumbnail có thể bị cắt khi hiển thị.')
+          }
+          image.src = e.target.result
+        }
       }
       reader.readAsDataURL(input.files[0])
     }
