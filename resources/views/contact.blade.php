@@ -11,10 +11,10 @@
             </div>
 
             @if(session('success'))
-                <p style="color:#7af2a0;">{{ session('success') }}</p>
+                <p style="color:#7af2a0;" role="status" aria-live="polite">{{ session('success') }}</p>
             @endif
             @if($errors->any())
-                <p style="color:#ff8f8f;">{{ $errors->first() }}</p>
+                <p style="color:#ff8f8f;" role="alert">{{ $errors->first() }}</p>
             @endif
 
             <form action="{{ route('lead.store') }}" method="POST" class="mt-4">

@@ -164,6 +164,7 @@ Trước migration: báo rõ rủi ro, backup DB phù hợp môi trường, ki�
 - Header có menu desktop `d-none d-lg-block`, offcanvas/hamburger cho mobile, CTA tới `/#final-cta`, theme toggle. Menu `Liên hệ` ở header/footer trỏ thống nhất tới `/contact`; CTA đăng ký học vẫn trỏ tới `/#final-cta` theo luồng form nhanh trên trang chủ.
 - Fallback asset/site info dùng `data_get`; kiểm tra fallback khi Setting/About chưa có row. Khi chưa có course active, trang `/courses` hiển thị thông báo public và CTA tới `/contact`, không lộ hướng dẫn admin.
 - Ba form lead public (home, contact, course detail) dùng `autocomplete` cho name/tel/email; phone dùng `type="tel"` và `inputmode="tel"` để hỗ trợ bàn phím mobile. Các field hiển thị có `aria-label`; honeypot vẫn `aria-hidden`. Giữ `name` field và validation server-side hiện có khi sửa form.
+- Thông báo gửi lead thành công dùng `role="status"` với `aria-live="polite"`; lỗi validation dùng `role="alert"` ở cả home, contact và course detail. Giữ nguyên copy/thứ tự hiển thị khi sửa feedback form.
 - Pagination dùng `resources/views/vendor/paginate.blade.php` hoặc `pagination.blade.php` tùy view, không dùng mặc định Laravel.
 
 ### Admin

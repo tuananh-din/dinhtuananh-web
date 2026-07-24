@@ -342,10 +342,10 @@
                 <div class="wow fadeInUp" data-wow-delay=".3s">
                     <p class="course-placeholder-note">Nh&#7853;n t&#432; v&#7845;n nhanh qua &#273;i&#7879;n tho&#7841;i, Zalo ho&#7863;c trang li&#234;n h&#7879;.</p>
                     @if(session('success'))
-                        <div class="lead-feedback success">{{ session('success') }}</div>
+                        <div class="lead-feedback success" role="status" aria-live="polite">{{ session('success') }}</div>
                     @endif
                     @if($errors->any())
-                        <div class="lead-feedback error">{{ $errors->first() }}</div>
+                        <div class="lead-feedback error" role="alert">{{ $errors->first() }}</div>
                     @endif
                     <form class="lead-form-shell" action="{{ route('lead.store') }}" method="POST">
                         @csrf
