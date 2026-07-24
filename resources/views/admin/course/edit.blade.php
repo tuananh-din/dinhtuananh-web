@@ -28,15 +28,18 @@
                                 @endif
                                 <div class="form-group">
                                     <label>Ti&#234;u &#273;&#7873; (*)</label>
-                                    <input type="text" name="title" class="form-control" value="{{ old('title', $course->title) }}" required>
+                                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $course->title) }}" required>
+                                    @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Slug</label>
-                                    <input type="text" name="slug" class="form-control" value="{{ old('slug', $course->slug) }}">
+                                    <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug', $course->slug) }}">
+                                    @error('slug')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>M&#244; t&#7843; ng&#7855;n (*)</label>
-                                    <textarea name="short_description" class="form-control" rows="4" required>{{ old('short_description', $course->short_description) }}</textarea>
+                                    <textarea name="short_description" class="form-control @error('short_description') is-invalid @enderror" rows="4" required>{{ old('short_description', $course->short_description) }}</textarea>
+                                    @error('short_description')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>M&#244; t&#7843;</label>
@@ -49,16 +52,18 @@
                                 <div class="form-group">
                                     <img id="preview" src="{{ $course->thumbnail ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="">
                                     <div class="file-input">
-                                        <input class="choose" type="file" name="thumbnail" accept="image/*">
+                                        <input class="choose @error('thumbnail') is-invalid @enderror" type="file" name="thumbnail" accept="image/*">
                                         <span class="button">Th&#234;m &#7843;nh thumb</span>
                                         <span class="label"></span>
                                     </div>
                                     <small class="form-text text-muted">Khuy&#7871;n ngh&#7883;: &#7843;nh ngang 16:9, t&#7889;i thi&#7875;u 1200&#215;675 px, d&#432;&#7899;i 5 MB.</small>
                                     <small id="thumbnail-aspect-warning" class="form-text text-warning" hidden></small>
+                                    @error('thumbnail')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Gi&#225; g&#7889;c</label>
-                                    <input type="number" step="0.01" min="0" name="price" class="form-control" value="{{ old('price', $course->price) }}">
+                                    <input type="number" step="0.01" min="0" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $course->price) }}">
+                                    @error('price')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Gi&#225; sale</label>
@@ -94,7 +99,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Th&#7913; t&#7921; hi&#7875;n th&#7883;</label>
-                                    <input type="number" name="sort_order" class="form-control" value="{{ old('sort_order', $course->sort_order) }}">
+                                    <input type="number" name="sort_order" class="form-control @error('sort_order') is-invalid @enderror" value="{{ old('sort_order', $course->sort_order) }}">
+                                    @error('sort_order')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>SEO title</label>
