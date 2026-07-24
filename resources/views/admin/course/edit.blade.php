@@ -53,6 +53,7 @@
                                         <span class="button">Th&#234;m &#7843;nh thumb</span>
                                         <span class="label"></span>
                                     </div>
+                                    <small class="form-text text-muted">Khuy&#7871;n ngh&#7883;: &#7843;nh ngang 16:9, t&#7889;i thi&#7875;u 1200&#215;675 px, d&#432;&#7899;i 5 MB.</small>
                                 </div>
                                 <div class="form-group">
                                     <label>Gi&#225; g&#7889;c</label>
