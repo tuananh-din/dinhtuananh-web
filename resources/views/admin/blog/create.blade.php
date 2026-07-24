@@ -27,8 +27,9 @@
                                    
                                     <div class="form-group">
                                             <label for="title">Tiêu đề (*)</label>
-                                            <input type="text" name="title" class="form-control" id="title">
+                                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title') }}">
                                             <span class="mess-error" id="title_error"></span>
+                                            @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                         </div>
 
                                     <div class="form-group">
@@ -44,12 +45,13 @@
                                     <div class="form-group">
                                         <img id="preview" src="app/assets/images/others/thumb-16.jpg" alt="">
                                         <div class="file-input">
-                                            <input class="choose" type="file" name="image" accept="image/*">
+                                            <input class="choose @error('image') is-invalid @enderror" type="file" name="image" accept="image/*">
                                             <span class="button">Thêm hình ảnh</span>
                                             <span class="label"></span>
                                         </div>
                                         <small class="form-text text-muted">Khuyến nghị: ảnh ngang 16:9, tối thiểu 1200×675 px, dưới 5 MB.</small>
                                         <small id="blog-image-aspect-warning" class="form-text text-warning" hidden></small>
+                                        @error('image')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
                                     </div>
                                     <div class="m-t-25">
                                         <div class="form-group">
