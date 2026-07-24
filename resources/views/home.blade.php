@@ -193,9 +193,9 @@
             @else
             <div class="col-lg-4">
                 <div class="placeholder-card">
-                    <h3>Ch&#432;a c&#243; kh&#243;a h&#7885;c n&#7893;i b&#7853;t</h3>
-                    <p>Section n&#224;y &#273;ang ch&#7901; d&#7919; li&#7879;u th&#7853;t t&#7915; admin courses.</p>
-                    <p class="course-placeholder-note"><a href="{{ route('courses') }}">Xem trang kh&#243;a h&#7885;c</a> ho&#7863;c li&#234;n h&#7879; &#273;&#7875; &#273;&#432;&#7907;c t&#432; v&#7845;n s&#7899;m.</p>
+                    <h3>Kh&#243;a h&#7885;c m&#7899;i &#273;ang &#273;&#432;&#7907;c c&#7853;p nh&#7853;t</h3>
+                    <p>HÃ£y &#273;&#7875; l&#7841;i th&#244;ng tin &#273;&#7875; nh&#7853;n t&#432; v&#7845;n l&#7897; tr&#236;nh phÃ¹ há»£p v&#7899;i má»¥c ti&#234;u cá»§a báº¡n.</p>
+                    <a href="{{ route('contact') }}" class="theme-btn">Nh&#7853;n t&#432; v&#7845;n kh&#243;a h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
                 </div>
             </div>
             @endif
