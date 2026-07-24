@@ -200,8 +200,9 @@ Tên route không theo prefix nhất quán hoàn toàn vì legacy: ví dụ publ
 - `tests/Feature/CourseDeletionProtectionTest.php`: course có lead được ẩn, course không có lead vẫn xóa được.
 - `tests/Feature/AdminImageTypeValidationTest.php`: admin chỉ tạo image với type `0` hoặc `1`.
 - `tests/Feature/AdminAccessTest.php`: guest bị chuyển login, user đăng nhập truy cập được route admin đại diện.
+- `tests/Feature/LoginLogoutTest.php`: đăng nhập đúng/sai và logout admin.
 - `tests/Feature/PublicLeadSubmissionTest.php`: lead hợp lệ/honeypot/validation và lỗi email notification không làm mất lead.
-- Chưa cover auth login/logout, CRUD admin khác, upload, slug, sitemap, SEO/JSON-LD, phân quyền, hay giao diện responsive.
+- Chưa cover remember-me, hành vi guest của route login, CRUD admin khác, upload, slug, sitemap, SEO/JSON-LD, phân quyền, hay giao diện responsive.
 
 `phpunit.xml` dùng `DB_CONNECTION=sqlite` và `DB_DATABASE=:memory:`. Feature test có `RefreshDatabase` chạy migrations trong RAM, vì vậy suite không phụ thuộc MySQL/Laragon hoặc `.env` thật. Lần chạy gần nhất: 10 tests, 32 assertions pass. SQLite không thay thế hoàn toàn MySQL production; migration/query đặc thù MySQL vẫn cần kiểm tra phù hợp trước khi dùng.
 
