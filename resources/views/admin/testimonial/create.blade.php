@@ -24,7 +24,8 @@
                                 @endif
                                 <div class="form-group">
                                     <label>T&#234;n (*)</label>
-                                    <input type="text" name="name" class="form-control" required>
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                                    @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Ch&#7913;c danh</label>
@@ -36,21 +37,25 @@
                                 </div>
                                 <div class="form-group">
                                     <label>N&#7897;i dung (*)</label>
-                                    <textarea name="content" class="form-control" rows="5" required></textarea>
+                                    <textarea name="content" class="form-control @error('content') is-invalid @enderror" rows="5" required>{{ old('content') }}</textarea>
+                                    @error('content')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Rating (1-5)</label>
-                                    <input type="number" min="1" max="5" name="rating" class="form-control">
+                                    <input type="number" min="1" max="5" name="rating" class="form-control @error('rating') is-invalid @enderror" value="{{ old('rating') }}">
+                                    @error('rating')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>&#7842;nh &#273;&#7841;i di&#7879;n</label>
-                                    <input type="file" name="avatar" class="form-control-file" accept="image/*">
+                                    <input type="file" name="avatar" class="form-control-file @error('avatar') is-invalid @enderror" accept="image/*">
                                     <small class="form-text text-muted">Khuyến nghị: ảnh vuông, tối thiểu 600×600 px, dưới 5 MB.</small>
                                     <small id="testimonial-avatar-aspect-warning" class="form-text text-warning" hidden></small>
+                                    @error('avatar')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Th&#7913; t&#7921; hi&#7875;n th&#7883;</label>
-                                    <input type="number" name="sort_order" value="0" class="form-control">
+                                    <input type="number" name="sort_order" value="{{ old('sort_order', 0) }}" class="form-control @error('sort_order') is-invalid @enderror">
+                                    @error('sort_order')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="is_featured" value="1" id="is_featured">
