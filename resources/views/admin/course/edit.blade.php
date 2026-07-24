@@ -80,8 +80,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>CTA text</label>
-                                    <input type="text" name="cta_text" class="form-control" value="{{ old('cta_text', $course->cta_text) }}" maxlength="60" aria-describedby="cta-text-help">
+                                    <input type="text" name="cta_text" class="form-control @error('cta_text') is-invalid @enderror" value="{{ old('cta_text', $course->cta_text) }}" maxlength="60" aria-describedby="cta-text-help">
                                     <small id="cta-text-help" class="form-text text-muted">T&#7889;i &#273;a 60 k&#253; t&#7921;.</small>
+                                    @error('cta_text')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>CTA link</label>
@@ -93,13 +94,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label>SEO title</label>
-                                    <input type="text" name="seo_title" class="form-control" value="{{ old('seo_title', $course->seo_title) }}" maxlength="60" aria-describedby="seo-title-help">
+                                    <input type="text" name="seo_title" class="form-control @error('seo_title') is-invalid @enderror" value="{{ old('seo_title', $course->seo_title) }}" maxlength="60" aria-describedby="seo-title-help">
                                     <small id="seo-title-help" class="form-text text-muted">T&#7889;i &#273;a 60 k&#253; t&#7921;.</small>
+                                    @error('seo_title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>SEO description</label>
-                                    <textarea name="seo_description" class="form-control" rows="4" maxlength="155" aria-describedby="seo-description-help">{{ old('seo_description', $course->seo_description) }}</textarea>
+                                    <textarea name="seo_description" class="form-control @error('seo_description') is-invalid @enderror" rows="4" maxlength="155" aria-describedby="seo-description-help">{{ old('seo_description', $course->seo_description) }}</textarea>
                                     <small id="seo-description-help" class="form-text text-muted">T&#7889;i &#273;a 155 k&#253; t&#7921;.</small>
+                                    @error('seo_description')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="is_featured" value="1" id="is_featured" {{ old('is_featured', $course->is_featured) ? 'checked' : '' }}>
