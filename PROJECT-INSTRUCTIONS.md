@@ -45,6 +45,11 @@ Kiến trúc là Laravel MVC mỏng: route gọi controller, controller query tr
 - Nút mở/đóng offcanvas phải là `<button type="button">`, có nhãn tiếng Việt và trạng thái `aria-expanded`/`aria-hidden`; giữ class hook JavaScript cũ khi thay đổi markup.
 - Không giảm vùng chạm menu mobile dưới kích thước theme hiện có (60px). CTA chữ dài được ẩn dưới breakpoint menu ngang để tránh làm header chật; menu offcanvas là kênh điều hướng thay thế.
 
+### Quy ước CTA khóa học
+
+- `cta_link` là dữ liệu admin nhưng được render trực tiếp thành `href`, nên phải validate ở server. Chỉ chấp nhận URL `http/https`, đường dẫn nội bộ bắt đầu bằng một dấu `/` (không phải `//...`), hoặc `tel:` có số điện thoại hợp lệ.
+- Không tự đổi dữ liệu CTA đã lưu trong migration. Trước khi siết rule mới, rà các giá trị hiện có để tránh chặn format hợp lệ đang dùng; hiện dữ liệu production/local mẫu sử dụng `tel:`.
+
 Đọc `AGENTS.md` ở root trước mọi phase. Các yêu cầu quan trọng:
 
 - Trao đổi và tài liệu bằng tiếng Việt, dễ hiểu.

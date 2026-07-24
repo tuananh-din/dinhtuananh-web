@@ -42,7 +42,31 @@ class CourseController extends Controller
             'price' => 'nullable|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
             'sort_order' => 'nullable|integer|min:0',
-            'cta_link' => 'nullable|string|max:255',
+            'cta_link' => [
+                'nullable',
+                'string',
+                'max:255',
+                function ($attribute, $value, $fail) {
+                    if ($value === null || $value === '') {
+                        return;
+                    }
+
+                    if (Str::startsWith($value, '/') && !Str::startsWith($value, '//')) {
+                        return;
+                    }
+
+                    $scheme = strtolower((string) parse_url($value, PHP_URL_SCHEME));
+                    if (in_array($scheme, ['http', 'https'], true) && filter_var($value, FILTER_VALIDATE_URL)) {
+                        return;
+                    }
+
+                    if (preg_match('/^tel:\+?[0-9][0-9().\-\s]*$/i', $value)) {
+                        return;
+                    }
+
+                    $fail('Liên kết CTA chỉ hỗ trợ URL http/https, đường dẫn nội bộ bắt đầu bằng / hoặc số điện thoại tel:.');
+                },
+            ],
         ]);
 
         if (!is_null($request->price) && !is_null($request->sale_price) && (float) $request->sale_price > (float) $request->price) {
