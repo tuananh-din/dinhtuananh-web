@@ -16,7 +16,7 @@
                 <li><a href="{{ route('portfolio') }}">Case Study</a></li>
                 <li><a href="{{ route('blogs') }}">Blog</a></li>
                 <li><a href="{{ route('courses') }}">Kh&#243;a h&#7885;c</a></li>
-                <li><a href="{{ route('about') }}#contact-brand">Li&#234;n h&#7879;</a></li>
+                <li><a href="{{ route('contact') }}">Li&#234;n h&#7879;</a></li>
             </ul>
             <div class="footer-brand-copy">
                 <h3>{{ $brandName }}</h3>

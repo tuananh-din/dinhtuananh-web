@@ -161,7 +161,7 @@ Trước migration: báo rõ rủi ro, backup DB phù hợp môi trường, ki�
 - Các view chính: `home`, `about`, `portfolio`, `life`, `blogs`, `blog_detail`, `courses`, `course_detail`, `contact`, `login`, `errors/404`, `sitemap`. Form `contact` nhận `$courses` active và `$selectedCourse` từ query `course`; giữ course selector optional để không cản trở liên hệ chung.
 - `partials/jsonld-person` dùng ở home/about; `jsonld-article` dùng ở blog detail.
 - `public/site/assets/css/main.css` là CSS theme; custom của dự án ở `public/site/assets/css/custom.css`, nạp sau main. Không redesign hoặc thay CSS theme lớn nếu chưa có yêu cầu.
-- Header có menu desktop `d-none d-lg-block`, offcanvas/hamburger cho mobile, CTA tới `/#final-cta`, theme toggle. Link liên hệ hiện trỏ `/about#contact-brand`, không phải `/contact`; đây là hành vi hiện hữu cần giữ trừ khi được yêu cầu đổi.
+- Header có menu desktop `d-none d-lg-block`, offcanvas/hamburger cho mobile, CTA tới `/#final-cta`, theme toggle. Menu `Liên hệ` ở header/footer trỏ thống nhất tới `/contact`; CTA đăng ký học vẫn trỏ tới `/#final-cta` theo luồng form nhanh trên trang chủ.
 - Fallback asset/site info dùng `data_get`; kiểm tra fallback khi Setting/About chưa có row.
 - Pagination dùng `resources/views/vendor/paginate.blade.php` hoặc `pagination.blade.php` tùy view, không dùng mặc định Laravel.
 
