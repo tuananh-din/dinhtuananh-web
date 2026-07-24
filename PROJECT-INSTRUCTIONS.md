@@ -194,10 +194,13 @@ Tên route không theo prefix nhất quán hoàn toàn vì legacy: ví dụ publ
 ### Coverage hiện có
 
 - `tests/Unit/ExampleTest.php`: assertion `true` — pass, không cover nghiệp vụ.
-- `tests/Feature/ExampleTest.php`: `GET /` kỳ vọng 200 — smoke test duy nhất; không dùng `RefreshDatabase`.
-- Chưa có test tự động cho auth, CRUD admin, validation, upload, lead/mail, slug, sitemap, SEO/JSON-LD, phân quyền, hay giao diện responsive.
+- `tests/Feature/ExampleTest.php`: smoke `GET /` dùng `RefreshDatabase`.
+- `tests/Feature/LeadStatusValidationTest.php`: admin chỉ cập nhật lead bằng status chuẩn.
+- `tests/Feature/CourseDeletionProtectionTest.php`: course có lead được ẩn, course không có lead vẫn xóa được.
+- `tests/Feature/PublicLeadSubmissionTest.php`: lead hợp lệ/honeypot/validation và lỗi email notification không làm mất lead.
+- Chưa cover auth login/logout, CRUD admin khác, upload, slug, sitemap, SEO/JSON-LD, phân quyền, hay giao diện responsive.
 
-`phpunit.xml` chỉ đặt cache/session/mail/queue test; hai cấu hình SQLite đang comment. Vì vậy test feature dùng kết nối DB mặc định từ môi trường. Lần chạy kiểm tra ngày 24/07/2026 cho kết quả 1 pass/1 fail: `GET /` trả 500 do MySQL tại `127.0.0.1` từ chối kết nối. Đây là môi trường database chưa chạy/không kết nối được, **không kết luận là lỗi logic home**.
+`phpunit.xml` dùng `DB_CONNECTION=sqlite` và `DB_DATABASE=:memory:`. Feature test có `RefreshDatabase` chạy migrations trong RAM, vì vậy suite không phụ thuộc MySQL/Laragon hoặc `.env` thật. Lần chạy gần nhất: 10 tests, 32 assertions pass. SQLite không thay thế hoàn toàn MySQL production; migration/query đặc thù MySQL vẫn cần kiểm tra phù hợp trước khi dùng.
 
 ### Lệnh local
 
@@ -207,10 +210,10 @@ PowerShell hiện không có `php` trong `PATH`; PHP Laragon đã xác minh tạ
 $php = 'C:\App\laragon\bin\php\php-8.3.30-Win32-vs16-x64\php.exe'
 & $php artisan route:list --except-vendor
 & $php artisan test
-& $php artisan pint --test
+& $php vendor/bin/pint --test
 ```
 
-Trước khi chạy feature test, cần xác minh MySQL local đang chạy và database test an toàn. Cách bền vững hơn (cần được thống nhất trước khi sửa config) là tạo `.env.testing` hoặc bật SQLite riêng cho PHPUnit, migrate database test, và dùng `RefreshDatabase` cho test cần DB. Không trỏ test destructive tới DB local/production có dữ liệu.
+SQLite đã là môi trường mặc định của PHPUnit. Chỉ dùng MySQL local để test thủ công khi cần đối chiếu hành vi MySQL; không trỏ test destructive tới DB local/production có dữ liệu.
 
 ## 10. Quy trình phát triển tiếp
 
@@ -222,6 +225,13 @@ Trước khi chạy feature test, cần xác minh MySQL local đang chạy và d
 6. Chạy ít nhất syntax/test phù hợp, `route:list` khi sửa route, test tay màn hình desktop/mobile và lỗi validation. Cập nhật tài liệu/changelog khi thay đổi kiến trúc hoặc quy ước.
 
 Lệnh vận hành local chỉ chạy sau khi nói rõ mục đích. Tham khảo `docs/deployment-guide.md` cho deploy; không deploy chỉ vì hoàn tất code.
+
+### Quy ước vận hành staging/production
+
+- `docs/deployment-guide.md` là checklist triển khai chuẩn. Chỉ đánh dấu một bước là hoàn tất khi có bằng chứng kiểm tra, nhưng không ghi password, token, mailbox hay dữ liệu khách hàng vào Git.
+- Chưa có bằng chứng trong repo rằng SMTP thật, mailbox nhận lead, backup/restore hoặc staging/production đã được kiểm tra end-to-end. Đây là việc **cần xác minh** với người sở hữu hạ tầng, không được suy đoán từ test `Mail::fake()`.
+- Lead được lưu trước khi gửi `NewLeadNotification`; nếu gửi lỗi, app log lỗi và vẫn báo thành công. Sau khi cấu hình SMTP thật, cần kiểm tra cả hai nhánh: email nhận được khi bình thường và lead vẫn lưu khi SMTP lỗi.
+- Trước deploy: backup DB, xác nhận `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL` đúng host, migration phù hợp, storage link và cache. Sau deploy: smoke test public/admin/sitemap/upload/lead theo deployment guide và chuẩn bị cách rollback.
 
 ## 11. Checklist thêm tính năng
 
@@ -262,8 +272,8 @@ Lệnh vận hành local chỉ chạy sau khi nói rõ mục đích. Tham khảo
 
 ## 14. Rủi ro kỹ thuật và điểm cần cẩn thận
 
-1. **Test chưa cô lập DB (cao):** PHPUnit dùng MySQL môi trường vì SQLite bị comment. Test feature đang fail khi MySQL không chạy; cần một database testing riêng trước khi tin tưởng CI/test.
-2. **Coverage cực thấp (cao):** chỉ 2 example test, không bảo vệ các luồng business/admin/upload.
+1. **Khác biệt SQLite/MySQL (trung bình):** PHPUnit đã cô lập bằng SQLite in-memory, nhưng test không thay thế hoàn toàn hành vi MySQL production (schema/query/encoding đặc thù). Kiểm tra MySQL khi phase có rủi ro tương thích.
+2. **Coverage còn giới hạn (trung bình):** đã cover smoke, lead và bảo vệ xóa course; vẫn chưa bảo vệ auth, CRUD admin khác, upload, sitemap/SEO và UI.
 3. **Thiếu foreign key (trung bình):** `leads.course_id` nullable nhưng không constrained. Xóa course có thể làm lead còn course id không tồn tại; admin có fallback `Course #id`.
 4. **Mass assignment rộng (trung bình):** hầu hết model `$guarded = []`. Controller hiện chọn field qua `only()`, nhưng code mới không được `create($request->all())`.
 5. **HTML/snippet từ DB (trung bình/cao theo quyền admin):** `code_header`, `code_footer`, rich content được render raw. Đây là chủ đích CMS nhưng phải giới hạn quyền admin, không lấy dữ liệu từ public input vào các field đó.
@@ -287,4 +297,3 @@ Các việc dưới đây là đề xuất tồn đọng, **không tự triển 
 - Xác định lifecycle cho `public/media` CKEditor và ảnh orphan; tránh dọn tự động có nguy cơ làm mất ảnh đang được dùng trong rich content.
 - Rà soát accessibility/SEO bằng trình duyệt thực tế (menu keyboard, alt text, contrast, responsive) và hiệu năng asset/caching sau khi có baseline đo đạc.
 - Rà soát/xóa blog mẫu trước go-live nếu không cần, sau khi backup và xác minh dữ liệu.
-

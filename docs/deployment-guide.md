@@ -2,6 +2,17 @@
 
 Domain production: **https://dinhtuananh.com**
 
+## 0. Preflight bắt buộc và bằng chứng kiểm tra
+
+> Không deploy chỉ vì checklist này đã được viết. Người có quyền hạ tầng phải thực hiện và lưu bằng chứng ở nơi an toàn (ticket/runbook nội bộ), **không** ghi secret, token, mật khẩu, địa chỉ mailbox riêng hoặc dữ liệu lead vào Git.
+
+- [ ] Xác nhận credential từng xuất hiện trong file tracked đã được owner kiểm tra/rotate nếu còn hiệu lực.
+- [ ] Xác nhận `.env` production không nằm trong Git; `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL` đúng domain.
+- [ ] Xác nhận backup DB mới nhất có thể khôi phục ở môi trường an toàn trước migration có schema.
+- [ ] Xác nhận migration đang chờ, dung lượng storage và quyền ghi `storage/`.
+- [ ] Xác nhận SMTP và `LEAD_NOTIFY_EMAIL` bằng mailbox được phép test; không paste credential vào source/log/ticket công khai.
+- [ ] Xác nhận kế hoạch rollback code/schema và người chịu trách nhiệm thực hiện.
+
 ## 1. Checklist deploy prod (theo thứ tự)
 
 1. **Backup DB prod** trước mọi thay đổi schema:
@@ -68,6 +79,8 @@ php artisan config:clear
 php artisan tinker --execute="Mail::raw('test lead', fn(\$m)=>\$m->to(config('mail.lead_notify'))->subject('Test')); echo 'sent';"
 ```
 Hoặc submit thử 1 form lead trên site rồi kiểm hộp thư. **DO NOT** commit `.env` (đã trong `.gitignore`).
+
+Ghi nhận cả nhánh lỗi: tạm thời dùng SMTP/mailbox test không hợp lệ hoặc ngắt kết nối ở staging, submit lead và xác nhận lead vẫn được lưu còn lỗi email chỉ có trong log. Không làm thử nghiệm này trên production nếu chưa có kế hoạch và quyền thực hiện.
 
 ## 3. Lệnh chạy local (dev/QC)
 
