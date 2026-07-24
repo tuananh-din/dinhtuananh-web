@@ -51,7 +51,8 @@
                 <div class="course-card">
                     <div class="course-content">
                         <h3>Ch&#432;a c&#243; kh&#243;a h&#7885;c hi&#7875;n th&#7883;</h3>
-                        <p class="desc">B&#7841;n c&#243; th&#7875; th&#234;m kh&#243;a h&#7885;c m&#7899;i trong khu v&#7921;c admin, sau &#273;&#243; b&#7853;t tr&#7841;ng th&#225;i hi&#7875;n th&#7883; &#273;&#7875; xu&#7845;t hi&#7879;n t&#7841;i &#273;&#226;y.</p>
+                        <p class="desc">Kh&#243;a h&#7885;c m&#7899;i &#273;ang &#273;&#432;&#7907;c c&#7853;p nh&#7853;t. HÃ£y &#273;&#7875; l&#7841;i th&#244;ng tin &#273;&#7875; nh&#7853;n t&#432; v&#7845;n l&#7897; tr&#236;nh phÃ¹ há»£p.</p>
+                        <a href="{{ route('contact') }}" class="theme-btn">Nh&#7853;n t&#432; v&#7845;n kh&#243;a h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
                     </div>
                 </div>
             </div>
