@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Image as ModelsImage;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
@@ -26,6 +27,7 @@ class ImageController extends Controller
     public function store(Request $request){
         $request->validate([
             'image' => 'nullable|image|max:5120',
+            'type' => ['required', 'integer', Rule::in([0, 1])],
         ]);
 
         $id = $request->id;

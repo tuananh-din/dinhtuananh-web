@@ -89,6 +89,7 @@ Không xem `vendor/`, `node_modules/` (nếu được cài), asset minified bên
 
 - Controller gọi `$request->validate()` trực tiếp; không có Form Request. Khi thêm field phải bổ sung validation ở đúng controller, giữ lỗi quay về form theo mẫu hiện có.
 - Upload ảnh thường dùng `nullable|image|max:5120` (5 MB), đọc bằng Intervention Image và lưu `public/images`.
+- `images.type` chỉ nhận `0` (Life/Case) hoặc `1` (ảnh trang giới thiệu); giữ validation server-side này khi mở rộng form image.
 - Blog/course tự tạo slug bằng `Str::slug()`, thêm `-1`, `-2` khi trùng. Blog **giữ nguyên slug khi edit**; courses có thể tính lại slug từ input/title khi lưu.
 - Lead public có honeypot field `website`, validate name/phone/email/message/source_page/course_id và bỏ course id không tồn tại thay vì fail validation.
 - Lead chỉ nên dùng một trong năm trạng thái `new`, `contacted`, `qualified`, `won`, `lost` trong `Lead::STATUSES`; controller update hiện mới validate chuỗi `max:50`, vì vậy khi sửa cần tránh tạo status ngoài danh sách này.
@@ -197,6 +198,7 @@ Tên route không theo prefix nhất quán hoàn toàn vì legacy: ví dụ publ
 - `tests/Feature/ExampleTest.php`: smoke `GET /` dùng `RefreshDatabase`.
 - `tests/Feature/LeadStatusValidationTest.php`: admin chỉ cập nhật lead bằng status chuẩn.
 - `tests/Feature/CourseDeletionProtectionTest.php`: course có lead được ẩn, course không có lead vẫn xóa được.
+- `tests/Feature/AdminImageTypeValidationTest.php`: admin chỉ tạo image với type `0` hoặc `1`.
 - `tests/Feature/PublicLeadSubmissionTest.php`: lead hợp lệ/honeypot/validation và lỗi email notification không làm mất lead.
 - Chưa cover auth login/logout, CRUD admin khác, upload, slug, sitemap, SEO/JSON-LD, phân quyền, hay giao diện responsive.
 
