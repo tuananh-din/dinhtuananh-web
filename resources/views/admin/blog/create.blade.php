@@ -38,8 +38,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="content">Nội dung (*)</label>
-                                        <textarea id="content" name="content" class="form-control content"></textarea>
+                                        <textarea id="content" name="content" class="form-control content @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
                                         <span class="mess-error" id="content_error"></span>
+                                        @error('content')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     </div>
                                     
                                     <div class="form-group">

@@ -26,6 +26,7 @@ class BlogController extends Controller
     public function store(Request $request){
         $request->validate([
             'title' => 'required|string|max:255',
+            'content' => 'required|string',
             'image' => 'nullable|image|max:5120',
         ]);
 
