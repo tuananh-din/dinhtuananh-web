@@ -216,7 +216,7 @@
                     <img src="{{ $row->image ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $row->title ?: 'case-study' }}">
                     <div class="content">
                         <h3>{{ $row->title ?: 'Case study th&#7921;c t&#7871;' }}</h3>
-                        <p>{{ $row->description ?: 'B&#7841;n c&#243; th&#7875; d&#249;ng module Image c&#361; &#273;&#7875; &#273;&#432;a &#7843;nh d&#7921; &#225;n, k&#7871;t qu&#7843;, workshop ho&#7863;c feedback th&#7921;c t&#7871;.' }}</p>
+                        <p>{{ $row->description ?: 'Khám phá dự án và kết quả thực tế được cập nhật từ hành trình làm việc.' }}</p>
                     </div>
                 </div>
             </div>
