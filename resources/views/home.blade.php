@@ -194,7 +194,7 @@
             <div class="col-lg-4">
                 <div class="placeholder-card">
                     <h3>Kh&#243;a h&#7885;c m&#7899;i &#273;ang &#273;&#432;&#7907;c c&#7853;p nh&#7853;t</h3>
-                    <p>HÃ£y &#273;&#7875; l&#7841;i th&#244;ng tin &#273;&#7875; nh&#7853;n t&#432; v&#7845;n l&#7897; tr&#236;nh phÃ¹ há»£p v&#7899;i má»¥c ti&#234;u cá»§a báº¡n.</p>
+                    <p>H&#227;y &#273;&#7875; l&#7841;i th&#244;ng tin &#273;&#7875; nh&#7853;n t&#432; v&#7845;n l&#7897; tr&#236;nh ph&#249; h&#7907;p v&#7899;i m&#7909;c ti&#234;u c&#7911;a b&#7841;n.</p>
                     <a href="{{ route('contact') }}" class="theme-btn">Nh&#7853;n t&#432; v&#7845;n kh&#243;a h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
                 </div>
             </div>

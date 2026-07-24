@@ -27,6 +27,12 @@ Kiến trúc là Laravel MVC mỏng: route gọi controller, controller query tr
 
 ## 2. Quy ước làm việc bắt buộc
 
+### Quy ước encoding tiếng Việt
+
+- Lưu Blade, PHP, Markdown và cấu hình text bằng **UTF-8**; không copy chuỗi đã bị lỗi mã hóa kiểu `HÃ£y` hoặc `phÃ¹ há»£p`.
+- Với nội dung HTML cũ đang dùng numeric HTML entities, có thể tiếp tục dùng entities cho ký tự tiếng Việt khi sửa đúng vùng đó để thay đổi nhỏ và tránh lỗi mã hóa từ editor/terminal.
+- Trước khi commit nội dung public tiếng Việt, kiểm tra source và xem tay trang liên quan; dữ liệu do admin nhập trong database cần xác minh riêng vì không thể kết luận chỉ từ source.
+
 Đọc `AGENTS.md` ở root trước mọi phase. Các yêu cầu quan trọng:
 
 - Trao đổi và tài liệu bằng tiếng Việt, dễ hiểu.
