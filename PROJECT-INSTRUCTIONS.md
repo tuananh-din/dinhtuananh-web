@@ -1,5 +1,7 @@
 # PROJECT INSTRUCTIONS — tanh
 
+Tài liệu vận hành Admin cho người mới: xem `ADMIN-GUIDE.md` ở root trước khi cập nhật nội dung/ảnh trên CMS.
+
 > Tài liệu bối cảnh kỹ thuật để phát triển tiếp dự án mà không cần đọc lại toàn bộ mã nguồn. Cập nhật theo source tại ngày 24/07/2026. Khi tài liệu và mã nguồn mâu thuẫn, **ưu tiên mã nguồn hiện tại** và cập nhật lại tài liệu sau khi xác minh.
 
 ## 1. Tổng quan dự án
