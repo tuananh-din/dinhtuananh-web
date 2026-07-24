@@ -5,7 +5,9 @@ namespace Tests\Feature;
 use App\Mail\NewLeadNotification;
 use App\Models\Course;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use RuntimeException;
 use Tests\TestCase;
 
 class PublicLeadSubmissionTest extends TestCase
@@ -72,5 +74,32 @@ class PublicLeadSubmissionTest extends TestCase
         $response->assertSessionHasErrors(['name', 'phone']);
         $this->assertDatabaseCount('leads', 0);
         Mail::assertNothingSent();
+    }
+
+    public function test_lead_is_saved_when_notification_mail_fails(): void
+    {
+        Mail::shouldReceive('to')
+            ->once()
+            ->with(config('mail.lead_notify'))
+            ->andReturnSelf();
+        Mail::shouldReceive('send')
+            ->once()
+            ->withArgs(fn ($mailable) => $mailable instanceof NewLeadNotification)
+            ->andThrow(new RuntimeException('Mail unavailable'));
+        Log::shouldReceive('error')
+            ->once()
+            ->withArgs(fn ($message) => str_contains($message, 'Lead mail failed: Mail unavailable'));
+
+        $response = $this->post(route('lead.store'), [
+            'name' => 'Nguyen Van C',
+            'phone' => '0900000002',
+        ]);
+
+        $response->assertSessionHas('success');
+        $this->assertDatabaseHas('leads', [
+            'name' => 'Nguyen Van C',
+            'phone' => '0900000002',
+            'status' => 'new',
+        ]);
     }
 }
