@@ -41,6 +41,7 @@
                                 <span class="label"></span>
                             </div>
                             <small class="form-text text-muted">Khuyến nghị: logo ngang khoảng 300×100 px, dưới 5 MB.</small>
+                            <small id="logo-aspect-warning" class="form-text text-warning" hidden></small>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="font-weight-semibold">Favicon</label><br>
@@ -51,6 +52,7 @@
                                 <span class="label1"></span>
                             </div>
                             <small class="form-text text-muted">Khuyến nghị: ảnh vuông 512×512 px, dưới 5 MB.</small>
+                            <small id="favicon-aspect-warning" class="form-text text-warning" hidden></small>
                         </div>
                     </div>
                     <div class="form-group">

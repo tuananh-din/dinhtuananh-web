@@ -67,6 +67,31 @@ const readURL = (input) => {
     $('.label1').text(fileName)
   })
 
+  const warnSettingImageAspect = (input, warningSelector, isRecommended, message) => {
+    const file = input.files && input.files[0]
+    const warning = $(warningSelector)
+    if (!file || !warning.length) return
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const image = new Image()
+      image.onload = () => {
+        warning.prop('hidden', isRecommended(image.naturalWidth / image.naturalHeight))
+        warning.text(isRecommended(image.naturalWidth / image.naturalHeight) ? '' : message)
+      }
+      image.src = e.target.result
+    }
+    reader.readAsDataURL(file)
+  }
+
+  $('input[name="logo"]').on('change', function () {
+    warnSettingImageAspect(this, '#logo-aspect-warning', ratio => ratio >= 2, 'Logo này chưa đủ ngang; nên dùng logo ngang để header gọn hơn.')
+  })
+
+  $('input[name="favicon"]').on('change', function () {
+    warnSettingImageAspect(this, '#favicon-aspect-warning', ratio => Math.abs(ratio - 1) <= 0.08, 'Favicon này không gần tỷ lệ vuông; icon có thể bị cắt khi hiển thị.')
+  })
+
   $('input[name="avatar"]').on('change', function () {
     const file = this.files && this.files[0]
     const warning = $('#testimonial-avatar-aspect-warning')
