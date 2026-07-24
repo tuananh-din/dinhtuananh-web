@@ -110,7 +110,7 @@ Không xem `vendor/`, `node_modules/` (nếu được cài), asset minified bên
 3. **Portfolio `/portfolio` và life `/life`:** dùng `images.type=0` cho case/life; portfolio kết hợp About, services, skills và ảnh type 1.
 4. **Blog:** `/blog` phân trang 12 bài; `/{slug}.html` lấy blog theo slug hoặc 404, rồi lấy 3 bài khác mới nhất.
 5. **Khóa học:** `/courses` chỉ hiển thị `is_active=1`, phân trang 12 theo `sort_order ASC, id DESC`; `/courses/{slug}` chỉ xem được khóa active.
-6. **Lead:** form trang chủ/contact/course detail gửi `POST /lead/store`; contact cho phép chọn course active (không bắt buộc) và `GET /contact?course={slug}` chỉ preselect slug active. CTA fallback từ course detail giữ ngữ cảnh này. Hệ thống lọc honeypot, tạo row `leads` trạng thái `new`, thử gửi email admin và luôn trả flash success nếu mail lỗi.
+6. **Lead:** form trang chủ/contact/course detail gửi `POST /lead/store`; contact cho phép chọn course active (không bắt buộc) và `GET /contact?course={slug}` chỉ preselect slug active. CTA fallback từ course detail và course nổi bật trên home giữ ngữ cảnh này. Hệ thống lọc honeypot, tạo row `leads` trạng thái `new`, thử gửi email admin và luôn trả flash success nếu mail lỗi.
 7. **SEO:** layout sinh title/description/canonical/OG/Twitter; sitemap XML gồm trang tĩnh + blog + course active; `robots.txt` chặn `/admin`, `/login` và chỉ sitemap production hiện tại.
 8. **Theme:** public có toggle sáng/tối lưu `localStorage['theme']`, ưu tiên lựa chọn trước đó rồi theo `prefers-color-scheme`.
 

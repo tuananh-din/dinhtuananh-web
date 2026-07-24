@@ -161,7 +161,7 @@
                     @if($featuredCourse->cta_link)
                     <a href="{{ $featuredCourse->cta_link }}" class="theme-btn border-btn">{{ $featuredCourse->cta_text ?: '&#272;&#259;ng k&#253; h&#7885;c' }} <i class="fa-solid fa-arrow-up-right"></i></a>
                     @else
-                    <a href="{{ route('contact') }}" class="theme-btn border-btn">Li&#234;n h&#7879; t&#432; v&#7845;n <i class="fa-solid fa-arrow-up-right"></i></a>
+                    <a href="{{ route('contact', ['course' => $featuredCourse->slug]) }}" class="theme-btn border-btn">Li&#234;n h&#7879; t&#432; v&#7845;n <i class="fa-solid fa-arrow-up-right"></i></a>
                     @endif
                 </div>
             </div>
