@@ -109,13 +109,13 @@
                             <input type="hidden" name="source_page" value="course_detail">
                             <input type="hidden" name="course_id" value="{{ $course->id }}">
                             <div class="form-clt">
-                                <input type="text" name="name" placeholder="H&#7885; v&#224; t&#234;n (*)" value="{{ old('name') }}" required>
+                                <input type="text" name="name" placeholder="H&#7885; v&#224; t&#234;n (*)" value="{{ old('name') }}" autocomplete="name" required>
                             </div>
                             <div class="form-clt">
-                                <input type="text" name="phone" placeholder="S&#7889; &#273;i&#7879;n tho&#7841;i (*)" value="{{ old('phone') }}" required>
+                                <input type="tel" name="phone" placeholder="S&#7889; &#273;i&#7879;n tho&#7841;i (*)" value="{{ old('phone') }}" inputmode="tel" autocomplete="tel" required>
                             </div>
                             <div class="form-clt">
-                                <input type="email" name="email" placeholder="Email (kh&#244;ng b&#7855;t bu&#7897;c)" value="{{ old('email') }}">
+                                <input type="email" name="email" placeholder="Email (kh&#244;ng b&#7855;t bu&#7897;c)" value="{{ old('email') }}" autocomplete="email">
                             </div>
                             <div class="form-clt">
                                 <textarea name="message" placeholder="Nhu c&#7847;u c&#7911;a b&#7841;n (kh&#244;ng b&#7855;t bu&#7897;c)">{{ old('message') }}</textarea>
