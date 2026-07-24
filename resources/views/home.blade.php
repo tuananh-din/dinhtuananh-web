@@ -356,14 +356,14 @@
                         </div>
                         <input type="hidden" name="source_page" value="home_final_cta">
                         <div class="form-row">
-                            <input type="text" name="name" placeholder="H&#7885; v&#224; t&#234;n (*)" value="{{ old('name') }}" autocomplete="name" required>
-                            <input type="tel" name="phone" placeholder="S&#7889; &#273;i&#7879;n tho&#7841;i (*)" value="{{ old('phone') }}" inputmode="tel" autocomplete="tel" required>
+                            <input type="text" name="name" placeholder="H&#7885; v&#224; t&#234;n (*)" value="{{ old('name') }}" autocomplete="name" aria-label="Họ và tên" required>
+                            <input type="tel" name="phone" placeholder="S&#7889; &#273;i&#7879;n tho&#7841;i (*)" value="{{ old('phone') }}" inputmode="tel" autocomplete="tel" aria-label="Số điện thoại" required>
                         </div>
                         <div class="form-row single">
-                            <input type="email" name="email" placeholder="Email (kh&#244;ng b&#7855;t bu&#7897;c)" value="{{ old('email') }}" autocomplete="email">
+                            <input type="email" name="email" placeholder="Email (kh&#244;ng b&#7855;t bu&#7897;c)" value="{{ old('email') }}" autocomplete="email" aria-label="Email">
                         </div>
                         <div class="form-row single">
-                            <textarea name="message" placeholder="Nhu c&#7847;u c&#7911;a b&#7841;n (kh&#244;ng b&#7855;t bu&#7897;c)">{{ old('message') }}</textarea>
+                            <textarea name="message" placeholder="Nhu c&#7847;u c&#7911;a b&#7841;n (kh&#244;ng b&#7855;t bu&#7897;c)" aria-label="Nhu cầu tư vấn">{{ old('message') }}</textarea>
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="theme-btn">&#272;&#259;ng k&#253; t&#432; v&#7845;n <i class="fa-solid fa-arrow-up-right"></i></button>
