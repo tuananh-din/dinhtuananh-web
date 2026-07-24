@@ -16,6 +16,19 @@ const readURL = (input) => {
           }
           image.src = e.target.result
         }
+
+        if ($('#blog-image-aspect-warning').length) {
+          const image = new Image()
+          image.onload = () => {
+            const ratio = image.naturalWidth / image.naturalHeight
+            const isNearSixteenByNine = Math.abs(ratio - (16 / 9)) <= 0.08
+            const warning = $('#blog-image-aspect-warning')
+
+            warning.prop('hidden', isNearSixteenByNine)
+            warning.text(isNearSixteenByNine ? '' : 'Ảnh này không gần tỷ lệ 16:9; ảnh đại diện bài viết có thể bị cắt khi hiển thị.')
+          }
+          image.src = e.target.result
+        }
       }
       reader.readAsDataURL(input.files[0])
     }

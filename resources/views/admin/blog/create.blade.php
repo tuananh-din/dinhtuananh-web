@@ -49,6 +49,7 @@
                                             <span class="label"></span>
                                         </div>
                                         <small class="form-text text-muted">Khuyến nghị: ảnh ngang 16:9, tối thiểu 1200×675 px, dưới 5 MB.</small>
+                                        <small id="blog-image-aspect-warning" class="form-text text-warning" hidden></small>
                                     </div>
                                     <div class="m-t-25">
                                         <div class="form-group">
