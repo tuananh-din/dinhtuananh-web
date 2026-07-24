@@ -42,7 +42,7 @@
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </a>
-                                <form action="{{ route('course.delete', $row->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa?')">
+                                <form action="{{ route('course.delete', $row->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa? Khóa học đã có lead sẽ được ẩn thay vì xóa.')">
                                     @csrf
                                     <button type="submit" class="btn btn-icon btn-danger btn-rounded btn-tone">
                                         <i class="fas fa-trash"></i>

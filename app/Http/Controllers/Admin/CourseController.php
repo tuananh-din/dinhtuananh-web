@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Lead;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -119,6 +120,12 @@ class CourseController extends Controller
     {
         $course = Course::where('id', $id)->first();
         if ($course) {
+            if (Lead::where('course_id', $course->id)->exists()) {
+                $course->update(['is_active' => 0]);
+
+                return redirect()->back()->with('success', 'Khóa học đã có lead nên được ẩn thay vì xóa.');
+            }
+
             $this->deleteManagedUpload($course->thumbnail);
             $course->delete();
             return redirect()->back()->with('success', 'Xóa khóa học thành công.');
