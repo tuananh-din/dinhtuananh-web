@@ -105,7 +105,7 @@ Không xem `vendor/`, `node_modules/` (nếu được cài), asset minified bên
 
 ### Public site
 
-1. **Trang chủ `/`:** lấy About, services (dùng làm jobs và từ khóa typing), top skills, 3 blog mới, 3 ảnh case, khóa học featured/fallback và tối đa 6 testimonial. Có form tư vấn cuối trang.
+1. **Trang chủ `/`:** lấy About, services (dùng làm jobs và từ khóa typing), top skills, 3 blog mới, 3 ảnh case, khóa học featured/fallback cùng tối đa 2 khóa học phụ (mỗi course có CTA detail) và tối đa 6 testimonial. Có form tư vấn cuối trang.
 2. **Giới thiệu `/about`:** hiển thị About, ảnh `images.type=1`, kỹ năng và dịch vụ.
 3. **Portfolio `/portfolio` và life `/life`:** dùng `images.type=0` cho case/life; portfolio kết hợp About, services, skills và ảnh type 1.
 4. **Blog:** `/blog` phân trang 12 bài; `/{slug}.html` lấy blog theo slug hoặc 404, rồi lấy 3 bài khác mới nhất.

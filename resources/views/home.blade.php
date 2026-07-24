@@ -181,6 +181,7 @@
                                 Li&#234;n h&#7879;
                             @endif
                         </p>
+                        <a href="{{ route('course.detail', $courseItem->slug) }}" class="theme-btn border-btn">Xem chi ti&#7871;t <i class="fa-solid fa-arrow-up-right"></i></a>
                     </div>
                     @empty
                     <p>Ch&#432;a c&#243; th&#234;m kh&#243;a h&#7885;c n&#224;o kh&#225;c &#273;ang hi&#7875;n th&#7883;.</p>
