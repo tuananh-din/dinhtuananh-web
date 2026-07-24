@@ -49,6 +49,7 @@
                                     @endif
                                     <label>&#7842;nh &#273;&#7841;i di&#7879;n</label>
                                     <input type="file" name="avatar" class="form-control-file" accept="image/*">
+                                    <small class="form-text text-muted">Khuyến nghị: ảnh vuông, tối thiểu 600×600 px, dưới 5 MB.</small>
                                 </div>
                                 <div class="form-group">
                                     <label>Th&#7913; t&#7921; hi&#7875;n th&#7883;</label>
