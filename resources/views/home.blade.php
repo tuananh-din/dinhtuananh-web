@@ -225,6 +225,7 @@
                 <div class="placeholder-card">
                     <h3>Case study sẽ được cập nhật sớm</h3>
                     <p>Các kết quả và hình ảnh dự án thực tế đang được bổ sung. Để lại thông tin để được tư vấn ngay.</p>
+                    <a href="{{ route('contact') }}" class="theme-btn">Nhận tư vấn <i class="fa-solid fa-arrow-up-right"></i></a>
                 </div>
             </div>
             @endforelse
