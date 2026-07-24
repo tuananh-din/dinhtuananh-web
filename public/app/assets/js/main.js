@@ -66,3 +66,22 @@ const readURL = (input) => {
     const fileName = $(this).val().slice(i)
     $('.label1').text(fileName)
   })
+
+  $('input[name="avatar"]').on('change', function () {
+    const file = this.files && this.files[0]
+    const warning = $('#testimonial-avatar-aspect-warning')
+
+    if (!file || !warning.length) return
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const image = new Image()
+      image.onload = () => {
+        const isNearSquare = Math.abs((image.naturalWidth / image.naturalHeight) - 1) <= 0.08
+        warning.prop('hidden', isNearSquare)
+        warning.text(isNearSquare ? '' : 'Ảnh này không gần tỷ lệ vuông; avatar có thể bị cắt khi hiển thị.')
+      }
+      image.src = e.target.result
+    }
+    reader.readAsDataURL(file)
+  })
