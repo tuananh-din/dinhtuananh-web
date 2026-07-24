@@ -33,6 +33,12 @@ Kiến trúc là Laravel MVC mỏng: route gọi controller, controller query tr
 - Với nội dung HTML cũ đang dùng numeric HTML entities, có thể tiếp tục dùng entities cho ký tự tiếng Việt khi sửa đúng vùng đó để thay đổi nhỏ và tránh lỗi mã hóa từ editor/terminal.
 - Trước khi commit nội dung public tiếng Việt, kiểm tra source và xem tay trang liên quan; dữ liệu do admin nhập trong database cần xác minh riêng vì không thể kết luận chỉ từ source.
 
+### Quy ước card public và responsive
+
+- Nội dung do admin nhập trong card phải được phép xuống dòng; với card dùng Flexbox, giữ `min-width: 0` và `overflow-wrap: anywhere` tại vùng text động để title/mô tả dài không tràn khỏi card hoặc badge.
+- Không dùng chiều cao cố định để ép các card đều nhau. Dùng layout cột + `flex: 1` cho phần mô tả khi cần căn CTA, và chỉ điều chỉnh padding theo breakpoint nhỏ.
+- Khi sửa card public, kiểm tra tối thiểu desktop và viewport 360px/768px bằng trình duyệt; nếu công cụ xem trực quan không khả dụng, ghi rõ giới hạn này và không khẳng định kết quả bằng mắt.
+
 Đọc `AGENTS.md` ở root trước mọi phase. Các yêu cầu quan trọng:
 
 - Trao đổi và tài liệu bằng tiếng Việt, dễ hiểu.
