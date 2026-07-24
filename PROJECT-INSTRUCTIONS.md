@@ -202,9 +202,10 @@ Tên route không theo prefix nhất quán hoàn toàn vì legacy: ví dụ publ
 - `tests/Feature/AdminAccessTest.php`: guest bị chuyển login, user đăng nhập truy cập được route admin đại diện.
 - `tests/Feature/LoginLogoutTest.php`: khách xem được trang đăng nhập; người đã đăng nhập bị chuyển về `/admin`; đăng nhập đúng/sai, remember-me và logout admin.
 - `tests/Feature/PublicLeadSubmissionTest.php`: lead hợp lệ/honeypot/validation và lỗi email notification không làm mất lead.
-- Chưa cover CRUD admin khác, upload, slug, sitemap, SEO/JSON-LD, phân quyền, hay giao diện responsive.
+- `tests/Feature/SitemapTest.php`: sitemap có blog và course active, không lộ course inactive.
+- Chưa cover CRUD admin khác, upload, slug, SEO/JSON-LD, phân quyền, hay giao diện responsive.
 
-`phpunit.xml` dùng `DB_CONNECTION=sqlite` và `DB_DATABASE=:memory:`. Feature test có `RefreshDatabase` chạy migrations trong RAM, vì vậy suite không phụ thuộc MySQL/Laragon hoặc `.env` thật. Lần chạy gần nhất: 20 tests, 65 assertions pass. SQLite không thay thế hoàn toàn MySQL production; migration/query đặc thù MySQL vẫn cần kiểm tra phù hợp trước khi dùng.
+`phpunit.xml` dùng `DB_CONNECTION=sqlite` và `DB_DATABASE=:memory:`. Feature test có `RefreshDatabase` chạy migrations trong RAM, vì vậy suite không phụ thuộc MySQL/Laragon hoặc `.env` thật. Lần chạy gần nhất: 21 tests, 71 assertions pass. SQLite không thay thế hoàn toàn MySQL production; migration/query đặc thù MySQL vẫn cần kiểm tra phù hợp trước khi dùng.
 
 ### Lệnh local
 
