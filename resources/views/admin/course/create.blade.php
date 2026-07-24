@@ -59,7 +59,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Gi&#225; sale</label>
-                                    <input type="number" step="0.01" min="0" name="sale_price" class="form-control" value="{{ old('sale_price') }}">
+                                    <input type="number" step="0.01" min="0" name="sale_price" class="form-control @error('sale_price') is-invalid @enderror" value="{{ old('sale_price') }}">
+                                    @error('sale_price')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>N&#7873;n t&#7843;ng</label>
@@ -85,7 +86,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>CTA link</label>
-                                    <input type="text" name="cta_link" class="form-control" value="{{ old('cta_link') }}">
+                                    <input type="text" name="cta_link" class="form-control @error('cta_link') is-invalid @enderror" value="{{ old('cta_link') }}">
+                                    @error('cta_link')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Th&#7913; t&#7921; hi&#7875;n th&#7883;</label>

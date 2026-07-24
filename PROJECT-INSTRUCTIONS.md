@@ -52,6 +52,7 @@ Kiến trúc là Laravel MVC mỏng: route gọi controller, controller query tr
 - Giới hạn server cho nội dung public course: `cta_text` tối đa 60 ký tự để không làm vỡ CTA; `seo_title` tối đa 60 và `seo_description` tối đa 155 ký tự, khớp giới hạn meta description hiện render ở trang chi tiết.
 - Form tạo/sửa course phải phản chiếu các giới hạn này bằng `maxlength` và mô tả ngắn; đây chỉ là phản hồi sớm, server validation vẫn là bắt buộc.
 - Với trường có validation quan trọng trên form Course, dùng `@error` để thêm `is-invalid` và `invalid-feedback` ngay cạnh field; alert tổng quan không thay thế lỗi theo từng field.
+- Áp dụng tối thiểu cho `cta_link`, `sale_price` và các trường CTA/SEO có giới hạn server.
 
 Đọc `AGENTS.md` ở root trước mọi phase. Các yêu cầu quan trọng:
 
