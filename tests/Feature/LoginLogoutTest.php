@@ -10,6 +10,20 @@ class LoginLogoutTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_guest_can_view_login_page(): void
+    {
+        $this->get(route('login'))->assertOk();
+    }
+
+    public function test_authenticated_user_is_redirected_away_from_login_page(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->get(route('login'))
+            ->assertRedirect('/admin');
+    }
+
     public function test_user_can_log_in_with_valid_credentials(): void
     {
         $user = User::factory()->create();

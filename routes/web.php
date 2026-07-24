@@ -42,7 +42,7 @@ Route::post('/lead/store',[LeadController::class,'store'])->middleware('throttle
 Route::get('/sitemap.xml',[SitemapController::class,'index'])->name('sitemap');
 Route::get('/{slug}.html',[BlogController::class,'detail'])->name('blog');
 
-Route::get('/login',[LoginController::class,'login'])->name('login');
+Route::get('/login',[LoginController::class,'login'])->middleware('guest')->name('login');
 Route::post('login',[LoginController::class,'send'])->middleware('throttle:5,1')->name('login.send');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
