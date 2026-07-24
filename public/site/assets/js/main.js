@@ -42,6 +42,8 @@
         $(".sidebar__toggle").on("click", function () {
         $(".offcanvas__info").addClass("info-open");
         $(".offcanvas__overlay").addClass("overlay-open");
+        $(this).attr("aria-expanded", "true");
+        $(".offcanvas__info").attr("aria-hidden", "false");
 
         // Hide sticky item
         $(".sidebar-sticky-item").fadeOut().removeClass("active");
@@ -51,6 +53,8 @@
         $(".offcanvas__close, .offcanvas__overlay").on("click", function () {
         $(".offcanvas__info").removeClass("info-open");
         $(".offcanvas__overlay").removeClass("overlay-open");
+        $(".sidebar__toggle").attr("aria-expanded", "false").trigger("focus");
+        $(".offcanvas__info").attr("aria-hidden", "true");
 
         // Show sticky item
         $(".sidebar-sticky-item").fadeIn().addClass("active");
@@ -1783,4 +1787,3 @@ text_slider.on('slideChangeTransitionStart', function () {
 
   
   })(jQuery); // End jQuery
-

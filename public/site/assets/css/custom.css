@@ -603,6 +603,13 @@
     opacity: 1;
 }
 
+.header-main button.sidebar__toggle {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
 /* ===== LIGHT MODE (skin nen sang, toi uu do tuong phan / thuan mat) ===== */
 html[data-theme="light"] {
     --white: #21252b;   /* chu von trang -> slate dam (diu hon #000) */

@@ -39,6 +39,11 @@ Kiến trúc là Laravel MVC mỏng: route gọi controller, controller query tr
 - Không dùng chiều cao cố định để ép các card đều nhau. Dùng layout cột + `flex: 1` cho phần mô tả khi cần căn CTA, và chỉ điều chỉnh padding theo breakpoint nhỏ.
 - Khi sửa card public, kiểm tra tối thiểu desktop và viewport 360px/768px bằng trình duyệt; nếu công cụ xem trực quan không khả dụng, ghi rõ giới hạn này và không khẳng định kết quả bằng mắt.
 
+### Quy ước header mobile
+
+- Nút mở/đóng offcanvas phải là `<button type="button">`, có nhãn tiếng Việt và trạng thái `aria-expanded`/`aria-hidden`; giữ class hook JavaScript cũ khi thay đổi markup.
+- Không giảm vùng chạm menu mobile dưới kích thước theme hiện có (60px). CTA chữ dài được ẩn dưới breakpoint menu ngang để tránh làm header chật; menu offcanvas là kênh điều hướng thay thế.
+
 Đọc `AGENTS.md` ở root trước mọi phase. Các yêu cầu quan trọng:
 
 - Trao đổi và tài liệu bằng tiếng Việt, dễ hiểu.

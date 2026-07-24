@@ -31,12 +31,12 @@
 <!-- Offcanvas Area Start -->
 <div class="fix-area style-offcanvas-2">
     <div class="header-offcanvas-border">
-        <div class="offcanvas__info">
+        <div id="site-mobile-menu" class="offcanvas__info" aria-hidden="true">
             <a href="{{ route('index') }}" class="offcanvas__logo">
                 <img src="{{ $siteLogoUrl }}" height="100px" alt="logo">
             </a>
             <div class="offcanvas__close">
-                <button>
+                <button type="button" aria-label="&#272;&#243;ng menu">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -104,9 +104,9 @@
                     </button>
                     <a href="{{ route('index') }}#final-cta" class="theme-btn">&#272;&#259;ng k&#253; h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
                     <div class="header__hamburger my-auto">
-                        <div class="sidebar__toggle">
-                            <img src="{{ asset('site/assets/img/bar.svg') }}" alt="menu">
-                        </div>
+                        <button type="button" class="sidebar__toggle" aria-label="M&#7903; menu" aria-controls="site-mobile-menu" aria-expanded="false">
+                            <img src="{{ asset('site/assets/img/bar.svg') }}" alt="">
+                        </button>
                     </div>
                 </div>
             </div>
