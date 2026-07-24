@@ -13,22 +13,22 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('admin/profile') ? 'active' : '' }}">
-                        <a href="{{ route('admin.profile') }}">Thong tin ca nhan</a>
+                        <a href="{{ route('admin.profile') }}">Thông tin cá nhân</a>
                     </li>
                     <li class="{{ Request::is('admin/image') ? 'active' : '' }}">
-                        <a href="{{ route('admin.image') }}">Hinh anh</a>
+                        <a href="{{ route('admin.image') }}">Hình ảnh</a>
                     </li>
                     <li class="{{ Request::is('admin/skill') ? 'active' : '' }}">
-                        <a href="{{ route('admin.skill') }}">Ky nang</a>
+                        <a href="{{ route('admin.skill') }}">Kỹ năng</a>
                     </li>
                     <li class="{{ Request::is('admin/service') ? 'active' : '' }}">
-                        <a href="{{ route('admin.service') }}">Nganh nghe</a>
+                        <a href="{{ route('admin.service') }}">Ngành nghề</a>
                     </li>
                     <li class="{{ Request::is('admin/blog') ? 'active' : '' }}">
-                        <a href="{{ route('admin.blog') }}">Bai viet</a>
+                        <a href="{{ route('admin.blog') }}">Bài viết</a>
                     </li>
                     <li class="{{ Request::is('admin/course') || Request::is('admin/course/*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.course') }}">Khoa hoc</a>
+                        <a href="{{ route('admin.course') }}">Khóa học</a>
                     </li>
                     <li class="{{ Request::is('admin/lead') || Request::is('admin/lead/*') ? 'active' : '' }}">
                         <a href="{{ route('admin.lead') }}">Leads</a>
@@ -37,7 +37,7 @@
                         <a href="{{ route('admin.testimonial') }}">Testimonial</a>
                     </li>
                     <li class="{{ Request::is('admin') ? 'active' : '' }}">
-                        <a href="{{ route('setting') }}">Cai dat</a>
+                        <a href="{{ route('setting') }}">Cài đặt</a>
                     </li>
                 </ul>
             </li>

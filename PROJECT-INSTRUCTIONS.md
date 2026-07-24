@@ -171,7 +171,7 @@ Trước migration: báo rõ rủi ro, backup DB phù hợp môi trường, ki�
 ### Admin
 
 - Mọi view admin extends `admin.layouts.master`, include `admin.layouts.header`/`sidebar`; base URL dùng `<base href="{{ asset('') }}">`.
-- Menu sidebar: profile, image, skill, service, blog, course, leads, testimonial, setting.
+- Menu sidebar dùng nhãn tiếng Việt có dấu: Thông tin cá nhân, Hình ảnh, Kỹ năng, Ngành nghề, Bài viết, Khóa học, Leads, Testimonial, Cài đặt.
 - Form create/edit có enctype khi upload, `@csrf`; delete là `<form method="POST">` với confirm JS.
 - CKEditor CDN ở blog/profile/setting; adapter local `public/app/assets/js/ckeditor-csrf-upload-adapter.js` phải được giữ nếu sửa upload endpoint/CSRF.
 
