@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LeadController extends Controller
 {
@@ -29,7 +30,7 @@ class LeadController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|string|max:50',
+            'status' => ['required', 'string', Rule::in(array_keys(Lead::STATUSES))],
             'note' => 'nullable|string',
         ]);
 
