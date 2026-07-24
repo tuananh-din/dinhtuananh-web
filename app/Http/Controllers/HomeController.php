@@ -67,12 +67,15 @@ class HomeController extends Controller
 
         return view('about',compact('about','image','skills','jobs'));
     }
-    public function contact(){
+    public function contact(Request $request)
+    {
         $courses = Course::where('is_active', 1)
             ->orderBy('sort_order', 'ASC')
             ->orderBy('id', 'DESC')
             ->get();
-        return view('contact', compact('courses'));
+        $selectedCourse = $courses->firstWhere('slug', $request->query('course'));
+
+        return view('contact', compact('courses', 'selectedCourse'));
     }
     public function life(){
         $images = Image::where('type',0)->orderBy('id','DESC')->get();

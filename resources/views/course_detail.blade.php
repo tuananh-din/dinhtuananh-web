@@ -85,7 +85,7 @@
                             <i class="fa-solid fa-arrow-up-right"></i>
                         </a>
                         @else
-                        <a href="{{ route('contact') }}" class="theme-btn">
+                        <a href="{{ route('contact', ['course' => $course->slug]) }}" class="theme-btn">
                             Li&#234;n h&#7879; t&#432; v&#7845;n
                             <i class="fa-solid fa-arrow-up-right"></i>
                         </a>

@@ -34,6 +34,17 @@
                 <div class="form-clt">
                     <input type="email" name="email" placeholder="Email (kh&#244;ng b&#7855;t bu&#7897;c)" value="{{ old('email') }}">
                 </div>
+                @php($selectedCourseId = old('course_id', $selectedCourse?->id))
+                <div class="form-clt">
+                    <select name="course_id" id="course_id">
+                        <option value="">Kh&#243;a h&#7885;c quan t&#226;m (kh&#244;ng b&#7855;t bu&#7897;c)</option>
+                        @foreach($courses as $course)
+                            <option value="{{ $course->id }}" @selected((string) $selectedCourseId === (string) $course->id)>
+                                {{ $course->title }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-clt">
                     <textarea name="message" placeholder="Nhu c&#7847;u c&#7911;a b&#7841;n (kh&#244;ng b&#7855;t bu&#7897;c)">{{ old('message') }}</textarea>
                 </div>

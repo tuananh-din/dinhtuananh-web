@@ -110,7 +110,7 @@ Không xem `vendor/`, `node_modules/` (nếu được cài), asset minified bên
 3. **Portfolio `/portfolio` và life `/life`:** dùng `images.type=0` cho case/life; portfolio kết hợp About, services, skills và ảnh type 1.
 4. **Blog:** `/blog` phân trang 12 bài; `/{slug}.html` lấy blog theo slug hoặc 404, rồi lấy 3 bài khác mới nhất.
 5. **Khóa học:** `/courses` chỉ hiển thị `is_active=1`, phân trang 12 theo `sort_order ASC, id DESC`; `/courses/{slug}` chỉ xem được khóa active.
-6. **Lead:** form trang chủ/contact gửi `POST /lead/store`; lọc honeypot, tạo row `leads` trạng thái `new`, thử gửi email admin và luôn trả flash success nếu mail lỗi.
+6. **Lead:** form trang chủ/contact/course detail gửi `POST /lead/store`; contact cho phép chọn course active (không bắt buộc) và `GET /contact?course={slug}` chỉ preselect slug active. CTA fallback từ course detail giữ ngữ cảnh này. Hệ thống lọc honeypot, tạo row `leads` trạng thái `new`, thử gửi email admin và luôn trả flash success nếu mail lỗi.
 7. **SEO:** layout sinh title/description/canonical/OG/Twitter; sitemap XML gồm trang tĩnh + blog + course active; `robots.txt` chặn `/admin`, `/login` và chỉ sitemap production hiện tại.
 8. **Theme:** public có toggle sáng/tối lưu `localStorage['theme']`, ưu tiên lựa chọn trước đó rồi theo `prefers-color-scheme`.
 
@@ -158,7 +158,7 @@ Trước migration: báo rõ rủi ro, backup DB phù hợp môi trường, ki�
 ### Public
 
 - Mọi trang public extends `layouts.master`; master include header/footer, asset theo `asset('site/assets/...')`, Toastr flash và `@stack('scripts')`.
-- Các view chính: `home`, `about`, `portfolio`, `life`, `blogs`, `blog_detail`, `courses`, `course_detail`, `contact`, `login`, `errors/404`, `sitemap`.
+- Các view chính: `home`, `about`, `portfolio`, `life`, `blogs`, `blog_detail`, `courses`, `course_detail`, `contact`, `login`, `errors/404`, `sitemap`. Form `contact` nhận `$courses` active và `$selectedCourse` từ query `course`; giữ course selector optional để không cản trở liên hệ chung.
 - `partials/jsonld-person` dùng ở home/about; `jsonld-article` dùng ở blog detail.
 - `public/site/assets/css/main.css` là CSS theme; custom của dự án ở `public/site/assets/css/custom.css`, nạp sau main. Không redesign hoặc thay CSS theme lớn nếu chưa có yêu cầu.
 - Header có menu desktop `d-none d-lg-block`, offcanvas/hamburger cho mobile, CTA tới `/#final-cta`, theme toggle. Link liên hệ hiện trỏ `/about#contact-brand`, không phải `/contact`; đây là hành vi hiện hữu cần giữ trừ khi được yêu cầu đổi.
