@@ -38,6 +38,21 @@ class LoginLogoutTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
+    public function test_user_can_log_in_with_remember_me_enabled(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->post(route('login.send'), [
+            'email' => $user->email,
+            'password' => 'password',
+            'remember' => '1',
+        ]);
+
+        $response->assertRedirect('/admin');
+        $this->assertAuthenticatedAs($user);
+        $this->assertNotNull($user->fresh()->remember_token);
+    }
+
     public function test_user_cannot_log_in_with_invalid_credentials(): void
     {
         $user = User::factory()->create();
