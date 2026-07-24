@@ -79,7 +79,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>CTA text</label>
-                                    <input type="text" name="cta_text" class="form-control" value="{{ old('cta_text') }}">
+                                    <input type="text" name="cta_text" class="form-control" value="{{ old('cta_text') }}" maxlength="60" aria-describedby="cta-text-help">
+                                    <small id="cta-text-help" class="form-text text-muted">T&#7889;i &#273;a 60 k&#253; t&#7921;.</small>
                                 </div>
                                 <div class="form-group">
                                     <label>CTA link</label>
@@ -91,11 +92,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label>SEO title</label>
-                                    <input type="text" name="seo_title" class="form-control" value="{{ old('seo_title') }}">
+                                    <input type="text" name="seo_title" class="form-control" value="{{ old('seo_title') }}" maxlength="60" aria-describedby="seo-title-help">
+                                    <small id="seo-title-help" class="form-text text-muted">T&#7889;i &#273;a 60 k&#253; t&#7921;.</small>
                                 </div>
                                 <div class="form-group">
                                     <label>SEO description</label>
-                                    <textarea name="seo_description" class="form-control" rows="4">{{ old('seo_description') }}</textarea>
+                                    <textarea name="seo_description" class="form-control" rows="4" maxlength="155" aria-describedby="seo-description-help">{{ old('seo_description') }}</textarea>
+                                    <small id="seo-description-help" class="form-text text-muted">T&#7889;i &#273;a 155 k&#253; t&#7921;.</small>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="is_featured" value="1" id="is_featured" {{ old('is_featured') ? 'checked' : '' }}>

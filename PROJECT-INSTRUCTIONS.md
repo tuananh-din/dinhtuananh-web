@@ -50,6 +50,7 @@ Kiến trúc là Laravel MVC mỏng: route gọi controller, controller query tr
 - `cta_link` là dữ liệu admin nhưng được render trực tiếp thành `href`, nên phải validate ở server. Chỉ chấp nhận URL `http/https`, đường dẫn nội bộ bắt đầu bằng một dấu `/` (không phải `//...`), hoặc `tel:` có số điện thoại hợp lệ.
 - Không tự đổi dữ liệu CTA đã lưu trong migration. Trước khi siết rule mới, rà các giá trị hiện có để tránh chặn format hợp lệ đang dùng; hiện dữ liệu production/local mẫu sử dụng `tel:`.
 - Giới hạn server cho nội dung public course: `cta_text` tối đa 60 ký tự để không làm vỡ CTA; `seo_title` tối đa 60 và `seo_description` tối đa 155 ký tự, khớp giới hạn meta description hiện render ở trang chi tiết.
+- Form tạo/sửa course phải phản chiếu các giới hạn này bằng `maxlength` và mô tả ngắn; đây chỉ là phản hồi sớm, server validation vẫn là bắt buộc.
 
 Đọc `AGENTS.md` ở root trước mọi phase. Các yêu cầu quan trọng:
 
