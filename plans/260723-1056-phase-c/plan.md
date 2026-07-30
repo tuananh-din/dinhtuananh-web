@@ -11,6 +11,8 @@ created: 2026-07-23
 
 # Phase C — Kế hoạch tổng quan
 
+> **Trạng thái lịch sử: đã triển khai.** Các nhãn `Pending` bên dưới là trạng thái tại thời điểm lập kế hoạch; xem [changelog dự án](../../docs/project-changelog.md#phase-c--2026-07-23-seo-on-page--cleanup) để đối chiếu commit thực hiện.
+
 Tiếp nối Phase A (asset, menu, jquery, meta OG) và Phase B (card blog, blog detail, custom.css, honeypot).
 Phase C tập trung: **chống spam mạnh hơn, SEO kỹ thuật, hoàn thiện việc dọn dẹp đã bắt đầu ở Phase B**.
 Toàn bộ 6 hạng mục **KHÔNG có migration**, không đổi schema, không đổi route cũ — đúng AGENTS.md.

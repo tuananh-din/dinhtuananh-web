@@ -11,6 +11,8 @@ created: 2026-07-23
 
 # Phase D — Kế hoạch tổng quan
 
+> **Trạng thái lịch sử: đã triển khai.** Các nhãn `Pending` bên dưới là trạng thái tại thời điểm lập kế hoạch; xem [changelog dự án](../../docs/project-changelog.md#phase-d--2026-07-23-seo-structured-data-bảo-mật-email-lead) để đối chiếu commit thực hiện.
+
 Tiếp nối Phase C. Phase D gồm 3 hạng mục Phase C đã tách ra chờ xác nhận (slug unique, delete POST, JSON-LD)
 cộng 2 hạng mục có căn cứ từ code thật (throttle login, email báo lead mới).
 

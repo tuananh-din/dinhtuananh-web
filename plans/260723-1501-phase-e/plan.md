@@ -11,6 +11,8 @@ created: 2026-07-23
 
 # Phase E — Kế hoạch tổng quan
 
+> **Trạng thái lịch sử: đã triển khai.** Các nhãn `Pending` bên dưới là trạng thái tại thời điểm lập kế hoạch; xem [changelog dự án](../../docs/project-changelog.md#phase-e--2026-07-23-fix-tồn-đọng-audit--bug-p0-social--build-out) để đối chiếu commit thực hiện.
+
 Tiếp nối Phase C+D+fix audit A1-A9. Phase E gồm: các mục LOW còn tồn (A10-A13), 1 **bug P0 mới phát hiện**
 (lưu admin profile lỗi 500 vì bảng `about` thiếu 4 cột social mà form + controller đang gửi), và 2 hạng mục
 build-out có căn cứ từ code thật. Mọi mục đụng schema / xoá module đều đánh dấu **CẦN USER DUYỆT**.
