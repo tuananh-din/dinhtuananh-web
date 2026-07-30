@@ -58,7 +58,24 @@ Code đã xong: khi có lead mới, gửi `NewLeadNotification` tới `config('m
 'lead_notify' => env('LEAD_NOTIFY_EMAIL', env('MAIL_FROM_ADDRESS', 'hello@example.com')),
 ```
 
-### Cần set trong `.env` (thay giá trị thật):
+### Verify local an toàn trước khi SMTP thật
+
+Trước khi cấu hình SMTP, dùng mailer `log` để kiểm tra command và template mà không gửi email ra ngoài. Chỉ đặt trong `.env` local:
+
+```
+MAIL_MAILER=log
+```
+
+Sau đó chạy:
+
+```
+php artisan config:clear
+php artisan lead:test-notify qa@example.test
+```
+
+Command in ra mailer, host và recipient đang dùng; nó chỉ tạo `Lead` mẫu trong bộ nhớ, **không** lưu vào database. Mở `storage/logs/laravel.log` để kiểm tra nội dung email đã render. Chỉ khi bước này đạt mới đổi sang SMTP thật.
+
+### Cấu hình SMTP thật trong `.env` (thay giá trị placeholder)
 ```
 MAIL_MAILER=smtp
 MAIL_HOST=<smtp-host>           # vd smtp.gmail.com / smtp.mailgun.org
@@ -73,12 +90,12 @@ LEAD_NOTIFY_EMAIL="<email-nhan-thong-bao>"
 
 > **Hiện trạng local:** `MAIL_HOST=mailpit`, `MAIL_PORT=1025` (mail catcher, không gửi ra ngoài). Chưa có `LEAD_NOTIFY_EMAIL`.
 
-### Test sau khi cấu hình:
+### Test sau khi cấu hình SMTP:
 ```
 php artisan config:clear
-php artisan tinker --execute="Mail::raw('test lead', fn(\$m)=>\$m->to(config('mail.lead_notify'))->subject('Test')); echo 'sent';"
+php artisan lead:test-notify <email-nhan-thong-bao>
 ```
-Hoặc submit thử 1 form lead trên site rồi kiểm hộp thư. **DO NOT** commit `.env` (đã trong `.gitignore`).
+Command này không tạo lead rác. Có thể submit thử 1 form lead trên site rồi kiểm hộp thư khi cần xác nhận end-to-end. **DO NOT** commit `.env` (đã trong `.gitignore`).
 
 Ghi nhận cả nhánh lỗi: tạm thời dùng SMTP/mailbox test không hợp lệ hoặc ngắt kết nối ở staging, submit lead và xác nhận lead vẫn được lưu còn lỗi email chỉ có trong log. Không làm thử nghiệm này trên production nếu chưa có kế hoạch và quyền thực hiện.
 
