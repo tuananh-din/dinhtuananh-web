@@ -28,11 +28,17 @@ class NewLeadNotification extends Mailable
 
     public function build()
     {
-        return $this->subject('Lead mới từ website')
+        $mail = $this->subject('Lead mới từ website')
             ->view('emails.new-lead')
             ->with([
                 'lead' => $this->lead,
                 'courseTitle' => $this->courseTitle,
             ]);
+
+        if (filter_var($this->lead->email, FILTER_VALIDATE_EMAIL)) {
+            $mail->replyTo($this->lead->email);
+        }
+
+        return $mail;
     }
 }
