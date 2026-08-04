@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
@@ -25,6 +26,16 @@ class BlogController extends Controller
     public function edit($id){
         $blog = Blog::findOrFail($id);
         return view('admin.blog.edit', ['blog' => $blog, 'categories' => Category::orderBy('name')->get()]);
+    }
+    public function preview($id)
+    {
+        $blog = Blog::with('categories')->findOrFail($id);
+        $otherBlogs = Blog::where('is_published', 1)->where('id', '!=', $blog->id)->latest()->limit(3)->get();
+        $featuredCourse = Course::where('is_active', 1)->where('is_featured', 1)->orderBy('sort_order')->orderByDesc('id')->first();
+        if (!$featuredCourse) {
+            $featuredCourse = Course::where('is_active', 1)->orderBy('sort_order')->orderByDesc('id')->first();
+        }
+        return view('blog_detail', compact('blog', 'otherBlogs', 'featuredCourse') + ['isPreview' => !$blog->is_published]);
     }
     public function store(Request $request){
         $request->validate([

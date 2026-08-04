@@ -85,6 +85,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [AdminBlogController::class, 'index'])->name('admin.blog');
             Route::get('/create', [AdminBlogController::class, 'create'])->name('blog.create');
             Route::get('/edit/{id}', [AdminBlogController::class, 'edit'])->name('blog.edit');
+            Route::get('/preview/{id}', [AdminBlogController::class, 'preview'])->name('blog.preview');
             Route::post('store', [AdminBlogController::class, 'store'])->name('blog.store');
             Route::post('/delete/{id}', [AdminBlogController::class, 'delete'])->name('blog.delete');
         });

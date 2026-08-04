@@ -26,6 +26,9 @@
     ]])
 @endpush
 @section('content')
+@if(!empty($isPreview) && $isPreview)
+<div class="container"><div class="alert alert-warning mt-3" role="status">Bản xem trước — bài chưa đăng</div></div>
+@endif
 <section class="news-grid-section1 fix">
     <div class="container">
         @include('partials.breadcrumbs', ['items' => [

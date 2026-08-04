@@ -16,6 +16,7 @@
         <div class="card-body">
           
             <a href="{{ route('admin.blog') }}" class="btn btn-primary m-r-5">Danh sách</a>
+            <a href="{{ route('blog.preview', $blog->id) }}" target="_blank" rel="noopener" class="btn btn-secondary">Xem trước</a>
             <form class="forms-sample" action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data" id="form-validation">
                 @csrf
                 <input type="hidden" value="{{$blog->id}}" name="id">

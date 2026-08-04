@@ -32,6 +32,7 @@
                                 <td><img src="{{$row->image}}" height="100px"></td>
                                 <td><span class="badge {{ $row->is_published ? 'badge-success' : 'badge-secondary' }}">{{ $row->is_published ? 'Đã đăng' : 'Nháp' }}</span></td>
                                 <td>
+                                    <a href="{{ route('blog.preview', $row->id) }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary">Xem trước</a>
                                     <a href="{{ route('blog.edit',$row->id) }}"> 
                                         <button class="btn btn-icon btn-primary btn-rounded btn-tone">
                                             <i class="fas fa-edit"></i>
