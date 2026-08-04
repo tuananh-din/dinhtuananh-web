@@ -17,6 +17,10 @@ return [
 
     'default' => env('DB_CONNECTION', 'mysql'),
 
+    'backup' => [
+        'mysqldump_path' => env('BACKUP_MYSQLDUMP_PATH', '/bin/mysqldump'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Database Connections
