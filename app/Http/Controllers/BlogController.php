@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -18,6 +19,10 @@ class BlogController extends Controller
     public function detail($slug){
         $blog = Blog::where('is_published', 1)->where('slug',$slug)->firstOrFail();
         $otherBlogs = Blog::where('is_published', 1)->where('id','!=',$blog->id)->orderBy('id','DESC')->limit(3)->get();
-        return view('blog_detail',compact('blog','otherBlogs'));
+        $featuredCourse = Course::where('is_active', 1)->where('is_featured', 1)->orderBy('sort_order')->orderByDesc('id')->first();
+        if (!$featuredCourse) {
+            $featuredCourse = Course::where('is_active', 1)->orderBy('sort_order')->orderByDesc('id')->first();
+        }
+        return view('blog_detail', compact('blog', 'otherBlogs', 'featuredCourse'));
     }
 }

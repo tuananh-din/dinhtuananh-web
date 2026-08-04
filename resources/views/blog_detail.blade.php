@@ -79,6 +79,19 @@
                         <button type="submit" class="theme-btn">Đăng ký</button>
                     </form>
                 </div>
+                @if($featuredCourse)
+                <div class="blog-course-promo mt-5">
+                    <h3>Khóa học nổi bật</h3>
+                    <h4>{{ $featuredCourse->title }}</h4>
+                    @if($featuredCourse->short_description)<p>{{ $featuredCourse->short_description }}</p>@endif
+                    @if(!is_null($featuredCourse->sale_price))
+                        <strong>{{ number_format($featuredCourse->sale_price, 0, ',', '.') }} VND</strong>
+                    @elseif(!is_null($featuredCourse->price))
+                        <strong>{{ number_format($featuredCourse->price, 0, ',', '.') }} VND</strong>
+                    @endif
+                    <div class="mt-3"><a class="theme-btn" href="{{ route('course.detail', $featuredCourse->slug) }}">Xem khóa học</a></div>
+                </div>
+                @endif
                 @if(!empty($otherBlogs) && $otherBlogs->isNotEmpty())
                 <div class="other-blogs mt-5">
                     <h3>Bài viết khác</h3>
