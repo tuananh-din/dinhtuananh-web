@@ -1046,6 +1046,22 @@ html[data-theme="light"] .footer-logo img { filter: brightness(0); }
 .hero-section1 .hero-content .social-link { margin-top: 20px; }
 .cta-inline { background: transparent !important; border-color: transparent !important; }
 @media (max-width: 767px) {
+    .cta-section .shape-1,
+    .cta-section .shape-2,
+    .cta-section .shape-3 { display: none; }
+    .cta-section .cta-text-items h2.text_invert-2,
+    .cta-section .cta-text-items h2.text_invert-2 > div {
+        background: none !important;
+        background-image: none !important;
+        background-clip: border-box !important;
+        -webkit-background-clip: border-box !important;
+        color: var(--text) !important;
+        font-size: clamp(34px, 10vw, 50px) !important;
+        line-height: 1.08;
+        letter-spacing: -.02em;
+    }
+}
+@media (max-width: 767px) {
     .hero-profile-card { border-radius: 18px; }
     .hero-profile-image { border-radius: 18px; }
     .hero-profile-card .brand-metrics { margin-top: 16px; }
