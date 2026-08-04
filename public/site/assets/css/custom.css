@@ -1019,6 +1019,9 @@ body p, body li, body label, body input, body textarea, body select { font-size:
 .hero-content > p { text-transform: none !important; letter-spacing: .01em !important; line-height: 1.7; font-size: 17px; }
 .hero-section .hero-content p { text-transform: none !important; letter-spacing: .01em !important; line-height: 1.7 !important; font-size: 17px !important; }
 html[data-theme="dark"] .hero-content > p { color: #e7e7e7; }
+html[data-theme="light"] header .offcanvas__logo img,
+html[data-theme="light"] .offcanvas__info .offcanvas__logo img,
+html[data-theme="light"] .footer-logo img { filter: brightness(0); }
 .hero-image .animated-image { transform: none; opacity: 1; }
 .hero-image { min-height: 0; }
 .hero-section1 > .container > .row > .col-xl-5 > .brand-card { margin-top: clamp(28px, 5vw, 72px); }
