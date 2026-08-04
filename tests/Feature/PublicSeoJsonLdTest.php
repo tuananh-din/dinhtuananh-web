@@ -64,6 +64,19 @@ class PublicSeoJsonLdTest extends TestCase
         $this->get(route('blogs'))->assertDontSee('Bài nháp');
     }
 
+    public function test_rss_feed_contains_published_blogs_only(): void
+    {
+        $this->createSiteIdentity();
+        Blog::create(['title' => 'Bài RSS', 'slug' => 'bai-rss', 'description' => 'Mô tả RSS', 'content' => 'Nội dung', 'is_published' => true]);
+        Blog::create(['title' => 'Bài nháp RSS', 'slug' => 'bai-nhap-rss', 'description' => 'Nháp', 'content' => 'Nội dung', 'is_published' => false]);
+
+        $this->get(route('feed'))
+            ->assertOk()
+            ->assertHeader('Content-Type', 'application/rss+xml; charset=UTF-8')
+            ->assertSee('Bài RSS')
+            ->assertDontSee('Bài nháp RSS');
+    }
+
     private function createSiteIdentity(): void
     {
         Setting::create([

@@ -21,6 +21,7 @@ use App\Http\Controllers\LeadMagnetController;
 use App\Http\Controllers\Admin\LeadMagnetController as AdminLeadMagnetController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SitemapController;
+use App\Models\Blog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,11 @@ Route::post('/lead/store',[LeadController::class,'store'])->middleware('throttle
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'store'])->middleware('throttle:5,1')->name('newsletter.store');
 Route::post('/lead-magnet/{id}/subscribe', [LeadMagnetController::class, 'subscribe'])->middleware('throttle:5,1')->name('lead-magnet.subscribe');
 Route::get('/sitemap.xml',[SitemapController::class,'index'])->name('sitemap');
+Route::get('/feed', function () {
+    $blogs = Blog::where('is_published', 1)->latest()->limit(20)->get();
+
+    return response()->view('feed', compact('blogs'))->header('Content-Type', 'application/rss+xml; charset=UTF-8');
+})->name('feed');
 Route::get('/{slug}.html',[BlogController::class,'detail'])->name('blog');
 
 Route::get('/login',[LoginController::class,'login'])->middleware('guest')->name('login');

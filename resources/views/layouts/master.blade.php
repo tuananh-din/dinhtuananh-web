@@ -36,6 +36,7 @@
         <meta name="twitter:description" content="@yield('og_description', $seoDescription)">
         <meta name="twitter:image" content="@yield('og_image', $defaultOgImageUrl)">
         <link rel="canonical" href="@yield('canonical', url()->current())">
+        <link rel="alternate" type="application/rss+xml" title="{{ $siteName }} RSS" href="{{ route('feed') }}">
         <!--<< Favcion >>-->
         <link rel="shortcut icon" href="{{ $faviconUrl }}" type="image/x-icon" />
         {{-- Dark/Light: set data-theme SỚM (trước CSS) để tránh nháy sáng (FOUC). Ưu tiên lựa chọn đã lưu, fallback theo OS. --}}
