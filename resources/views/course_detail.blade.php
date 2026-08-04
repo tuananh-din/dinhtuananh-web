@@ -19,6 +19,9 @@
 @if(!empty($course->thumbnail))
     @section('og_image', \Illuminate\Support\Str::startsWith($course->thumbnail, ['http://','https://','//']) ? $course->thumbnail : asset(ltrim($course->thumbnail, '/')))
 @endif
+@push('structured_data')
+    @include('partials.jsonld-course', ['course' => $course])
+@endpush
 @section('content')
 <section class="course-detail-shell fix">
     <div class="container">
