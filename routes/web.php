@@ -101,6 +101,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [AdminCourseController::class, 'index'])->name('admin.course');
             Route::get('/create', [AdminCourseController::class, 'create'])->name('course.create');
             Route::get('/edit/{id}', [AdminCourseController::class, 'edit'])->name('course.edit');
+            Route::get('/preview/{id}', [AdminCourseController::class, 'preview'])->name('course.preview');
             Route::post('store', [AdminCourseController::class, 'store'])->name('course.store');
             Route::post('/delete/{id}', [AdminCourseController::class, 'delete'])->name('course.delete');
         });

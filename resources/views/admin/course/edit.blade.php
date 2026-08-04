@@ -13,6 +13,7 @@
     <div class="card">
         <div class="card-body">
             <a href="{{ route('admin.course') }}" class="btn btn-primary m-r-5">Danh s&#225;ch</a>
+            <a href="{{ route('course.preview', $course->id) }}" target="_blank" rel="noopener" class="btn btn-secondary">Xem trước</a>
             <form class="forms-sample" action="{{ route('course.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id" value="{{ $course->id }}">

@@ -28,6 +28,9 @@
     ]])
 @endpush
 @section('content')
+@if(!empty($isPreview) && $isPreview)
+<div class="container"><div class="alert alert-warning mt-3" role="status">Bản xem trước — khóa học chưa mở</div></div>
+@endif
 <section class="course-detail-shell fix">
     <div class="container">
         @include('partials.breadcrumbs', ['items' => [

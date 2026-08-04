@@ -32,6 +32,7 @@
                             <td>{{ $row->is_featured ? 'Có' : 'Không' }}</td>
                             <td>{{ $row->is_active ? 'Có' : 'Không' }}</td>
                             <td>
+                                <a href="{{ route('course.preview', $row->id) }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary">Xem trước</a>
                                 <a href="{{ route('course.edit', $row->id) }}">
                                     <button class="btn btn-icon btn-primary btn-rounded btn-tone">
                                         <i class="fas fa-edit"></i>

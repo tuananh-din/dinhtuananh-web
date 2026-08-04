@@ -33,6 +33,16 @@ class CourseController extends Controller
         return view('admin.course.edit', compact('course'));
     }
 
+    public function preview($id)
+    {
+        $course = Course::findOrFail($id);
+        $testimonials = \App\Models\Testimonial::where('is_active', 1)->where('is_featured', 1)->orderBy('sort_order')->orderByDesc('id')->take(3)->get();
+        if ($testimonials->isEmpty()) {
+            $testimonials = \App\Models\Testimonial::where('is_active', 1)->orderBy('sort_order')->orderByDesc('id')->take(3)->get();
+        }
+        return view('course_detail', compact('course', 'testimonials') + ['isPreview' => !$course->is_active]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
