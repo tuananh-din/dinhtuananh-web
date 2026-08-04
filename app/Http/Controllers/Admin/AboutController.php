@@ -54,6 +54,6 @@ class AboutController extends Controller
             $data
         );
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Đã lưu thành công.');
     }
 }

@@ -35,7 +35,7 @@ class ServiceController extends Controller
             ['id' => $id],
             $data
         );
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Đã lưu thành công.');
     }
     public function delete($id){
         $n = Service::where('id',$id)->first();

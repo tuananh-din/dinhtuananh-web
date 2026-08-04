@@ -67,7 +67,7 @@ class SettingController extends Controller
             $data
         );
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Đã lưu thành công.');
     }
 
     public function upload(Request $request)
