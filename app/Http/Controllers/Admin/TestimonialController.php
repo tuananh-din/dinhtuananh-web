@@ -7,6 +7,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
+use App\Support\ImageOptimizer;
 
 class TestimonialController extends Controller
 {
@@ -48,8 +49,7 @@ class TestimonialController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $path = $file->hashName('public/images');
-            $img = Image::read($file);
-            Storage::put($path, (string) $img->encode());
+            Storage::put($path, ImageOptimizer::encode($file));
             $avatar = Storage::url($path);
             if (!empty($testimonial?->avatar) && $testimonial->avatar !== $avatar) {
                 $this->deleteManagedUpload($testimonial->avatar);

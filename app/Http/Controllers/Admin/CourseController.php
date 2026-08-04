@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
+use App\Support\ImageOptimizer;
 
 class CourseController extends Controller
 {
@@ -84,8 +85,7 @@ class CourseController extends Controller
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
             $path = $file->hashName('public/images');
-            $img = Image::read($file);
-            Storage::put($path, (string) $img->encode());
+            Storage::put($path, ImageOptimizer::encode($file));
             $thumbnail = Storage::url($path);
             if (!empty($course?->thumbnail) && $course->thumbnail !== $thumbnail) {
                 $this->deleteManagedUpload($course->thumbnail);

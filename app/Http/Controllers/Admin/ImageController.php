@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
+use App\Support\ImageOptimizer;
 
 class ImageController extends Controller
 {
@@ -35,8 +36,7 @@ class ImageController extends Controller
         if($request->hasFile('image')){
             $file = $request->file('image');
             $path = $file->hashName('public/images');
-            $img = Image::read($file);
-            Storage::put($path, (string) $img->encode());   
+            Storage::put($path, ImageOptimizer::encode($file));
             $image = Storage::url($path);
             if (!empty($imageModel?->image) && $imageModel->image !== $image) {
                 $this->deleteManagedUpload($imageModel->image);

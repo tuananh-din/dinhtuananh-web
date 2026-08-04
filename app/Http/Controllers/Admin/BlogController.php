@@ -9,6 +9,7 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
+use App\Support\ImageOptimizer;
 use Str;
 
 class BlogController extends Controller
@@ -60,8 +61,7 @@ class BlogController extends Controller
         if($request->hasFile('image')){
             $file = $request->file('image');
             $path = $file->hashName('public/images');
-            $img = Image::read($file);
-            Storage::put($path, (string) $img->encode());
+            Storage::put($path, ImageOptimizer::encode($file));
             $image = Storage::url($path);
             if (!empty($blog?->image) && $blog->image !== $image) {
                 $this->deleteManagedUpload($blog->image);

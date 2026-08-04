@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
+use App\Support\ImageOptimizer;
 
 class SettingController extends Controller
 {
@@ -29,8 +30,7 @@ class SettingController extends Controller
         if($request->hasFile('logo')){
             $file = $request->file('logo');
             $path = $file->hashName('public/images');
-            $img = Image::read($file);
-            Storage::put($path, (string) $img->encode());   
+            Storage::put($path, ImageOptimizer::encode($file));
             $logo = Storage::url($path);
             if (!empty($setting?->logo) && $setting->logo !== $logo) {
                 $this->deleteManagedUpload($setting->logo);

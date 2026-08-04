@@ -7,6 +7,7 @@ use App\Models\About;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
+use App\Support\ImageOptimizer;
 
 class AboutController extends Controller
 {
@@ -29,8 +30,7 @@ class AboutController extends Controller
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $path = $file->hashName('public/images');
-            $img = Image::read($file);
-            Storage::put($path, (string) $img->encode());   
+            Storage::put($path, ImageOptimizer::encode($file));
             $avatar = Storage::url($path);
             if (!empty($about?->avatar) && $about->avatar !== $avatar) {
                 $this->deleteManagedUpload($about->avatar);
