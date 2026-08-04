@@ -74,7 +74,9 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('lead')->group(function () {
             Route::get('/', [AdminLeadController::class, 'index'])->name('admin.lead');
+            Route::get('/export', [AdminLeadController::class, 'export'])->name('lead.export');
             Route::post('/update/{id}', [AdminLeadController::class, 'update'])->name('lead.update');
+            Route::post('/delete/{id}', [AdminLeadController::class, 'delete'])->name('lead.delete');
         });
 
         Route::prefix('testimonial')->group(function () {

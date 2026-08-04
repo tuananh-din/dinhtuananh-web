@@ -19,13 +19,16 @@
                         <span class="badge badge-default m-r-5">{{ $sLabel }}: {{ $counts[$sValue] ?? 0 }}</span>
                     @endforeach
                 </div>
-                <form method="GET" action="{{ route('admin.lead') }}" class="lead-filter">
-                    <select name="status" class="form-control" onchange="this.form.submit()">
+                <form method="GET" action="{{ route('admin.lead') }}" class="d-flex flex-wrap align-items-center">
+                    <input type="search" name="search" value="{{ $search ?? '' }}" class="form-control m-r-10" placeholder="Tìm tên, SĐT, email">
+                    <select name="status" class="form-control m-r-10">
                         <option value="">Tất cả trạng thái</option>
                         @foreach(\App\Models\Lead::STATUSES as $sValue => $sLabel)
                             <option value="{{ $sValue }}" {{ ($status ?? '') === $sValue ? 'selected' : '' }}>{{ $sLabel }}</option>
                         @endforeach
                     </select>
+                    <button type="submit" class="btn btn-primary btn-tone m-r-10">Tìm</button>
+                    <a href="{{ route('lead.export', request()->query()) }}" class="btn btn-default">Xuất CSV</a>
                 </form>
             </div>
             @if(session('success'))
@@ -44,6 +47,7 @@
                             <th>Tr&#7841;ng th&#225;i</th>
                             <th>Ghi ch&#250;</th>
                             <th>C&#7853;p nh&#7853;t</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,6 +78,12 @@
                             </td>
                             <td>
                                     <button class="btn btn-success btn-tone">L&#432;u</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ route('lead.delete', $lead->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc muốn xóa lead này?');">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-tone">Xóa</button>
                                 </form>
                             </td>
                         </tr>
