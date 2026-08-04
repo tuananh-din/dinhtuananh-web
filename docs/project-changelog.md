@@ -34,6 +34,61 @@ Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `mas
 
 Trang public (home/about/courses/blog), meta SEO/OG cơ bản, responsive.
 
+## Phase F — 2026-07-30
+
+- `f4403ed` **F-5** Cập nhật README theo trạng thái project.
+- `ae3d147` **F-6** Đánh dấu hoàn tất các kế hoạch Phase C, D và E.
+
+## Phase G — 2026-07-30 (email lead thật)
+
+- `34d5a05` **G-1** Thêm command `lead:test-notify` để kiểm tra gửi email lead không lưu dữ liệu.
+- `0056dd8` **G-2** Cập nhật Mailable thông báo lead.
+- `2585901` **G-3** Bổ sung test cho luồng thông báo email lead.
+- `72c8385` **G-4** Cập nhật hướng dẫn Gmail SMTP và kiểm tra email lead khi deploy.
+
+## Phase H — 2026-08-04 (Admin + đồng bộ schema)
+
+- `4bb18f1` **H-0** Migration idempotent bổ sung `code_footer` cho bảng `setting`.
+- `e6018e9` **H-1** Cập nhật hướng dẫn deploy cho cấu hình production.
+- `93a7590` **H-2** Chuẩn hóa thông báo flash sau khi lưu các mục Admin.
+- `c44cf30` **H-3** Thêm Dashboard Admin và route `/admin`.
+- `9ef905e` **H-4** Quản lý Lead: tìm kiếm, xuất CSV và xóa mềm bằng `deleted_at`.
+
+## Auto-deploy cPanel — 2026-08-04
+
+- `f19fc34` Thêm `.cpanel.yml` cho cPanel Git Version Control deploy và cập nhật `.gitignore` cần thiết.
+
+## NHÓM 1 — 2026-08-04 (thu lead + chuyển đổi)
+
+- `a7131e7` **1.1** Thêm bảng `subscribers`, form newsletter và đồng bộ Brevo non-blocking.
+- `6e30cdf` **1.2** Thêm trang cảm ơn `/cam-on` và `@stack('conversion')` cho mã chuyển đổi.
+- `1da1279` **1.3** Thêm lead magnet, bảng `lead_magnets`, gửi email tải tài liệu và CRUD Admin.
+- `6806aff` **1.4** Bổ sung Dashboard phân tích lead theo nguồn, khoảng thời gian và trạng thái.
+
+## NHÓM 2 — 2026-08-04 (SEO + traffic)
+
+- `4feabf7` **2.1** Thêm JSON-LD Course cho trang chi tiết khóa học.
+- `45812f5` **2.2a** Thêm bảng `categories`, pivot `blog_category` và quan hệ Blog/Category.
+- `a3fa6b2` **2.2b** Thêm CRUD Chuyên mục trong Admin và menu sidebar.
+- `da7a856` **2.2c** Form Blog chọn nhiều chuyên mục, lưu bằng `sync()`.
+- `f6cee15` **2.2d** Thêm tìm kiếm title/description và lọc blog public theo chuyên mục.
+- `7455c82` **2.3** Thêm JSON-LD BreadcrumbList cho blog và khóa học.
+- `1955d76` **2.4** Thêm `loading="lazy"` cho ảnh nội dung công khai.
+
+## NHÓM 3 — 2026-08-04 (accessibility + branding Admin)
+
+- `e78a6a1` **3.2** Thêm skip-to-content, focus-visible, aria/alt cơ bản và cải thiện accessibility trang public.
+- `8412766` **3.3** Đồng bộ branding Admin theo nhận diện site bằng CSS và asset có sẵn.
+
+## Review fix — 2026-08-04
+
+- `0ded470` Đồng bộ subscriber lead magnet lên Brevo theo cách non-blocking; bỏ branding trùng và bổ sung `.visually-hidden`.
+
+## NHÓM 4 — 2026-08-04 (vận hành)
+
+- `47571a0` **health** Thêm route công khai `/health`: kiểm tra DB, trả JSON `ok` (200) hoặc `error` (503).
+- `8175ec2` **backup-db** Thêm command `backup:db`: `mysqldump` qua `MYSQL_PWD`, nén vào `storage/app/backups`, dọn bản quá 14 ngày; sẵn dùng với cron hằng đêm.
+
 ---
 
 **Ghi chú:** DB local có 2 blog seed test (`bai-mau-1-facebook-ads`, `bai-mau-2-personal-brand`) — xoá trước khi go-live nếu không cần.
