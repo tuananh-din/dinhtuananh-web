@@ -23,6 +23,9 @@
         <div class="col-md-6 col-lg-3">
             <div class="card"><div class="card-body"><p class="m-b-5">Testimonial</p><h2 class="m-b-0">{{ $testimonialCount }}</h2></div></div>
         </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card"><div class="card-body"><p class="m-b-5">Đăng ký email</p><h2 class="m-b-0">{{ $subscriberCount }}</h2></div></div>
+        </div>
     </div>
 
     <div class="row">

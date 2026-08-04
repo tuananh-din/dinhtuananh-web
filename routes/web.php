@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LeadController as AdminLeadController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\SettingController ;
 use App\Http\Controllers\Admin\SkillController as AdminSkillController;
+use App\Http\Controllers\Admin\SubscriberController as AdminSubscriberController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CourseController;
@@ -102,6 +103,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/export', [AdminLeadController::class, 'export'])->name('lead.export');
             Route::post('/update/{id}', [AdminLeadController::class, 'update'])->name('lead.update');
             Route::post('/delete/{id}', [AdminLeadController::class, 'delete'])->name('lead.delete');
+        });
+        Route::prefix('subscriber')->group(function () {
+            Route::get('/', [AdminSubscriberController::class, 'index'])->name('admin.subscriber');
+            Route::get('/export', [AdminSubscriberController::class, 'export'])->name('subscriber.export');
+            Route::post('/delete/{id}', [AdminSubscriberController::class, 'delete'])->name('subscriber.delete');
         });
         Route::prefix('lead-magnet')->group(function () { Route::get('/',[AdminLeadMagnetController::class,'index'])->name('admin.lead-magnet'); Route::get('/create',[AdminLeadMagnetController::class,'create'])->name('lead-magnet.create'); Route::get('/edit/{id}',[AdminLeadMagnetController::class,'edit'])->name('lead-magnet.edit'); Route::post('store',[AdminLeadMagnetController::class,'store'])->name('lead-magnet.store'); Route::post('/delete/{id}',[AdminLeadMagnetController::class,'delete'])->name('lead-magnet.delete'); });
 
