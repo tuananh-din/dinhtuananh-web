@@ -1044,6 +1044,7 @@ html[data-theme="light"] .footer-logo img { filter: brightness(0); }
 .hero-profile-card .brand-metrics { position: relative; z-index: 2; margin-top: 18px; }
 .hero-section1 .line-shape { z-index: 0; }
 .hero-section1 .hero-content .social-link { margin-top: 20px; }
+.cta-inline { background: transparent !important; border-color: transparent !important; }
 @media (max-width: 767px) {
     .hero-profile-card { border-radius: 18px; }
     .hero-profile-image { border-radius: 18px; }
