@@ -13,6 +13,10 @@
     $defaultOgImageUrl = \Illuminate\Support\Str::startsWith($defaultOgImage, ['http://', 'https://', '//'])
         ? $defaultOgImage
         : asset(ltrim($defaultOgImage, '/'));
+    $assetVersion = static function (string $path): string {
+        $file = public_path($path);
+        return asset($path).(is_file($file) ? '?v='.filemtime($file) : '');
+    };
 @endphp
 <!DOCTYPE html>
 <html lang="vi">
@@ -80,8 +84,8 @@
         <!--<< Nice Select.css >>-->
         <link rel="stylesheet" href="{{ asset('site/assets/css/nice-select.css') }}">
         <!--<< Main.css >>-->
-        <link rel="stylesheet" href="{{ asset('site/assets/css/main.css') }}">
-        <link rel="stylesheet" href="{{ asset('site/assets/css/custom.css') }}">
+        <link rel="stylesheet" href="{{ $assetVersion('site/assets/css/main.css') }}">
+        <link rel="stylesheet" href="{{ $assetVersion('site/assets/css/custom.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
@@ -146,7 +150,7 @@
         <!--<< Wow Animation Js >>-->
         <script src="{{ asset('site/assets/js/wow.min.js') }}"></script>
         <!--<< Main.js >>-->
-        <script src="{{ asset('site/assets/js/main.js') }}"></script>
+        <script src="{{ $assetVersion('site/assets/js/main.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
             @if(session('success'))

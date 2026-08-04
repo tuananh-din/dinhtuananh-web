@@ -17,8 +17,9 @@
     <link href="app/assets/vendors/select2/select2.css" rel="stylesheet">
 
     <!-- Core css -->
-    <link href="app/assets/css/app.min.css" rel="stylesheet">
-    <link href="app/assets/css/main.css" rel="stylesheet">
+    @php($adminAssetVersion = static function (string $path): string { $file = public_path($path); return asset($path).(is_file($file) ? '?v='.filemtime($file) : ''); })
+    <link href="{{ $adminAssetVersion('app/assets/css/app.min.css') }}" rel="stylesheet">
+    <link href="{{ $adminAssetVersion('app/assets/css/main.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="app/assets/richtexteditor/richtexteditor/rte_theme_default.css" />
@@ -229,8 +230,8 @@
     <script src="app/assets/js/pages/form-elements.js"></script>
     <script src="app/assets/js/pages/e-commerce-product-edit.js"></script>
     <!-- Core JS -->
-    <script src="app/assets/js/app.min.js"></script>
-    <script src="app/assets/js/main.js"></script>
+    <script src="{{ $adminAssetVersion('app/assets/js/app.min.js') }}"></script>
+    <script src="{{ $adminAssetVersion('app/assets/js/main.js') }}"></script>
 
 
     <script type="text/javascript">
