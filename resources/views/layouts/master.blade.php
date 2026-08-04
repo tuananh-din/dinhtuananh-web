@@ -200,6 +200,13 @@
                     firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     firstError.focus({ preventScroll: true });
                 }
+
+                setTimeout(function () {
+                    document.querySelectorAll('.wow').forEach(function (element) {
+                        element.style.visibility = 'visible';
+                        element.style.opacity = '1';
+                    });
+                }, 1500);
             });
         </script>
         @stack('scripts')

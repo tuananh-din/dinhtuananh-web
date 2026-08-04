@@ -967,3 +967,4 @@ html[data-theme="light"] .lead-form-shell .form-note {
 .error-page__suggestions { text-align: left; }
 .error-page__suggestions h2 { font-size: 1.25rem; }
 .blog-empty-state { min-height: 220px; }
+.text-muted, .post-date { color: #555 !important; }
