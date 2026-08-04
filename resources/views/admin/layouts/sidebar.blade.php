@@ -12,6 +12,9 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin') ? 'active' : '' }}">
+                        <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                    </li>
                     <li class="{{ Request::is('admin/profile') ? 'active' : '' }}">
                         <a href="{{ route('admin.profile') }}">Thông tin cá nhân</a>
                     </li>
@@ -36,7 +39,7 @@
                     <li class="{{ Request::is('admin/testimonial') || Request::is('admin/testimonial/*') ? 'active' : '' }}">
                         <a href="{{ route('admin.testimonial') }}">Testimonial</a>
                     </li>
-                    <li class="{{ Request::is('admin') ? 'active' : '' }}">
+                    <li class="{{ Request::is('admin/setting') ? 'active' : '' }}">
                         <a href="{{ route('setting') }}">Cài đặt</a>
                     </li>
                 </ul>

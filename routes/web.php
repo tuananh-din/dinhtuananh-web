@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\LeadController as AdminLeadController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
@@ -48,7 +49,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () { 
-        Route::get('/', [SettingController::class, 'index'])->name('setting');
+        Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('setting', [SettingController::class, 'index'])->name('setting');
         Route::post('setting/update', [SettingController::class, 'updateSetting'])->name('setting.update');
         Route::get('/profile', [AboutController::class, 'index'])->name('admin.profile');
         Route::post('profile/update', [AboutController::class, 'updateProfile'])->name('profile.update');
