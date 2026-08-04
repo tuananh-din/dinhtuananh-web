@@ -70,7 +70,7 @@
         </div>
         <div class="footer-bottom wow fadeInUp" data-wow-delay=".3s">
             <p>Copyright &copy; <span>{{ data_get($siteInfo, 'name', $brandName) }}</span></p>
-            <a href="{{ route('index') }}" class="footer-logo"><img src="{{ $siteLogo }}" alt="logo" height="100px"></a>
+            <a href="{{ route('index') }}" class="footer-logo"><img src="{{ $siteLogo }}" alt="{{ $brandName }}" height="100px"></a>
             <ul>
                 <li><a href="tel:{{ $phone }}">Hotline: {{ $phone }}</a></li>
                 <li><a href="mailto:{{ $email }}">{{ $email }}</a></li>

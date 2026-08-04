@@ -20,7 +20,7 @@
 </div>
 
 <!-- Back To Top Start -->
-<button id="back-top" class="back-to-top">
+<button id="back-top" class="back-to-top" aria-label="Về đầu trang">
     <i class="fa-regular fa-arrow-up"></i>
 </button>
 
@@ -33,7 +33,7 @@
     <div class="header-offcanvas-border">
         <div id="site-mobile-menu" class="offcanvas__info" aria-hidden="true">
             <a href="{{ route('index') }}" class="offcanvas__logo">
-                <img src="{{ $siteLogoUrl }}" height="100px" alt="logo">
+                <img src="{{ $siteLogoUrl }}" height="100px" alt="{{ $brandName }}">
             </a>
             <div class="offcanvas__close">
                 <button type="button" aria-label="&#272;&#243;ng menu">
@@ -82,7 +82,7 @@
         <div class="mega-menu-wrapper">
             <div class="header-main">
                 <a href="{{ route('index') }}" class="offcanvas__logo">
-                    <img src="{{ $siteLogoUrl }}" alt="logo">
+                    <img src="{{ $siteLogoUrl }}" alt="{{ $brandName }}">
                 </a>
                 <div class="header-right justify-content-end align-items-center">
                     <div class="mean__menu-wrapper d-none d-lg-block">
