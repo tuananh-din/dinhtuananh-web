@@ -21,6 +21,11 @@
 @endif
 @push('structured_data')
     @include('partials.jsonld-course', ['course' => $course])
+    @include('partials.jsonld-breadcrumbs', ['items' => [
+        ['name' => 'Trang chủ', 'url' => route('index')],
+        ['name' => 'Khóa học', 'url' => route('courses')],
+        ['name' => $course->title, 'url' => url()->current()],
+    ]])
 @endpush
 @section('content')
 <section class="course-detail-shell fix">

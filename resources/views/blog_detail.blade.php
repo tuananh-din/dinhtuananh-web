@@ -17,6 +17,11 @@
 @endif
 @push('structured_data')
     @include('partials.jsonld-article', ['blog' => $blog])
+    @include('partials.jsonld-breadcrumbs', ['items' => [
+        ['name' => 'Trang chủ', 'url' => route('index')],
+        ['name' => 'Blog', 'url' => route('blogs')],
+        ['name' => $blog->title, 'url' => url()->current()],
+    ]])
 @endpush
 @section('content')
 <section class="news-grid-section1 fix">
