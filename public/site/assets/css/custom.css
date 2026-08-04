@@ -982,3 +982,20 @@ html[data-theme="light"] .lead-form-shell .form-note {
 @media (max-width: 991px) {
     .home-about-image, .home-about-image img { max-height: 70vh; }
 }
+html[data-theme="dark"] .text-muted, html[data-theme="dark"] .post-date { color: #b0b0b0 !important; }
+html[data-theme="dark"] .home-about-copy__body { color: #e9e9e9; }
+html[data-theme="dark"] .header-main .main-menu ul li a,
+html[data-theme="dark"] .header-main .main-menu ul li a i,
+html[data-theme="dark"] .header-2 .main-menu ul li a,
+html[data-theme="dark"] .mean-container a.meanmenu-reveal,
+html[data-theme="dark"] .offcanvas__info a,
+html[data-theme="dark"] .offcanvas__info .offcanvas__close button { color: #e9e9e9; }
+html[data-theme="dark"] .header-main .main-menu ul li a:hover,
+html[data-theme="dark"] .header-2 .main-menu ul li a:hover,
+html[data-theme="dark"] .offcanvas__info a:hover { color: var(--theme); }
+html[data-theme="dark"] .header-main .main-menu ul li .submenu,
+html[data-theme="dark"] .offcanvas__info,
+html[data-theme="dark"] .mean-container .mean-nav { background-color: #171717; }
+html[data-theme="dark"] .site-breadcrumbs,
+html[data-theme="dark"] .blog-category-chip,
+html[data-theme="dark"] .contact-info-panel { color: #e9e9e9; }
