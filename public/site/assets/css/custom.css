@@ -964,3 +964,5 @@ html[data-theme="light"] .lead-form-shell .form-note {
 .site-breadcrumbs li+li::before { content:'/'; margin-right:8px; opacity:.6; }
 .site-breadcrumbs a { color: var(--theme, #6b5cff); }
 .blog-course-promo { padding: 24px; border-radius: 16px; background: rgba(107, 92, 255, .08); }
+.error-page__suggestions { text-align: left; }
+.error-page__suggestions h2 { font-size: 1.25rem; }
