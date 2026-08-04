@@ -28,6 +28,11 @@
 @section('content')
 <section class="news-grid-section1 fix">
     <div class="container">
+        @include('partials.breadcrumbs', ['items' => [
+            ['name' => 'Trang chủ', 'url' => route('index')],
+            ['name' => 'Blog', 'url' => route('blogs')],
+            ['name' => $blog->title],
+        ]])
         <h1>{{ $blog->title }}</h1>
         <div class="blog-meta">
             <span class="post-date">{{ optional($blog->created_at)->format('d/m/Y') }}</span>

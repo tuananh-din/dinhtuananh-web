@@ -4,6 +4,14 @@
 @section('content')
 <section class="news-grid-section1 fix">
     <div class="container">
+        @if($selectedCategory)
+            @php($selectedCategoryModel = $categories->firstWhere('slug', $selectedCategory))
+            @include('partials.breadcrumbs', ['items' => [
+                ['name' => 'Trang chủ', 'url' => route('index')],
+                ['name' => 'Blog', 'url' => route('blogs')],
+                ['name' => optional($selectedCategoryModel)->name ?: $selectedCategory],
+            ]])
+        @endif
         <h1>Blog</h1>
         <form method="GET" action="{{ route('blogs') }}" class="mb-4" aria-label="Lọc bài viết">
             <label for="blog-search" class="visually-hidden">Tìm bài viết</label>

@@ -30,6 +30,11 @@
 @section('content')
 <section class="course-detail-shell fix">
     <div class="container">
+        @include('partials.breadcrumbs', ['items' => [
+            ['name' => 'Trang chủ', 'url' => route('index')],
+            ['name' => 'Khóa học', 'url' => route('courses')],
+            ['name' => $course->title],
+        ]])
         <div class="row g-4">
             <div class="col-lg-8">
                 <div class="course-main-card">
