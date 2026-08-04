@@ -53,6 +53,17 @@ class PublicSeoJsonLdTest extends TestCase
         $response->assertSee('"sameAs":["https://example.test/profile"]', false);
     }
 
+    public function test_draft_blog_is_hidden_from_public_detail_and_listing(): void
+    {
+        $this->createSiteIdentity();
+        $draft = Blog::create([
+            'title' => 'Bài nháp', 'slug' => 'bai-nhap', 'content' => 'Nội dung nháp', 'is_published' => false,
+        ]);
+
+        $this->get(route('blog', $draft->slug))->assertNotFound();
+        $this->get(route('blogs'))->assertDontSee('Bài nháp');
+    }
+
     private function createSiteIdentity(): void
     {
         Setting::create([

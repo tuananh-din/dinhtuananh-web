@@ -11,13 +11,13 @@ class BlogController extends Controller
     public function blogs(Request $request){
         $search = trim((string) $request->query('search'));
         $category = $request->query('category');
-        $blogs = Blog::with('categories')->when($search, fn($q) => $q->where(fn($s) => $s->where('title', 'like', "%{$search}%")->orWhere('description', 'like', "%{$search}%")))->when($category, fn($q) => $q->whereHas('categories', fn($c) => $c->where('slug', $category)))->latest()->paginate(12)->withQueryString();
+        $blogs = Blog::where('is_published', 1)->with('categories')->when($search, fn($q) => $q->where(fn($s) => $s->where('title', 'like', "%{$search}%")->orWhere('description', 'like', "%{$search}%")))->when($category, fn($q) => $q->whereHas('categories', fn($c) => $c->where('slug', $category)))->latest()->paginate(12)->withQueryString();
         return view('blogs', ['blogs' => $blogs, 'categories' => Category::orderBy('name')->get(), 'search' => $search, 'selectedCategory' => $category]);
     }
 
     public function detail($slug){
-        $blog = Blog::where('slug',$slug)->firstOrFail();
-        $otherBlogs = Blog::where('id','!=',$blog->id)->orderBy('id','DESC')->limit(3)->get();
+        $blog = Blog::where('is_published', 1)->where('slug',$slug)->firstOrFail();
+        $otherBlogs = Blog::where('is_published', 1)->where('id','!=',$blog->id)->orderBy('id','DESC')->limit(3)->get();
         return view('blog_detail',compact('blog','otherBlogs'));
     }
 }

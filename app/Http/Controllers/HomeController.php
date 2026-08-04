@@ -19,7 +19,7 @@ class HomeController extends Controller
         $jobs = Service::orderBy('id','DESC')->get();
         $words = Service::pluck('title');
         $skills = Skill::orderBy('number','DESC')->take(4)->get();
-        $blogs = Blog::orderBy('id','DESC')->take(3)->get();
+        $blogs = Blog::where('is_published', 1)->orderBy('id','DESC')->take(3)->get();
         $cases = Image::where('type',0)->orderBy('id','DESC')->take(3)->get();
         $featuredCourse = Course::where('is_active', 1)
             ->where('is_featured', 1)

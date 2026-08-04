@@ -13,6 +13,7 @@
     <div class="card">
         <div class="card-body">
             <h4>Danh sách bài viết</h4>
+            <p class="text-muted">Đã đăng: {{ $publishedCount }} &middot; Nháp: {{ $draftCount }}</p>
             <a href="{{route('blog.create')}}" class="btn btn-primary m-r-5">Thêm mới</a>
             <div class="table-responsive">
                 <table class="table">
@@ -20,6 +21,7 @@
                         <tr>
                             <th scope="col">Tiêu đề</th>
                             <th scope="col">Ảnh</th>
+                            <th scope="col">Trạng thái</th>
                             <th scope="col">Hành động</th>
                         </tr>
                     </thead>
@@ -28,6 +30,7 @@
                             <tr>
                                 <th scope="row">{{$row->title}}</th>
                                 <td><img src="{{$row->image}}" height="100px"></td>
+                                <td><span class="badge {{ $row->is_published ? 'badge-success' : 'badge-secondary' }}">{{ $row->is_published ? 'Đã đăng' : 'Nháp' }}</span></td>
                                 <td>
                                     <a href="{{ route('blog.edit',$row->id) }}"> 
                                         <button class="btn btn-icon btn-primary btn-rounded btn-tone">

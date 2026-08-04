@@ -56,6 +56,10 @@
                                         </div>
                                     </div>
                                     
+                                    <div class="form-check mb-3">
+                                        <input id="is_published" class="form-check-input" type="checkbox" name="is_published" value="1" {{ old('is_published', $blog->is_published) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="is_published">Đăng bài</label>
+                                    </div>
                                     <div class="form-group">
                                         <img id="preview" src="{{ $blog->image ?? 'app/assets/images/others/thumb-16.jpg' }}" alt="">
                                         <div class="file-input">

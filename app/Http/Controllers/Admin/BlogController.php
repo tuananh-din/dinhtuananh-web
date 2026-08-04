@@ -14,7 +14,9 @@ class BlogController extends Controller
 {
     public function index(){
         $blogs = Blog::orderBy('id','DESC')->paginate(20);
-        return view('admin.blog.index',compact('blogs'));
+        $publishedCount = Blog::where('is_published', 1)->count();
+        $draftCount = Blog::where('is_published', 0)->count();
+        return view('admin.blog.index', compact('blogs', 'publishedCount', 'draftCount'));
     }
 
     public function create(){
@@ -77,6 +79,7 @@ class BlogController extends Controller
         ]), [
             'image' => $image,
             'slug' => $slug,
+            'is_published' => $request->boolean('is_published'),
 
         ]);
 
