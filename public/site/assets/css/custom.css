@@ -736,6 +736,10 @@ html[data-theme="light"] .blog-toc {
     padding: 0;
     color: inherit;
 }
+.header__hamburger { display: block !important; }
+.header-main .sidebar__toggle img { width: 24px; height: auto; display: block; }
+html[data-theme="light"] .header-main .sidebar__toggle img { filter: invert(1); }
+html[data-theme="dark"] .header-main .sidebar__toggle img { filter: none; }
 
 .skip-to-content {
     position: fixed;
