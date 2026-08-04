@@ -13,6 +13,11 @@ class Blog extends Model
     protected $table = "blogs";
     public $timestamps = true;
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'blog_category');
+    }
+
     public function getImageUrlAttribute()
     {
         $path = $this->image;
