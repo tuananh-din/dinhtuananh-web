@@ -327,6 +327,9 @@
 </section>
 
 <section class="cta-section section-padding fix pt-0" id="final-cta">
+    @if($leadMagnet)
+    <div class="container"><div class="brand-card text-center mb-4"><h3>{{ $leadMagnet->name }}</h3><p>{{ $leadMagnet->description }}</p><form method="POST" action="{{ route('lead-magnet.subscribe',$leadMagnet->id) }}">@csrf<input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none"><label class="visually-hidden" for="magnet-email">Email</label><input id="magnet-email" name="email" type="email" required placeholder="Email để nhận tài liệu"><button class="theme-btn">Nhận tài liệu</button></form></div></div>
+    @endif
     <div class="shape-1">
         <img src="{{ asset('site/assets/img/home-1/cta/cta-shape-1.png') }}" alt="img">
     </div>

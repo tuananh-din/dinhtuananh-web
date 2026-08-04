@@ -9,6 +9,7 @@ use App\Models\Image;
 use App\Models\Service;
 use App\Models\Skill;
 use App\Models\Testimonial;
+use App\Models\LeadMagnet;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -57,7 +58,8 @@ class HomeController extends Controller
                 ->get();
         }
 
-        return view('home',compact('about','jobs','words','skills','blogs','cases','featuredCourse','highlightCourses','featuredTestimonials'));
+        $leadMagnet = LeadMagnet::where('is_active', 1)->latest()->first();
+        return view('home',compact('about','jobs','words','skills','blogs','cases','featuredCourse','highlightCourses','featuredTestimonials','leadMagnet'));
     }
     public function about(){
         $about = About::first() ?? new About();

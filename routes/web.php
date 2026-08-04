@@ -16,6 +16,8 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LeadMagnetController;
+use App\Http\Controllers\Admin\LeadMagnetController as AdminLeadMagnetController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +46,7 @@ Route::get('/courses',[CourseController::class,'index'])->name('courses');
 Route::get('/courses/{slug}',[CourseController::class,'detail'])->name('course.detail');
 Route::post('/lead/store',[LeadController::class,'store'])->middleware('throttle:5,1')->name('lead.store');
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'store'])->middleware('throttle:5,1')->name('newsletter.store');
+Route::post('/lead-magnet/{id}/subscribe', [LeadMagnetController::class, 'subscribe'])->middleware('throttle:5,1')->name('lead-magnet.subscribe');
 Route::get('/sitemap.xml',[SitemapController::class,'index'])->name('sitemap');
 Route::get('/{slug}.html',[BlogController::class,'detail'])->name('blog');
 
@@ -89,6 +92,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', [AdminLeadController::class, 'update'])->name('lead.update');
             Route::post('/delete/{id}', [AdminLeadController::class, 'delete'])->name('lead.delete');
         });
+        Route::prefix('lead-magnet')->group(function () { Route::get('/',[AdminLeadMagnetController::class,'index'])->name('admin.lead-magnet'); Route::get('/create',[AdminLeadMagnetController::class,'create'])->name('lead-magnet.create'); Route::get('/edit/{id}',[AdminLeadMagnetController::class,'edit'])->name('lead-magnet.edit'); Route::post('store',[AdminLeadMagnetController::class,'store'])->name('lead-magnet.store'); Route::post('/delete/{id}',[AdminLeadMagnetController::class,'delete'])->name('lead-magnet.delete'); });
 
         Route::prefix('testimonial')->group(function () {
             Route::get('/', [AdminTestimonialController::class, 'index'])->name('admin.testimonial');

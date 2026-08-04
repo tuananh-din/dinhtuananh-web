@@ -39,6 +39,7 @@
                     <li class="{{ Request::is('admin/lead') || Request::is('admin/lead/*') ? 'active' : '' }}">
                         <a href="{{ route('admin.lead') }}">Leads</a>
                     </li>
+                    <li class="{{ Request::is('admin/lead-magnet') || Request::is('admin/lead-magnet/*') ? 'active' : '' }}"><a href="{{ route('admin.lead-magnet') }}">Tài liệu tặng</a></li>
                     <li class="{{ Request::is('admin/testimonial') || Request::is('admin/testimonial/*') ? 'active' : '' }}">
                         <a href="{{ route('admin.testimonial') }}">Testimonial</a>
                     </li>

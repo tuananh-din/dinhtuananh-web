@@ -1,0 +1,4 @@
+<?php
+namespace App\Http\Controllers;
+use App\Mail\LeadMagnetDownload; use App\Models\LeadMagnet; use App\Models\Subscriber; use Illuminate\Http\Request; use Illuminate\Support\Facades\Log; use Illuminate\Support\Facades\Mail;
+class LeadMagnetController extends Controller { public function subscribe(Request $request, $id) { if ($request->filled('website')) return redirect()->route('thank.you'); $request->validate(['email'=>'required|email|max:255']); $magnet=LeadMagnet::where('is_active',1)->findOrFail($id); Subscriber::firstOrCreate(['email'=>$request->email],['source'=>'lead_magnet']); try { Mail::to($request->email)->send(new LeadMagnetDownload($magnet)); } catch (\Throwable $e) { Log::error('Lead magnet email failed.', ['lead_magnet_id'=>$magnet->id,'exception_class'=>$e::class]); } return redirect()->route('thank.you')->with('success','Đã gửi link tải tài liệu tới email của bạn.'); } }

@@ -1,0 +1,4 @@
+@extends('admin.layouts.master')
+@section('content')
+<div class="main-content"><div class="card"><div class="card-body"><a class="btn btn-primary m-b-15" href="{{ route('lead-magnet.create') }}">Thêm tài liệu</a><table class="table"><thead><tr><th>Tên</th><th>Hiển thị</th><th></th></tr></thead><tbody>@foreach($leadMagnets as $magnet)<tr><td>{{ $magnet->name }}</td><td>{{ $magnet->is_active ? 'Có' : 'Không' }}</td><td><a class="btn btn-primary btn-sm" href="{{ route('lead-magnet.edit',$magnet->id) }}">Sửa</a><form method="POST" class="d-inline" action="{{ route('lead-magnet.delete',$magnet->id) }}" onsubmit="return confirm('Xóa tài liệu này?')">@csrf <button class="btn btn-danger btn-sm">Xóa</button></form></td></tr>@endforeach</tbody></table>{{ $leadMagnets->links('vendor.pagination') }}</div></div></div>
+@endsection
