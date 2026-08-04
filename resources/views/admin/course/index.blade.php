@@ -12,7 +12,19 @@
     <div class="card">
         <div class="card-body">
             <h4>Danh s&#225;ch kh&#243;a h&#7885;c</h4>
+            <p class="text-muted">&#272;ang m&#7903;: {{ $activeCount }} &middot; T&#7855;t: {{ $inactiveCount }}</p>
             <a href="{{ route('course.create') }}" class="btn btn-primary m-r-5">Th&#234;m m&#7899;i</a>
+            <form method="GET" action="{{ route('admin.course') }}" class="form-inline mt-3 mb-3">
+                <label class="sr-only" for="admin-course-search">T&#236;m ti&#234;u &#273;&#7873;</label>
+                <input id="admin-course-search" name="search" value="{{ $search }}" class="form-control mr-2" placeholder="T&#236;m theo ti&#234;u &#273;&#7873;">
+                <label class="sr-only" for="admin-course-status">Tr&#7841;ng th&#225;i</label>
+                <select id="admin-course-status" name="status" class="form-control mr-2">
+                    <option value="">T&#7845;t c&#7843; tr&#7841;ng th&#225;i</option>
+                    <option value="active" {{ $status === 'active' ? 'selected' : '' }}>&#272;ang m&#7903;</option>
+                    <option value="inactive" {{ $status === 'inactive' ? 'selected' : '' }}>T&#7855;t</option>
+                </select>
+                <button class="btn btn-secondary" type="submit">L&#7885;c</button>
+            </form>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -30,7 +42,7 @@
                             <th scope="row">{{ $row->title }}</th>
                             <td>{{ $row->slug }}</td>
                             <td>{{ $row->is_featured ? 'Có' : 'Không' }}</td>
-                            <td>{{ $row->is_active ? 'Có' : 'Không' }}</td>
+                            <td><span class="badge {{ $row->is_active ? 'badge-success' : 'badge-secondary' }}">{{ $row->is_active ? '&#272;ang m&#7903;' : 'T&#7855;t' }}</span></td>
                             <td>
                                 <a href="{{ route('course.preview', $row->id) }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary">Xem trước</a>
                                 <a href="{{ route('course.edit', $row->id) }}">

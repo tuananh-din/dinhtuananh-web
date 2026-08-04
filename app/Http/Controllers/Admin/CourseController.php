@@ -15,11 +15,18 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Course::orderBy('sort_order', 'ASC')
+        $search = trim((string) request('search', ''));
+        $status = request('status');
+        $courses = Course::when($search, fn ($query) => $query->where('title', 'like', "%{$search}%"))
+            ->when($status === 'active', fn ($query) => $query->where('is_active', 1))
+            ->when($status === 'inactive', fn ($query) => $query->where('is_active', 0))
+            ->orderBy('sort_order', 'ASC')
             ->orderBy('id', 'DESC')
-            ->paginate(20);
+            ->paginate(20)->withQueryString();
+        $activeCount = Course::where('is_active', 1)->count();
+        $inactiveCount = Course::where('is_active', 0)->count();
 
-        return view('admin.course.index', compact('courses'));
+        return view('admin.course.index', compact('courses', 'search', 'status', 'activeCount', 'inactiveCount'));
     }
 
     public function create()

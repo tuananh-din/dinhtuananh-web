@@ -26,4 +26,13 @@ class CoursePreviewTest extends TestCase
         $this->get(route('course.preview', $course->id))->assertRedirect(route('login'));
         $this->get(route('course.detail', $course->slug))->assertNotFound();
     }
+
+    public function test_admin_course_index_filters_by_title_and_status(): void
+    {
+        Course::create(['title' => 'Khóa học đang mở', 'slug' => 'khoa-mo', 'short_description' => 'Mô tả', 'is_active' => true]);
+        Course::create(['title' => 'Khóa học tắt', 'slug' => 'khoa-tat', 'short_description' => 'Mô tả', 'is_active' => false]);
+
+        $this->actingAs(User::factory()->create())->get(route('admin.course', ['search' => 'đang mở', 'status' => 'active']))
+            ->assertOk()->assertSee('Khóa học đang mở')->assertDontSee('Khóa học tắt');
+    }
 }
