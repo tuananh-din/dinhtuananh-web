@@ -14,10 +14,19 @@ use Str;
 class BlogController extends Controller
 {
     public function index(){
-        $blogs = Blog::orderBy('id','DESC')->paginate(20);
+        $search = trim((string) request('search', ''));
+        $status = request('status');
+        $category = request('category');
+        $blogs = Blog::with('categories')
+            ->when($search, fn ($query) => $query->where('title', 'like', "%{$search}%"))
+            ->when($status === 'published', fn ($query) => $query->where('is_published', 1))
+            ->when($status === 'draft', fn ($query) => $query->where('is_published', 0))
+            ->when($category, fn ($query) => $query->whereHas('categories', fn ($cat) => $cat->where('slug', $category)))
+            ->orderByDesc('id')->paginate(20)->withQueryString();
         $publishedCount = Blog::where('is_published', 1)->count();
         $draftCount = Blog::where('is_published', 0)->count();
-        return view('admin.blog.index', compact('blogs', 'publishedCount', 'draftCount'));
+        $categories = Category::orderBy('name')->get();
+        return view('admin.blog.index', compact('blogs', 'publishedCount', 'draftCount', 'categories', 'search', 'status', 'category'));
     }
 
     public function create(){
