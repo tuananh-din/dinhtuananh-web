@@ -85,7 +85,6 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
         @stack('head')
-        @stack('head')
         @stack('structured_data')
         {!! data_get($infor, 'code_header') !!}
     </head>

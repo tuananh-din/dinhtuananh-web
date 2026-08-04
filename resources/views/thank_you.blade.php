@@ -4,9 +4,6 @@
 @push('head')
 <meta name="robots" content="noindex,nofollow">
 @endpush
-@push('head')
-<meta name="robots" content="noindex,nofollow">
-@endpush
 @section('content')
 <section class="news-grid-section1 fix">
     <div class="container text-center">
