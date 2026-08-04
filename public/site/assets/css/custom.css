@@ -1005,3 +1005,8 @@ body p, body li, body label, body input, body textarea, body select { font-size:
 html[data-theme="dark"] .hero-content > p { color: #e7e7e7; }
 .hero-image .animated-image { transform: none; opacity: 1; }
 .hero-image { min-height: 0; }
+.hero-section1 > .container > .row > .col-xl-5 > .brand-card { margin-top: clamp(28px, 5vw, 72px); }
+.hero-section1 .hero-image { max-height: 70vh; overflow: hidden; }
+.hero-section1 .hero-image img { max-height: 70vh; object-fit: cover; object-position: top center; }
+@media (max-width: 1199px) { .hero-section1 > .container > .row > .col-xl-5 > .brand-card { margin-top: 24px; } }
+@media (max-width: 767px) { .hero-section1 > .container > .row > .col-xl-5 > .brand-card { margin-top: 12px; } }
