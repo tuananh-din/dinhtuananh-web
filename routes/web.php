@@ -88,6 +88,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/preview/{id}', [AdminBlogController::class, 'preview'])->name('blog.preview');
             Route::post('store', [AdminBlogController::class, 'store'])->name('blog.store');
             Route::post('/delete/{id}', [AdminBlogController::class, 'delete'])->name('blog.delete');
+            Route::get('/trash', [AdminBlogController::class, 'trash'])->name('blog.trash');
+            Route::post('/restore/{id}', [AdminBlogController::class, 'restore'])->name('blog.restore');
+            Route::post('/force-delete/{id}', [AdminBlogController::class, 'forceDelete'])->name('blog.force-delete');
         });
         Route::prefix('category')->group(function () {
             Route::get('/', [AdminCategoryController::class, 'index'])->name('admin.category');

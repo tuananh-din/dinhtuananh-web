@@ -41,4 +41,18 @@ class BlogPreviewTest extends TestCase
             ->get(route('admin.blog', ['search' => 'SEO', 'status' => 'draft', 'category' => 'seo']))
             ->assertOk()->assertSee('Bài SEO nháp')->assertDontSee('Bài khác');
     }
+
+    public function test_blog_can_be_soft_deleted_restored_and_force_deleted(): void
+    {
+        $user = User::factory()->create();
+        $blog = Blog::create(['title' => 'Bài thùng rác', 'slug' => 'bai-thung-rac', 'content' => 'Nội dung', 'is_published' => true]);
+
+        $this->actingAs($user)->post(route('blog.delete', $blog->id))->assertRedirect();
+        $this->assertSoftDeleted('blogs', ['id' => $blog->id]);
+        $this->actingAs($user)->post(route('blog.restore', $blog->id))->assertRedirect();
+        $this->assertDatabaseHas('blogs', ['id' => $blog->id, 'deleted_at' => null]);
+        $this->actingAs($user)->post(route('blog.delete', $blog->id));
+        $this->actingAs($user)->post(route('blog.force-delete', $blog->id))->assertRedirect();
+        $this->assertDatabaseMissing('blogs', ['id' => $blog->id]);
+    }
 }

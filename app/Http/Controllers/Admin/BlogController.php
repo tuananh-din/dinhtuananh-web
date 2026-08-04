@@ -113,11 +113,29 @@ class BlogController extends Controller
     public function delete($id){
         $n = Blog::where('id',$id)->first();
         if ($n) {
-            $this->deleteManagedUpload($n->image);
             $n->delete();
             return redirect()->back()->with('success', 'Xóa bài viết thành công.');
         }
 
         return redirect()->back()->with('error', 'Không tìm thấy bài viết để xóa.');
+    }
+
+    public function trash()
+    {
+        return view('admin.blog.trash', ['blogs' => Blog::onlyTrashed()->latest('deleted_at')->paginate(20)]);
+    }
+
+    public function restore($id)
+    {
+        Blog::onlyTrashed()->findOrFail($id)->restore();
+        return redirect()->back()->with('success', 'Đã khôi phục bài viết.');
+    }
+
+    public function forceDelete($id)
+    {
+        $blog = Blog::onlyTrashed()->findOrFail($id);
+        $this->deleteManagedUpload($blog->image);
+        $blog->forceDelete();
+        return redirect()->back()->with('success', 'Đã xóa vĩnh viễn bài viết.');
     }
 }

@@ -15,6 +15,7 @@
             <h4>Danh sách bài viết</h4>
             <p class="text-muted">Đã đăng: {{ $publishedCount }} &middot; Nháp: {{ $draftCount }}</p>
             <a href="{{route('blog.create')}}" class="btn btn-primary m-r-5">Thêm mới</a>
+            <a href="{{ route('blog.trash') }}" class="btn btn-outline-secondary">Thùng rác</a>
             <form method="GET" action="{{ route('admin.blog') }}" class="form-inline mt-3 mb-3">
                 <label class="sr-only" for="admin-blog-search">Tìm tiêu đề</label>
                 <input id="admin-blog-search" name="search" value="{{ $search }}" class="form-control mr-2" placeholder="Tìm theo tiêu đề">
