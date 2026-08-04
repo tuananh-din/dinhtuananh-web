@@ -1017,6 +1017,7 @@ html[data-theme="dark"] .contact-info-panel { color: #e9e9e9; }
 body { font-family: "Be Vietnam Pro", system-ui, sans-serif; text-transform: none; letter-spacing: 0; line-height: 1.7; }
 body p, body li, body label, body input, body textarea, body select { font-size: 16px; letter-spacing: .01em; }
 .hero-content > p { text-transform: none !important; letter-spacing: .01em !important; line-height: 1.7; font-size: 17px; }
+.hero-section .hero-content p { text-transform: none !important; letter-spacing: .01em !important; line-height: 1.7 !important; font-size: 17px !important; }
 html[data-theme="dark"] .hero-content > p { color: #e7e7e7; }
 .hero-image .animated-image { transform: none; opacity: 1; }
 .hero-image { min-height: 0; }
@@ -1025,3 +1026,4 @@ html[data-theme="dark"] .hero-content > p { color: #e7e7e7; }
 .hero-section1 .hero-image img { max-height: 70vh; object-fit: cover; object-position: top center; }
 @media (max-width: 1199px) { .hero-section1 > .container > .row > .col-xl-5 > .brand-card { margin-top: 24px; } }
 @media (max-width: 767px) { .hero-section1 > .container > .row > .col-xl-5 > .brand-card { margin-top: 12px; } }
+@media (max-width: 767px) { .hero-section .hero-content p { font-size: 16px !important; } }
