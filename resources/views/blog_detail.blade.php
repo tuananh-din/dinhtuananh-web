@@ -6,6 +6,8 @@
         155
     );
     $blogBrand = data_get($infor, 'name', 'Personal Brand');
+    $blogWordCount = count(preg_split('/\s+/u', trim(strip_tags($blog->content ?? '')), -1, PREG_SPLIT_NO_EMPTY));
+    $blogReadingMinutes = max(1, (int) ceil($blogWordCount / 200));
 @endphp
 @section('page_title', $blog->title . ' | ' . $blogBrand)
 @section('meta_description', $blogDescription)
@@ -27,7 +29,17 @@
 <section class="news-grid-section1 fix">
     <div class="container">
         <h1>{{ $blog->title }}</h1>
-        <span class="post-date">{{ optional($blog->created_at)->format('d/m/Y') }}</span>
+        <div class="blog-meta">
+            <span class="post-date">{{ optional($blog->created_at)->format('d/m/Y') }}</span>
+            <span class="post-date"><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ $blogReadingMinutes }} phút đọc</span>
+        </div>
+        @if($blog->categories->isNotEmpty())
+        <div class="blog-category-list" aria-label="Chuyên mục">
+            @foreach($blog->categories as $category)
+            <a class="blog-category-chip" href="{{ route('blogs', ['category' => $category->slug]) }}">{{ $category->name }}</a>
+            @endforeach
+        </div>
+        @endif
         @if($blog->description)
         <p class="mb-4">{{ $blog->description }}</p>
         @endif
@@ -41,6 +53,10 @@
             <div class="col-lg-12">
                 <div class="news-details-area">
                     <div class="single-news-post">
+                        <nav id="blog-toc" class="blog-toc d-none" aria-label="Mục lục bài viết">
+                            <strong>Mục lục</strong>
+                            <ol></ol>
+                        </nav>
                         <div class="news-content">
                             {!! $blog->content !!}
                         </div>
@@ -68,8 +84,15 @@
                                 <img src="{{ $other->image_url }}" alt="{{ $other->title }}" loading="lazy">
                                 <div class="content">
                                     <span class="post-date">{{ optional($other->created_at)->format('d/m/Y') }}</span>
+                                    @if($other->categories->isNotEmpty())
+                                    <div class="blog-category-list" aria-label="Chuyên mục">
+                                        @foreach($other->categories as $category)
+                                        <a class="blog-category-chip" href="{{ route('blogs', ['category' => $category->slug]) }}">{{ $category->name }}</a>
+                                        @endforeach
+                                    </div>
+                                    @endif
                                     <h3><a href="{{ route('blog', $other->slug) }}">{{ $other->title }}</a></h3>
-                                    @if($other->description)<p>{{ $other->description }}</p>@endif
+                                    @if($other->description)<p>{{ \Illuminate\Support\Str::limit($other->description, 160) }}</p>@endif
                                     <a href="{{ route('blog', $other->slug) }}">Đọc bài viết <i class="fa-solid fa-arrow-up-right"></i></a>
                                 </div>
                             </div>
@@ -102,6 +125,29 @@ document.addEventListener('click', function (e) {
         try { document.execCommand('copy'); done(); } catch (_) {}
         document.body.removeChild(ta);
     }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const content = document.querySelector('.news-content');
+    const toc = document.getElementById('blog-toc');
+    if (!content || !toc) return;
+
+    const headings = Array.from(content.querySelectorAll('h2, h3'));
+    if (headings.length < 3) return;
+
+    const list = toc.querySelector('ol');
+    headings.forEach(function (heading, index) {
+        if (!heading.id) heading.id = 'blog-heading-' + (index + 1);
+        const item = document.createElement('li');
+        item.className = heading.tagName.toLowerCase() === 'h3' ? 'blog-toc__subitem' : '';
+        const link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.textContent = heading.textContent;
+        item.appendChild(link);
+        list.appendChild(item);
+    });
+
+    toc.classList.remove('d-none');
 });
 </script>
 @endpush

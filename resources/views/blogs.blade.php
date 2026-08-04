@@ -26,9 +26,16 @@
                     </div>
                     <div class="content">
                         <span class="post-date">{{ optional($row->created_at)->format('d/m/Y') }}</span>
+                        @if($row->categories->isNotEmpty())
+                        <div class="blog-category-list" aria-label="Chuyên mục">
+                            @foreach($row->categories as $category)
+                            <a class="blog-category-chip" href="{{ route('blogs', ['category' => $category->slug]) }}">{{ $category->name }}</a>
+                            @endforeach
+                        </div>
+                        @endif
                         <h3><a href="{{ route('blog', $row->slug) }}">{{ $row->title }}</a></h3>
                         @if($row->description)
-                        <p>{{ $row->description }}</p>
+                        <p>{{ \Illuminate\Support\Str::limit($row->description, 160) }}</p>
                         @endif
                         <a href="{{ route('blog', $row->slug) }}" class="theme-btn">&#272;&#7885;c b&#224;i vi&#7871;t <i class="fa-solid fa-arrow-up-right"></i></a>
                     </div>
