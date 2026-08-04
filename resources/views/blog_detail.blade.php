@@ -65,7 +65,7 @@
                         @foreach($otherBlogs as $other)
                         <div class="col-lg-4 col-md-6">
                             <div class="blog-mini-card">
-                                <img src="{{ $other->image_url }}" alt="{{ $other->title }}">
+                                <img src="{{ $other->image_url }}" alt="{{ $other->title }}" loading="lazy">
                                 <div class="content">
                                     <span class="post-date">{{ optional($other->created_at)->format('d/m/Y') }}</span>
                                     <h3><a href="{{ route('blog', $other->slug) }}">{{ $other->title }}</a></h3>

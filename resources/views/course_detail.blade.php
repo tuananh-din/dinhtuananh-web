@@ -42,7 +42,7 @@
 
                     @if($course->thumbnail)
                     <p class="mt-4">
-                        <img src="{{ $course->thumbnail }}" alt="{{ $course->title }}" style="max-width:100%;height:auto;border-radius:16px;">
+                        <img src="{{ $course->thumbnail }}" alt="{{ $course->title }}" loading="lazy" style="max-width:100%;height:auto;border-radius:16px;">
                     </p>
                     @endif
 

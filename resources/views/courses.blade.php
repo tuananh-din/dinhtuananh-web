@@ -18,7 +18,7 @@
                         <span class="course-badge">N&#7893;i b&#7853;t</span>
                         @endif
                         <a href="{{ route('course.detail', $row->slug) }}">
-                            <img src="{{ $row->thumbnail ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $row->title }}">
+                            <img src="{{ $row->thumbnail ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $row->title }}" loading="lazy">
                         </a>
                     </div>
 
