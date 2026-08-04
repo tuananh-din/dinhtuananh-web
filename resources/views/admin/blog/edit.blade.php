@@ -44,10 +44,16 @@
                                         @error('content')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="categories">Chuyên mục</label>
-                                        <select id="categories" name="categories[]" class="form-control" multiple>
-                                            @foreach($categories as $category)<option value="{{ $category->id }}" {{ in_array($category->id, old('categories', $blog->categories->pluck('id')->all())) ? 'selected' : '' }}>{{ $category->name }}</option>@endforeach
-                                        </select>
+                                        <label>Chuyên mục</label>
+                                        @php($selectedCategories = old('categories', $blog->categories->pluck('id')->all()))
+                                        <div class="border rounded p-3">
+                                            @foreach($categories as $category)
+                                            <div class="form-check">
+                                                <input id="category-{{ $category->id }}" class="form-check-input" type="checkbox" name="categories[]" value="{{ $category->id }}" {{ in_array($category->id, $selectedCategories) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="category-{{ $category->id }}">{{ $category->name }}</label>
+                                            </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                     
                                     <div class="form-group">
