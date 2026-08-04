@@ -77,6 +77,13 @@ class PublicSeoJsonLdTest extends TestCase
             ->assertDontSee('Bài nháp RSS');
     }
 
+    public function test_blog_index_shows_empty_state_when_no_published_posts_match(): void
+    {
+        $this->createSiteIdentity();
+        $this->get(route('blogs', ['search' => 'khong-co']))
+            ->assertOk()->assertSee('Chưa có bài viết trong mục này.')->assertSee('Xem tất cả bài viết');
+    }
+
     private function createSiteIdentity(): void
     {
         Setting::create([

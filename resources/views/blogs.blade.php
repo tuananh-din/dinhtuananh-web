@@ -23,6 +23,19 @@
             </select>
             <button class="theme-btn" type="submit">Lọc</button>
         </form>
+        @if($blogs->isEmpty())
+        <div class="blog-empty-state text-center py-5">
+            @if($search || $selectedCategory)
+                <h2>Chưa có bài viết trong mục này.</h2>
+                <p>Hãy thử từ khóa hoặc chuyên mục khác.</p>
+                <a href="{{ route('blogs') }}" class="theme-btn">Xem tất cả bài viết</a>
+            @else
+                <h2>Chưa có bài viết mới.</h2>
+                <p>Nội dung đang được chuẩn bị. Bạn có thể xem các khóa học hiện có.</p>
+                <a href="{{ route('courses') }}" class="theme-btn">Xem khóa học</a>
+            @endif
+        </div>
+        @else
         <div class="row bb-bottom">
             @foreach ($blogs as $key => $row)
             <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".{{ ($key + 1) * 2 }}s">
@@ -51,6 +64,7 @@
             </div>
             @endforeach
         </div>
+        @endif
         <div class="page-nav-wrap text-center">
             {!! $blogs->links('vendor.paginate') !!}
         </div>

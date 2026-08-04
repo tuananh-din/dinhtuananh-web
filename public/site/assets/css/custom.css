@@ -966,3 +966,4 @@ html[data-theme="light"] .lead-form-shell .form-note {
 .blog-course-promo { padding: 24px; border-radius: 16px; background: rgba(107, 92, 255, .08); }
 .error-page__suggestions { text-align: left; }
 .error-page__suggestions h2 { font-size: 1.25rem; }
+.blog-empty-state { min-height: 220px; }
