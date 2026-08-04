@@ -1041,6 +1041,8 @@ html[data-theme="light"] .footer-logo img { filter: brightness(0); }
 .hero-profile-card { position: relative; overflow: hidden; border-radius: 24px; }
 .hero-profile-image { position: relative; z-index: 1; overflow: hidden; border-radius: 24px; margin: 0; }
 .hero-profile-image img { display: block; width: 100%; margin: 0; border-radius: inherit; }
+.hero-profile-image img { height: auto; max-height: 80vh; object-fit: contain; object-position: bottom center; }
+.hero-profile-image { background: inherit; }
 .hero-profile-card .brand-metrics { position: relative; z-index: 2; margin-top: 18px; }
 .hero-section1 .line-shape { z-index: 0; }
 .hero-section1 .hero-content .social-link { margin-top: 20px; }
@@ -1064,5 +1066,6 @@ html[data-theme="light"] .footer-logo img { filter: brightness(0); }
 @media (max-width: 767px) {
     .hero-profile-card { border-radius: 18px; }
     .hero-profile-image { border-radius: 18px; }
+    .hero-profile-image img { max-height: 60vh; }
     .hero-profile-card .brand-metrics { margin-top: 16px; }
 }
