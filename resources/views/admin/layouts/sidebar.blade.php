@@ -6,7 +6,7 @@
                     <span class="icon-holder">
                         <i class="anticon anticon-dashboard"></i>
                     </span>
-                    <span class="title">Website</span>
+                    <span class="title">{{ data_get($infor, 'name', 'Website') }}</span>
                     <span class="arrow">
                         <i class="arrow-icon"></i>
                     </span>

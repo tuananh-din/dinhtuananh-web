@@ -13,6 +13,7 @@
 
     <!-- Core css -->
     <link href="{{ asset('app/assets/css/app.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('app/assets/css/main.css') }}" rel="stylesheet">
 
 </head>
 
@@ -26,8 +27,8 @@
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between m-b-30">
-                                        <img class="img-fluid" alt="" src="{{ asset('app/assets/images/logo/logo.png') }}">
-                                        <h2 class="m-b-0">Sign In</h2>
+                                        <img class="img-fluid" alt="{{ data_get($infor, 'name', 'Website') }}" src="{{ asset('app/assets/images/logo/logo.png') }}">
+                                        <h2 class="m-b-0">{{ data_get($infor, 'name', 'Website') }} Admin</h2>
                                     </div>
                                     @if ($errors->any())
                                         <p style="color:red">{{ $errors->first() }}</p>
@@ -53,7 +54,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <button type="submit" class="btn btn-primary">Sign In</button>
+                                                <button type="submit" class="btn btn-primary">Đăng nhập</button>
                                             </div>
                                         </div>
                                     </form>
