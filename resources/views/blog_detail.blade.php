@@ -41,6 +41,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="other-blogs mt-5">
+                    <h3>Nhận bài viết mới qua email</h3>
+                    <p>Đăng ký để không bỏ lỡ kiến thức marketing và quảng cáo thực chiến.</p>
+                    <form action="{{ route('newsletter.store') }}" method="POST" class="d-flex flex-wrap gap-2">
+                        @csrf
+                        <input type="hidden" name="source" value="blog_detail">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+                        <label class="visually-hidden" for="blog-newsletter-email">Email</label>
+                        <input id="blog-newsletter-email" type="email" name="email" required class="form-control" placeholder="Email của bạn">
+                        <button type="submit" class="theme-btn">Đăng ký</button>
+                    </form>
+                </div>
                 @if(!empty($otherBlogs) && $otherBlogs->isNotEmpty())
                 <div class="other-blogs mt-5">
                     <h3>Bài viết khác</h3>

@@ -22,6 +22,16 @@
                 <h3>{{ $brandName }}</h3>
                 <p>{{ $siteSlogan }}</p>
                 <a href="{{ route('index') }}#final-cta" class="theme-btn">Nh&#7853;n t&#432; v&#7845;n kh&#243;a h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
+                <form action="{{ route('newsletter.store') }}" method="POST" class="mt-4">
+                    @csrf
+                    <input type="hidden" name="source" value="footer">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+                    <label for="footer-newsletter-email">Nhận kiến thức mới qua email</label>
+                    <div class="d-flex gap-2">
+                        <input id="footer-newsletter-email" type="email" name="email" required class="form-control" placeholder="Email của bạn">
+                        <button type="submit" class="theme-btn">Đăng ký</button>
+                    </div>
+                </form>
             </div>
             <div class="icon-items-area">
                 @if(data_get($contactInfo, 'facebook'))
