@@ -137,6 +137,12 @@ Email lead được lưu trước; lỗi gửi email chỉ log, không chặn l�
 
 ## 8. Quy trình phát triển
 
+### Quy ước encoding tiếng Việt
+
+- Lưu PHP, Blade, Markdown và file cấu hình text bằng UTF-8.
+- Nhiều view public cũ dùng numeric HTML entities (`&#...;`) cho ký tự tiếng Việt. Khi sửa đúng vùng đó, có thể tiếp tục dùng entities để tránh lỗi mã hóa.
+- Không đặt entity bên trong `{{ ... }}` vì Blade sẽ escape dấu `&`; fallback text động dùng chuỗi UTF-8 trực tiếp.
+
 - Đọc `AGENTS.md`, file này, changelog, `git status` và route/controller/model/view liên quan trước khi sửa.
 - Codex làm code; Claude lập kế hoạch và review diff. Không tự mở rộng scope, refactor lớn hay đổi route/schema legacy.
 - Ưu tiên thay đổi nhỏ, tận dụng code cũ và giữ style giao diện hiện có.
