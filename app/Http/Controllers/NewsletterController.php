@@ -54,6 +54,6 @@ class NewsletterController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Đăng ký newsletter thành công.');
+        return redirect()->route('thank.you')->with('success', 'Đăng ký newsletter thành công.');
     }
 }

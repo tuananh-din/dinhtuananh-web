@@ -56,6 +56,6 @@ class LeadController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', $successMessage);
+        return redirect()->route('thank.you')->with('success', $successMessage);
     }
 }

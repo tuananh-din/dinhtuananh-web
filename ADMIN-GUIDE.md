@@ -109,6 +109,10 @@ Lead là người đã gửi form tư vấn. Cập nhật trạng thái và ghi 
 - [ ] Kiểm tra mobile nếu vừa thay ảnh/card/CTA.
 - [ ] Với khóa học: kiểm tra `/courses`, trang chi tiết và form tư vấn.
 
+## Đo chuyển đổi trang cảm ơn
+
+Sau khi khách gửi form tư vấn hoặc đăng ký newsletter, website chuyển tới `/cam-on`. Kỹ thuật viên có thể dán sự kiện Facebook Pixel, Google Ads hoặc GA4 riêng cho trang này trong `resources/views/thank_you.blade.php` tại vùng `@push('conversion')`.
+
 ## 8. Khi có lỗi
 
 - Lỗi đỏ dưới ô nhập: đọc đúng message và sửa field đó.

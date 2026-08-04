@@ -154,6 +154,7 @@
         </script>
         {{-- Slot cho các view push script phụ thuộc jQuery/main.js đã nạp xong. --}}
         @stack('scripts')
+        @stack('conversion')
         {!! data_get($infor, 'code_footer') !!}
     </body>
 </html>
