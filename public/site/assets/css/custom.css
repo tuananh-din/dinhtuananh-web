@@ -967,6 +967,12 @@ html[data-theme="light"] .lead-form-shell .form-note {
 .error-page__suggestions { text-align: left; }
 .error-page__suggestions h2 { font-size: 1.25rem; }
 .blog-empty-state { min-height: 220px; }
+.contact-card--enhanced { display: grid; grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr); gap: 36px; align-items: start; }
+.contact-info-panel { padding: 24px; border-radius: 16px; background: rgba(107, 92, 255, .08); }
+.contact-info-panel a { display: block; margin-top: 12px; color: inherit; }
+.contact-social-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+.contact-social-links a { margin-top: 0; }
+@media (max-width: 767px) { .contact-card--enhanced { grid-template-columns: 1fr; gap: 20px; } }
 .text-muted, .post-date { color: #555 !important; }
 .home-about-image { position: relative; overflow: hidden; max-height: 78vh; }
 .home-about-image::after { content: ''; position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.55)); pointer-events: none; }

@@ -4,7 +4,20 @@
 @section('content')
 <section class="contact-shell fix">
     <div class="container">
-        <div class="contact-card">
+        <div class="contact-card contact-card--enhanced">
+            <div class="contact-info-panel">
+                <h3>Trao đổi cùng Tuấn Anh</h3>
+                <p>Để lại thông tin, tôi sẽ tư vấn hướng đi phù hợp với mục tiêu của bạn.</p>
+                @if(data_get($contact, 'tel'))<a href="tel:{{ data_get($contact, 'tel') }}"><i class="fa-solid fa-phone"></i> {{ data_get($contact, 'tel') }}</a>@endif
+                @if(data_get($contact, 'email'))<a href="mailto:{{ data_get($contact, 'email') }}"><i class="fa-solid fa-envelope"></i> {{ data_get($contact, 'email') }}</a>@endif
+                <div class="contact-social-links">
+                    @foreach(['facebook' => 'Facebook', 'instagram' => 'Instagram', 'linkedin' => 'LinkedIn', 'x' => 'X'] as $key => $label)
+                        @if(data_get($contact, $key))<a href="{{ data_get($contact, $key) }}" target="_blank" rel="noopener">{{ $label }}</a>@endif
+                    @endforeach
+                </div>
+                <p class="contact-note">Phản hồi trong giờ làm việc.</p>
+            </div>
+            <div class="contact-form-panel">
             <div class="section-title">
                 <h6>Li&#234;n h&#7879;</h6>
                 <h2>&#272;&#259;ng k&#253; t&#432; v&#7845;n nhanh</h2>
@@ -51,7 +64,7 @@
                 <button type="submit" class="theme-btn">&#272;&#259;ng k&#253; t&#432; v&#7845;n <i class="fa-solid fa-arrow-up-right"></i></button>
             </form>
 
-            <p class="contact-note">Ch&#250;ng t&#244;i s&#7869; li&#234;n h&#7879; l&#7841;i trong gi&#7901; l&#224;m vi&#7879;c.</p>
+            </div>
         </div>
     </div>
 </section>
