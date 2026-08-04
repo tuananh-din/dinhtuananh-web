@@ -20,6 +20,7 @@ use App\Http\Controllers\LeadMagnetController;
 use App\Http\Controllers\Admin\LeadMagnetController as AdminLeadMagnetController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SitemapController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,16 @@ Route::get('/life',[HomeController::class,'life'])->name('life');
 Route::get('/portfolio',[HomeController::class,'portfolio'])->name('portfolio');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::view('/cam-on', 'thank_you')->name('thank.you');
+
+Route::get('/health', function () {
+    try {
+        DB::select('select 1');
+
+        return response()->json(['status' => 'ok']);
+    } catch (\Throwable $exception) {
+        return response()->json(['status' => 'error'], 503);
+    }
+})->name('health');
 
 Route::get('/blog',[BlogController::class,'blogs'])->name('blogs');
 Route::get('/courses',[CourseController::class,'index'])->name('courses');
