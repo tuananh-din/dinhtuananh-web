@@ -548,6 +548,13 @@ span {
   justify-content: center;
   background: transparent;
   z-index: 99999999999999;
+  animation: preloader-fallback 800ms ease-out forwards;
+}
+
+.preloader-hidden { display: none !important; }
+
+@keyframes preloader-fallback {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
 }
 
 .preloader svg {

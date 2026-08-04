@@ -1627,6 +1627,22 @@ text_slider.on('slideChangeTransitionStart', function () {
     ================================ */
 
      function preloader() {
+        const preloaderElement = document.querySelector('.preloader');
+        if (!preloaderElement) return;
+        const hidePreloader = () => {
+            preloaderElement.classList.add('preloader-hidden');
+            preloaderElement.setAttribute('aria-hidden', 'true');
+        };
+        let seen = false;
+        try { seen = sessionStorage.getItem('site_preloader_seen') === '1'; } catch (e) {}
+        if (seen) {
+            hidePreloader();
+            return;
+        }
+        try { sessionStorage.setItem('site_preloader_seen', '1'); } catch (e) {}
+        document.addEventListener('DOMContentLoaded', () => setTimeout(hidePreloader, 250), { once: true });
+        setTimeout(hidePreloader, 800);
+        return;
         $(window).on("load", function () {
         const svg = document.getElementById("svg");
         if (!svg) return; // safety check if SVG not found
