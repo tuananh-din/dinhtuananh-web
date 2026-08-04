@@ -5,6 +5,16 @@
 <section class="news-grid-section1 fix">
     <div class="container">
         <h1>Blog</h1>
+        <form method="GET" action="{{ route('blogs') }}" class="mb-4" aria-label="Lọc bài viết">
+            <label for="blog-search" class="visually-hidden">Tìm bài viết</label>
+            <input id="blog-search" name="search" value="{{ $search }}" placeholder="Tìm bài viết" aria-label="Tìm bài viết">
+            <label for="blog-category" class="visually-hidden">Chuyên mục</label>
+            <select id="blog-category" name="category" aria-label="Chuyên mục">
+                <option value="">Tất cả chuyên mục</option>
+                @foreach($categories as $category)<option value="{{ $category->slug }}" {{ $selectedCategory === $category->slug ? 'selected' : '' }}>{{ $category->name }}</option>@endforeach
+            </select>
+            <button class="theme-btn" type="submit">Lọc</button>
+        </form>
         <div class="row bb-bottom">
             @foreach ($blogs as $key => $row)
             <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".{{ ($key + 1) * 2 }}s">

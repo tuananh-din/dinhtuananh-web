@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function blogs(){
-        $blogs = Blog::orderBy('id','DESC')->paginate(12);
-        return view('blogs',compact('blogs'));
+    public function blogs(Request $request){
+        $search = trim((string) $request->query('search'));
+        $category = $request->query('category');
+        $blogs = Blog::with('categories')->when($search, fn($q) => $q->where(fn($s) => $s->where('title', 'like', "%{$search}%")->orWhere('description', 'like', "%{$search}%")))->when($category, fn($q) => $q->whereHas('categories', fn($c) => $c->where('slug', $category)))->latest()->paginate(12)->withQueryString();
+        return view('blogs', ['blogs' => $blogs, 'categories' => Category::orderBy('name')->get(), 'search' => $search, 'selectedCategory' => $category]);
     }
 
     public function detail($slug){
