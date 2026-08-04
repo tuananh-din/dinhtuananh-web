@@ -43,6 +43,12 @@
                                         <span class="mess-error" id="content_error"></span>
                                         @error('content')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     </div>
+                                    <div class="form-group">
+                                        <label for="categories">Chuyên mục</label>
+                                        <select id="categories" name="categories[]" class="form-control" multiple>
+                                            @foreach($categories as $category)<option value="{{ $category->id }}" {{ in_array($category->id, old('categories', $blog->categories->pluck('id')->all())) ? 'selected' : '' }}>{{ $category->name }}</option>@endforeach
+                                        </select>
+                                    </div>
                                     
                                     <div class="form-group">
                                         <img id="preview" src="{{ $blog->image ?? 'app/assets/images/others/thumb-16.jpg' }}" alt="">

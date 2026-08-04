@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
@@ -17,17 +18,19 @@ class BlogController extends Controller
     }
 
     public function create(){
-        return view('admin.blog.create');
+        return view('admin.blog.create', ['categories' => Category::orderBy('name')->get()]);
     }
     public function edit($id){
         $blog = Blog::findOrFail($id);
-        return view('admin.blog.edit',compact('blog'));
+        return view('admin.blog.edit', ['blog' => $blog, 'categories' => Category::orderBy('name')->get()]);
     }
     public function store(Request $request){
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|image|max:5120',
+            'categories' => 'nullable|array',
+            'categories.*' => 'integer|exists:categories,id',
         ]);
 
         $id = $request->id;
@@ -77,10 +80,11 @@ class BlogController extends Controller
 
         ]);
 
-        Blog::query()->updateOrCreate(
+        $savedBlog = Blog::query()->updateOrCreate(
             ['id' => $id],
             $data
         );
+        $savedBlog->categories()->sync($request->input('categories', []));
         return redirect()->back()->with('success', 'Đã lưu thành công.');
     }
     public function delete($id){
