@@ -20,12 +20,21 @@ class DashboardController extends Controller
             ->latest()
             ->take(10)
             ->get();
+        $totalLeads = $leadCounts->sum();
+        $leadsBySource = Lead::selectRaw("COALESCE(NULLIF(source_page, ''), 'unknown') as source, COUNT(*) as total")
+            ->groupBy('source')
+            ->orderByDesc('total')
+            ->get();
 
         return view('admin.dashboard', [
             'blogCount' => Blog::count(),
             'activeCourseCount' => Course::where('is_active', 1)->count(),
             'testimonialCount' => Testimonial::count(),
             'leadCounts' => $leadCounts,
+            'totalLeads' => $totalLeads,
+            'leadsLast7Days' => Lead::where('created_at', '>=', now()->subDays(7))->count(),
+            'leadsLast30Days' => Lead::where('created_at', '>=', now()->subDays(30))->count(),
+            'leadsBySource' => $leadsBySource,
             'recentLeads' => $recentLeads,
         ]);
     }

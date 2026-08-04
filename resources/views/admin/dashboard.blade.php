@@ -18,10 +18,32 @@
             <div class="card"><div class="card-body"><p class="m-b-5">Khóa học đang hiển thị</p><h2 class="m-b-0">{{ $activeCourseCount }}</h2></div></div>
         </div>
         <div class="col-md-6 col-lg-3">
-            <div class="card"><div class="card-body"><p class="m-b-5">Leads</p><h2 class="m-b-0">{{ $leadCounts->sum() }}</h2></div></div>
+            <div class="card"><div class="card-body"><p class="m-b-5">Leads</p><h2 class="m-b-0">{{ $totalLeads }}</h2><small>7 ngày: {{ $leadsLast7Days }} · 30 ngày: {{ $leadsLast30Days }}</small></div></div>
         </div>
         <div class="col-md-6 col-lg-3">
             <div class="card"><div class="card-body"><p class="m-b-5">Testimonial</p><h2 class="m-b-0">{{ $testimonialCount }}</h2></div></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card"><div class="card-body">
+                <h4>Lead theo nguồn</h4>
+                @forelse($leadsBySource as $item)
+                    <div class="d-flex justify-content-between border-bottom py-2"><span>{{ $item->source }}</span><strong>{{ $item->total }}</strong></div>
+                @empty
+                    <p class="text-muted m-b-0">Chưa có dữ liệu nguồn lead.</p>
+                @endforelse
+            </div></div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card"><div class="card-body">
+                <h4>Tỷ lệ theo trạng thái</h4>
+                @foreach(\App\Models\Lead::STATUSES as $status => $label)
+                    @php($count = $leadCounts[$status] ?? 0)
+                    <div class="d-flex justify-content-between border-bottom py-2"><span>{{ $label }}</span><strong>{{ $count }} ({{ $totalLeads ? number_format($count * 100 / $totalLeads, 1) : 0 }}%)</strong></div>
+                @endforeach
+            </div></div>
         </div>
     </div>
 
