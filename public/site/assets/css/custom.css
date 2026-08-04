@@ -968,3 +968,11 @@ html[data-theme="light"] .lead-form-shell .form-note {
 .error-page__suggestions h2 { font-size: 1.25rem; }
 .blog-empty-state { min-height: 220px; }
 .text-muted, .post-date { color: #555 !important; }
+.home-about-image { position: relative; overflow: hidden; max-height: 78vh; }
+.home-about-image::after { content: ''; position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.55)); pointer-events: none; }
+.home-about-image img { display: block; width: 100%; max-height: 78vh; object-fit: cover; }
+.home-about-copy { position: relative; z-index: 1; }
+.home-about-copy__body { color: #333; }
+@media (max-width: 991px) {
+    .home-about-image, .home-about-image img { max-height: 70vh; }
+}

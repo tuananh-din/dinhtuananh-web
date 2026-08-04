@@ -203,7 +203,7 @@
     </div>
 </section>
 
-<section class="section-shell pt-0">
+<section class="section-shell pt-0 home-about-section">
     <div class="container">
         <div class="section-title">
             <h6>Case study</h6>
@@ -307,16 +307,16 @@
     <div class="container">
         <div class="row g-4 align-items-center">
             <div class="col-lg-5">
-                <div class="brand-card">
+                <div class="brand-card home-about-image">
                     <img src="{{ $about->avatar ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $about->name }}">
                 </div>
             </div>
             <div class="col-lg-7">
-                <div class="section-title">
+                <div class="section-title home-about-copy">
                     <h6>Gi&#7899;i thi&#7879;u b&#7843;n th&#226;n</h6>
                     <h2>X&#226;y d&#7921;ng th&#432;&#417;ng hi&#7879;u c&#225; nh&#226;n &#273;&#7875; b&#225;n kh&#243;a h&#7885;c v&#224; t&#432; v&#7845;n d&#7877; h&#417;n</h2>
                 </div>
-                <div>{!! $about->about_me ?: $about->content !!}</div>
+                <div class="home-about-copy__body">{!! $about->about_me ?: $about->content !!}</div>
                 <div class="cta-inline">
                     <a href="{{ route('about') }}" class="theme-btn">Xem h&#7891; s&#417; &#273;&#7847;y &#273;&#7911; <i class="fa-solid fa-arrow-up-right"></i></a>
                     <a href="tel:{{ $about->tel }}" class="theme-btn border-btn">G&#7885;i t&#432; v&#7845;n <i class="fa-solid fa-arrow-up-right"></i></a>
