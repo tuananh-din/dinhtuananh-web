@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\LeadController as AdminLeadController;
@@ -65,6 +66,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{id}', [AdminBlogController::class, 'edit'])->name('blog.edit');
             Route::post('store', [AdminBlogController::class, 'store'])->name('blog.store');
             Route::post('/delete/{id}', [AdminBlogController::class, 'delete'])->name('blog.delete');
+        });
+        Route::prefix('category')->group(function () {
+            Route::get('/', [AdminCategoryController::class, 'index'])->name('admin.category');
+            Route::get('/create', [AdminCategoryController::class, 'create'])->name('category.create');
+            Route::get('/edit/{id}', [AdminCategoryController::class, 'edit'])->name('category.edit');
+            Route::post('store', [AdminCategoryController::class, 'store'])->name('category.store');
+            Route::post('/delete/{id}', [AdminCategoryController::class, 'delete'])->name('category.delete');
         });
 
         Route::prefix('course')->group(function () {

@@ -1,0 +1,4 @@
+@extends('admin.layouts.master')
+@section('content')
+<div class="main-content"><div class="card"><div class="card-body"><a href="{{ route('category.create') }}" class="btn btn-primary m-b-15">Thêm chuyên mục</a><table class="table"><thead><tr><th>Tên</th><th>Slug</th><th>Thao tác</th></tr></thead><tbody>@foreach($categories as $category)<tr><td>{{ $category->name }}</td><td>{{ $category->slug }}</td><td><a class="btn btn-primary btn-sm" href="{{ route('category.edit',$category->id) }}">Sửa</a><form method="POST" action="{{ route('category.delete',$category->id) }}" class="d-inline" onsubmit="return confirm('Xóa chuyên mục này?')">@csrf <button class="btn btn-danger btn-sm">Xóa</button></form></td></tr>@endforeach</tbody></table>{{ $categories->links('vendor.pagination') }}</div></div></div>
+@endsection
