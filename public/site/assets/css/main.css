@@ -552,6 +552,7 @@ span {
 }
 
 .preloader-hidden { display: none !important; }
+.preloader-skip .preloader { display: none !important; }
 
 @keyframes preloader-fallback {
   to { opacity: 0; visibility: hidden; pointer-events: none; }

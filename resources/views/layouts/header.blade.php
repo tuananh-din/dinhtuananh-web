@@ -11,6 +11,9 @@
     $phone = data_get($contactInfo, 'tel', '');
     $email = data_get($contactInfo, 'email', '');
 @endphp
+<script>
+    try { if (sessionStorage.getItem('preloaded') === '1') document.documentElement.classList.add('preloader-skip'); } catch (e) {}
+</script>
 <!-- Preloader Start -->
 <div class="preloader">
     <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">

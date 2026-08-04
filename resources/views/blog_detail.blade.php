@@ -129,6 +129,7 @@
 @endsection
 @push('scripts')
 <script>
+try {
 document.addEventListener('click', function (e) {
     const btn = e.target.closest('.btn-copy-link');
     if (!btn) return;
@@ -170,5 +171,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     toc.classList.remove('d-none');
 });
+} catch (error) {
+    console.warn('Blog enhancement scripts skipped.', error);
+}
 </script>
 @endpush

@@ -1634,12 +1634,12 @@ text_slider.on('slideChangeTransitionStart', function () {
             preloaderElement.setAttribute('aria-hidden', 'true');
         };
         let seen = false;
-        try { seen = sessionStorage.getItem('site_preloader_seen') === '1'; } catch (e) {}
+        try { seen = sessionStorage.getItem('preloaded') === '1'; } catch (e) {}
         if (seen) {
             hidePreloader();
             return;
         }
-        try { sessionStorage.setItem('site_preloader_seen', '1'); } catch (e) {}
+        try { sessionStorage.setItem('preloaded', '1'); } catch (e) {}
         document.addEventListener('DOMContentLoaded', () => setTimeout(hidePreloader, 250), { once: true });
         setTimeout(hidePreloader, 800);
         return;
