@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Blog;
+use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -17,6 +18,8 @@ class SitemapTest extends TestCase
             'title' => 'Bài viết sitemap',
             'slug' => 'bai-viet-sitemap',
         ]);
+        $category = Category::create(['name' => 'Marketing', 'slug' => 'marketing']);
+        $blog->categories()->attach($category);
         $activeCourse = Course::create([
             'title' => 'Khóa học active',
             'slug' => 'khoa-hoc-active',
@@ -33,6 +36,7 @@ class SitemapTest extends TestCase
         $response->assertOk();
         $response->assertHeader('Content-Type', 'text/xml; charset=UTF-8');
         $response->assertSee(route('blog', $blog->slug), false);
+        $response->assertSee(route('blogs', ['category' => $category->slug]), false);
         $response->assertSee(route('course.detail', $activeCourse->slug), false);
         $response->assertDontSee(route('course.detail', $inactiveCourse->slug), false);
     }

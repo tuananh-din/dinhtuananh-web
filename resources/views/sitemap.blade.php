@@ -23,6 +23,12 @@
         <lastmod>{{ optional($blog->updated_at)->toAtomString() ?? now()->toAtomString() }}</lastmod>
     </url>
 @endforeach
+@foreach ($blogCategories as $category)
+    <url>
+        <loc>{{ route('blogs', ['category' => $category->slug]) }}</loc>
+        <lastmod>{{ optional($category->updated_at)->toAtomString() ?? now()->toAtomString() }}</lastmod>
+    </url>
+@endforeach
 @foreach ($courses as $course)
     <url>
         <loc>{{ route('course.detail', $course->slug) }}</loc>
