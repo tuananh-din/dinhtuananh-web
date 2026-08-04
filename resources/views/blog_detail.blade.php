@@ -65,7 +65,7 @@
                 <div class="other-blogs mt-5">
                     <h3>Nhận bài viết mới qua email</h3>
                     <p>Đăng ký để không bỏ lỡ kiến thức marketing và quảng cáo thực chiến.</p>
-                    <form action="{{ route('newsletter.store') }}" method="POST" class="d-flex flex-wrap gap-2">
+                    <form action="{{ route('newsletter.store') }}" method="POST" class="d-flex flex-wrap gap-2" data-submit-label="Đang gửi...">
                         @csrf
                         <input type="hidden" name="source" value="blog_detail">
                         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">

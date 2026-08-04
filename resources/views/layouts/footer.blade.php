@@ -22,7 +22,7 @@
                 <h3>{{ $brandName }}</h3>
                 <p>{{ $siteSlogan }}</p>
                 <a href="{{ route('index') }}#final-cta" class="theme-btn">Nh&#7853;n t&#432; v&#7845;n kh&#243;a h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
-                <form action="{{ route('newsletter.store') }}" method="POST" class="mt-4">
+                <form action="{{ route('newsletter.store') }}" method="POST" class="mt-4" data-submit-label="Đang gửi...">
                     @csrf
                     <input type="hidden" name="source" value="footer">
                     <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">

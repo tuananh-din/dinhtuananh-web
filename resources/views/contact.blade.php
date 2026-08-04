@@ -17,7 +17,7 @@
                 <p style="color:#ff8f8f;" role="alert">{{ $errors->first() }}</p>
             @endif
 
-            <form action="{{ route('lead.store') }}" method="POST" class="mt-4">
+            <form action="{{ route('lead.store') }}" method="POST" class="mt-4" data-submit-label="Đang gửi...">
                 @csrf
                 {{-- Honeypot chống bot: bot điền, user thật không thấy. --}}
                 <div class="hp-wrap" aria-hidden="true">

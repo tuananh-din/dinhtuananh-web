@@ -112,7 +112,7 @@
                         @if($errors->any())
                             <p style="color:#ff8f8f;" role="alert">{{ $errors->first() }}</p>
                         @endif
-                        <form action="{{ route('lead.store') }}" method="POST">
+                        <form action="{{ route('lead.store') }}" method="POST" data-submit-label="Đang gửi...">
                             @csrf
                             <input type="hidden" name="source_page" value="course_detail">
                             <input type="hidden" name="course_id" value="{{ $course->id }}">

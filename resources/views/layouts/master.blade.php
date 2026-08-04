@@ -172,6 +172,34 @@
             })();
         </script>
         {{-- Slot cho các view push script phụ thuộc jQuery/main.js đã nạp xong. --}}
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('form[data-submit-label]').forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.dataset.submitting === 'true') {
+                            event.preventDefault();
+                            return;
+                        }
+
+                        var button = form.querySelector('button[type="submit"], button:not([type])');
+                        if (!button) return;
+
+                        form.dataset.submitting = 'true';
+                        button.dataset.originalLabel = button.innerHTML;
+                        button.textContent = form.dataset.submitLabel;
+                        button.disabled = true;
+                        button.setAttribute('aria-disabled', 'true');
+                    });
+                });
+
+                var firstError = document.querySelector('[role="alert"]');
+                if (firstError) {
+                    firstError.setAttribute('tabindex', '-1');
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.focus({ preventScroll: true });
+                }
+            });
+        </script>
         @stack('scripts')
         @stack('conversion')
         {!! data_get($infor, 'code_footer') !!}
