@@ -387,6 +387,13 @@
     height: 100% !important;
     object-fit: cover;
 }
+.course-testimonial-card {
+    padding: 18px;
+    margin-top: 12px;
+}
+.course-testimonial-card .testimonial-meta {
+    margin-top: 12px;
+}
 .blog-meta,
 .blog-category-list,
 .blog-share {

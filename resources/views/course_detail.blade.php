@@ -106,6 +106,29 @@
                         </a>
                     </div>
 
+                    @if($testimonials->isNotEmpty())
+                    <div class="course-testimonials mt-4">
+                        <h4>Học viên nói gì</h4>
+                        @foreach($testimonials as $testimonial)
+                        <div class="testimonial-card course-testimonial-card">
+                            @if($testimonial->rating)
+                            <div class="testimonial-rating" aria-label="{{ $testimonial->rating }} trên 5 sao">
+                                @for($i = 0; $i < $testimonial->rating; $i++)<i class="fa-solid fa-star" aria-hidden="true"></i>@endfor
+                            </div>
+                            @endif
+                            <p>{{ $testimonial->content }}</p>
+                            <div class="testimonial-meta">
+                                <img class="testimonial-avatar" src="{{ $testimonial->avatar ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $testimonial->name }}">
+                                <div>
+                                    <p class="testimonial-name">{{ $testimonial->name }}</p>
+                                    <p class="testimonial-role">{{ $testimonial->job_title ?: 'Học viên / Khách hàng' }}@if($testimonial->company) - {{ $testimonial->company }}@endif</p>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    @endif
+
                     <div class="lead-form-box">
                         <h4>&#272;&#7875; l&#7841;i th&#244;ng tin t&#432; v&#7845;n</h4>
                         @if(session('success'))
