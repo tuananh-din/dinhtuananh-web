@@ -39,8 +39,8 @@
                 </div>
             </div>
             <div class="col-xl-5">
-                <div class="brand-card wow fadeInUp" data-wow-delay=".3s">
-                    <div class="hero-image image-wrapper">
+                <div class="brand-card hero-profile-card wow fadeInUp" data-wow-delay=".3s">
+                    <div class="hero-image hero-profile-image image-wrapper">
                         <img class="animated-image" src="{{ $about->avatar ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $about->name }}" width="100%">
                     </div>
                     <div class="brand-metrics">
