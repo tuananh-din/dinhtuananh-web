@@ -2,6 +2,34 @@
 
 Domain production: **https://dinhtuananh.com**
 
+## Dong goi code deploy
+
+Khuyen nghi dong goi bang Git de chi lay cac file dang duoc track:
+
+```bash
+git archive --format=zip -o tanh-deploy.zip HEAD
+```
+
+`vendor/` va `node_modules/` dang nam trong `.gitignore` nen tu dong khong co trong goi. Cac thu muc duoc track nhu `resources/views/vendor` va `public/app/assets/vendors` van duoc giu lai, de khong lam mat view phan trang hoac tai nguyen giao dien admin.
+
+Neu can zip thu cong, chi loai tru thu muc `/vendor` o goc project; khong loai tru moi thu muc co ten `vendor` o cac cap con.
+
+Neu goi deploy khong kem cac thu muc runtime, sau khi giai nen tren server hay tao:
+
+```text
+storage/framework/views
+storage/framework/cache/data
+storage/framework/sessions
+storage/logs
+bootstrap/cache
+```
+
+Sau do cap quyen ghi cho Laravel:
+
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
 ## 0. Preflight bắt buộc và bằng chứng kiểm tra
 
 > Không deploy chỉ vì checklist này đã được viết. Người có quyền hạ tầng phải thực hiện và lưu bằng chứng ở nơi an toàn (ticket/runbook nội bộ), **không** ghi secret, token, mật khẩu, địa chỉ mailbox riêng hoặc dữ liệu lead vào Git.
