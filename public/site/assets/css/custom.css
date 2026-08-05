@@ -1069,3 +1069,19 @@ html[data-theme="light"] .footer-logo img { filter: brightness(0); }
     .hero-profile-image img { max-height: 60vh; }
     .hero-profile-card .brand-metrics { margin-top: 16px; }
 }
+
+/* NHOM 15.1: Nhận biết trang hiện tại trên menu desktop và offcanvas. */
+.header-main .main-menu ul li a.active,
+.offcanvas__info .main-menu ul li a.active,
+.mean-container .mean-nav ul li a.active {
+    color: var(--theme);
+    font-weight: 700;
+}
+html[data-theme="light"] .header-main .main-menu ul li a.active {
+    color: var(--theme);
+}
+html[data-theme="dark"] .header-main .main-menu ul li a.active,
+html[data-theme="dark"] .offcanvas__info .main-menu ul li a.active,
+html[data-theme="dark"] .mean-container .mean-nav ul li a.active {
+    color: var(--theme);
+}

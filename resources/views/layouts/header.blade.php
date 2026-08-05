@@ -92,12 +92,12 @@
                         <div class="main-menu">
                             <nav id="mobile-menus">
                                 <ul>
-                                    <li><a href="{{ route('index') }}">Trang ch&#7911;</a></li>
-                                    <li><a href="{{ route('about') }}">Gi&#7899;i thi&#7879;u</a></li>
-                                    <li><a href="{{ route('portfolio') }}">Case Study</a></li>
-                                    <li><a href="{{ route('blogs') }}">Blog</a></li>
-                                    <li><a href="{{ route('courses') }}">Kh&#243;a h&#7885;c</a></li>
-                                    <li><a href="{{ route('contact') }}">Li&#234;n h&#7879;</a></li>
+                                    <li><a href="{{ route('index') }}" class="{{ request()->routeIs('index') ? 'active' : '' }}" @if(request()->routeIs('index')) aria-current="page" @endif>Trang ch&#7911;</a></li>
+                                    <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}" @if(request()->routeIs('about')) aria-current="page" @endif>Gi&#7899;i thi&#7879;u</a></li>
+                                    <li><a href="{{ route('portfolio') }}" class="{{ request()->routeIs('portfolio') ? 'active' : '' }}" @if(request()->routeIs('portfolio')) aria-current="page" @endif>Case Study</a></li>
+                                    <li><a href="{{ route('blogs') }}" class="{{ request()->routeIs('blogs', 'blog') ? 'active' : '' }}" @if(request()->routeIs('blogs', 'blog')) aria-current="page" @endif>Blog</a></li>
+                                    <li><a href="{{ route('courses') }}" class="{{ request()->routeIs('courses', 'course.detail') ? 'active' : '' }}" @if(request()->routeIs('courses', 'course.detail')) aria-current="page" @endif>Kh&#243;a h&#7885;c</a></li>
+                                    <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}" @if(request()->routeIs('contact')) aria-current="page" @endif>Li&#234;n h&#7879;</a></li>
                                 </ul>
                             </nav>
                         </div>
