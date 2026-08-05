@@ -203,3 +203,10 @@ Xem lịch sử thay đổi đã commit trong `docs/project-changelog.md` và h�
 
 - Có `/feed`, `media:orphan-report`, Subscriber Admin/CSV, sitemap đã lọc nội dung và `noindex` cho trang cảm ơn.
 - Việc còn lại: đo Lighthouse/PageSpeed và tối ưu theo **số liệu thực**; xác minh SĐT Brevo rồi mới bật cấu hình/tích hợp; thay nội dung, ảnh case study, blog/khóa học và email footer bằng dữ liệu thật trước khi quảng bá.
+
+### Hoàn thiện giao diện — NHÓM 14–15
+
+- Admin hiển thị tiêu đề `Quản trị — {tên site}`; logo header lấy từ Setting, fallback là tên site.
+- Header public đánh dấu mục hiện tại bằng `active` và `aria-current`; áp dụng cho cả desktop/mobile, gồm trang chi tiết Blog và Khóa học.
+- Select public, nút chia sẻ Blog, gợi ý 404 và lưới Case Study đã có style riêng cho light/dark, responsive và trạng thái hover/focus. Icon X dùng `fab fa-twitter` theo Font Awesome của theme.
+- `/portfolio` dùng dữ liệu ảnh type `0` có sẵn và hiển thị lưới case study tỷ lệ 3:2; không cần query hay route mới.

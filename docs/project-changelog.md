@@ -150,3 +150,16 @@ Trang public (home/about/courses/blog), meta SEO/OG cơ bản, responsive.
 ## NHÓM 13 — 2026-08-05 (responsive mobile)
 
 - `3fd7dbb`–`6d67f53` **13.1–13.9, 13.5b** Hoàn thiện mobile menu, logo light mode, CTA, marquee và hero shape; gồm các review-fix giao diện sau triển khai.
+
+## NHÓM 14 — 2026-08-05 (branding Admin)
+
+- `ae433a3` **admin-title** Đổi tiêu đề Admin thành `Quản trị — {tên site}`; header Admin dùng logo từ Setting, fallback tên site khi chưa có logo.
+
+## NHÓM 15 — 2026-08-05 (polish UI sau QC)
+
+- `2bc1fe3` **15.1** Menu public đánh dấu trang hiện tại (`active`, `aria-current`) cho desktop và menu mobile.
+- `b492598` **15.2** Đồng bộ giao diện dark mode cho các select public.
+- `25065d4` **15.3** Sửa icon chia sẻ X/Twitter và độ tương phản nút chia sẻ blog.
+- `9c59972` **15.4** Căn giữa, bọc card và responsive khối gợi ý bài viết trên trang 404.
+- `e6d53cd` **15.5** Trang Case Study vào thẳng lưới dự án 3:2, không dùng lại banner trang Giới thiệu.
+- `beaabe8` **15.3b (review-fix)** Khắc phục icon chia sẻ trắng-trên-trắng: màu/viền riêng cho light và dark mode, dùng `fab fa-twitter` tương thích theme.
