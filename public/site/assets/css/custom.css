@@ -1085,3 +1085,15 @@ html[data-theme="dark"] .offcanvas__info .main-menu ul li a.active,
 html[data-theme="dark"] .mean-container .mean-nav ul li a.active {
     color: var(--theme);
 }
+/* NHOM 15.2: Select public dong bo voi input trong dark mode. */
+html[data-theme="dark"] .contact-form-panel select,
+html[data-theme="dark"] .news-grid-section1 form select {
+    background-color: #171717;
+    color: #e9e9e9;
+    border-color: rgba(255, 255, 255, .22);
+}
+html[data-theme="dark"] .contact-form-panel select option,
+html[data-theme="dark"] .news-grid-section1 form select option {
+    background-color: #171717;
+    color: #e9e9e9;
+}
