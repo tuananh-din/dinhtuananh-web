@@ -1145,3 +1145,19 @@ html[data-theme="light"] .error-page__suggestion-card {
 @media (max-width: 767px) {
     .error-page__suggestions { margin-top: 32px; padding: 18px; }
 }
+/* NHOM 15.5: Case Study vao thang luoi du an, khong dung banner About. */
+.case-study-intro { max-width: 720px; margin: 0 auto 42px; }
+.case-study-intro h1 { margin-bottom: 12px; }
+.case-study-grid .case-card { height: 100%; }
+.case-study-grid .case-card > img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    height: auto;
+    object-fit: cover;
+}
+.case-study-grid .case-card h2 { font-size: 1.35rem; margin-bottom: 10px; }
+.case-study-empty { padding: 48px 24px; border: 1px solid rgba(255, 255, 255, .16); border-radius: 16px; }
+html[data-theme="light"] .case-study-empty { background: #ffffff; border-color: #e3e6ea; }
+@media (max-width: 767px) {
+    .case-study-intro { margin-bottom: 28px; }
+}
