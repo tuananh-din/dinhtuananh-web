@@ -178,3 +178,28 @@ Các mục này chưa được tự triển khai nếu chưa có yêu cầu riê
 - Xóa hoặc thay bài blog test còn lại trước khi quảng bá site.
 
 Xem lịch sử thay đổi đã commit trong `docs/project-changelog.md` và hướng dẫn triển khai chi tiết trong `docs/deployment-guide.md`.
+
+## 11. Cập nhật kiến trúc — NHÓM 5–13
+
+### Routes và Admin bổ sung
+
+- Public có thêm `GET /feed` (RSS).
+- Admin có preview Blog/Khóa học, danh sách Subscriber (bao gồm xuất CSV), bộ lọc Blog/Khóa học và thùng rác Blog. Các route Admin vẫn nằm dưới `/admin/**` và middleware `auth`.
+- Blog public chỉ hiển thị nội dung `is_published`; preview Admin là luồng riêng để kiểm tra nội dung chưa xuất bản.
+
+### Blog và upload ảnh
+
+- `blogs` có `is_published` và `deleted_at`. Xóa Blog từ Admin là **xóa mềm**; dùng thùng rác để xem bản đã xóa, không tự xóa cứng dữ liệu.
+- `App\Support\ImageOptimizer` xử lý upload ảnh: giới hạn tối đa 1600px theo cạnh dài và JPG chất lượng 82. Vẫn upload ảnh nguồn chất lượng cao; PNG phù hợp cho logo/ảnh tách nền.
+
+### Asset, UX và bảo mật
+
+- Preloader custom cần được sửa đồng bộ ở **3 nơi**: `public/site/assets/js/main.js`, `public/site/assets/css/main.css` và inline script trong `resources/views/layouts/header.blade.php`. Preloader có ngưỡng 800ms, `sessionStorage` và fallback WOW.
+- Asset CSS/JS dùng cache-busting `?v=filemtime`; không bỏ cơ chế này khi sửa cách nạp asset.
+- Font chính là Be Vietnam Pro; dark mode và responsive mobile (menu, logo light, CTA, marquee, hero shape) đã được tinh chỉnh.
+- Middleware `SecurityHeaders` đã được đăng ký. Log daily được giữ 14 ngày.
+
+### Vận hành và việc còn lại
+
+- Có `/feed`, `media:orphan-report`, Subscriber Admin/CSV, sitemap đã lọc nội dung và `noindex` cho trang cảm ơn.
+- Việc còn lại: đo Lighthouse/PageSpeed và tối ưu theo **số liệu thực**; xác minh SĐT Brevo rồi mới bật cấu hình/tích hợp; thay nội dung, ảnh case study, blog/khóa học và email footer bằng dữ liệu thật trước khi quảng bá.
