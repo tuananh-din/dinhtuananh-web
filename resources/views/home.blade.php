@@ -92,7 +92,7 @@
     </div>
 </section>
 
-<section class="choose-us-section fix section-shell pt-0">
+<section class="choose-us-section fix section-shell">
     <div class="container">
         <div class="section-title-area">
             <div class="section-title">
@@ -128,7 +128,7 @@
     </div>
 </section>
 
-<section class="section-shell pt-0" id="courses">
+<section class="section-shell" id="courses">
     <div class="container">
         <div class="section-title">
             <h6>Kh&#243;a h&#7885;c n&#7893;i b&#7853;t</h6>
@@ -203,7 +203,7 @@
     </div>
 </section>
 
-<section class="section-shell pt-0 home-about-section">
+<section class="section-shell home-about-section">
     <div class="container">
         <div class="section-title">
             <h6>Case study</h6>
@@ -236,7 +236,7 @@
     </div>
 </section>
 
-<section class="section-shell pt-0">
+<section class="section-shell">
     <div class="container">
         <div class="section-title">
             <h6>Blog n&#7893;i b&#7853;t</h6>
@@ -260,7 +260,7 @@
     </div>
 </section>
 
-<section class="section-shell pt-0">
+<section class="section-shell">
     <div class="container">
         <div class="section-title">
             <h6>Feedback h&#7885;c vi&#234;n / kh&#225;ch h&#224;ng</h6>
@@ -303,7 +303,7 @@
     </div>
 </section>
 
-<section class="section-shell pt-0">
+<section class="section-shell">
     <div class="container">
         <div class="row g-4 align-items-center">
             <div class="col-lg-5">
