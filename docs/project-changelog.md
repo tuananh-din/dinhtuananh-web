@@ -92,3 +92,61 @@ Trang public (home/about/courses/blog), meta SEO/OG cơ bản, responsive.
 ---
 
 **Ghi chú:** DB local có 2 blog seed test (`bai-mau-1-facebook-ads`, `bai-mau-2-personal-brand`) — xoá trước khi go-live nếu không cần.
+
+## NHÓM 5 — 2026-08-05 (liên hệ nổi + UX blog/form)
+
+- `9ff7a54` **5.4** Hoàn thiện UX liên hệ nổi, blog và form; bổ sung checkbox chọn chuyên mục khi tạo/sửa blog.
+
+## NHÓM 6 — 2026-08-05 (vận hành Admin + SEO/media/CLS)
+
+- `fc26ec1` **6.1** Admin quản lý subscriber và xuất CSV; Dashboard/sidebar có lối vào module Subscriber.
+- `95364b4` **6.2** Sitemap chỉ đưa nội dung hợp lệ; thêm `noindex` cho trang cảm ơn.
+- `6010ee0` **6.3** Thêm command `media:orphan-report` để báo cáo ảnh media không còn được tham chiếu.
+- `8eaa4eb` **6.4** Điều chỉnh trang chi tiết khóa học và CSS để giảm CLS.
+
+## NHÓM 7 — 2026-08-05 (nội dung khóa học, breadcrumbs, lỗi và bảo mật)
+
+- `31d74c8` **7.1** Hoàn thiện hiển thị testimonial cho trang chi tiết khóa học.
+- `0055d49` **7.2** Thêm breadcrumbs cho Blog và Khóa học.
+- `ec2c061` **7.3** Thêm trang lỗi 500/503 và kênh log daily.
+- `e7be28f` **7.4** Thêm middleware SecurityHeaders và test header bảo mật.
+
+## NHÓM 8 — 2026-08-05 (xuất bản blog + RSS)
+
+- `34eb4b6` **8.1a** Migration bổ sung `blogs.is_published`.
+- `f711e40` **8.1b** Áp dụng trạng thái xuất bản vào luồng admin/public/sitemap; blog chưa xuất bản không lộ công khai.
+- `c024d7d` **8.2** Bổ sung khối khóa học liên quan trong trang blog.
+- `bbc1f6e` **8.3** Thêm RSS tại `/feed`.
+- `138c19c` **8.4** Bổ sung coverage test cho NHÓM 8.
+- `2bfb667` **review-fix-2** Rà soát và sửa các điểm UI/SEO liên quan sau NHÓM 8.
+
+## NHÓM 9 — 2026-08-05 (preview blog, upload ảnh và 404)
+
+- `45493d4` **9.1** Thêm preview blog từ Admin.
+- `38fda8e` **9.2** Bổ sung lọc/danh sách Admin Blog.
+- `1f8362b` **9.3** Thêm `App\Support\ImageOptimizer`: ảnh upload được giới hạn 1600px cạnh dài và chất lượng JPG 82.
+- `44fb54e` **9.4** Cải thiện trang 404 với gợi ý điều hướng.
+
+## NHÓM 10 — 2026-08-05 (preview khóa học + thùng rác Blog)
+
+- `f71ba54` **10.1** Thêm preview khóa học từ Admin.
+- `94d8831` **10.2** Bổ sung lọc danh sách khóa học trong Admin.
+- `6723255` **10.3a** Migration bổ sung `blogs.deleted_at`.
+- `60338cc` **10.3b** Admin xóa blog theo cơ chế xóa mềm và có trang thùng rác.
+- `f24d17c` **10.4** Bổ sung empty state cho danh sách blog công khai.
+
+## NHÓM 11 — 2026-08-05 (preloader, hero và liên hệ)
+
+- `01eb388` **11.1** Thêm preloader tùy biến.
+- `78d32a4` **11.2** Preloader hiển thị tối thiểu 800ms, lưu trạng thái bằng `sessionStorage`, có fallback WOW; đồng bộ header inline script.
+- `7513e48` **11.3** Tinh chỉnh hero trang chủ.
+- `8f5f932` **11.4** Tinh chỉnh trang liên hệ.
+
+## NHÓM 12 — 2026-08-05 (dark mode, font và cache asset)
+
+- `53e56b8`, `2b146e6`, `a119411`, `e0d299d`, `1b24ea2` **12.1–12.3b** Hoàn thiện dark mode và font Be Vietnam Pro trên public/admin.
+- `93ba613` **12.4** Thêm cache-busting asset theo `?v=filemtime`.
+
+## NHÓM 13 — 2026-08-05 (responsive mobile)
+
+- `3fd7dbb`–`6d67f53` **13.1–13.9, 13.5b** Hoàn thiện mobile menu, logo light mode, CTA, marquee và hero shape; gồm các review-fix giao diện sau triển khai.
