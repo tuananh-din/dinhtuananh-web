@@ -1161,3 +1161,28 @@ html[data-theme="light"] .case-study-empty { background: #ffffff; border-color: 
 @media (max-width: 767px) {
     .case-study-intro { margin-bottom: 28px; }
 }
+/* NHOM 15.3b: Icon chia se blog phai luon tuong phan voi nut. */
+html[data-theme="dark"] .blog-share a,
+html[data-theme="dark"] .blog-share button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .35);
+    color: #e9e9e9;
+}
+html[data-theme="light"] .blog-share a,
+html[data-theme="light"] .blog-share button {
+    background: transparent;
+    border: 1px solid #b8bec7;
+    color: #333333;
+}
+.blog-share a i,
+.blog-share button i {
+    color: inherit !important;
+}
+.blog-share a:hover,
+.blog-share a:focus-visible,
+.blog-share button:hover,
+.blog-share button:focus-visible {
+    background: var(--theme);
+    border-color: var(--theme);
+    color: #060606;
+}
