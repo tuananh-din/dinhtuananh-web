@@ -24,11 +24,13 @@
                     <a href="{{ route('courses') }}" class="theme-btn">Xem Khóa học</a>
                 </div>
                 @if($recentBlogs->isNotEmpty())
-                <div class="error-page__suggestions mt-5">
+                <div class="error-page__suggestions">
                     <h2>Bài viết mới</h2>
-                    <div class="row g-3">
+                    <div class="row g-3 justify-content-center">
                         @foreach($recentBlogs as $blog)
-                        <div class="col-md-4"><a href="{{ route('blog', $blog->slug) }}">{{ $blog->title }}</a></div>
+                        <div class="col-12 col-md-4">
+                            <a class="error-page__suggestion-card" href="{{ route('blog', $blog->slug) }}">{{ $blog->title }}</a>
+                        </div>
                         @endforeach
                     </div>
                 </div>
