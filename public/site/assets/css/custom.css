@@ -1186,3 +1186,28 @@ html[data-theme="light"] .blog-share button {
     border-color: var(--theme);
     color: #060606;
 }
+/* nhom-13: 13.5b — Hero portrait: giu tron anh, khong crop. */
+.hero-section1 .hero-image.hero-profile-image {
+    width: fit-content;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    margin-inline: auto;
+    overflow: hidden;
+}
+.hero-section1 .hero-image.hero-profile-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 82vh;
+    object-fit: contain;
+    object-position: bottom center;
+}
+.hero-profile-card .brand-metrics {
+    margin-top: 18px;
+}
+@media (max-width: 767px) {
+    .hero-section1 .hero-image.hero-profile-image img {
+        max-height: 82vh;
+    }
+}
