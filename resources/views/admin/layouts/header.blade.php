@@ -1,16 +1,23 @@
+@php($adminSiteLogo = data_get($infor, 'logo'))
 <div class="header">
                 <div class="logo logo-dark">
                     <a href="index.html">
-                        <img src="app/assets/images/logo/logo.png" alt="Logo">
-                        <img class="logo-fold" src="app/assets/images/logo/logo-fold.png" alt="Logo">
-                        <span class="admin-brand-name">{{ data_get($infor, 'name', 'Website') }}</span>
+                        @if($adminSiteLogo)
+                            <img src="{{ asset($adminSiteLogo) }}" alt="{{ data_get($infor, 'name', 'Website') }}">
+                            <img class="logo-fold" src="{{ asset($adminSiteLogo) }}" alt="{{ data_get($infor, 'name', 'Website') }}">
+                        @else
+                            <span class="admin-brand-name">{{ data_get($infor, 'name', 'Website') }}</span>
+                        @endif
                     </a>
                 </div>
                 <div class="logo logo-white">
                     <a href="index.html">
-                        <img src="app/assets/images/logo/logo-white.png" alt="Logo">
-                        <img class="logo-fold" src="app/assets/images/logo/logo-fold-white.png" alt="Logo">
-                        <span class="admin-brand-name">{{ data_get($infor, 'name', 'Website') }}</span>
+                        @if($adminSiteLogo)
+                            <img src="{{ asset($adminSiteLogo) }}" alt="{{ data_get($infor, 'name', 'Website') }}">
+                            <img class="logo-fold" src="{{ asset($adminSiteLogo) }}" alt="{{ data_get($infor, 'name', 'Website') }}">
+                        @else
+                            <span class="admin-brand-name">{{ data_get($infor, 'name', 'Website') }}</span>
+                        @endif
                     </a>
                 </div>
                 <div class="nav-wrap">

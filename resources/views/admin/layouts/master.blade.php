@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Enlink - Admin Dashboard Template</title>
+    <title>Quản trị — {{ data_get($infor, 'name', 'Website') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <base href="{{asset('')}}">
 
