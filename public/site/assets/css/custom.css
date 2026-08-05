@@ -1097,3 +1097,13 @@ html[data-theme="dark"] .news-grid-section1 form select option {
     background-color: #171717;
     color: #e9e9e9;
 }
+/* NHOM 15.3: Icon chia se giu do tuong phan o ca hai giao dien. */
+.blog-share a i,
+.blog-share button i {
+    color: currentColor;
+    display: inline-block;
+}
+html[data-theme="dark"] .blog-share a,
+html[data-theme="dark"] .blog-share button {
+    color: #f3f3f3;
+}
