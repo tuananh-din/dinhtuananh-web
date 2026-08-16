@@ -1,0 +1,722 @@
+/* ============================================================================
+   ARTICLE DESIGN SYSTEM  —  trang chi tiet Blog (route: blog, blog.preview)
+   ----------------------------------------------------------------------------
+   NGUYEN TAC (bat buoc giu khi sua file nay):
+   1. File nay nap SAU custom.css -> thang cascade khi cung specificity.
+      Khong dung !important (hien tai: 0 lan).
+   2. MOI selector deu phai bat dau bang `.article-page` hoac `body.is-article`.
+      Hai class nay CHI xuat hien trong resources/views/blog_detail.blade.php.
+      => CSS o day khong the ro ri sang home / about / courses / blog listing.
+   3. `.news-content` la class cua theme (main.css cung co
+      `.news-main-box-items .news-content` cho card tin trang chu).
+      Vi vay LUON viet kem tien to: `.article-page .news-content ...`.
+   4. KHONG sua main.css / bootstrap.min.css / custom.css.
+      Moi thu can override deu duoc thang bang specificity + thu tu nap.
+
+   CAC RULE CU DANG BI TRUNG HOA (tham chieu de sau nay khong bo nham):
+     main.css:62    ul { list-style:none; padding:0; margin:0 }
+     main.css:83    h1..h6 { font-family:"Big Shoulders Display"; text-transform:uppercase; margin:0 }
+     main.css:133   h2 { font-size:55px } + 5 media query
+     main.css:186   a  { color:var(--header); text-decoration:none }
+     main.css:196   p  { margin:0 }
+     custom.css:1022 body p, body li ... { font-size:16px }
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. TOKENS
+   Doi 1 cho -> doi toan bo he thong. Khong hardcode gia tri o duoi.
+   --------------------------------------------------------------------------- */
+.article-page {
+    /* Do rong */
+    --article-measure:   700px;   /* cot chu — chot theo direction (680-720) */
+    --article-title:     900px;   /* cot tieu de hero — rong hon cot chu */
+    --article-bleed:    1040px;   /* wide media (image/figure) toi da */
+    --article-gutter:     24px;   /* le an toan hai ben khi wide media cham vien */
+
+    /* Typography */
+    --article-body-size: 19px;
+    --article-body-lh:   1.7;
+
+    /* Mau — dark (mac dinh cua site) */
+    --article-fg:        #e9e9e7;
+    --article-strong:    #ffffff;
+    --article-muted:     #a2a6a2;
+    --article-accent:    #bff747;
+    --article-accent-fg: #0a0a0a;
+    --article-rule:      rgba(255, 255, 255, .14);
+    --article-surface:   rgba(255, 255, 255, .05);
+    --article-surface-2: rgba(255, 255, 255, .08);
+}
+
+html[data-theme="light"] .article-page {
+    --article-fg:        #23272e;
+    --article-strong:    #11151b;
+    --article-muted:     #5b626b;
+    --article-accent:    #4d7511;
+    --article-accent-fg: #ffffff;
+    --article-rule:      rgba(0, 0, 0, .12);
+    --article-surface:   #f4f5f7;
+    --article-surface-2: #eceef1;
+}
+
+/* ---------------------------------------------------------------------------
+   2. KHUNG TRANG
+   Header cua theme la position:absolute (main.css:1366) nen can padding-top lon.
+   --------------------------------------------------------------------------- */
+.article-page {
+    display: block;
+    padding: clamp(120px, 11vw, 160px) 0 clamp(72px, 8vw, 110px);
+    color: var(--article-fg);
+}
+
+/* Bo cuc chung: moi khoi noi dung deu bam vao cot chu, tru wide media. */
+.article-page .article-shell {
+    max-width: min(var(--article-measure), 100%);
+    margin-inline: auto;
+}
+
+.article-page .article-shell--title {
+    max-width: min(var(--article-title), 100%);
+}
+
+.article-page .article-shell--wide {
+    max-width: min(var(--article-bleed), 100%);
+}
+
+/* ---------------------------------------------------------------------------
+   3. HERO
+   --------------------------------------------------------------------------- */
+.article-page .site-breadcrumbs {
+    margin-bottom: 22px;
+    color: var(--article-muted);
+}
+
+.article-page .site-breadcrumbs a {
+    color: var(--article-muted);
+}
+
+.article-page .site-breadcrumbs a:hover,
+.article-page .site-breadcrumbs a:focus-visible {
+    color: var(--article-accent);
+}
+
+/* Eyebrow / category — CHO NAY giu font condensed lam nhan dien thuong hieu. */
+.article-hero__eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.article-hero__eyebrow a {
+    font-family: "Big Shoulders Display", "Be Vietnam Pro", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--article-accent);
+    transition: opacity .2s ease;
+}
+
+.article-hero__eyebrow a:hover,
+.article-hero__eyebrow a:focus-visible {
+    color: var(--article-accent);
+    opacity: .75;
+    text-decoration: underline;
+    text-underline-offset: .3em;
+}
+
+/* H1 — Be Vietnam Pro 700, KHONG uppercase, wrap tu nhien. */
+.article-hero__title {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-size: clamp(30px, 3.4vw, 50px);
+    font-weight: 700;
+    line-height: 1.16;
+    letter-spacing: -.02em;
+    text-transform: none;
+    color: var(--article-strong);
+    margin: 0 0 20px;
+    text-wrap: balance;          /* trinh duyet ho tro se can bang so tu moi dong */
+    overflow-wrap: break-word;
+}
+
+.article-hero__subtitle {
+    max-width: min(var(--article-measure), 100%);
+    font-size: clamp(17px, 1.4vw, 20px);
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--article-muted);
+    margin: 0 0 28px;
+}
+
+.article-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--article-rule);
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--article-muted);
+}
+
+.article-hero__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 36px;
+    margin-right: 4px;
+}
+
+.article-hero__author {
+    font-weight: 600;
+    color: var(--article-fg);
+}
+
+.article-hero__dot {
+    opacity: .5;
+}
+
+/* Cover.
+   QUAN TRONG: upload cover di qua App\Support\ImageOptimizer::encode() ->
+   scaleDown(width:1600), CHI gioi han chieu rong, GIU NGUYEN ti le goc.
+   => He thong KHONG dam bao anh 16:9, va KHONG luu dimension trong DB.
+   Vi vay o day dung CONTAINER co aspect-ratio co dinh + object-fit:cover:
+     - container tu dat cho truoc khi anh tai xong  -> CLS = 0
+     - object-fit:cover                             -> anh KHONG bi meo
+     - doi lai: anh khong phai 16:9 se bi CAT BOT   -> DAY LA VISUAL CROP CO CHU DICH
+   Khong hardcode width/height tren <img> vi se la khai bao ti le SAI. */
+.article-hero__cover {
+    margin: 40px auto 0;
+    max-width: min(var(--article-bleed), 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--article-surface);
+}
+
+.article-hero__cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+}
+
+.article-hero__cover figcaption {
+    padding: 12px 4px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--article-muted);
+    text-align: center;
+}
+
+/* Khi bai KHONG co cover: hero tu thu gon khoang cach, khong chua cho trong. */
+.article-hero {
+    margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.article-hero:has(.article-hero__cover) {
+    margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+/* ---------------------------------------------------------------------------
+   4. MUC LUC (markup + JS da co san trong blog_detail.blade.php)
+   --------------------------------------------------------------------------- */
+.article-page .blog-toc {
+    max-width: min(var(--article-measure), 100%);
+    margin: 0 auto clamp(32px, 4vw, 48px);
+    padding: 22px 26px;
+    border-left: 3px solid var(--article-accent);
+    border-radius: 0 12px 12px 0;
+    background: var(--article-surface);
+    font-size: 16px;
+}
+
+.article-page .blog-toc strong {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--article-muted);
+}
+
+.article-page .blog-toc ol {
+    margin: 14px 0 0;
+    padding-left: 20px;
+    list-style: decimal;
+}
+
+.article-page .blog-toc li {
+    margin-top: 8px;
+    color: var(--article-muted);
+}
+
+.article-page .blog-toc a {
+    color: var(--article-fg);
+}
+
+.article-page .blog-toc a:hover,
+.article-page .blog-toc a:focus-visible {
+    color: var(--article-accent);
+}
+
+/* ---------------------------------------------------------------------------
+   5. THAN BAI  —  .news-content
+   Day la vung duy nhat render HTML tu CKEditor. Moi tag deu phai co style.
+   --------------------------------------------------------------------------- */
+.article-page .news-content {
+    max-width: min(var(--article-measure), 100%);
+    margin-inline: auto;
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-size: var(--article-body-size);
+    line-height: var(--article-body-lh);
+    font-weight: 400;
+    color: var(--article-fg);
+    text-transform: none;
+    letter-spacing: 0;
+    overflow-wrap: break-word;
+}
+
+/* --- doan van --- */
+.article-page .news-content p {
+    font-size: var(--article-body-size);
+    line-height: var(--article-body-lh);
+    letter-spacing: 0;
+    color: var(--article-fg);
+    margin: 0 0 1.3em;
+}
+
+/* --- heading trong bai: Be Vietnam Pro, KHONG uppercase --- */
+.article-page .news-content h2,
+.article-page .news-content h3,
+.article-page .news-content h4,
+.article-page .news-content h5,
+.article-page .news-content h6 {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    text-transform: none;
+    letter-spacing: -.01em;
+    color: var(--article-strong);
+    scroll-margin-top: 110px;    /* chua cho header sticky khi bam muc luc */
+}
+
+.article-page .news-content h2 {
+    font-size: clamp(25px, 2.4vw, 34px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 2.4em 0 .5em;
+}
+
+.article-page .news-content h3 {
+    font-size: clamp(21px, 1.8vw, 26px);
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 1.9em 0 .45em;
+}
+
+.article-page .news-content h4 {
+    font-size: clamp(19px, 1.4vw, 21px);
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 1.6em 0 .4em;
+}
+
+.article-page .news-content h5,
+.article-page .news-content h6 {
+    font-size: var(--article-body-size);
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 1.5em 0 .4em;
+}
+
+/* --- inline --- */
+.article-page .news-content strong,
+.article-page .news-content b {
+    font-weight: 600;
+    color: var(--article-strong);
+}
+
+.article-page .news-content em,
+.article-page .news-content i {
+    font-style: italic;
+}
+
+.article-page .news-content mark {
+    background: var(--article-accent);
+    color: var(--article-accent-fg);
+    padding: 0 .2em;
+    border-radius: 3px;
+}
+
+.article-page .news-content s,
+.article-page .news-content del {
+    text-decoration: line-through;
+    color: var(--article-muted);
+}
+
+/* --- link: phai khac ro so voi chu thuong --- */
+.article-page .news-content a {
+    color: var(--article-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .18em;
+    text-decoration-color: color-mix(in srgb, var(--article-accent) 55%, transparent);
+}
+
+.article-page .news-content a:hover,
+.article-page .news-content a:focus-visible {
+    color: var(--article-accent);
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--article-accent);
+}
+
+/* --- danh sach: khoi phuc marker (main.css:62 da xoa) --- */
+.article-page .news-content ul,
+.article-page .news-content ol {
+    margin: 0 0 1.3em;
+    padding-left: 1.35em;
+    font-size: var(--article-body-size);
+    line-height: var(--article-body-lh);
+    color: var(--article-fg);
+}
+
+.article-page .news-content ul {
+    list-style: disc;
+}
+
+.article-page .news-content ol {
+    list-style: decimal;
+}
+
+.article-page .news-content li {
+    font-size: var(--article-body-size);
+    line-height: var(--article-body-lh);
+    margin-bottom: .5em;
+    padding-left: .2em;
+}
+
+.article-page .news-content li::marker {
+    color: var(--article-accent);
+}
+
+.article-page .news-content li > p {
+    margin-bottom: .5em;
+}
+
+/* danh sach long nhau */
+.article-page .news-content ul ul,
+.article-page .news-content ul ol,
+.article-page .news-content ol ul,
+.article-page .news-content ol ol {
+    margin: .5em 0 0;
+}
+
+.article-page .news-content ul ul {
+    list-style: circle;
+}
+
+.article-page .news-content ol ol {
+    list-style: lower-alpha;
+}
+
+/* --- trich dan --- */
+.article-page .news-content blockquote {
+    margin: 2em 0;
+    padding: 4px 0 4px 26px;
+    border-left: 3px solid var(--article-accent);
+    font-size: calc(var(--article-body-size) + 2px);
+    line-height: 1.6;
+    font-style: italic;
+    color: var(--article-strong);
+}
+
+.article-page .news-content blockquote p {
+    font-size: inherit;
+    line-height: inherit;
+    margin-bottom: .7em;
+}
+
+.article-page .news-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- anh --- */
+.article-page .news-content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.article-page .news-content figure {
+    margin: 2.6em 0;
+}
+
+/* WIDE MEDIA: chi ap dung cho figure anh/media truc tiep trong than bai.
+   `:not(.table)` — bang cua CKEditor cung la <figure class="table">, va theo
+   direction thi BANG phai bam theo cot chu, khong bleed. */
+.article-page .news-content > figure:not(.table) {
+    width: min(var(--article-bleed), calc(100vw - 2 * var(--article-gutter)));
+    max-width: none;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.article-page .news-content figure img {
+    width: 100%;
+}
+
+.article-page .news-content figcaption {
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--article-muted);
+    text-align: center;
+}
+
+/* MediaEmbed cua CKEditor xuat <figure class="media"><oembed url="..."></oembed>.
+   Khong co plugin frontend nao render the <oembed> => mac dinh se la KHOI TRANG.
+   Fallback: it nhat hien mot the link bam duoc thay vi khong hien gi. */
+.article-page .news-content figure.media oembed {
+    display: block;
+    padding: 20px 22px;
+    border: 1px dashed var(--article-rule);
+    border-radius: 12px;
+    background: var(--article-surface);
+    font-size: 15px;
+    color: var(--article-muted);
+    word-break: break-all;
+}
+
+.article-page .news-content figure.media oembed::before {
+    content: "Nội dung nhúng: " attr(url);
+}
+
+/* --- bang: bam cot chu, cuon ngang BEN TRONG khoi ---
+   VA CHAM DA GAP: CKEditor xuat <figure class="table">, ma `.table` cung la
+   ten component cua Bootstrap. Bootstrap ap:
+     .table                          -> color:#212529; margin-bottom:1rem
+     .table > :not(caption) > * > *  -> background-color:#fff + box-shadow inset
+   => bang bi nen TRANG va chu header trang-tren-trang o dark mode.
+   Ba rule duoi day trung hoa dung pham vi bai viet, khong dung !important. */
+.article-page .news-content figure.table {
+    width: auto;
+    max-width: 100%;
+    margin: 2.2em 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    color: var(--article-fg);
+    border-color: var(--article-rule);
+}
+
+.article-page .news-content figure.table > :not(caption) > *,
+.article-page .news-content figure.table > :not(caption) > * > * {
+    background-color: transparent;
+    box-shadow: none;
+    border-color: var(--article-rule);
+    color: inherit;
+}
+
+.article-page .news-content table {
+    width: 100%;
+    min-width: 520px;          /* duoi nguong nay bang bi bop -> cho cuon ngang */
+    border-collapse: collapse;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--article-fg);
+}
+
+.article-page .news-content th,
+.article-page .news-content td {
+    padding: 12px 14px;
+    border: 1px solid var(--article-rule);
+    text-align: left;
+    vertical-align: top;
+}
+
+/* Dat SAU khoi trung hoa Bootstrap o tren de nen header khong bi ghi de. */
+.article-page .news-content thead th,
+.article-page .news-content th,
+.article-page .news-content figure.table > :not(caption) > * > th {
+    background-color: var(--article-surface);
+    font-weight: 600;
+    color: var(--article-strong);
+}
+
+/* --- code --- */
+.article-page .news-content code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .9em;
+    padding: .15em .4em;
+    border-radius: 4px;
+    background: var(--article-surface-2);
+    color: var(--article-strong);
+    word-break: break-word;
+}
+
+.article-page .news-content pre {
+    margin: 2em 0;
+    padding: 20px 22px;
+    border: 1px solid var(--article-rule);
+    border-radius: 12px;
+    background: var(--article-surface);
+    overflow-x: auto;           /* cuon BEN TRONG, khong lam tran ca trang */
+    -webkit-overflow-scrolling: touch;
+}
+
+.article-page .news-content pre code {
+    display: block;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre;
+    word-break: normal;
+}
+
+/* --- divider --- */
+.article-page .news-content hr {
+    width: 120px;
+    height: 0;
+    margin: 3em auto;
+    border: 0;
+    border-top: 1px solid var(--article-rule);
+    opacity: 1;
+}
+
+/* --- bien --- */
+.article-page .news-content > :first-child {
+    margin-top: 0;
+}
+
+.article-page .news-content > :last-child {
+    margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   6. FOOTER BAI VIET
+   --------------------------------------------------------------------------- */
+.article-footer {
+    margin-top: clamp(48px, 6vw, 72px);
+}
+
+.article-page .blog-share {
+    margin: 0 0 clamp(40px, 5vw, 56px);
+    padding-top: 28px;
+    border-top: 1px solid var(--article-rule);
+}
+
+.article-page .blog-share > span {
+    font-weight: 600;
+    color: var(--article-fg);
+}
+
+.article-page .other-blogs h3,
+.article-page .blog-course-promo h3 {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-size: clamp(21px, 1.9vw, 26px);
+    font-weight: 700;
+    line-height: 1.35;
+    text-transform: none;
+    letter-spacing: -.01em;
+    color: var(--article-strong);
+    margin-bottom: 10px;
+}
+
+.article-page .other-blogs > p,
+.article-page .blog-course-promo p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--article-muted);
+    margin-bottom: 16px;
+}
+
+.article-page .article-related {
+    margin-top: clamp(48px, 6vw, 72px);
+}
+
+.article-page .article-related .blog-mini-card h3 {
+    font-size: 19px;
+    line-height: 1.4;
+}
+
+.article-page .article-related .blog-mini-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--article-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   7. FLOATING CONTACT
+   Lop chinh la o tang server: master.blade.php khong include partial khi
+   route la `blog` / `blog.preview`. Rule duoi day chi la lop phong thu thu hai
+   va CHI an duoi body.is-article (class nay chi do blog_detail.blade.php dat).
+   --------------------------------------------------------------------------- */
+body.is-article .floating-contact {
+    display: none;
+}
+
+/* ---------------------------------------------------------------------------
+   8. RESPONSIVE
+   --------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+    .article-page {
+        --article-measure: 660px;
+    }
+}
+
+@media (max-width: 767px) {
+    .article-page {
+        --article-body-size: 17px;
+        --article-gutter: 16px;
+    }
+
+    .article-hero__title {
+        line-height: 1.2;
+        letter-spacing: -.015em;
+    }
+
+    .article-hero__cover {
+        margin-top: 28px;
+        border-radius: 12px;
+    }
+
+    .article-page .blog-toc {
+        padding: 18px 20px;
+    }
+
+    .article-page .news-content h2 {
+        margin-top: 2em;
+    }
+
+    .article-page .news-content blockquote {
+        padding-left: 18px;
+    }
+
+    .article-page .news-content pre {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 575px) {
+    .article-hero__meta {
+        font-size: 14px;
+        gap: 8px;
+    }
+
+    .article-page .news-content table {
+        min-width: 420px;
+    }
+}
+
+/* Ton trong tuy chon giam chuyen dong. */
+@media (prefers-reduced-motion: reduce) {
+    .article-page .news-content a,
+    .article-hero__eyebrow a {
+        transition: none;
+    }
+}
