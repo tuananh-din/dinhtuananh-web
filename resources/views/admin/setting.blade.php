@@ -54,6 +54,18 @@
                             <small class="form-text text-muted">Khuyến nghị: ảnh vuông 512×512 px, dưới 5 MB.</small>
                             <small id="favicon-aspect-warning" class="form-text text-warning" hidden></small>
                         </div>
+                        <div class="form-group col-md-6">
+                            <label class="font-weight-semibold">Ảnh chia sẻ mặc định (og:image, 1200×630)</label><br>
+                            @if(!empty($setting?->og_image))
+                                <img src="{{ $setting->og_image }}" alt="Ảnh chia sẻ hiện tại" height="120">
+                            @endif
+                            <div class="file-input">
+                                <input class="choose" type="file" name="og_image" accept="image/*">
+                                <span class="button">Thêm hình ảnh</span>
+                                <span class="label"></span>
+                            </div>
+                            <small class="form-text text-muted">Khuyến nghị 1200×630 px, dưới 5 MB. Dùng khi trang không có ảnh bìa riêng.</small>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="font-weight-semibold" for="productBrand">Code Header</label>

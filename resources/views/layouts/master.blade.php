@@ -8,11 +8,17 @@
     $faviconUrl = \Illuminate\Support\Str::startsWith($favicon, ['http://', 'https://', '//', '/'])
         ? $favicon
         : asset($favicon);
-    // A-4: fallback ảnh OG dùng logo site (chuẩn hóa URL tuyệt đối giống favicon).
-    $defaultOgImage = data_get($siteInfo, 'logo', 'app/assets/images/others/thumb-16.jpg');
-    $defaultOgImageUrl = \Illuminate\Support\Str::startsWith($defaultOgImage, ['http://', 'https://', '//'])
-        ? $defaultOgImage
-        : asset(ltrim($defaultOgImage, '/'));
+    $pageOgImage = trim((string) $__env->yieldContent('og_image', ''));
+    $defaultOgImage = trim((string) data_get($siteInfo, 'og_image', ''));
+    $selectedOgImage = $pageOgImage ?: $defaultOgImage;
+    $ogImageUrl = null;
+    if ($selectedOgImage !== '') {
+        $ogImageUrl = \Illuminate\Support\Str::startsWith($selectedOgImage, ['http://', 'https://'])
+            ? $selectedOgImage
+            : (\Illuminate\Support\Str::startsWith($selectedOgImage, '//')
+                ? request()->getScheme().':'.$selectedOgImage
+                : asset(ltrim($selectedOgImage, '/')));
+    }
     $assetVersion = static function (string $path): string {
         $file = public_path($path);
         return asset($path).(is_file($file) ? '?v='.filemtime($file) : '');
@@ -33,12 +39,20 @@
         <meta property="og:type" content="@yield('og_type', 'website')">
         <meta property="og:title" content="@yield('og_title', $siteName)">
         <meta property="og:description" content="@yield('og_description', $seoDescription)">
-        <meta property="og:image" content="@yield('og_image', $defaultOgImageUrl)">
+        @if($ogImageUrl)
+        <meta property="og:image" content="{{ $ogImageUrl }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        @endif
         <meta property="og:url" content="{{ url()->current() }}">
+        @if($ogImageUrl)
         <meta name="twitter:card" content="summary_large_image">
+        @endif
         <meta name="twitter:title" content="@yield('og_title', $siteName)">
         <meta name="twitter:description" content="@yield('og_description', $seoDescription)">
-        <meta name="twitter:image" content="@yield('og_image', $defaultOgImageUrl)">
+        @if($ogImageUrl)
+        <meta name="twitter:image" content="{{ $ogImageUrl }}">
+        @endif
         <link rel="canonical" href="@yield('canonical', url()->current())">
         <link rel="alternate" type="application/rss+xml" title="{{ $siteName }} RSS" href="{{ route('feed') }}">
         <!--<< Favcion >>-->

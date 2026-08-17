@@ -24,6 +24,7 @@ class SettingController extends Controller
             'url' => 'required|string|max:255',
             'logo' => 'nullable|image|max:5120',
             'favicon' => 'nullable|image|max:5120',
+            'og_image' => 'nullable|image|max:5120',
         ]);
 
         $setting = Setting::first();
@@ -52,13 +53,26 @@ class SettingController extends Controller
             $favicon = $setting->favicon ?? null;
         }
 
+        if ($request->hasFile('og_image')) {
+            $file = $request->file('og_image');
+            $path = $file->hashName('public/images');
+            Storage::put($path, ImageOptimizer::encode($file));
+            $ogImage = Storage::url($path);
+            if (!empty($setting?->og_image) && $setting->og_image !== $ogImage) {
+                $this->deleteManagedUpload($setting->og_image);
+            }
+        } else {
+            $ogImage = $setting->og_image ?? null;
+        }
+
         // Chuẩn bị dữ liệu sản phẩm
         $data = array_merge($request->only([
             'name', 'url','code_header','code_footer','slogan','note', 'title_seo', 
             'desc_seo', 'key_seo'
         ]), [
             'logo' => $logo,
-            'favicon' => $favicon
+            'favicon' => $favicon,
+            'og_image' => $ogImage
 
         ]);
 

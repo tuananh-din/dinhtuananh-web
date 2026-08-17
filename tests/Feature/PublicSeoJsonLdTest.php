@@ -49,6 +49,8 @@ class PublicSeoJsonLdTest extends TestCase
         $response->assertSee('<meta property="og:type" content="website">', false);
         $response->assertSee('<meta property="og:title" content="Thương hiệu thử nghiệm">', false);
         $response->assertSee('"@type":"Person"', false);
+        $response->assertSee('<meta property="og:image" content="http://localhost/storage/images/og.jpg">', false);
+        $response->assertSee('<meta name="twitter:card" content="summary_large_image">', false);
         $response->assertSee('"name":"Nguyễn Thử Nghiệm"', false);
         $response->assertSee('"sameAs":["https://example.test/profile"]', false);
     }
@@ -91,6 +93,7 @@ class PublicSeoJsonLdTest extends TestCase
             'url' => 'https://example.test',
             'desc_seo' => 'Mô tả SEO của website.',
             'logo' => '/storage/images/logo.jpg',
+            'og_image' => '/storage/images/og.jpg',
         ]);
 
         About::create([
