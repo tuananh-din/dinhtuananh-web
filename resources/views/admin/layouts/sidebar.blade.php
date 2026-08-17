@@ -36,6 +36,9 @@
                     <li class="{{ Request::is('admin/blog') ? 'active' : '' }}">
                         <a href="{{ route('admin.blog') }}">Bài viết</a>
                     </li>
+                    <li class="{{ Request::is('admin/case-study') || Request::is('admin/case-study/*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.case-study') }}">Case Study</a>
+                    </li>
                     <li class="{{ Request::is('admin/category') || Request::is('admin/category/*') ? 'active' : '' }}">
                         <a href="{{ route('admin.category') }}">Chuyên mục</a>
                     </li>

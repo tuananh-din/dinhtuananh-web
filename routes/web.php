@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\CaseStudyController as AdminCaseStudyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ImageController as AdminImageController;
 use App\Http\Controllers\Admin\LeadController as AdminLeadController;
@@ -91,6 +92,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/trash', [AdminBlogController::class, 'trash'])->name('blog.trash');
             Route::post('/restore/{id}', [AdminBlogController::class, 'restore'])->name('blog.restore');
             Route::post('/force-delete/{id}', [AdminBlogController::class, 'forceDelete'])->name('blog.force-delete');
+        });
+        Route::prefix('case-study')->group(function () {
+            Route::get('/', [AdminCaseStudyController::class, 'index'])->name('admin.case-study');
+            Route::get('/create', [AdminCaseStudyController::class, 'create'])->name('case-study.create');
+            Route::get('/edit/{id}', [AdminCaseStudyController::class, 'edit'])->name('case-study.edit');
+            Route::get('/preview/{id}', [AdminCaseStudyController::class, 'preview'])->name('case-study.preview');
+            Route::post('store', [AdminCaseStudyController::class, 'store'])->name('case-study.store');
+            Route::post('/delete/{id}', [AdminCaseStudyController::class, 'delete'])->name('case-study.delete');
         });
         Route::prefix('category')->group(function () {
             Route::get('/', [AdminCategoryController::class, 'index'])->name('admin.category');
