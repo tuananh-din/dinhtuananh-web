@@ -217,10 +217,14 @@ document.addEventListener('click', function (e) {
 document.addEventListener('DOMContentLoaded', function () {
     const content = document.querySelector('.news-content');
     const toc = document.getElementById('blog-toc');
-    if (!content || !toc) return;
+    const layout = document.querySelector('.article-layout');
+    if (!content || !toc || !layout) return;
 
     const headings = Array.from(content.querySelectorAll('h2, h3'));
-    if (headings.length < 3) return;
+    if (headings.length < 3) {
+        layout.classList.add('article-layout--no-toc');
+        return;
+    }
 
     const list = toc.querySelector('ul');
     headings.forEach(function (heading, index) {

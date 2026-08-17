@@ -113,6 +113,9 @@
     ClassicEditor
         .create( document.querySelector( '#content' ),{
             extraPlugins: [ CsrfUploadAdapterPlugin ],
+            image: {
+                toolbar: [ 'toggleImageCaption', 'imageTextAlternative' ],
+            },
         })  
         .then( editor => {
             myEditor = editor;

@@ -768,6 +768,14 @@ body.is-article .mouseCursor {
         gap: 56px;
     }
 
+    .article-page .article-layout--no-toc {
+        grid-template-columns: minmax(0, var(--article-measure));
+    }
+
+    .article-page .article-layout--no-toc .article-aside {
+        display: none;
+    }
+
     .article-page .article-layout__content {
         grid-column: 1;
     }
