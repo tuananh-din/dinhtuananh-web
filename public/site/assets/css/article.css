@@ -100,6 +100,14 @@ html[data-theme="light"] .article-page {
     color: var(--article-accent);
 }
 
+.article-page .site-breadcrumbs li:last-child {
+    min-width: 0;
+    max-width: 60ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 /* Eyebrow / category — CHO NAY giu font condensed lam nhan dien thuong hieu. */
 .article-hero__eyebrow {
     display: flex;
@@ -842,8 +850,8 @@ body.is-article .mouseCursor {
 
     .article-page .blog-toc {
         position: sticky;
-        top: 110px;
-        max-height: calc(100vh - 140px);
+        top: 132px;
+        max-height: calc(100vh - 162px);
         margin: 0;
         padding: 0;
         overflow-y: auto;
@@ -879,6 +887,10 @@ body.is-article .mouseCursor {
     .article-page .case-study-gallery__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
+    }
+
+    .article-page .site-breadcrumbs li:last-child {
+        max-width: 100%;
     }
 }
 

@@ -104,10 +104,11 @@
             <div class="row g-4 align-items-stretch home-services-row">
                 <div class="col-lg-6">
                     <ul class="choose-us-box-list">
+                        @php($serviceIcons = ['fa-bullhorn', 'fa-chart-line', 'fa-laptop-code'])
                         @foreach ($jobs as $key => $row)
                         <li class="wow fadeInUp" data-wow-delay=".{{ ($key + 1) * 2 }}s">
                             <div class="content">
-                                <h2>{{ $row->title }}</h2>
+                                <h2><i class="fa-solid {{ $serviceIcons[$key % count($serviceIcons)] }} service-item-icon" aria-hidden="true"></i>{{ $row->title }}</h2>
                                 <p>{{ $row->description }}</p>
                             </div>
                         </li>

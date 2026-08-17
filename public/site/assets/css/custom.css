@@ -813,6 +813,26 @@ html[data-theme="light"] :where(a, button, input, textarea, select):focus-visibl
     outline-color: #3f6f00;
 }
 
+/* NHOM 18: focus va thong bao loi cho form public. */
+:where(input, textarea, select):focus-visible {
+    border-color: var(--theme);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme) 30%, transparent);
+}
+
+[role="alert"] {
+    color: #ffd1d1;
+    background: #551d25;
+    border: 1px solid #d9535f;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+.service-item-icon {
+    color: var(--theme);
+    font-size: .9em;
+    margin-right: .55em;
+}
+
 /* ===== LIGHT MODE (skin nen sang, toi uu do tuong phan / thuan mat) ===== */
 html[data-theme="light"] {
     --white: #21252b;   /* chu von trang -> slate dam (diu hon #000) */
