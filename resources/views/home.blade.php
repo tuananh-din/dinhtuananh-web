@@ -101,7 +101,7 @@
             </div>
         </div>
         <div class="choose-us-wrapper">
-            <div class="row g-4">
+            <div class="row g-4 align-items-stretch home-services-row">
                 <div class="col-lg-6">
                     <ul class="choose-us-box-list">
                         @foreach ($jobs as $key => $row)
