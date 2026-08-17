@@ -1277,3 +1277,38 @@ html[data-theme="light"] .contact-info-panel {
     background: #ffffff;
     border-color: #e3e6ea;
 }
+
+/* Nhom 17D: bo cac shape trang tri gay nhiem noi dung. */
+.mouseCursor,
+.cta-section .shape-1,
+.cta-section .shape-2,
+.cta-section .shape-3 {
+    display: none;
+}
+
+html[data-theme="light"] .hero-section1 .line-shape {
+    display: none;
+}
+
+/* Nhom 17D: trang co 0-1 item can duoc can giua, khong doi grid binh thuong. */
+.home-featured-courses--single > .col-lg-8,
+.home-featured-courses--empty > .col-lg-4,
+.home-featured-blogs--sparse > .col-lg-4,
+.course-list-grid--sparse > .col-xl-4,
+.blog-list-grid--single > .col-xl-4 {
+    margin-inline: auto;
+}
+
+.home-sparse-empty,
+.blog-sparse-empty,
+.course-list-grid--sparse .course-card {
+    max-width: 720px;
+    margin-inline: auto;
+}
+
+.home-featured-courses--empty,
+.home-featured-blogs--sparse,
+.course-list-grid--sparse,
+.blog-list-grid--single {
+    padding-block: 12px;
+}

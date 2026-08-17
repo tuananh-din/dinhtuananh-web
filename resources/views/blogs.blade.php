@@ -24,7 +24,7 @@
             <button class="theme-btn" type="submit">Lọc</button>
         </form>
         @if($blogs->isEmpty())
-        <div class="blog-empty-state text-center py-5">
+        <div class="blog-empty-state blog-sparse-empty text-center py-5">
             @if($search || $selectedCategory)
                 <h2>Chưa có bài viết trong mục này.</h2>
                 <p>Hãy thử từ khóa hoặc chuyên mục khác.</p>
@@ -36,7 +36,7 @@
             @endif
         </div>
         @else
-        <div class="row bb-bottom">
+        <div class="row bb-bottom blog-list-grid {{ $blogs->count() === 1 ? 'blog-list-grid--single' : '' }}">
             @foreach ($blogs as $key => $row)
             <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".{{ ($key + 1) * 2 }}s">
                 <div class="news-box-items-2">

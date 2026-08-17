@@ -9,7 +9,7 @@
             <h2>Danh s&#225;ch kh&#243;a h&#7885;c &#273;ang m&#7903; &#273;&#259;ng k&#253;</h2>
         </div>
 
-        <div class="row g-4 mt-3">
+        <div class="row g-4 mt-3 course-list-grid {{ $courses->count() <= 1 ? 'course-list-grid--sparse' : '' }}">
             @forelse ($courses as $key => $row)
             <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".{{ ($key + 1) * 2 }}s">
                 <article class="course-card">

@@ -134,7 +134,7 @@
             <h6>Kh&#243;a h&#7885;c n&#7893;i b&#7853;t</h6>
             <h2>Khóa học đang mở đăng ký</h2>
         </div>
-        <div class="row g-4 mt-4">
+        <div class="row g-4 mt-4 home-featured-courses {{ !$featuredCourse ? 'home-featured-courses--empty' : ($highlightCourses->isEmpty() ? 'home-featured-courses--single' : '') }}">
             @if($featuredCourse)
             <div class="col-lg-8">
                 <div class="placeholder-card">
@@ -165,10 +165,11 @@
                     @endif
                 </div>
             </div>
+            @if($highlightCourses->isNotEmpty())
             <div class="col-lg-4">
                 <div class="placeholder-card">
                     <h3>Kh&#243;a h&#7885;c kh&#225;c</h3>
-                    @forelse($highlightCourses as $courseItem)
+                    @foreach($highlightCourses as $courseItem)
                     <div class="course-side-card">
                         <h4><a href="{{ route('course.detail', $courseItem->slug) }}">{{ $courseItem->title }}</a></h4>
                         <p>{{ $courseItem->short_description ?: 'Xem chi ti&#7871;t &#273;&#7875; bi&#7871;t n&#7897;i dung v&#224; l&#7897; tr&#236;nh h&#7885;c.' }}</p>
@@ -183,13 +184,12 @@
                         </p>
                         <a href="{{ route('course.detail', $courseItem->slug) }}" class="theme-btn border-btn">Xem chi ti&#7871;t <i class="fa-solid fa-arrow-up-right"></i></a>
                     </div>
-                    @empty
-                    <p>Ch&#432;a c&#243; th&#234;m kh&#243;a h&#7885;c n&#224;o kh&#225;c &#273;ang hi&#7875;n th&#7883;.</p>
-                    @endforelse
+                    @endforeach
                     <p class="course-placeholder-note">B&#7841;n c&#243; th&#7875; xem to&#224;n b&#7897; kh&#243;a h&#7885;c &#273;ang active t&#7841;i trang danh s&#225;ch.</p>
                     <a href="{{ route('courses') }}" class="theme-btn">Xem t&#7845;t c&#7843; kh&#243;a h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
                 </div>
             </div>
+            @endif
             @else
             <div class="col-lg-4">
                 <div class="placeholder-card">
@@ -242,8 +242,8 @@
             <h6>Blog n&#7893;i b&#7853;t</h6>
             <h2>Gi&#7919; l&#7841;i blog c&#361; v&#224; bi&#7871;n n&#243; th&#224;nh k&#234;nh x&#226;y d&#7921;ng ni&#7873;m tin</h2>
         </div>
-        <div class="row g-4 mt-4">
-            @foreach ($blogs as $row)
+        <div class="row g-4 mt-4 home-featured-blogs {{ $blogs->count() <= 1 ? 'home-featured-blogs--sparse' : '' }}">
+            @forelse ($blogs as $row)
             <div class="col-lg-4">
                 <div class="blog-mini-card">
                     <img src="{{ $row->image_url }}" alt="{{ $row->title }}">
@@ -255,7 +255,15 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="col-12">
+                <div class="placeholder-card home-sparse-empty">
+                    <h3>Blog đang được cập nhật</h3>
+                    <p>Nội dung mới sẽ sớm được bổ sung. Bạn có thể xem các khóa học hoặc để lại thông tin để được tư vấn.</p>
+                    <a href="{{ route('courses') }}" class="theme-btn">Xem khóa học <i class="fa-solid fa-arrow-up-right"></i></a>
+                </div>
+            </div>
+            @endforelse
         </div>
     </div>
 </section>
