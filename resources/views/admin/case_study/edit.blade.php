@@ -51,5 +51,7 @@
     </div></div>
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-<script>ClassicEditor.create(document.querySelector('#content')).catch(error => console.error(error));</script>
+<script>window.ckUploadConfig = { url: '{{ route("image.upload") }}', token: '{{ csrf_token() }}' };</script>
+<script src="{{ asset('app/assets/js/ckeditor-csrf-upload-adapter.js') }}"></script>
+<script>ClassicEditor.create(document.querySelector('#content'), { extraPlugins: [CsrfUploadAdapterPlugin] }).catch(error => console.error(error));</script>
 @endsection

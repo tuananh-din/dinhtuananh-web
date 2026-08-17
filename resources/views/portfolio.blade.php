@@ -9,7 +9,24 @@
             <p>Nơi tổng hợp các dự án, kết quả và minh chứng thực tế.</p>
         </div>
 
-        @if($lifes->isNotEmpty())
+        @if($usesCaseStudies)
+        <div class="row g-4 case-study-grid">
+            @foreach($caseStudies as $caseStudy)
+            <div class="col-xl-4 col-md-6">
+                <article class="case-card h-100">
+                    <a href="{{ route('portfolio.detail', $caseStudy->slug) }}" aria-label="Xem case study {{ $caseStudy->title }}">
+                    <img src="{{ $caseStudy->image_url }}" alt="{{ $caseStudy->title }}" loading="lazy">
+                    <div class="content">
+                        <h2>{{ $caseStudy->title }}</h2>
+                        @if($caseStudy->summary)<p>{{ $caseStudy->summary }}</p>@endif
+                        @if($caseStudy->industry)<span class="case-card__industry">{{ $caseStudy->industry }}</span>@endif
+                    </div>
+                    </a>
+                </article>
+            </div>
+            @endforeach
+        </div>
+        @elseif($lifes->isNotEmpty())
         <div class="row g-4 case-study-grid">
             @foreach($lifes as $row)
             <div class="col-xl-4 col-md-6">

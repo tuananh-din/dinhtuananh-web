@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Blog;
+use App\Models\CaseStudy;
 use App\Models\Course;
 use App\Models\Image;
 use App\Models\Service;
@@ -20,7 +21,11 @@ class HomeController extends Controller
         $words = Service::pluck('title');
         $skills = Skill::orderBy('number','DESC')->take(4)->get();
         $blogs = Blog::where('is_published', 1)->orderBy('id','DESC')->take(3)->get();
-        $cases = Image::where('type',0)->orderBy('id','DESC')->take(3)->get();
+        $cases = CaseStudy::where('is_published', true)->latest()->take(3)->get();
+        $usesCaseStudies = $cases->isNotEmpty();
+        if (!$usesCaseStudies) {
+            $cases = Image::where('type', 0)->orderByDesc('id')->take(3)->get();
+        }
         $featuredCourse = Course::where('is_active', 1)
             ->where('is_featured', 1)
             ->orderBy('sort_order', 'ASC')
@@ -59,7 +64,7 @@ class HomeController extends Controller
         }
 
         $leadMagnet = LeadMagnet::where('is_active', 1)->latest()->first();
-        return view('home',compact('about','jobs','words','skills','blogs','cases','featuredCourse','highlightCourses','featuredTestimonials','leadMagnet'));
+        return view('home',compact('about','jobs','words','skills','blogs','cases','usesCaseStudies','featuredCourse','highlightCourses','featuredTestimonials','leadMagnet'));
     }
     public function about(){
         $about = About::first() ?? new About();
@@ -89,7 +94,16 @@ class HomeController extends Controller
         $jobs = Service::orderBy('id','DESC')->get();
         $skills = Skill::orderBy('id','DESC')->get();
         $image = Image::where('type',1)->orderBy('id','DESC')->first();
-        $lifes = Image::where('type',0)->orderBy('id','DESC')->get();
-        return view('portfolio',compact('about','jobs','skills','image','lifes'));
+        $caseStudies = CaseStudy::where('is_published', true)->latest()->get();
+        $usesCaseStudies = $caseStudies->isNotEmpty();
+        $lifes = $usesCaseStudies ? collect() : Image::where('type', 0)->orderByDesc('id')->get();
+        return view('portfolio',compact('about','jobs','skills','image','lifes','caseStudies','usesCaseStudies'));
+    }
+
+    public function caseStudyDetail($slug)
+    {
+        $caseStudy = CaseStudy::where('is_published', true)->where('slug', $slug)->firstOrFail();
+
+        return view('case_study_detail', compact('caseStudy'));
     }
 }

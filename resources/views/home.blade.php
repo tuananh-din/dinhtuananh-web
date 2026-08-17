@@ -213,11 +213,14 @@
             @forelse ($cases as $row)
             <div class="col-lg-4">
                 <div class="case-card">
-                    <img src="{{ $row->image ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $row->title ?: 'case-study' }}">
+                    @if($usesCaseStudies)<a href="{{ route('portfolio.detail', $row->slug) }}" aria-label="Xem case study {{ $row->title }}">@endif
+                    <img src="{{ $usesCaseStudies ? $row->image_url : ($row->image ?: 'app/assets/images/others/thumb-16.jpg') }}" alt="{{ $row->title ?: 'case-study' }}">
                     <div class="content">
                         <h3>{{ $row->title ?: 'Case study th&#7921;c t&#7871;' }}</h3>
-                        <p>{{ $row->description ?: 'Khám phá dự án và kết quả thực tế được cập nhật từ hành trình làm việc.' }}</p>
+                        <p>{{ $usesCaseStudies ? ($row->summary ?: 'Khám phá kết quả và cách triển khai dự án.') : ($row->description ?: 'Khám phá dự án và kết quả thực tế được cập nhật từ hành trình làm việc.') }}</p>
+                        @if($usesCaseStudies && $row->industry)<span class="case-card__industry">{{ $row->industry }}</span>@endif
                     </div>
+                    @if($usesCaseStudies)</a>@endif
                 </div>
             </div>
             @empty

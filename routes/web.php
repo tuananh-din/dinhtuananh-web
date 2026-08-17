@@ -42,6 +42,7 @@ Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/about',[HomeController::class,'about'])->name('about');
 Route::get('/life',[HomeController::class,'life'])->name('life');
 Route::get('/portfolio',[HomeController::class,'portfolio'])->name('portfolio');
+Route::get('/portfolio/{slug}', [HomeController::class, 'caseStudyDetail'])->name('portfolio.detail');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::view('/cam-on', 'thank_you')->name('thank.you');
 

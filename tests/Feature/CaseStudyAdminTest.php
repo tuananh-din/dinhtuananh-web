@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\CaseStudy;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -67,5 +68,46 @@ class CaseStudyAdminTest extends TestCase
             ->get(route('case-study.preview', $caseStudy->id))
             ->assertOk()
             ->assertSee('Bản xem trước');
+    }
+
+    public function test_published_case_study_has_a_public_detail_page_and_draft_is_hidden(): void
+    {
+        $published = CaseStudy::create([
+            'title' => 'Kết quả công khai',
+            'slug' => 'ket-qua-cong-khai',
+            'summary' => 'Tóm tắt kết quả.',
+            'industry' => 'Bán lẻ',
+            'content' => '<p>Nội dung công khai.</p>',
+            'is_published' => true,
+        ]);
+        $draft = CaseStudy::create([
+            'title' => 'Bản nháp riêng tư',
+            'slug' => 'ban-nhap-rieng-tu',
+            'content' => '<p>Nội dung nháp.</p>',
+            'is_published' => false,
+        ]);
+
+        $this->get(route('portfolio.detail', $published->slug))->assertOk()->assertSee('Tóm tắt kết quả.');
+        $this->get(route('portfolio.detail', $draft->slug))->assertNotFound();
+        $this->get(route('portfolio'))->assertOk()->assertSee('Kết quả công khai');
+    }
+
+    public function test_portfolio_and_home_keep_the_legacy_image_fallback_without_published_case_studies(): void
+    {
+        Image::create([
+            'type' => 0,
+            'title' => 'Dự án ảnh cũ',
+            'image' => 'app/assets/images/others/thumb-16.jpg',
+            'description' => 'Mô tả cũ',
+        ]);
+        CaseStudy::create([
+            'title' => 'Chỉ là nháp',
+            'slug' => 'chi-la-nhap',
+            'content' => '<p>Nội dung nháp.</p>',
+            'is_published' => false,
+        ]);
+
+        $this->get(route('portfolio'))->assertOk()->assertSee('Dự án ảnh cũ');
+        $this->get(route('index'))->assertOk()->assertSee('Dự án ảnh cũ');
     }
 }
