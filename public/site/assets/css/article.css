@@ -694,7 +694,7 @@ body.is-article .mouseCursor {
     .article-page .article-aside {
         grid-column: 2;
         grid-row: 1;
-        align-self: start;
+        align-self: stretch;
     }
 
     .article-page .blog-toc {
