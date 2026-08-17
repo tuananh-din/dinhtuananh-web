@@ -244,10 +244,10 @@ html[data-theme="light"] .article-page {
     color: var(--article-muted);
 }
 
-.article-page .blog-toc ol {
+.article-page .blog-toc ul {
     margin: 14px 0 0;
-    padding-left: 20px;
-    list-style: decimal;
+    padding-left: 0;
+    list-style: none;
 }
 
 .article-page .blog-toc li {
@@ -660,9 +660,67 @@ body.is-article .floating-contact {
     display: none;
 }
 
+/* Hai cham cursor cua theme duoc render tu layouts.header. */
+body.is-article .mouseCursor {
+    display: none;
+}
+
 /* ---------------------------------------------------------------------------
    8. RESPONSIVE
    --------------------------------------------------------------------------- */
+.article-page .article-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 1200px) {
+    .article-page {
+        --article-measure: 740px;
+        --article-title: 960px;
+        --article-bleed: 880px;
+    }
+
+    .article-page .article-layout {
+        display: grid;
+        grid-template-columns: minmax(0, var(--article-measure)) 280px;
+        justify-content: center;
+        gap: 56px;
+    }
+
+    .article-page .article-layout__content {
+        grid-column: 1;
+    }
+
+    .article-page .article-aside {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: start;
+    }
+
+    .article-page .blog-toc {
+        position: sticky;
+        top: 110px;
+        max-height: calc(100vh - 140px);
+        margin: 0;
+        padding: 0;
+        overflow-y: auto;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        font-size: 15px;
+    }
+
+    .article-page .blog-toc ul {
+        margin-top: 12px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .article-page .article-aside {
+        order: -1;
+    }
+}
+
 @media (max-width: 991px) {
     .article-page {
         --article-measure: 660px;

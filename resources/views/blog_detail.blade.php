@@ -105,13 +105,19 @@
         </header>
 
         {{-- ============================ BODY ============================ --}}
-        <nav id="blog-toc" class="blog-toc d-none" aria-label="Mục lục bài viết">
-            <strong>Mục lục</strong>
-            <ol></ol>
-        </nav>
+        <div class="article-layout">
+            <div class="article-layout__content">
+                <div class="news-content">
+                    {!! $blog->content !!}
+                </div>
+            </div>
 
-        <div class="news-content">
-            {!! $blog->content !!}
+            <aside class="article-aside">
+                <nav id="blog-toc" class="blog-toc d-none" aria-label="Mục lục bài viết">
+                    <strong>Mục lục</strong>
+                    <ul></ul>
+                </nav>
+            </aside>
         </div>
 
         {{-- =========================== FOOTER =========================== --}}
@@ -216,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const headings = Array.from(content.querySelectorAll('h2, h3'));
     if (headings.length < 3) return;
 
-    const list = toc.querySelector('ol');
+    const list = toc.querySelector('ul');
     headings.forEach(function (heading, index) {
         if (!heading.id) heading.id = 'blog-heading-' + (index + 1);
         const item = document.createElement('li');
