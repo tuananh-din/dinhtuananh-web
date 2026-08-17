@@ -163,3 +163,19 @@ Trang public (home/about/courses/blog), meta SEO/OG cơ bản, responsive.
 - `9c59972` **15.4** Căn giữa, bọc card và responsive khối gợi ý bài viết trên trang 404.
 - `e6d53cd` **15.5** Trang Case Study vào thẳng lưới dự án 3:2, không dùng lại banner trang Giới thiệu.
 - `beaabe8` **15.3b (review-fix)** Khắc phục icon chia sẻ trắng-trên-trắng: màu/viền riêng cho light và dark mode, dùng `fab fa-twitter` tương thích theme.
+
+## Blog editorial, NHÓM 17, Case Study và Admin — 2026-08-17
+
+- `e4f2f92` Blog detail nhận Article Design System, TOC desktop và khung nội dung mới.
+- `5ed5977` Sửa TOC Blog sticky bằng cách cho aside stretch để có khoảng cuộn.
+- `fd0eabe` Admin Blog/Khóa học cho phép nhập slug, chuẩn hóa và chống trùng.
+- `009cd82` Cân bằng card hai cột và thêm fallback cho thanh skill/progress.
+- `e1d7080` Thêm fallback 1.5 giây cho các animation text-reveal bị kẹt.
+- `0211ac5` Ẩn shape gây rối và căn giữa các section có ít nội dung.
+- `f27426d` Cân lại banner trang Giới thiệu cho desktop/mobile và hai theme.
+- `f39c3e7` Tắt smooth scroll trên bài viết để TOC sticky hoạt động, ẩn caption trùng trên banner About.
+- `4b6d0de` Thay icon tạm của floating contact bằng SVG inline Zalo/Messenger chuẩn brand.
+- `568aa7d` Thêm migration, model, CRUD Admin và preview cho Case Study.
+- `62c1e01` Thêm detail `/portfolio/{slug}`, SEO/KPI và fallback Case Study public/home.
+- `eb3ca9a` Căn giữa Blog khi không có TOC và bật Image Caption cho CKEditor Blog.
+- `9ad07f5` Chỉ giữ một logo Admin ở sidebar và nâng tương phản menu.

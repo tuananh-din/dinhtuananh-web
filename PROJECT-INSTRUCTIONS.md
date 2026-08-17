@@ -210,3 +210,29 @@ Xem lịch sử thay đổi đã commit trong `docs/project-changelog.md` và h�
 - Header public đánh dấu mục hiện tại bằng `active` và `aria-current`; áp dụng cho cả desktop/mobile, gồm trang chi tiết Blog và Khóa học.
 - Select public, nút chia sẻ Blog, gợi ý 404 và lưới Case Study đã có style riêng cho light/dark, responsive và trạng thái hover/focus. Icon X dùng `fab fa-twitter` theo Font Awesome của theme.
 - `/portfolio` dùng dữ liệu ảnh type `0` có sẵn và hiển thị lưới case study tỷ lệ 3:2; không cần query hay route mới.
+
+## 12. Blog editorial, Case Study và NHÓM 17
+
+### Blog detail: Article Design System
+
+- Trang chi tiết Blog dùng `public/site/assets/css/article.css`. Mọi selector trong file phải scope dưới `.article-page` hoặc `body.is-article`, không thêm `!important`; file này nạp sau `custom.css` trong layout public.
+- Ở desktop từ 1200px, layout là hai cột nội dung/TOC; `.blog-toc` sticky `top:110px`. Smooth scroll phá sticky khi wrapper bị `transform`, nên `main.js` không khởi tạo smooth scroll khi `body.is-article`.
+- Blog có dưới 3 heading thì script đặt `.article-layout--no-toc`, layout trở về một cột căn giữa. Từ 3 heading trở lên, TOC sidebar giữ nguyên.
+- SEO Blog đã dùng `title_seo`/`desc_seo`, sau đó mới fallback sang tiêu đề, mô tả hoặc nội dung. CKEditor Blog đã bật Image Caption; `figcaption` đã có style trong Article Design System.
+
+### Slug Admin và Case Study
+
+- Form Admin Blog và Khóa học có ô **Đường dẫn**. Để trống sẽ tự sinh từ tiêu đề; giá trị nhập được chuẩn hóa bằng `Str::slug()` và tự thêm hậu tố `-1`, `-2` khi trùng.
+- Case Study có bảng `case_studies`, CRUD/preview Admin, route public `/portfolio/{slug}` và trang chi tiết tái sử dụng `.article-page`. Trang `/portfolio` và section trang chủ ưu tiên bản ghi `is_published`, fallback về ảnh type `0` legacy khi chưa có bản ghi đã đăng.
+- **Không có** bảng `case_study_images`, gallery nhiều ảnh, caption hay `sort_order` riêng cho Case Study. Ảnh minh chứng nhiều tấm hiện được chèn trong nội dung CKEditor.
+
+### Quy ước UI đã áp dụng
+
+- NHÓM 17: mọi text-reveal theo scroll phải có fallback force hiện đủ sau tối đa 1.5 giây; không xóa hiệu ứng gốc. Shape gây rối đã được ẩn theo scope phù hợp, trong đó `.mouseCursor` đã ẩn toàn site.
+- Card hai cột desktop dùng stretch; section có 0–1 item căn giữa và giảm khoảng trống; thanh skill có fallback để hiển thị đúng phần trăm.
+- Floating contact dùng SVG inline logo brand cho Zalo/Messenger và icon điện thoại; màu nút cố định theo brand ở cả dark/light.
+
+### Bài học vận hành sau deploy
+
+- cPanel đôi khi copy thiếu file trong lần deploy đầu; deploy lại lần hai trước khi suy đoán lỗi code.
+- Khi HTML cũ vẫn hiển thị sau deploy, chạy `php artisan view:clear`. Nếu host vẫn giữ OPcache, chỉ khi được phép mới tạo file `opcache_reset` tạm để reset, kiểm tra xong phải xóa ngay và không commit file đó.

@@ -13,6 +13,7 @@ Tài liệu này dành cho người mới quản trị website. Đăng nhập t�
 | Kỹ năng | Danh sách kỹ năng/chỉ số | Trang chủ/Giới thiệu khi có dữ liệu |
 | Ngành nghề | Dịch vụ | Khu vực dịch vụ public |
 | Bài viết | Blog | `/blog` và trang bài viết |
+| Case Study | Kết quả dự án, KPI và nội dung chi tiết | `/portfolio`, `/portfolio/{slug}` |
 | Khóa học | Danh sách, landing/course detail, lead | `/courses`, `/courses/{slug}` |
 | Leads | Người gửi form tư vấn | Admin → Leads |
 | Testimonial | Nhận xét khách hàng | Trang chủ khi có dữ liệu |
@@ -119,3 +120,24 @@ Sau khi khách gửi form tư vấn hoặc đăng ký newsletter, website chuy�
 - Không thấy thay đổi: kiểm tra đã bấm lưu, đang xem đúng trang và hard refresh (`Ctrl+F5`).
 - Ảnh không hiển thị: kiểm tra file là ảnh, dưới 5 MB, và đường dẫn `/storage` của môi trường local hoạt động.
 - Không tự sửa database, `.env`, file trong `storage` hoặc source code để xử lý lỗi nội dung. Ghi lại URL, thao tác và ảnh chụp lỗi để kỹ thuật viên kiểm tra.
+
+## 9. Cập nhật Blog và Case Study
+
+### Đường dẫn và ảnh trong Blog
+
+- Ở form Blog, điền **Đường dẫn** nếu cần URL riêng. Để trống thì hệ thống tự tạo từ tiêu đề và tự xử lý slug trùng. Không cần tự bỏ dấu.
+- Hạn chế đổi Đường dẫn của bài đã đăng: link đã chia sẻ hoặc Google đã lập chỉ mục có thể thành 404.
+- Có thể chèn nhiều ảnh trong CKEditor bằng cách chèn từng ảnh. Click từng ảnh, chọn **Bật/tắt Chú thích ảnh**, rồi nhập caption; sau khi lưu, caption hiển thị dưới ảnh ở trang public.
+
+### Case Study
+
+Vào **Case Study** → **Thêm mới**. Hoàn thiện sáu phần sau, sau đó bấm lưu và dùng **Xem trước** nếu chưa muốn đăng:
+
+1. Tiêu đề, Đường dẫn và ảnh bìa.
+2. Kết quả nổi bật (dòng ngắn hiển thị trên card).
+3. Khách hàng và ngành.
+4. Nền tảng, thời gian và vai trò.
+5. Tối đa 4 cặp KPI (nhãn + giá trị); bỏ trống cặp nào thì public không hiển thị cặp đó.
+6. Nội dung, SEO title/description và checkbox Đăng case study.
+
+Case Study hiện chưa có gallery ảnh minh chứng riêng. Để chèn nhiều ảnh và caption, dùng CKEditor trong phần Nội dung theo cách hướng dẫn ở trên; không có mục gallery độc lập để nhập hay sắp xếp ảnh.
