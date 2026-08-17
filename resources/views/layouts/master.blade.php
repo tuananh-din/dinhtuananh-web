@@ -86,16 +86,19 @@
         <!--<< Main.css >>-->
         <link rel="stylesheet" href="{{ $assetVersion('site/assets/css/main.css') }}">
         <link rel="stylesheet" href="{{ $assetVersion('site/assets/css/custom.css') }}">
+        {{-- Article Design System: nap SAU custom.css. Moi selector deu scope duoi
+             `.article-page` / `body.is-article` (chi co o blog_detail.blade.php). --}}
+        <link rel="stylesheet" href="{{ $assetVersion('site/assets/css/article.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
         @stack('head')
         @stack('structured_data')
         {!! data_get($infor, 'code_header') !!}
     </head>
-    <body>
+    <body class="@yield('body_class')">
         <a class="skip-to-content" href="#main-content">Bỏ qua tới nội dung</a>
 
         @include('layouts.header')
@@ -108,7 +111,12 @@
             </div>
         </div>
 
-        @include('layouts.floating-contact')
+        {{-- Trang doc bai viet: an nut lien he noi de giam nhieu khi doc.
+             Dieu kien bam theo ROUTE NAME nen landing/service/course/blog-listing
+             khong bi anh huong. `blog` = /{slug}.html, `blog.preview` = preview Admin. --}}
+        @unless(request()->routeIs('blog', 'blog.preview'))
+            @include('layouts.floating-contact')
+        @endunless
 
        
 

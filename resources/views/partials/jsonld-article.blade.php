@@ -3,14 +3,18 @@
         '@context' => 'https://schema.org',
         '@type' => 'Article',
         'headline' => $blog->title ?? null,
-        'description' => $blog->description
-            ?: \Illuminate\Support\Str::limit(strip_tags($blog->content ?? ''), 155),
+        // Cung chuoi fallback voi <meta name="description"> o blog_detail.blade.php:
+        // desc_seo -> description -> trich tu content.
+        'description' => trim((string) ($blog->desc_seo ?? '')) ?: ($blog->description
+            ?: \Illuminate\Support\Str::limit(strip_tags($blog->content ?? ''), 155)),
         'image' => $blog->image_url ?? null,
         'datePublished' => optional($blog->created_at)->toIso8601String(),
         'dateModified' => optional($blog->updated_at)->toIso8601String(),
         'author' => array_filter([
             '@type' => 'Person',
-            'name' => data_get($infor, 'name') ?: data_get($contact, 'name'),
+            // Uu tien bang `about` (nguoi that) truoc `setting` (ten site), de khop
+            // voi ten tac gia hien o hero cua bai viet.
+            'name' => data_get($contact, 'name') ?: data_get($infor, 'name'),
         ], function ($value) {
             return !is_null($value) && $value !== '';
         }),

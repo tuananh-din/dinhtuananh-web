@@ -1,15 +1,38 @@
 @extends('layouts.master')
 @php
-    // A-4: chuẩn hoá SEO/OG cho từng bài. Ưu tiên description ngắn, fallback từ content (155 ký tự).
-    $blogDescription = \Illuminate\Support\Str::limit(
+    $blogBrand = data_get($infor, 'name', 'Personal Brand');
+
+    // SEO: uu tien gia tri Admin da nhap (title_seo / desc_seo) roi moi fallback.
+    // Truoc day 2 field nay duoc luu nhung KHONG duoc view su dung.
+    $blogDescription = trim((string) $blog->desc_seo) ?: \Illuminate\Support\Str::limit(
         strip_tags($blog->description ?: ($blog->content ?? '')),
         155
     );
-    $blogBrand = data_get($infor, 'name', 'Personal Brand');
+    $blogSeoTitle = trim((string) $blog->title_seo) ?: ($blog->title . ' | ' . $blogBrand);
+
+    // Reading time: derive tu content (200 tu/phut), khong can field trong DB.
     $blogWordCount = count(preg_split('/\s+/u', trim(strip_tags($blog->content ?? '')), -1, PREG_SPLIT_NO_EMPTY));
     $blogReadingMinutes = max(1, (int) ceil($blogWordCount / 200));
+
+    // Bien trung gian: khi nao co cot `published_at` thi chi doi 1 dong nay.
+    $blogPublishedAt = $blog->created_at;
+
+    // Tac gia: dung lai du lieu san co (bang `about` qua view composer), khong them cot.
+    $blogAuthorName = data_get($contact, 'name') ?: data_get($infor, 'name');
+    $blogAuthorAvatarRaw = trim((string) data_get($contact, 'avatar'));
+    $blogAuthorAvatar = $blogAuthorAvatarRaw
+        ? (\Illuminate\Support\Str::startsWith($blogAuthorAvatarRaw, ['http://', 'https://', '//', '/'])
+            ? $blogAuthorAvatarRaw
+            : asset($blogAuthorAvatarRaw))
+        : null;
+
+    // Cover: chi render khi bai THAT SU co anh. Accessor image_url tra ve anh
+    // placeholder khi rong -> khong dung accessor de quyet dinh hien/an.
+    $blogHasCover = !empty($blog->image);
+    $blogCover = $blogHasCover ? $blog->image_url : null;
 @endphp
-@section('page_title', $blog->title . ' | ' . $blogBrand)
+@section('body_class', 'is-article')
+@section('page_title', $blogSeoTitle)
 @section('meta_description', $blogDescription)
 @section('og_title', $blog->title)
 @section('og_description', $blogDescription)
@@ -29,48 +52,79 @@
 @if(!empty($isPreview) && $isPreview)
 <div class="container"><div class="alert alert-warning mt-3" role="status">Bản xem trước — bài chưa đăng</div></div>
 @endif
-<section class="news-grid-section1 fix">
+<article class="article-page">
     <div class="container">
-        @include('partials.breadcrumbs', ['items' => [
-            ['name' => 'Trang chủ', 'url' => route('index')],
-            ['name' => 'Blog', 'url' => route('blogs')],
-            ['name' => $blog->title],
-        ]])
-        <h1>{{ $blog->title }}</h1>
-        <div class="blog-meta">
-            <span class="post-date">{{ optional($blog->created_at)->format('d/m/Y') }}</span>
-            <span class="post-date"><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ $blogReadingMinutes }} phút đọc</span>
-        </div>
-        @if($blog->categories->isNotEmpty())
-        <div class="blog-category-list" aria-label="Chuyên mục">
-            @foreach($blog->categories as $category)
-            <a class="blog-category-chip" href="{{ route('blogs', ['category' => $category->slug]) }}">{{ $category->name }}</a>
-            @endforeach
-        </div>
-        @endif
-        @if($blog->description)
-        <p class="mb-4">{{ $blog->description }}</p>
-        @endif
-        <div class="blog-share">
-            <span>Chia sẻ:</span>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($blog->title) }}" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
-            <button type="button" class="btn-copy-link" data-copy-url="{{ url()->current() }}" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-12">
-                <div class="news-details-area">
-                    <div class="single-news-post">
-                        <nav id="blog-toc" class="blog-toc d-none" aria-label="Mục lục bài viết">
-                            <strong>Mục lục</strong>
-                            <ol></ol>
-                        </nav>
-                        <div class="news-content">
-                            {!! $blog->content !!}
-                        </div>
-                    </div>
+
+        {{-- ============================ HERO ============================ --}}
+        <header class="article-hero">
+            <div class="article-shell article-shell--title">
+                @include('partials.breadcrumbs', ['items' => [
+                    ['name' => 'Trang chủ', 'url' => route('index')],
+                    ['name' => 'Blog', 'url' => route('blogs')],
+                    ['name' => $blog->title],
+                ]])
+
+                @if($blog->categories->isNotEmpty())
+                <div class="article-hero__eyebrow" aria-label="Chuyên mục">
+                    @foreach($blog->categories as $category)
+                    <a href="{{ route('blogs', ['category' => $category->slug]) }}">{{ $category->name }}</a>
+                    @endforeach
                 </div>
-                <div class="other-blogs mt-5">
+                @endif
+
+                <h1 class="article-hero__title">{{ $blog->title }}</h1>
+
+                @if($blog->description)
+                <p class="article-hero__subtitle">{{ $blog->description }}</p>
+                @endif
+
+                <div class="article-hero__meta">
+                    @if($blogAuthorAvatar)
+                    <img class="article-hero__avatar" src="{{ $blogAuthorAvatar }}" alt="" width="36" height="36" loading="lazy">
+                    @endif
+                    @if($blogAuthorName)
+                    <span class="article-hero__author">{{ $blogAuthorName }}</span>
+                    <span class="article-hero__dot" aria-hidden="true">·</span>
+                    @endif
+                    <time datetime="{{ optional($blogPublishedAt)->toDateString() }}">{{ optional($blogPublishedAt)->format('d/m/Y') }}</time>
+                    <span class="article-hero__dot" aria-hidden="true">·</span>
+                    <span>{{ $blogReadingMinutes }} phút đọc</span>
+                </div>
+            </div>
+
+            @if($blogHasCover)
+            {{-- Cover dung container aspect-ratio 16/9 + object-fit:cover.
+                 Ly do: ImageOptimizer chi scaleDown theo chieu rong, KHONG dam bao
+                 ti le anh, va DB khong luu dimension. Container co ti le co dinh =>
+                 khong CLS; object-fit:cover => khong meo anh. Doi lai anh khong phai
+                 16:9 se bi cat bot -> day la VISUAL CROP CO CHU DICH. --}}
+            <figure class="article-hero__cover">
+                <img src="{{ $blogCover }}" alt="{{ $blog->title }}" fetchpriority="high" decoding="async">
+            </figure>
+            @endif
+        </header>
+
+        {{-- ============================ BODY ============================ --}}
+        <nav id="blog-toc" class="blog-toc d-none" aria-label="Mục lục bài viết">
+            <strong>Mục lục</strong>
+            <ol></ol>
+        </nav>
+
+        <div class="news-content">
+            {!! $blog->content !!}
+        </div>
+
+        {{-- =========================== FOOTER =========================== --}}
+        <footer class="article-footer">
+            <div class="article-shell">
+                <div class="blog-share">
+                    <span>Chia sẻ:</span>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($blog->title) }}" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
+                    <button type="button" class="btn-copy-link" data-copy-url="{{ url()->current() }}" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+                </div>
+
+                <div class="other-blogs">
                     <h3>Nhận bài viết mới qua email</h3>
                     <p>Đăng ký để không bỏ lỡ kiến thức marketing và quảng cáo thực chiến.</p>
                     <form action="{{ route('newsletter.store') }}" method="POST" class="d-flex flex-wrap gap-2" data-submit-label="Đang gửi...">
@@ -82,6 +136,7 @@
                         <button type="submit" class="theme-btn">Đăng ký</button>
                     </form>
                 </div>
+
                 @if($featuredCourse)
                 <div class="blog-course-promo mt-5">
                     <h3>Khóa học nổi bật</h3>
@@ -95,8 +150,11 @@
                     <div class="mt-3"><a class="theme-btn" href="{{ route('course.detail', $featuredCourse->slug) }}">Xem khóa học</a></div>
                 </div>
                 @endif
-                @if(!empty($otherBlogs) && $otherBlogs->isNotEmpty())
-                <div class="other-blogs mt-5">
+            </div>
+
+            @if(!empty($otherBlogs) && $otherBlogs->isNotEmpty())
+            <div class="article-related article-shell article-shell--wide">
+                <div class="other-blogs">
                     <h3>Bài viết khác</h3>
                     <div class="row g-4 mt-2">
                         @foreach($otherBlogs as $other)
@@ -121,11 +179,12 @@
                         @endforeach
                     </div>
                 </div>
-                @endif
             </div>
-        </div>
+            @endif
+        </footer>
+
     </div>
-</section>
+</article>
 @endsection
 @push('scripts')
 <script>
