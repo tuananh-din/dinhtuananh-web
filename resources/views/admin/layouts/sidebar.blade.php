@@ -1,22 +1,14 @@
 <div class="side-nav">
     <div class="side-nav-inner">
+        <div class="admin-sidebar-brand">
+            @if(data_get($infor, 'logo'))
+                <img class="admin-sidebar-logo" src="{{ asset(data_get($infor, 'logo')) }}" alt="{{ data_get($infor, 'name', 'Website') }}">
+            @else
+                <span class="admin-sidebar-brand-name">{{ data_get($infor, 'name', 'Website') }}</span>
+            @endif
+        </div>
         <ul class="side-nav-menu scrollable">
             <li class="nav-item dropdown open">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder">
-                        <i class="anticon anticon-dashboard"></i>
-                    </span>
-                    <span class="title">
-                        @if(data_get($infor, 'logo'))
-                            <img src="{{ asset(data_get($infor, 'logo')) }}" alt="{{ data_get($infor, 'name', 'Website') }}" style="max-height: 40px; width: auto;">
-                        @else
-                            {{ data_get($infor, 'name', 'Website') }}
-                        @endif
-                    </span>
-                    <span class="arrow">
-                        <i class="arrow-icon"></i>
-                    </span>
-                </a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('admin') ? 'active' : '' }}">
                         <a href="{{ route('admin.dashboard') }}">Dashboard</a>

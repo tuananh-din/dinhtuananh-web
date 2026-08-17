@@ -47,11 +47,28 @@
 }
 
 /* Branding admin: giữ theme Enlink, chỉ tinh chỉnh màu và mật độ hiển thị. */
-.admin-brand-name { display:block; color:#172036; font-size:12px; font-weight:700; line-height:1.2; white-space:nowrap; }
-.logo-white .admin-brand-name { color:#fff; }
 .side-nav { background:#172036; }
-.side-nav .side-nav-menu a { color:#e9eef7; }
-.side-nav .side-nav-menu li.active > a, .side-nav .side-nav-menu li > a:hover { color:#bff747; }
+.side-nav .admin-sidebar-brand {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height:70px;
+	padding:15px 24px;
+	border-bottom:1px solid rgba(233, 238, 247, .14);
+}
+.side-nav .admin-sidebar-logo {
+	display:block;
+	width:auto;
+	max-width:160px;
+	max-height:40px;
+	object-fit:contain;
+}
+.side-nav .admin-sidebar-brand-name { color:#d5dbe5; font-size:14px; font-weight:700; line-height:1.3; text-align:center; }
+.side-nav .side-nav-menu { height:calc(100vh - 140px); }
+.side-nav .side-nav-menu > li.dropdown ul.dropdown-menu > li > a { color:#d5dbe5; }
+.side-nav .side-nav-menu > li.dropdown ul.dropdown-menu > li.active > a { color:#bff747; background:rgba(191, 247, 71, .12); }
+.side-nav .side-nav-menu > li.dropdown ul.dropdown-menu > li > a:hover,
+.side-nav .side-nav-menu > li.dropdown ul.dropdown-menu > li > a:focus { color:#ffffff; background:rgba(213, 219, 229, .12); }
 .header { box-shadow:0 1px 12px rgba(23,32,54,.08); }
 .card { border-radius:12px; border:1px solid #e7ebf1; box-shadow:0 5px 18px rgba(23,32,54,.05); }
 .table thead th { color:#172036; border-top:0; }
