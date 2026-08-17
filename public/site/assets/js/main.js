@@ -780,13 +780,17 @@
        Smooth Scroller And Title Animation Js Start
     ================================ */
 
-	if ($('#smooth-wrapper').length && $('#smooth-content').length) {
+	const hasSmoothScrollShell = $('#smooth-wrapper').length && $('#smooth-content').length;
+    if (hasSmoothScrollShell) {
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin);
 
     gsap.config({
         nullTargetWarn: false,
     });
+    }
 
+    // Trang doc bai dung native scroll de position: sticky cua Muc luc hoat dong.
+    if (hasSmoothScrollShell && !document.body.classList.contains('is-article')) {
     // Initialize ScrollSmoother
     let smoother = ScrollSmoother.create({
         wrapper: "#smooth-wrapper",

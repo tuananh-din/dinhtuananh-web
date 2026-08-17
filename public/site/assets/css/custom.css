@@ -1329,12 +1329,8 @@ html[data-theme="light"] .hero-section1 .line-shape {
 }
 
 .about-banner-copy {
-    position: absolute;
-    inset: auto 32px 28px;
-    display: grid;
-    gap: 2px;
-    color: #ffffff;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, .65);
+    display: none;
+    /* bat lai khi banner doi sang anh khong co chu san */
 }
 
 .about-banner-copy strong {
