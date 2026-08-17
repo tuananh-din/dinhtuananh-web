@@ -85,6 +85,22 @@
 
         <div class="news-content">{!! $caseStudy->content !!}</div>
 
+        @if($caseStudy->images->isNotEmpty())
+        <section class="case-study-gallery article-shell" aria-labelledby="case-study-gallery-title">
+            <h2 id="case-study-gallery-title">Hình ảnh minh chứng</h2>
+            <div class="case-study-gallery__grid">
+                @foreach($caseStudy->images as $galleryImage)
+                <figure class="case-study-gallery__item">
+                    <a href="{{ $galleryImage->image_url }}" class="img-popup" title="{{ $galleryImage->caption }}">
+                        <img src="{{ $galleryImage->image_url }}" alt="{{ $galleryImage->caption ?: $caseStudy->title }}" loading="lazy" decoding="async">
+                    </a>
+                    @if($galleryImage->caption)<figcaption>{{ $galleryImage->caption }}</figcaption>@endif
+                </figure>
+                @endforeach
+            </div>
+        </section>
+        @endif
+
         <footer class="article-footer">
             <div class="case-study-cta article-shell">
                 <h2>Bạn muốn kết quả tương tự?</h2>

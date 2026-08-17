@@ -261,6 +261,60 @@ html[data-theme="light"] .article-page {
     color: var(--article-muted);
 }
 
+/* Case study: gallery anh minh chung. */
+.article-page .case-study-gallery {
+    margin-top: clamp(42px, 6vw, 72px);
+    margin-bottom: clamp(48px, 7vw, 88px);
+}
+
+.article-page .case-study-gallery h2 {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-size: clamp(24px, 2.4vw, 34px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--article-strong);
+    margin-bottom: 24px;
+}
+
+.article-page .case-study-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.article-page .case-study-gallery__item {
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--article-rule);
+    border-radius: 12px;
+    background: var(--article-surface);
+}
+
+.article-page .case-study-gallery__item a {
+    display: block;
+}
+
+.article-page .case-study-gallery__item img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform .25s ease;
+}
+
+.article-page .case-study-gallery__item a:hover img,
+.article-page .case-study-gallery__item a:focus-visible img {
+    transform: scale(1.03);
+}
+
+.article-page .case-study-gallery__item figcaption {
+    padding: 12px 14px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--article-muted);
+}
+
 /* Cover.
    QUAN TRONG: upload cover di qua App\Support\ImageOptimizer::encode() ->
    scaleDown(width:1600), CHI gioi han chieu rong, GIU NGUYEN ti le goc.
@@ -821,6 +875,11 @@ body.is-article .mouseCursor {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 18px 16px;
     }
+
+    .article-page .case-study-gallery__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -864,6 +923,10 @@ body.is-article .mouseCursor {
 
     .article-page .news-content table {
         min-width: 420px;
+    }
+
+    .article-page .case-study-gallery__grid {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 

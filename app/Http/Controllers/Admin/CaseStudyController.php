@@ -156,6 +156,6 @@ class CaseStudyController extends Controller
         $this->deleteManagedUpload($image->image);
         $image->delete();
 
-        return redirect()->back()->with('success', 'ÄÃ£ xÃ³a áº£nh minh chá»©ng thÃ nh cÃ´ng.');
+        return redirect()->back()->with('success', 'Đã xóa ảnh minh chứng thành công.');
     }
 }
