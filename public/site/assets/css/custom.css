@@ -992,14 +992,15 @@ html[data-theme="light"] .lead-form-shell .form-note {
     outline: 3px solid #ffffff;
     outline-offset: 3px;
 }
-.floating-contact__button--phone { background: #16803d; }
+.floating-contact__button--phone { background: #16a34a; }
 .floating-contact__button--zalo { background: #0068ff; }
 .floating-contact__button--messenger { background: #0084ff; }
-.floating-contact__zalo {
-    font-family: Arial, sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-    line-height: 1;
+.floating-contact__icon {
+    display: block;
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
 }
 @media (max-width: 767px) {
     .floating-contact {
