@@ -16,7 +16,7 @@
                     <h1 class="brand-hero-title wow fadeInUp" data-wow-delay=".2s">
                         <span class="title-name">{{ $about->name }}</span>
                         <span class="title-sub">gi&#250;p doanh nghi&#7879;p v&#224; marketer</span>
-                        <strong id="typing-text"></strong>
+                        <strong id="typing-text">{{ $words[0] ?? '' }}</strong>
                     </h1>
                     <p class="wow fadeInUp" data-wow-delay=".3s">
                         {{ $about->description }}

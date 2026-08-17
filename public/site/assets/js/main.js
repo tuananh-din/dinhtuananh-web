@@ -1824,6 +1824,66 @@ text_slider.on('slideChangeTransitionStart', function () {
     })(jQuery);
     // Type Text Area End
 
+    /* Fallback chung: text animation khong duoc phep bi ket o trang thai an. */
+    (function () {
+        const selectors = [
+            '.text_invert',
+            '.text_invert-2',
+            '.wt-about-title2',
+            '.footer-big-text',
+            '.tv_hero_title',
+            '#typing-text'
+        ];
+
+        function revealText(element) {
+            element.style.opacity = '1';
+            element.style.visibility = 'visible';
+            element.style.transform = 'none';
+
+            if (element.matches('.text_invert, .text_invert-2')) {
+                element.querySelectorAll('div').forEach((line) => {
+                    line.style.backgroundImage = 'none';
+                    line.style.backgroundPositionX = '0';
+                    line.style.webkitBackgroundClip = 'border-box';
+                    line.style.backgroundClip = 'border-box';
+                    line.style.color = 'var(--header)';
+                });
+            }
+
+            element.querySelectorAll('.split-word, .split-line, .char, .word').forEach((part) => {
+                part.style.opacity = '1';
+                part.style.visibility = 'visible';
+                part.style.transform = 'none';
+                part.style.color = 'inherit';
+            });
+        }
+
+        function scheduleFallback(element) {
+            let timer;
+            const queueReveal = () => {
+                window.clearTimeout(timer);
+                timer = window.setTimeout(() => revealText(element), 1500);
+            };
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) return;
+                        queueReveal();
+                        observer.unobserve(entry.target);
+                    });
+                }, { threshold: 0.05 });
+                observer.observe(element);
+            } else {
+                queueReveal();
+            }
+
+            window.setTimeout(() => revealText(element), 1500);
+        }
+
+        document.querySelectorAll(selectors.join(',')).forEach(scheduleFallback);
+    })();
+
 
   
   })(jQuery); // End jQuery
