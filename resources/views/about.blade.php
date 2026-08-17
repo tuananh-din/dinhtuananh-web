@@ -16,6 +16,10 @@
             </h3>
             <div class="about-image fix">
                 <img data-speed=".7" src="{{ $image->image ?? $about->avatar ?? 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $about->name }}">
+                <div class="about-banner-copy">
+                    <strong>{{ $about->name }}</strong>
+                    <span>Digital media</span>
+                </div>
             </div>
         </div>
     </div>
