@@ -100,6 +100,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{id}', [AdminCaseStudyController::class, 'edit'])->name('case-study.edit');
             Route::get('/preview/{id}', [AdminCaseStudyController::class, 'preview'])->name('case-study.preview');
             Route::post('store', [AdminCaseStudyController::class, 'store'])->name('case-study.store');
+            Route::post('/image/delete/{id}', [AdminCaseStudyController::class, 'deleteImage'])->name('case-study.image.delete');
             Route::post('/delete/{id}', [AdminCaseStudyController::class, 'delete'])->name('case-study.delete');
         });
         Route::prefix('category')->group(function () {

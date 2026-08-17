@@ -27,6 +27,31 @@
                 <small class="form-text text-muted">Để trống để giữ ảnh hiện tại.</small>
                 @error('image')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
             </div>
+            <div class="form-group">
+                <label for="gallery_images">Thêm ảnh minh chứng</label>
+                <input id="gallery_images" type="file" name="gallery_images[]" accept="image/*" multiple class="form-control-file @error('gallery_images.*') is-invalid @enderror">
+                <small class="form-text text-muted">Chọn nhiều ảnh, mỗi ảnh tối đa 5 MB. Ảnh mới không làm mất ảnh đã có.</small>
+                @error('gallery_images.*')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+            </div>
+            @if($caseStudy->images->isNotEmpty())
+            <div class="form-group">
+                <label>Ảnh minh chứng đã tải</label>
+                <div class="row">
+                    @foreach($caseStudy->images as $galleryImage)
+                    <div class="col-md-6 mb-3">
+                        <div class="border rounded p-2 h-100">
+                            <img src="{{ $galleryImage->image_url }}" alt="" class="img-fluid mb-2" height="180">
+                            <label for="gallery_caption_{{ $galleryImage->id }}" class="small">Chú thích</label>
+                            <input id="gallery_caption_{{ $galleryImage->id }}" name="gallery[{{ $galleryImage->id }}][caption]" value="{{ old('gallery.'.$galleryImage->id.'.caption', $galleryImage->caption) }}" class="form-control form-control-sm mb-2">
+                            <label for="gallery_sort_order_{{ $galleryImage->id }}" class="small">Thứ tự</label>
+                            <input id="gallery_sort_order_{{ $galleryImage->id }}" type="number" min="0" name="gallery[{{ $galleryImage->id }}][sort_order]" value="{{ old('gallery.'.$galleryImage->id.'.sort_order', $galleryImage->sort_order) }}" class="form-control form-control-sm mb-2">
+                            <button type="submit" form="gallery-image-delete-{{ $galleryImage->id }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Xóa ảnh minh chứng này?');">Xóa ảnh</button>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @endif
             <div class="form-group"><label for="summary">Kết quả nổi bật</label><textarea id="summary" name="summary" rows="3" maxlength="500" class="form-control">{{ old('summary', $caseStudy->summary) }}</textarea></div>
             <div class="form-row">
                 <div class="form-group col-md-6"><label for="client">Khách hàng</label><input id="client" name="client" value="{{ old('client', $caseStudy->client) }}" class="form-control"></div>
@@ -48,6 +73,11 @@
             <div class="form-check mb-3"><input id="is_published" name="is_published" value="1" type="checkbox" class="form-check-input" {{ old('is_published', $caseStudy->is_published) ? 'checked' : '' }}><label for="is_published" class="form-check-label">Đăng case study</label></div>
             <button class="btn btn-success btn-tone">Lưu thay đổi</button>
         </form>
+        @foreach($caseStudy->images as $galleryImage)
+        <form id="gallery-image-delete-{{ $galleryImage->id }}" action="{{ route('case-study.image.delete', $galleryImage->id) }}" method="POST">
+            @csrf
+        </form>
+        @endforeach
     </div></div>
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>

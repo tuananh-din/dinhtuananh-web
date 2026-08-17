@@ -3,14 +3,24 @@
 namespace Tests\Feature;
 
 use App\Models\CaseStudy;
+use App\Models\CaseStudyImage;
 use App\Models\Image;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class CaseStudyAdminTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Storage::fake('local');
+    }
 
     public function test_admin_can_create_update_and_delete_a_case_study(): void
     {
@@ -109,5 +119,82 @@ class CaseStudyAdminTest extends TestCase
 
         $this->get(route('portfolio'))->assertOk()->assertSee('Dự án ảnh cũ');
         $this->get(route('index'))->assertOk()->assertSee('Dự án ảnh cũ');
+    }
+
+    public function test_admin_can_upload_update_and_delete_individual_gallery_images(): void
+    {
+        $caseStudy = CaseStudy::create([
+            'title' => 'Gallery Case Study',
+            'slug' => 'gallery-case-study',
+            'content' => '<p>Noi dung</p>',
+        ]);
+        $user = User::factory()->create();
+        $payload = [
+            'id' => $caseStudy->id,
+            'title' => $caseStudy->title,
+            'slug' => $caseStudy->slug,
+            'content' => $caseStudy->content,
+            'gallery_images' => [
+                UploadedFile::fake()->image('proof-one.jpg'),
+                UploadedFile::fake()->image('proof-two.jpg'),
+            ],
+        ];
+
+        $this->actingAs($user)->post(route('case-study.store'), $payload)->assertSessionHasNoErrors();
+
+        $images = $caseStudy->fresh()->images;
+        $this->assertCount(2, $images);
+        $first = $images->first();
+        $second = $images->last();
+        Storage::assertExists(str_replace('/storage/', 'public/', $first->image));
+        Storage::assertExists(str_replace('/storage/', 'public/', $second->image));
+
+        $this->actingAs($user)->post(route('case-study.store'), [
+            'id' => $caseStudy->id,
+            'title' => $caseStudy->title,
+            'slug' => $caseStudy->slug,
+            'content' => $caseStudy->content,
+            'gallery' => [
+                $first->id => ['caption' => 'Anh sau', 'sort_order' => 20],
+                $second->id => ['caption' => 'Anh truoc', 'sort_order' => 10],
+            ],
+        ])->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('case_study_images', ['id' => $first->id, 'caption' => 'Anh sau', 'sort_order' => 20]);
+        $this->assertDatabaseHas('case_study_images', ['id' => $second->id, 'caption' => 'Anh truoc', 'sort_order' => 10]);
+
+        $this->actingAs($user)->post(route('case-study.image.delete', $first->id))->assertSessionHasNoErrors();
+
+        $this->assertDatabaseMissing('case_study_images', ['id' => $first->id]);
+        $this->assertDatabaseHas('case_study_images', ['id' => $second->id]);
+        Storage::assertMissing(str_replace('/storage/', 'public/', $first->image));
+        Storage::assertExists(str_replace('/storage/', 'public/', $second->image));
+    }
+
+    public function test_public_detail_renders_gallery_in_sort_order_and_hides_it_when_empty(): void
+    {
+        $withGallery = CaseStudy::create([
+            'title' => 'Case co gallery',
+            'slug' => 'case-co-gallery',
+            'content' => '<p>Noi dung</p>',
+            'is_published' => true,
+        ]);
+        CaseStudyImage::create(['case_study_id' => $withGallery->id, 'image' => '/storage/images/late.jpg', 'caption' => 'Anh sau', 'sort_order' => 20]);
+        CaseStudyImage::create(['case_study_id' => $withGallery->id, 'image' => '/storage/images/early.jpg', 'caption' => 'Anh truoc', 'sort_order' => 10]);
+
+        $response = $this->get(route('portfolio.detail', $withGallery->slug))->assertOk()->assertSee('Hình ảnh minh chứng');
+        $this->assertLessThan(
+            strpos($response->getContent(), 'Anh sau'),
+            strpos($response->getContent(), 'Anh truoc')
+        );
+
+        $withoutGallery = CaseStudy::create([
+            'title' => 'Case khong gallery',
+            'slug' => 'case-khong-gallery',
+            'content' => '<p>Noi dung</p>',
+            'is_published' => true,
+        ]);
+
+        $this->get(route('portfolio.detail', $withoutGallery->slug))->assertOk()->assertDontSee('Hình ảnh minh chứng');
     }
 }

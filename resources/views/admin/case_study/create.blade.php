@@ -26,6 +26,12 @@
                 @error('image')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
             </div>
             <div class="form-group">
+                <label for="gallery_images">Ảnh minh chứng</label>
+                <input id="gallery_images" type="file" name="gallery_images[]" accept="image/*" multiple class="form-control-file @error('gallery_images.*') is-invalid @enderror">
+                <small class="form-text text-muted">Có thể chọn nhiều ảnh, mỗi ảnh tối đa 5 MB. Sau khi lưu, có thể nhập chú thích và thứ tự hiển thị.</small>
+                @error('gallery_images.*')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+            </div>
+            <div class="form-group">
                 <label for="summary">Kết quả nổi bật</label>
                 <textarea id="summary" name="summary" rows="3" maxlength="500" class="form-control">{{ old('summary') }}</textarea>
                 <small class="form-text text-muted">Dòng kết quả đắt nhất, tối đa 500 ký tự.</small>

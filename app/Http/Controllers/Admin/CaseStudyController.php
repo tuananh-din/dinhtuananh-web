@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CaseStudy;
+use App\Models\CaseStudyImage;
 use App\Support\ImageOptimizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,12 +26,12 @@ class CaseStudyController extends Controller
 
     public function edit($id)
     {
-        return view('admin.case_study.edit', ['caseStudy' => CaseStudy::findOrFail($id)]);
+        return view('admin.case_study.edit', ['caseStudy' => CaseStudy::with('images')->findOrFail($id)]);
     }
 
     public function preview($id)
     {
-        $caseStudy = CaseStudy::findOrFail($id);
+        $caseStudy = CaseStudy::with('images')->findOrFail($id);
 
         return view('case_study_detail', compact('caseStudy') + ['isPreview' => !$caseStudy->is_published]);
     }
@@ -58,6 +59,11 @@ class CaseStudyController extends Controller
             'content' => 'required|string',
             'title_seo' => 'nullable|string|max:255',
             'desc_seo' => 'nullable|string',
+            'gallery_images' => 'nullable|array',
+            'gallery_images.*' => 'image|max:5120',
+            'gallery' => 'nullable|array',
+            'gallery.*.caption' => 'nullable|string|max:255',
+            'gallery.*.sort_order' => 'nullable|integer|min:0',
         ]);
 
         $id = $request->id;
@@ -87,7 +93,7 @@ class CaseStudyController extends Controller
             $counter++;
         }
 
-        CaseStudy::query()->updateOrCreate(
+        $caseStudy = CaseStudy::query()->updateOrCreate(
             ['id' => $id],
             array_merge($request->only([
                 'title', 'summary', 'client', 'industry', 'platforms', 'duration', 'role',
@@ -101,6 +107,27 @@ class CaseStudyController extends Controller
             ])
         );
 
+        foreach ($request->input('gallery', []) as $imageId => $attributes) {
+            $caseStudy->images()
+                ->whereKey($imageId)
+                ->update([
+                    'caption' => $attributes['caption'] ?? null,
+                    'sort_order' => $attributes['sort_order'] ?? 0,
+                ]);
+        }
+
+        $nextSortOrder = (int) $caseStudy->images()->max('sort_order');
+
+        foreach ($request->file('gallery_images', []) as $file) {
+            $path = $file->hashName('public/images');
+            Storage::put($path, ImageOptimizer::encode($file));
+
+            $caseStudy->images()->create([
+                'image' => Storage::url($path),
+                'sort_order' => ++$nextSortOrder,
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Đã lưu case study thành công.');
     }
 
@@ -112,9 +139,23 @@ class CaseStudyController extends Controller
             return redirect()->back()->with('error', 'Không tìm thấy case study.');
         }
 
+        $caseStudy->load('images');
         $this->deleteManagedUpload($caseStudy->image);
+        foreach ($caseStudy->images as $image) {
+            $this->deleteManagedUpload($image->image);
+        }
         $caseStudy->delete();
 
         return redirect()->back()->with('success', 'Đã xóa case study thành công.');
+    }
+
+    public function deleteImage($id)
+    {
+        $image = CaseStudyImage::findOrFail($id);
+
+        $this->deleteManagedUpload($image->image);
+        $image->delete();
+
+        return redirect()->back()->with('success', 'ÄÃ£ xÃ³a áº£nh minh chá»©ng thÃ nh cÃ´ng.');
     }
 }

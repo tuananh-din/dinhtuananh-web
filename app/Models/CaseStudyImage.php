@@ -6,27 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class CaseStudy extends Model
+class CaseStudyImage extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    protected $casts = [
-        'is_published' => 'boolean',
-    ];
-
-    public function images()
+    public function caseStudy()
     {
-        return $this->hasMany(CaseStudyImage::class)->orderBy('sort_order')->orderBy('id');
+        return $this->belongsTo(CaseStudy::class);
     }
 
     public function getImageUrlAttribute(): string
     {
-        if (empty($this->image)) {
-            return asset('app/assets/images/others/thumb-16.jpg');
-        }
-
         return Str::startsWith($this->image, ['http://', 'https://', '//', '/'])
             ? $this->image
             : asset($this->image);
