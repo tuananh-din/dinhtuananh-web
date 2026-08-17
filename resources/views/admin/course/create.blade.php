@@ -31,8 +31,9 @@
                                     @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Slug (&#273;&#7875; tr&#7889;ng s&#7869; t&#7921; t&#7841;o)</label>
+                                    <label>Đường dẫn</label>
                                     <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') }}">
+                                    <small class="form-text text-muted">URL: {{ url('/courses/duong-dan') }}. Để trống để tự tạo từ tiêu đề.</small>
                                     @error('slug')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">

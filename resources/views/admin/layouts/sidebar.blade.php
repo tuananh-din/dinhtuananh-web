@@ -6,7 +6,13 @@
                     <span class="icon-holder">
                         <i class="anticon anticon-dashboard"></i>
                     </span>
-                    <span class="title">{{ data_get($infor, 'name', 'Website') }}</span>
+                    <span class="title">
+                        @if(data_get($infor, 'logo'))
+                            <img src="{{ asset(data_get($infor, 'logo')) }}" alt="{{ data_get($infor, 'name', 'Website') }}" style="max-height: 40px; width: auto;">
+                        @else
+                            {{ data_get($infor, 'name', 'Website') }}
+                        @endif
+                    </span>
                     <span class="arrow">
                         <i class="arrow-icon"></i>
                     </span>

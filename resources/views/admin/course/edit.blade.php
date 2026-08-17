@@ -33,8 +33,10 @@
                                     @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Slug</label>
+                                    <label>Đường dẫn</label>
                                     <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug', $course->slug) }}">
+                                    <small class="form-text text-muted">URL: {{ url('/courses/duong-dan') }}</small>
+                                    <small class="form-text text-warning">⚠ Đổi đường dẫn của bài ĐÃ ĐĂNG sẽ làm link cũ (đã chia sẻ/Google index) thành 404. Chỉ nên đổi khi bài mới đăng.</small>
                                     @error('slug')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group">

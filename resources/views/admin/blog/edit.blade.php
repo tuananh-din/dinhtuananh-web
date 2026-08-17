@@ -29,12 +29,19 @@
                                    
                                     <div class="form-group">
                                             <label for="title">Tiêu đề (*)</label>
-                                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title', $blog->title) }}">
-                                            <span class="mess-error" id="title_error"></span>
-                                            @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                                        </div>
+                                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title', $blog->title) }}">
+                                    <span class="mess-error" id="title_error"></span>
+                                    @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="slug">Đường dẫn</label>
+                                    <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" id="slug" value="{{ old('slug', $blog->slug) }}">
+                                    <small class="form-text text-muted">URL: {{ url('/duong-dan.html') }}</small>
+                                    <small class="form-text text-warning">⚠ Đổi đường dẫn của bài ĐÃ ĐĂNG sẽ làm link cũ (đã chia sẻ/Google index) thành 404. Chỉ nên đổi khi bài mới đăng.</small>
+                                    @error('slug')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                </div>
 
-                                    <div class="form-group">
+                                <div class="form-group">
                                         <label for="description">Mô tả</label>
                                         <textarea  name="description" class="form-control" id="description"  rows="6">{{$blog->description}}</textarea>
                                     </div>

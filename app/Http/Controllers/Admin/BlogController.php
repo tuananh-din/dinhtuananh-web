@@ -50,6 +50,7 @@ class BlogController extends Controller
     public function store(Request $request){
         $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|image|max:5120',
             'categories' => 'nullable|array',
@@ -70,26 +71,22 @@ class BlogController extends Controller
             $image = $blog->image ?? null;
         }
 
-        if ($blog) {
-            $slug = $blog->slug;
-        } else {
-            $baseSlug = Str::slug($request->title);
-            if (!$baseSlug) {
-                $baseSlug = 'blog';
-            }
+        $baseSlug = Str::slug($request->slug ?: $request->title);
+        if (!$baseSlug) {
+            $baseSlug = 'blog';
+        }
 
-            $slug = $baseSlug;
-            $counter = 1;
-            while (
-                Blog::where('slug', $slug)
-                    ->when($id, function ($query) use ($id) {
-                        $query->where('id', '!=', $id);
-                    })
-                    ->exists()
-            ) {
-                $slug = $baseSlug . '-' . $counter;
-                $counter++;
-            }
+        $slug = $baseSlug;
+        $counter = 1;
+        while (
+            Blog::where('slug', $slug)
+                ->when($id, function ($query) use ($id) {
+                    $query->where('id', '!=', $id);
+                })
+                ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
         }
 
         // Chuẩn bị dữ liệu sản phẩm

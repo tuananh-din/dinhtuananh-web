@@ -31,6 +31,12 @@
                                             <span class="mess-error" id="title_error"></span>
                                             @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                         </div>
+                                    <div class="form-group">
+                                        <label for="slug">Đường dẫn</label>
+                                        <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" id="slug" value="{{ old('slug') }}">
+                                        <small class="form-text text-muted">URL: {{ url('/duong-dan.html') }}. Để trống để tự tạo từ tiêu đề.</small>
+                                        @error('slug')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    </div>
 
                                     <div class="form-group">
                                         <label for="description">Mô tả</label>

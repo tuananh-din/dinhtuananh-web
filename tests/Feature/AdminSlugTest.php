@@ -12,7 +12,7 @@ class AdminSlugTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_blog_keeps_its_slug_when_edited_and_adds_suffix_for_duplicate_title(): void
+    public function test_blog_accepts_a_custom_slug_when_created_and_edited(): void
     {
         $user = User::factory()->create();
         $blog = Blog::create([
@@ -22,36 +22,56 @@ class AdminSlugTest extends TestCase
         ]);
 
         $this->actingAs($user)->post(route('blog.store'), [
+            'title' => 'Bài viết có đường dẫn riêng',
+            'slug' => 'Đường Dẫn Tự Nhập!',
+            'content' => 'Nội dung mới',
+        ])->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('blogs', [
+            'slug' => 'duong-dan-tu-nhap',
+        ]);
+
+        $this->actingAs($user)->post(route('blog.store'), [
             'id' => $blog->id,
             'title' => 'Tiêu đề hoàn toàn mới',
+            'slug' => 'Đường Dẫn Đã Sửa',
             'content' => 'Nội dung đã sửa',
         ])->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas('blogs', [
             'id' => $blog->id,
-            'slug' => 'slug-ban-dau',
+            'slug' => 'duong-dan-da-sua',
+        ]);
+
+        Blog::create([
+            'title' => 'Đường dẫn trùng',
+            'slug' => 'duong-dan-trung',
+            'content' => 'Nội dung có sẵn',
         ]);
 
         $this->actingAs($user)->post(route('blog.store'), [
-            'title' => 'Tiêu đề hoàn toàn mới',
-            'content' => 'Nội dung trùng thứ nhất',
+            'title' => 'Tiêu đề fallback',
+            'slug' => 'Đường Dẫn Trùng',
+            'content' => 'Nội dung trùng',
         ])->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('blogs', ['slug' => 'duong-dan-trung-1']);
 
         $this->actingAs($user)->post(route('blog.store'), [
-            'title' => 'Tiêu đề hoàn toàn mới',
-            'content' => 'Nội dung trùng thứ hai',
+            'title' => 'Tiêu đề fallback',
+            'content' => 'Nội dung tự sinh đường dẫn',
         ])->assertSessionHasNoErrors();
 
-        $this->assertDatabaseHas('blogs', ['slug' => 'tieu-de-hoan-toan-moi']);
-        $this->assertDatabaseHas('blogs', ['slug' => 'tieu-de-hoan-toan-moi-1']);
+        $this->assertDatabaseHas('blogs', ['slug' => 'tieu-de-fallback']);
     }
 
-    public function test_course_generates_slug_from_title_and_adds_suffix_for_duplicate_slug(): void
+    public function test_course_normalizes_a_custom_slug_and_falls_back_to_title(): void
     {
         $user = User::factory()->create();
 
         $this->actingAs($user)->post(route('course.store'), [
             'title' => 'Khóa học Facebook Ads',
+            'slug' => 'Khóa Học Tự Nhập!',
             'short_description' => 'Mô tả ngắn',
         ])->assertSessionHasNoErrors();
 
@@ -60,7 +80,47 @@ class AdminSlugTest extends TestCase
             'short_description' => 'Mô tả ngắn khác',
         ])->assertSessionHasNoErrors();
 
+        $this->assertDatabaseHas('courses', ['slug' => 'khoa-hoc-tu-nhap']);
         $this->assertDatabaseHas('courses', ['slug' => 'khoa-hoc-facebook-ads']);
-        $this->assertDatabaseHas('courses', ['slug' => 'khoa-hoc-facebook-ads-1']);
+    }
+
+    public function test_blog_adds_a_suffix_when_a_custom_slug_is_already_in_use(): void
+    {
+        $user = User::factory()->create();
+        Blog::create([
+            'title' => 'Bài viết có sẵn',
+            'slug' => 'duong-dan-da-dung',
+            'content' => 'Nội dung có sẵn',
+        ]);
+
+        $this->actingAs($user)->post(route('blog.store'), [
+            'title' => 'Bài viết mới',
+            'slug' => 'Đường Dẫn Đã Dùng',
+            'content' => 'Nội dung mới',
+        ])->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('blogs', ['slug' => 'duong-dan-da-dung-1']);
+    }
+
+    public function test_course_can_update_its_custom_slug(): void
+    {
+        $user = User::factory()->create();
+        $course = Course::create([
+            'title' => 'Khóa học hiện có',
+            'slug' => 'khoa-hoc-cu',
+            'short_description' => 'Mô tả ngắn',
+        ]);
+
+        $this->actingAs($user)->post(route('course.store'), [
+            'id' => $course->id,
+            'title' => 'Khóa học hiện có',
+            'slug' => 'Khóa Học Đường Dẫn Mới',
+            'short_description' => 'Mô tả ngắn đã sửa',
+        ])->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('courses', [
+            'id' => $course->id,
+            'slug' => 'khoa-hoc-duong-dan-moi',
+        ]);
     }
 }
