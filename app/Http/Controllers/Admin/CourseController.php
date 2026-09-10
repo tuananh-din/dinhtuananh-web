@@ -47,7 +47,10 @@ class CourseController extends Controller
         if ($testimonials->isEmpty()) {
             $testimonials = \App\Models\Testimonial::where('is_active', 1)->orderBy('sort_order')->orderByDesc('id')->take(3)->get();
         }
-        return view('course_detail', compact('course', 'testimonials') + ['isPreview' => !$course->is_active]);
+        $view = $course->slug === 'digital-performance-management'
+            ? 'courses.digital-performance' : 'course_detail';
+
+        return view($view, compact('course', 'testimonials') + ['isPreview' => !$course->is_active]);
     }
 
     public function store(Request $request)

@@ -790,7 +790,7 @@
     }
 
     // Trang doc bai dung native scroll de position: sticky cua Muc luc hoat dong.
-    if (hasSmoothScrollShell && !document.body.classList.contains('is-article')) {
+    if (hasSmoothScrollShell && !document.body.classList.contains('is-article') && !document.body.classList.contains('is-dpm')) {
     // Initialize ScrollSmoother
     let smoother = ScrollSmoother.create({
         wrapper: "#smooth-wrapper",

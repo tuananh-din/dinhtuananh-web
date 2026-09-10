@@ -38,6 +38,9 @@ class CourseController extends Controller
                 ->get();
         }
 
-        return view('course_detail', compact('course', 'testimonials'));
+        $view = $course->slug === 'digital-performance-management'
+            ? 'courses.digital-performance' : 'course_detail';
+
+        return view($view, compact('course', 'testimonials'));
     }
 }
