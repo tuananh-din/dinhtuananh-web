@@ -155,11 +155,23 @@ html[data-theme="light"] .dpm-page{--ink:var(--header,#171a1f);--muted:#6b7280;-
 /* Balance imagery with the course introduction and the full instructor bio. */
 @media(min-width:761px){
   .dpm-page .dpm-hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
-  .dpm-page .dpm-hero-visual img{height:clamp(480px,42vw,600px);aspect-ratio:auto;object-position:58% center}
+  .dpm-page .dpm-hero-visual img{height:auto;aspect-ratio:3/2;object-fit:contain;object-position:center}
   .dpm-page .dpm-instructor{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:48px;align-items:start}
-  .dpm-page .dpm-portrait{min-height:0;aspect-ratio:4/5}
-  .dpm-page .dpm-portrait>img{height:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top}
+  .dpm-page .dpm-portrait{min-height:0;aspect-ratio:auto}
+  .dpm-page .dpm-portrait>img{height:clamp(420px,42vw,580px);aspect-ratio:auto;object-fit:contain;object-position:center top}
 }
 @media(min-width:761px) and (max-width:1000px){
   .dpm-page .dpm-hero-grid,.dpm-page .dpm-instructor{gap:28px}
+}
+.dpm-page .dpm-hero-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}
+.dpm-page .dpm-hero-facts strong{display:block;font-size:18px;font-weight:600;color:var(--ink)}
+.dpm-page .dpm-hero-facts span{display:block;font-size:11px;color:var(--muted);margin-top:5px}
+.dpm-page .dpm-profile-summary{font-size:15px;line-height:1.85;color:var(--muted);margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}
+.dpm-page .dpm-instructor-profile{min-width:0}
+@media(max-width:760px){
+  .dpm-page .dpm-portrait{min-height:0;aspect-ratio:auto}
+  .dpm-page .dpm-portrait>img{height:auto;aspect-ratio:auto;object-fit:contain}
+  .dpm-page .dpm-monogram{min-height:340px}
+  .dpm-page .dpm-hero-facts{gap:12px}
+  .dpm-page .dpm-hero-facts strong{font-size:16px}
 }

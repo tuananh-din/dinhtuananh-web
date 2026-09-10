@@ -35,7 +35,10 @@
    <div class="dpm-actions"><a class="dpm-button" href="#dang-ky">Đăng ký tư vấn <span aria-hidden="true">↗</span></a><a class="dpm-text-link" href="#lo-trinh">Khám phá lộ trình ↓</a></div>
    <p class="dpm-hero-note">Video bài giảng · Thực hành · Nhóm hỏi đáp, chữa bài</p>
   </div>
-  <figure class="dpm-hero-visual"><img src="{{ asset('site/assets/img/courses/digital-performance-workspace.png') }}" width="1536" height="1024" fetchpriority="high" alt="Không gian làm việc với laptop hiển thị biểu đồ phân tích Marketing màu lime trên nền đen"><figcaption><span>ĐỌC DỮ LIỆU · HIỂU VẤN ĐỀ · CHỌN CÁCH LÀM</span></figcaption></figure>
+  <div class="dpm-hero-media">
+   <figure class="dpm-hero-visual"><img src="{{ asset('site/assets/img/courses/digital-performance-workspace.png') }}" width="1536" height="1024" fetchpriority="high" alt="Không gian làm việc với laptop hiển thị biểu đồ phân tích Marketing màu lime trên nền đen"><figcaption><span>ĐỌC DỮ LIỆU · HIỂU VẤN ĐỀ · CHỌN CÁCH LÀM</span></figcaption></figure>
+   <div class="dpm-hero-facts" aria-label="Hình thức khóa học"><div><strong>09 buổi</strong><span>Lộ trình học</span></div><div><strong>Video</strong><span>Học theo từng bài</span></div><div><strong>Chữa bài</strong><span>Trao đổi trong nhóm</span></div></div>
+  </div>
  </div>
 </section>
 <nav class="dpm-subnav" aria-label="Nội dung khóa học"><div class="dpm-wrap"><a href="#tong-quan">Tổng quan</a><a href="#lo-trinh">Lộ trình</a><a href="#cach-hoc">Cách học</a><a href="#giang-vien">Giảng viên</a><a href="#hoc-phi">Học phí</a><a href="#dang-ky">Đăng ký ↗</a></div></nav>
@@ -82,8 +85,11 @@
 </section>
 <section class="dpm-section" id="giang-vien">
  <div class="dpm-wrap dpm-instructor">
-  <div class="dpm-portrait">@if($instructorAvatar)<img src="{{ $instructorAvatar }}" alt="{{ $instructorName }}" loading="lazy" width="600" height="700">@else<div class="dpm-monogram" aria-hidden="true">TA<span>Đinh Tuấn Anh</span></div>@endif<span>GIẢNG VIÊN ĐỒNG HÀNH</span></div>
-  <div><p class="dpm-eyebrow">04 / HỌC CÙNG</p><h2>{{ $instructorName }}</h2><p class="dpm-instructor-intro">Trực tiếp giảng dạy khóa Digital Performance Management.</p>@if(data_get($contact, 'description'))<p>{{ data_get($contact, 'description') }}</p>@endif
+  <div class="dpm-instructor-profile">
+   <div class="dpm-portrait">@if($instructorAvatar)<img src="{{ $instructorAvatar }}" alt="{{ $instructorName }}" loading="lazy" width="600" height="700">@else<div class="dpm-monogram" aria-hidden="true">TA<span>Đinh Tuấn Anh</span></div>@endif<span>GIẢNG VIÊN ĐỒNG HÀNH</span></div>
+   @if(data_get($contact, 'description'))<p class="dpm-profile-summary">{{ data_get($contact, 'description') }}</p>@endif
+  </div>
+  <div><p class="dpm-eyebrow">04 / HỌC CÙNG</p><h2>{{ $instructorName }}</h2><p class="dpm-instructor-intro">Trực tiếp giảng dạy khóa Digital Performance Management.</p>
 @if(data_get($contact, 'about_me'))<div class="dpm-bio">{!! data_get($contact, 'about_me') !!}</div>@endif<div class="dpm-instructor-note">Bạn có thể trao đổi trực tiếp với giảng viên trong nhóm để giải đáp thắc mắc và nhận góp ý cho bài làm.</div><a class="dpm-text-link" href="{{ route('about') }}">Tìm hiểu thêm về giảng viên ↗</a></div>
  </div>
 </section>
