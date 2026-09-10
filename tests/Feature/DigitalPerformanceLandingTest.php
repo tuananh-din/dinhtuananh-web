@@ -6,6 +6,7 @@ use App\Models\About;
 use App\Models\Course;
 use App\Models\User;
 use Database\Seeders\DigitalPerformanceCourseSeeder;
+use Database\Seeders\PublishDigitalPerformanceCourseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -13,6 +14,31 @@ use Tests\TestCase;
 class DigitalPerformanceLandingTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_publication_adds_course_image_price_and_link_to_listing(): void
+    {
+        $this->seed(PublishDigitalPerformanceCourseSeeder::class);
+        $this->get(route('courses'))->assertOk()
+            ->assertSee('Digital Performance Management')->assertSee('3.000.000')
+            ->assertSee('/site/assets/img/courses/digital-performance-workspace.png', false)
+            ->assertSee(route('course.detail', 'digital-performance-management'), false);
+        $this->get(route('course.detail', 'digital-performance-management'))->assertOk()
+            ->assertViewIs('courses.digital-performance')->assertDontSee('Bản xem trước');
+    }
+
+    public function test_publication_preserves_existing_edits_and_other_courses(): void
+    {
+        $this->seed(DigitalPerformanceCourseSeeder::class);
+        $course = Course::where('slug', 'digital-performance-management')->firstOrFail();
+        $course->update(['price' => 3200000, 'thumbnail' => '/storage/custom.png', 'content' => 'Đã chỉnh']);
+        $other = Course::create(['title' => 'Other', 'slug' => 'other', 'is_active' => false]);
+        $this->seed(PublishDigitalPerformanceCourseSeeder::class);
+        $this->seed(PublishDigitalPerformanceCourseSeeder::class);
+        $this->assertDatabaseCount('courses', 2);
+        $this->assertDatabaseHas('courses', ['id' => $course->id, 'price' => 3200000,
+            'thumbnail' => '/storage/custom.png', 'content' => 'Đã chỉnh', 'is_active' => true]);
+        $this->assertFalse((bool) $other->fresh()->is_active);
+    }
 
     public function test_draft_is_private_but_admin_can_preview_the_landing(): void
     {
