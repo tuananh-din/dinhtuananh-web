@@ -151,3 +151,15 @@ html[data-theme="light"] .dpm-page{--ink:var(--header,#171a1f);--muted:#6b7280;-
 .dpm-page .dpm-table-scroll{overflow-x:auto}
 .dpm-page .dpm-data-table p{padding-bottom:18px;color:var(--muted)}
 @media(max-width:900px){.dpm-page .dpm-chart-grid{grid-template-columns:1fr}.dpm-page .dpm-chart-card svg{max-width:550px;align-self:center}.dpm-page .dpm-chart-reading{min-height:0}.dpm-page .dpm-hero-visual figcaption{padding:16px}}
+
+/* Balance imagery with the course introduction and the full instructor bio. */
+@media(min-width:761px){
+  .dpm-page .dpm-hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+  .dpm-page .dpm-hero-visual img{height:clamp(480px,42vw,600px);aspect-ratio:auto;object-position:58% center}
+  .dpm-page .dpm-instructor{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:48px;align-items:start}
+  .dpm-page .dpm-portrait{min-height:0;aspect-ratio:4/5}
+  .dpm-page .dpm-portrait>img{height:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top}
+}
+@media(min-width:761px) and (max-width:1000px){
+  .dpm-page .dpm-hero-grid,.dpm-page .dpm-instructor{gap:28px}
+}
