@@ -50,6 +50,7 @@ class CourseController extends Controller
         $view = match ($course->slug) {
             'digital-performance-management' => 'courses.digital-performance',
             'facebook-community-growth-system' => 'courses.facebook-community',
+            'data-analysis-visualization' => 'courses.data-analysis',
             default => 'course_detail',
         };
 
