@@ -45,6 +45,7 @@ html[data-theme="light"] .dpm-page{--ink:var(--header,#171a1f);--muted:#6b7280;-
 .dpm-page .dpm-section-head{display:grid;grid-template-columns:1.5fr 1fr;gap:80px;align-items:end;margin-bottom:40px}
 .dpm-page .dpm-section-head>p{font-size:14px;color:var(--muted);max-width:365px}
 .dpm-page .dpm-three{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.dpm-page .dpm-four{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
 .dpm-page .dpm-audience{border-top:1px solid var(--line);padding:26px 20px 15px 0}
 .dpm-page .dpm-number{display:block;font-size:12px;letter-spacing:.06em;color:var(--green);margin-bottom:28px}
 .dpm-page .dpm-three p{font-size:14px;color:var(--muted)}
@@ -56,6 +57,13 @@ html[data-theme="light"] .dpm-page{--ink:var(--header,#171a1f);--muted:#6b7280;-
 .dpm-page .dpm-outcome-list article>span{font-size:27px;color:var(--green)}
 .dpm-page .dpm-outcome-list h3{font-size:18px}
 .dpm-page .dpm-outcome-list p{font-size:13px;color:var(--muted);margin-top:9px}
+.dpm-page .dpm-visual{margin:34px 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.dpm-page .dpm-visual img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+.dpm-page .dpm-asset-note{font-size:11px;color:var(--muted);padding:12px 16px;border-top:1px solid var(--line)}
+.dpm-page .dpm-case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:35px}
+.dpm-page .dpm-case-grid figure{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.dpm-page .dpm-case-grid img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+.dpm-page .dpm-case-grid figcaption{padding:12px 15px;font-size:11px;color:var(--muted)}
 .dpm-page details{border-bottom:1px solid var(--line)}
 .dpm-page summary{list-style:none;cursor:pointer;min-height:64px}
 .dpm-page summary::-webkit-details-marker{display:none}
@@ -119,6 +127,8 @@ html[data-theme="light"] .dpm-page{--ink:var(--header,#171a1f);--muted:#6b7280;-
 @media(min-width:1600px){.dpm-page .dpm-hero{padding:100px 0}}
 @media(max-width:1000px){.dpm-page .dpm-wrap{padding:0 28px}.dpm-page .dpm-hero-grid{gap:32px}.dpm-page .dpm-path{padding:23px}.dpm-page .dpm-two,.dpm-page .dpm-instructor{gap:40px}.dpm-page .dpm-section-head{gap:40px}.dpm-page .dpm-hero-message{font-size:26px}.dpm-page .dpm-path-heading{font-size:25px}.dpm-page .dpm-subnav .dpm-wrap{gap:28px}.dpm-page .dpm-three{gap:18px}}
 @media(max-width:760px){.dpm-page .dpm-wrap{padding:0 22px}.dpm-page .dpm-hero{padding:50px 0}.dpm-page .dpm-hero-grid,.dpm-page .dpm-two,.dpm-page .dpm-instructor,.dpm-page .dpm-section-head{grid-template-columns:1fr;gap:34px}.dpm-page .dpm-path{transform:none;margin:0 5px 12px 0}.dpm-page .dpm-section{padding:58px 0}.dpm-page .dpm-three{grid-template-columns:1fr;gap:24px}.dpm-page .dpm-audience{padding-bottom:0}.dpm-page .dpm-number{margin-bottom:15px}.dpm-page .dpm-section-head{margin-bottom:30px;gap:5px}.dpm-page .dpm-subnav .dpm-wrap{gap:26px}.dpm-page .dpm-subnav a{padding:17px 0}.dpm-page .dpm-subnav a:last-child{margin-left:0}.dpm-page .dpm-curriculum summary{padding:20px 10px;gap:12px}.dpm-page .dpm-curriculum h3{font-size:16px}.dpm-page .dpm-curriculum details>p{padding:0 22px 22px 76px;font-size:13px}.dpm-page .dpm-curriculum-footer{display:block}.dpm-page .dpm-curriculum-footer a{margin-top:16px}.dpm-page .dpm-learning .dpm-three{margin-top:30px}.dpm-page .dpm-portrait{min-height:340px}.dpm-page .dpm-portrait>img{height:400px}.dpm-page .dpm-form-card{padding:25px}.dpm-page .dpm-closing .dpm-wrap{flex-direction:column;gap:12px}.dpm-page .dpm-hero-note{font-size:10px}.dpm-page .dpm-eyebrow{font-size:10px}.dpm-page .dpm-lead{font-size:14px}}
+@media(max-width:1000px){.dpm-page .dpm-four{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.dpm-page .dpm-four,.dpm-page .dpm-case-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.dpm-page .dpm-button{transition:none;transform:none}}
 
 /* Course imagery and illustrative analytics inherit the website theme. */

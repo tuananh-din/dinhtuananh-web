@@ -47,8 +47,11 @@ class CourseController extends Controller
         if ($testimonials->isEmpty()) {
             $testimonials = \App\Models\Testimonial::where('is_active', 1)->orderBy('sort_order')->orderByDesc('id')->take(3)->get();
         }
-        $view = $course->slug === 'digital-performance-management'
-            ? 'courses.digital-performance' : 'course_detail';
+        $view = match ($course->slug) {
+            'digital-performance-management' => 'courses.digital-performance',
+            'facebook-community-growth-system' => 'courses.facebook-community',
+            default => 'course_detail',
+        };
 
         return view($view, compact('course', 'testimonials') + ['isPreview' => !$course->is_active]);
     }

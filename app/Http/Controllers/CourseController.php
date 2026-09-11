@@ -38,8 +38,11 @@ class CourseController extends Controller
                 ->get();
         }
 
-        $view = $course->slug === 'digital-performance-management'
-            ? 'courses.digital-performance' : 'course_detail';
+        $view = match ($course->slug) {
+            'digital-performance-management' => 'courses.digital-performance',
+            'facebook-community-growth-system' => 'courses.facebook-community',
+            default => 'course_detail',
+        };
 
         return view($view, compact('course', 'testimonials'));
     }
