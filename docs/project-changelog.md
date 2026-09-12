@@ -2,6 +2,13 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Homepage conversion — 2026-09-12
+
+- Trang chủ chuyển trọng tâm sang chọn khóa học và tư vấn lộ trình: hero có CTA khóa học/tư vấn rõ ràng, thêm luồng định hướng theo nhu cầu và đưa khóa học lên trước phần dịch vụ chung.
+- Nội dung dịch vụ, case study, blog và testimonial được trình bày theo bằng chứng CMS hiện có: chỉ dùng nhãn Case Study khi có bản ghi xuất bản; ảnh legacy là “Hình ảnh hoạt động”; ẩn toàn bộ testimonial khi chưa có dữ liệu, không giữ placeholder hay tự tạo KPI/nhận xét.
+- Giữ nguyên dữ liệu `HomeController`, routes, JSON-LD và hợp đồng các form; tăng khả năng dùng trên mobile/dark mode, nhãn form hiển thị rõ và tôn trọng reduced motion.
+- Không có migration, route, model hoặc controller mới. Kiểm tra tĩnh diff/Blade/CSS đã thực hiện; PHP Artisan test và Vite build đầy đủ bị chặn do môi trường không có PHP/dependencies Vite khả dụng và không truy cập được Docker socket. Cần chạy lại build/test cùng kiểm tra giao diện sau deploy trên Tino cPanel.
+
 ## Phase E — 2026-07-23 (fix tồn đọng audit + bug P0 social + build-out)
 
 - `8af7e7a` **E-01** `RouteServiceProvider::HOME` `/home` → `/admin` (hết 404 khi guest đã đăng nhập mở `/login`).
