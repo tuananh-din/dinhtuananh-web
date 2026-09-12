@@ -1376,3 +1376,435 @@ html[data-theme="light"] .hero-section1 .line-shape {
         inset: auto 20px 20px;
     }
 }
+
+/* Homepage conversion: course discovery, evidence and consultation flow. */
+.homepage-hero-intro,
+.homepage-section-lead,
+.homepage-final-intro {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+.homepage-hero-actions {
+    margin-top: 28px;
+}
+
+.homepage-hero-guide {
+    display: grid;
+    gap: 16px;
+    padding: 24px;
+    border-top: 1px solid rgba(255, 255, 255, .14);
+}
+
+.homepage-hero-guide__eyebrow {
+    margin: 0;
+    color: var(--theme);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+.homepage-hero-guide ol {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.homepage-hero-guide li {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    align-items: start;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.homepage-hero-guide li span {
+    color: var(--theme);
+    font-weight: 800;
+}
+
+.homepage-paths {
+    padding-top: 72px;
+}
+
+.homepage-path-card,
+.homepage-support-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 270px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, .04);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.homepage-path-card:hover,
+.homepage-path-card:focus-visible {
+    border-color: var(--theme);
+    background: rgba(191, 247, 71, .09);
+    color: inherit;
+    transform: translateY(-4px);
+}
+
+.homepage-path-card__icon,
+.homepage-support-card__icon {
+    display: inline-grid;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 24px;
+    place-items: center;
+    border-radius: 14px;
+    background: var(--theme);
+    color: #111;
+    font-size: 20px;
+}
+
+.homepage-path-card h3,
+.homepage-support-card h3 {
+    margin-bottom: 12px;
+    font-size: 24px;
+    line-height: 1.24;
+}
+
+.homepage-path-card p,
+.homepage-support-card p {
+    margin-bottom: 22px;
+    line-height: 1.6;
+}
+
+.homepage-path-card__link,
+.homepage-evidence-card__link {
+    margin-top: auto;
+    color: var(--theme);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.homepage-path-card__link i,
+.homepage-evidence-card__link i {
+    margin-left: 5px;
+}
+
+.homepage-course-featured {
+    height: 100%;
+    padding: clamp(30px, 4vw, 54px);
+}
+
+.homepage-course-featured > p:not(.course-placeholder-note) {
+    max-width: 760px;
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+.homepage-course-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin: 24px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.homepage-course-meta li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.homepage-course-meta i {
+    color: var(--theme);
+}
+
+.homepage-course-list {
+    height: 100%;
+}
+
+.homepage-course-list .course-side-card:last-of-type {
+    margin-bottom: 28px;
+}
+
+.homepage-empty-card {
+    padding: 36px;
+}
+
+.homepage-support .section-title {
+    max-width: 880px;
+}
+
+.homepage-support-grid .col-lg-4 {
+    display: flex;
+}
+
+.homepage-support-card {
+    width: 100%;
+    min-height: 0;
+}
+
+.homepage-support-cta {
+    margin-top: 32px;
+}
+
+.homepage-evidence-block {
+    margin-top: 48px;
+}
+
+.homepage-evidence-block__heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.homepage-evidence-block__heading h3 {
+    margin-bottom: 8px;
+    font-size: clamp(25px, 3vw, 34px);
+}
+
+.homepage-evidence-block__heading p {
+    max-width: 680px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.homepage-evidence-card,
+.homepage-evidence-card > a {
+    height: 100%;
+}
+
+.homepage-evidence-card > a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.homepage-evidence-card > img,
+.homepage-evidence-card > a > img {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+
+.homepage-evidence-card h4 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.homepage-evidence-card .content > p {
+    line-height: 1.6;
+}
+
+.homepage-evidence-card .homepage-evidence-card__link {
+    display: inline-block;
+    margin-top: 12px;
+}
+
+.homepage-testimonials blockquote {
+    margin: 0 0 24px;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.homepage-testimonials blockquote::before {
+    content: "“";
+    color: var(--theme);
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 0;
+    vertical-align: -.25em;
+}
+
+.homepage-about {
+    padding-bottom: 130px;
+}
+
+.lead-magnet-card {
+    max-width: 760px;
+    margin-inline: auto;
+    padding: 34px;
+}
+
+.lead-magnet-card label,
+.lead-form-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.lead-magnet-card > form > label {
+    text-align: center;
+}
+
+.lead-magnet-card__form {
+    display: flex;
+    gap: 12px;
+    max-width: 620px;
+    margin: 14px auto 0;
+}
+
+.lead-magnet-card__form input {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.lead-form-shell .form-row {
+    align-items: start;
+}
+
+.lead-form-field {
+    width: 100%;
+}
+
+.lead-form-field__optional {
+    color: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    opacity: .72;
+}
+
+.homepage-final-intro {
+    margin: 18px auto 30px;
+}
+
+.cta-text-items .brand-eyebrow {
+    margin-bottom: 14px;
+}
+
+html[data-theme="light"] .homepage-path-card,
+html[data-theme="light"] .homepage-support-card {
+    border-color: #e2e6ea;
+    background: #fff;
+}
+
+html[data-theme="light"] .homepage-path-card:hover,
+html[data-theme="light"] .homepage-path-card:focus-visible {
+    border-color: #5f8f16;
+    background: #f4fae8;
+}
+
+html[data-theme="light"] .homepage-hero-guide {
+    border-color: #e1e5e9;
+}
+
+html[data-theme="light"] .homepage-path-card__link,
+html[data-theme="light"] .homepage-evidence-card__link,
+html[data-theme="light"] .homepage-course-meta i,
+html[data-theme="light"] .homepage-testimonials blockquote::before {
+    color: #4d7610;
+}
+
+html[data-theme="light"] .homepage-hero-guide__eyebrow,
+html[data-theme="light"] .homepage-hero-guide li span {
+    color: #4d7610;
+}
+
+html[data-theme="light"] .homepage-hero-guide,
+html[data-theme="light"] .homepage-section-lead,
+html[data-theme="light"] .homepage-final-intro {
+    color: #4c5560;
+}
+
+@media (max-width: 991px) {
+    .homepage-paths {
+        padding-top: 56px;
+    }
+
+    .homepage-about {
+        padding-bottom: 96px;
+    }
+}
+
+@media (max-width: 767px) {
+    .homepage-hero-intro,
+    .homepage-section-lead,
+    .homepage-final-intro {
+        font-size: 16px;
+    }
+
+    .homepage-hero-actions,
+    .homepage-course-featured .cta-inline,
+    .homepage-support-cta,
+    .homepage-about .cta-inline,
+    .cta-text-items .cta-inline {
+        display: grid;
+        gap: 12px;
+    }
+
+    .homepage-hero-actions .theme-btn,
+    .homepage-course-featured .cta-inline .theme-btn,
+    .homepage-support-cta .theme-btn,
+    .homepage-about .cta-inline .theme-btn,
+    .cta-text-items .cta-inline .theme-btn {
+        justify-content: center;
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .homepage-hero-guide,
+    .homepage-path-card,
+    .homepage-support-card,
+    .homepage-course-featured,
+    .lead-magnet-card {
+        padding: 24px;
+    }
+
+    .homepage-path-card {
+        min-height: 0;
+    }
+
+    .homepage-evidence-block {
+        margin-top: 36px;
+    }
+
+    .homepage-evidence-block__heading {
+        display: grid;
+        align-items: start;
+        gap: 16px;
+    }
+
+    .homepage-evidence-block__heading .theme-btn {
+        justify-self: start;
+    }
+
+    .lead-magnet-card__form,
+    .lead-form-shell .form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .lead-magnet-card__form .theme-btn,
+    .lead-form-shell .form-actions .theme-btn {
+        justify-content: center;
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .homepage-about {
+        padding-bottom: 72px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .homepage-path-card {
+        transition: none;
+    }
+
+    .homepage-path-card:hover,
+    .homepage-path-card:focus-visible {
+        transform: none;
+    }
+}
