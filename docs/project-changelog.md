@@ -2,6 +2,14 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Trang Giới thiệu — Instructor Profile — 2026-09-13
+
+- Làm lại `/about` theo định vị học Digital Marketing thực hành: hero nêu giá trị học, nhóm nhu cầu người học, nội dung định hướng, khóa học, case study/blog đã công bố, câu chuyện CMS và CTA đến khóa học/liên hệ.
+- Chỉ đọc Course `is_active=1`, CaseStudy/Blog `is_published=1`; Course rỗng có empty state trung thực, nhóm evidence rỗng được ẩn. Không dùng ảnh legacy làm minh chứng.
+- Không render Service, Testimonial hoặc “Cách học tại đây” vì chưa có xác nhận nội dung, phương pháp và quyền công bố; bỏ progress/phần trăm tự đánh giá, contact link rỗng và địa chỉ cá nhân.
+- `/about` có title/meta/OG/canonical riêng, fallback không rỗng, strip HTML cho mô tả. Layout escape metadata động trước khi render để tránh đưa CMS text thô vào head; Person JSON-LD vẫn giữ nguyên.
+- Thêm test contract cho lọc public, empty state, metadata/OG/canonical/JSON-LD, fallback và escaping. `git diff --check`, kiểm tra cú pháp JS và kiểm tra tĩnh CSS/Blade đã pass. Chưa chạy được PHP Artisan test/full build ở workspace vì thiếu PHP CLI, `vendor/` và dependency local; cần chạy lại trong môi trường Laravel đầy đủ và visual QA sau deploy.
+
 ## Homepage conversion — 2026-09-12
 
 - Trang chủ chuyển trọng tâm sang chọn khóa học và tư vấn lộ trình: hero có CTA khóa học/tư vấn rõ ràng, thêm luồng định hướng theo nhu cầu và đưa khóa học lên trước phần dịch vụ chung.
