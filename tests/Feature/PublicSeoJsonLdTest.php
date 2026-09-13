@@ -55,6 +55,83 @@ class PublicSeoJsonLdTest extends TestCase
         $response->assertSee('"sameAs":["https://example.test/profile"]', false);
     }
 
+    public function test_about_renders_its_own_seo_metadata_and_person_json_ld(): void
+    {
+        $this->createSiteIdentity();
+        About::firstOrFail()->update([
+            'title_seo' => 'Học Digital Marketing cùng Nguyễn Thử Nghiệm',
+            'desc_seo' => 'Thông tin giảng dạy và nội dung Digital Marketing thực hành.',
+            'avatar' => '/storage/images/about-profile.jpg',
+        ]);
+
+        $response = $this->get(route('about'));
+
+        $response->assertOk();
+        $response->assertSee('<title>Học Digital Marketing cùng Nguyễn Thử Nghiệm</title>', false);
+        $response->assertSee('<meta name="description" content="Thông tin giảng dạy và nội dung Digital Marketing thực hành.">', false);
+        $response->assertSee('<meta property="og:title" content="Học Digital Marketing cùng Nguyễn Thử Nghiệm">', false);
+        $response->assertSee('<meta property="og:description" content="Thông tin giảng dạy và nội dung Digital Marketing thực hành.">', false);
+        $response->assertSee('<link rel="canonical" href="http://localhost/about">', false);
+        $response->assertSee('<meta property="og:image" content="http://localhost/storage/images/about-profile.jpg">', false);
+        $response->assertSee('"@type":"Person"', false);
+    }
+
+    public function test_about_escapes_dynamic_seo_metadata(): void
+    {
+        $this->createSiteIdentity();
+        About::firstOrFail()->update([
+            'title_seo' => '<script>alert("title")</script>',
+            'desc_seo' => 'Mô tả "không an toàn" <b>cần được thoát</b>.',
+        ]);
+
+        $response = $this->get(route('about'));
+
+        $response->assertOk()
+            ->assertDontSee('<script>alert("title")</script>', false)
+            ->assertSee('&lt;script&gt;alert(&quot;title&quot;)&lt;/script&gt;', false)
+            ->assertSee('Mô tả &quot;không an toàn&quot; cần được thoát.', false);
+    }
+
+    public function test_about_uses_non_empty_seo_fallbacks(): void
+    {
+        $this->createSiteIdentity();
+        About::firstOrFail()->update([
+            'title_seo' => '   ',
+            'desc_seo' => '   ',
+            'description' => 'Mô tả giới thiệu dự phòng.',
+        ]);
+
+        $response = $this->get(route('about'));
+
+        $response->assertOk()
+            ->assertSee('<title>Giới thiệu | Nguyễn Thử Nghiệm</title>', false)
+            ->assertSee('<meta name="description" content="Mô tả giới thiệu dự phòng.">', false);
+    }
+
+    public function test_about_uses_default_metadata_when_cms_content_has_no_text(): void
+    {
+        $this->createSiteIdentity();
+        About::firstOrFail()->update([
+            'desc_seo' => '<p><br></p>',
+            'description' => '<div>   </div>',
+        ]);
+
+        $this->get(route('about'))
+            ->assertOk()
+            ->assertSee('<meta name="description" content="Thông tin giảng dạy và nội dung Digital Marketing của Nguyễn Thử Nghiệm.">', false);
+    }
+
+    public function test_about_uses_a_name_fallback_when_profile_and_site_name_are_blank(): void
+    {
+        $this->createSiteIdentity();
+        Setting::firstOrFail()->update(['name' => '   ']);
+        About::firstOrFail()->update(['name' => '   ']);
+
+        $this->get(route('about'))
+            ->assertOk()
+            ->assertSee('<title>Giới thiệu | Tuấn Anh</title>', false);
+    }
+
     public function test_draft_blog_is_hidden_from_public_detail_and_listing(): void
     {
         $this->createSiteIdentity();

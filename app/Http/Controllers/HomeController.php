@@ -69,10 +69,17 @@ class HomeController extends Controller
     public function about(){
         $about = About::first() ?? new About();
         $image = Image::where('type',1)->orderBy('id','DESC')->first();
-        $skills = Skill::orderBy('number','DESC')->take(6)->get();
-        $jobs = Service::orderBy('id','DESC')->take(4)->get();
+        $courses = Course::where('is_active', 1)
+            ->orderBy('sort_order', 'ASC')
+            ->orderBy('id', 'DESC')
+            ->take(3)
+            ->get();
+        $caseStudies = CaseStudy::where('is_published', true)->latest()->take(2)->get();
+        $blogs = Blog::where('is_published', 1)->latest()->take(2)->get();
 
-        return view('about',compact('about','image','skills','jobs'));
+        return view('about', compact(
+            'about', 'image', 'courses', 'caseStudies', 'blogs'
+        ));
     }
     public function contact(Request $request)
     {

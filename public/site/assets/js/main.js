@@ -694,30 +694,6 @@
     requestAnimationFrame(animate);
     });
 
-    /* About: animate progress khi hien trong viewport; timeout giu thanh luon hien dung %. */
-    document.querySelectorAll('.about-skill-progress').forEach((skill) => {
-        const bar = skill.querySelector('.about-skill-progress__bar');
-        if (!bar) return;
-
-        const reveal = () => skill.classList.remove('is-pending');
-        skill.classList.add('is-pending');
-
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
-                    reveal();
-                    observer.unobserve(entry.target);
-                });
-            }, { threshold: 0.2 });
-            observer.observe(skill);
-        } else {
-            reveal();
-        }
-
-        window.setTimeout(reveal, 1500);
-    });
-
     /* ================================
         Mouse Cursor Animation Js Start
     ================================ */

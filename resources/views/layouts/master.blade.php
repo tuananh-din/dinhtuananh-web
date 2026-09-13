@@ -32,13 +32,13 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="@yield('meta_description', $seoDescription)">
+        <meta name="description" content="{{ trim($__env->yieldContent('meta_description', $seoDescription)) }}">
         <!-- ======== Page title ============ -->
-        <title>@yield('page_title', $siteName)</title>
+        <title>{{ trim($__env->yieldContent('page_title', $siteName)) }}</title>
         <!-- ========== Open Graph ========== -->
         <meta property="og:type" content="@yield('og_type', 'website')">
-        <meta property="og:title" content="@yield('og_title', $siteName)">
-        <meta property="og:description" content="@yield('og_description', $seoDescription)">
+        <meta property="og:title" content="{{ trim($__env->yieldContent('og_title', $siteName)) }}">
+        <meta property="og:description" content="{{ trim($__env->yieldContent('og_description', $seoDescription)) }}">
         @if($ogImageUrl)
         <meta property="og:image" content="{{ $ogImageUrl }}">
         <meta property="og:image:width" content="1200">
@@ -48,12 +48,12 @@
         @if($ogImageUrl)
         <meta name="twitter:card" content="summary_large_image">
         @endif
-        <meta name="twitter:title" content="@yield('og_title', $siteName)">
-        <meta name="twitter:description" content="@yield('og_description', $seoDescription)">
+        <meta name="twitter:title" content="{{ trim($__env->yieldContent('og_title', $siteName)) }}">
+        <meta name="twitter:description" content="{{ trim($__env->yieldContent('og_description', $seoDescription)) }}">
         @if($ogImageUrl)
         <meta name="twitter:image" content="{{ $ogImageUrl }}">
         @endif
-        <link rel="canonical" href="@yield('canonical', url()->current())">
+        <link rel="canonical" href="{{ trim($__env->yieldContent('canonical', url()->current())) }}">
         <link rel="alternate" type="application/rss+xml" title="{{ $siteName }} RSS" href="{{ route('feed') }}">
         <!--<< Favcion >>-->
         <link rel="shortcut icon" href="{{ $faviconUrl }}" type="image/x-icon" />
