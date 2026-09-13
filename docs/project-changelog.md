@@ -2,6 +2,14 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Accordion trang khóa học — 2026-09-13 (chưa commit)
+
+- Chuẩn hóa 33 disclosure đang dùng thật trên ba landing khóa học bằng native `<details>/<summary>`: curriculum, FAQ và bảng số liệu. Không thêm JavaScript, ARIA mirror, route, controller, model, schema hay migration.
+- Curriculum chỉ mở buổi đầu khi tải nhưng cho phép mở nhiều buổi để đối chiếu; FAQ và bảng số liệu đóng khi tải, độc lập và vẫn cho phép so sánh nội dung.
+- Đổi title curriculum từ heading sang `span.dpm-module-title` có thể wrap; bảng số liệu có nhãn chính xác “Xem bảng số liệu và cách tính CPL”, icon `+`/`−`, surface/left accent khi mở, hover/pressed và target 64px. Giữ focus native/global và table scroll cục bộ trên mobile.
+- Bổ sung regression test cho HTML render: item đầu mở, FAQ/data đóng, không có heading trong summary và nhãn CPL. Static QA `git diff --check` cùng kiểm tra dấu ngoặc CSS đã đạt; chưa chạy PHPUnit/Artisan vì checkout thiếu PHP CLI và `vendor/`, chưa có visual/keyboard/screen-reader pass do local không render Laravel.
+- Rủi ro cần quyết định riêng: `/site/faq.html`, `/site/about.html` và `/site/index-2.html` đều trả HTTP 200 production nhưng dùng accordion template cũ với nội dung chưa xác minh. Đây là static file trong `public/site`, không phải ba landing Laravel đang sửa tại `/courses/digital-performance-management`, `/courses/facebook-community-growth-system` và `/courses/data-analysis-visualization`. Không tự redirect/xóa/viết nội dung mới trong phase này.
+
 ## Typography public — 2026-09-13 (chưa commit)
 
 - Thêm lớp token typography ở cuối `custom.css`: Be Vietnam Pro cho public text/display, scale semantic từ display đến meta, line-height/letter-spacing theo vai trò, và foreground token light/dark. Link text light dùng `#4d7511` (5.43:1 trên nền trắng); không thêm font, dependency hay weight mới.
