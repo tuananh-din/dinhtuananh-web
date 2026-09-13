@@ -71,6 +71,21 @@ class DigitalPerformanceLandingTest extends TestCase
         $this->assertDatabaseHas('leads', ['course_id' => $course->id, 'source_page' => 'digital_performance_landing']);
     }
 
+    public function test_landing_keeps_native_disclosure_semantics_and_initial_states(): void
+    {
+        $this->seed(PublishDigitalPerformanceCourseSeeder::class);
+
+        $content = $this->get(route('course.detail', 'digital-performance-management'))
+            ->assertOk()
+            ->getContent();
+
+        $this->assertMatchesRegularExpression('/<div class="dpm-curriculum">\s*<details\s+open\s*>\s*<summary><span class="dpm-module-number">Buổi 01<\/span><span class="dpm-module-title">/', $content);
+        $this->assertSame(0, preg_match('/<summary>(?:(?!<\/summary>).)*<h[1-6]\b/s', $content));
+        $this->assertStringContainsString('<details><summary>Chưa từng chạy quảng cáo có học được không?</summary>', $content);
+        $this->assertStringContainsString('<details class="dpm-data-table"><summary>Xem bảng số liệu và cách tính CPL</summary>', $content);
+        $this->assertSame(1, preg_match_all('/<details\b[^>]*\bopen\b[^>]*>/', $content));
+    }
+
     public function test_reseeding_preserves_admin_edits(): void
     {
         $this->seed(DigitalPerformanceCourseSeeder::class);

@@ -36,4 +36,18 @@ class FacebookCommunityLandingTest extends TestCase
             ->assertViewIs('courses.facebook-community')
             ->assertSee('Bản xem trước — khóa học chưa mở');
     }
+
+    public function test_landing_keeps_native_curriculum_disclosure_semantics_and_initial_state(): void
+    {
+        $this->seed(PublishFacebookCommunityCourseSeeder::class);
+
+        $content = $this->get(route('course.detail', 'facebook-community-growth-system'))
+            ->assertOk()
+            ->getContent();
+
+        $this->assertMatchesRegularExpression('/<div class="dpm-curriculum">\s*<details\s+open\s*>\s*<summary><span class="dpm-module-number">Buổi 01<\/span><span class="dpm-module-title">/', $content);
+        $this->assertSame(0, preg_match('/<summary>(?:(?!<\/summary>).)*<h[1-6]\b/s', $content));
+        $this->assertStringContainsString('<details><summary>Tôi chưa có Group có học được không?</summary>', $content);
+        $this->assertSame(1, preg_match_all('/<details\b[^>]*\bopen\b[^>]*>/', $content));
+    }
 }

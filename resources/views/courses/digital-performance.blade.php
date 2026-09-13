@@ -68,7 +68,7 @@
  <div class="dpm-wrap">
   <div class="dpm-section-head"><div><p class="dpm-eyebrow">02 / NỘI DUNG KHÓA HỌC</p><h2>9 buổi học.<br>Từ tư duy đến thực hành.</h2></div><p>Tổng quan → Kế hoạch → Nội dung → Kênh → Quảng cáo → Thực hành → Tối ưu → Phân tích. Mở từng buổi để xem chi tiết.</p></div>
   <div class="dpm-curriculum">@foreach(config('digital-performance.modules', []) as $module)
-<details @if($loop->first) open @endif><summary><span class="dpm-module-number">Buổi {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span><h3>{{ $module[0] }}</h3><span class="dpm-expand" aria-hidden="true"></span></summary><p>{{ $module[1] }}</p></details>
+<details @if($loop->first) open @endif><summary><span class="dpm-module-number">Buổi {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span><span class="dpm-module-title">{{ $module[0] }}</span><span class="dpm-expand" aria-hidden="true"></span></summary><p>{{ $module[1] }}</p></details>
 @endforeach</div>
   @if($course->content)<div class="dpm-extra">{!! $course->content !!}</div>@endif
   <div class="dpm-curriculum-footer"><p>Tài liệu đi kèm khóa học · Nhóm hỏi đáp và chữa bài thực hành.</p><a class="dpm-text-link" href="#dang-ky">Nhận tư vấn lộ trình ↗</a></div>
