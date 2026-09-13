@@ -2,7 +2,18 @@
     "use strict";
   
     const $documentOn = $(document);
-    const $windowOn = $(window);
+    const canMatchMedia = typeof window.matchMedia === 'function';
+    const prefersReducedMotion = canMatchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasFinePointer = canMatchMedia && window.matchMedia('(pointer: fine)').matches;
+    const canHover = canMatchMedia && window.matchMedia('(hover: hover)').matches;
+    const canUseEnhancedMotion = canMatchMedia && !prefersReducedMotion && hasFinePointer && canHover;
+    const canUseGsapMotion = canUseEnhancedMotion
+        && typeof window.gsap !== 'undefined'
+        && typeof window.ScrollTrigger !== 'undefined'
+        && typeof window.ScrollSmoother !== 'undefined'
+        && typeof window.ScrollToPlugin !== 'undefined'
+        && typeof window.SplitText !== 'undefined'
+        && typeof window.chroma !== 'undefined';
   
     $documentOn.ready( function() {
   
@@ -10,19 +21,25 @@
        Mobile Menu Js Start
     ================================ */
     
-      $('#mobile-menu').meanmenu({
-        meanMenuContainer: '.mobile-menu',
-        meanScreenWidth: "1199",
-        meanExpand: ['<i class="far fa-plus"></i>'],
-    });
+      if (typeof $.fn.meanmenu === 'function') {
+        if ($('#mobile-menu').length) {
+          $('#mobile-menu').meanmenu({
+            meanMenuContainer: '.mobile-menu',
+            meanScreenWidth: "1199",
+            meanExpand: ['<i class="far fa-plus"></i>'],
+          });
+        }
 
-       $('#mobile-menus').meanmenu({
-        meanMenuContainer: '.mobile-menus',
-        // Chỉ dùng phiên bản mean (dropdown) ở mobile (<=991px);
-        // từ 992px trở lên hiển thị menu ngang gốc trong header.
-        meanScreenWidth: "991",
-        meanExpand: ['<i class="far fa-plus"></i>'],
-    });
+        if ($('#mobile-menus').length) {
+          $('#mobile-menus').meanmenu({
+            meanMenuContainer: '.mobile-menus',
+            // Chỉ dùng phiên bản mean (dropdown) ở mobile (<=991px);
+            // từ 992px trở lên hiển thị menu ngang gốc trong header.
+            meanScreenWidth: "991",
+            meanExpand: ['<i class="far fa-plus"></i>'],
+          });
+        }
+      }
 
      $documentOn.on("click", ".mean-expand", function () {
         let icon = $(this).find("i");
@@ -86,55 +103,102 @@
        Sticky Header Js Start
     ================================ */
 
-       $windowOn.on("scroll", function () {
-        if ($(this).scrollTop() > 250) {
-          $("#header-sticky").addClass("sticky");
-        } else {
-          $("#header-sticky").removeClass("sticky");
+      const $stickyHeader = $('#header-sticky');
+      const $backToTop = $('#back-top');
+      let scrollFrame = null;
+      let isSticky = null;
+      let isBackToTopVisible = null;
+
+      function updateScrollState() {
+        scrollFrame = null;
+
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const nextStickyState = scrollTop > 250;
+        const viewportBottom = scrollTop + window.innerHeight;
+        const documentHeight = Math.max(
+          document.documentElement.scrollHeight,
+          document.body ? document.body.scrollHeight : 0
+        );
+        const nextBackToTopState = viewportBottom >= documentHeight - 10;
+
+        if ($stickyHeader.length && nextStickyState !== isSticky) {
+          $stickyHeader.toggleClass('sticky', nextStickyState);
+          isSticky = nextStickyState;
         }
-      });      
+
+        if ($backToTop.length && nextBackToTopState !== isBackToTopVisible) {
+          $backToTop.toggleClass('show', nextBackToTopState);
+          isBackToTopVisible = nextBackToTopState;
+        }
+      }
+
+      function requestScrollStateUpdate() {
+        if (scrollFrame !== null) return;
+        const schedule = window.requestAnimationFrame || function (callback) {
+          return window.setTimeout(callback, 16);
+        };
+        scrollFrame = schedule(updateScrollState);
+      }
+
+      if ($stickyHeader.length || $backToTop.length) {
+        window.addEventListener('scroll', requestScrollStateUpdate, { passive: true });
+        window.addEventListener('resize', requestScrollStateUpdate);
+        requestScrollStateUpdate();
+      }
       
        /* ================================
        Video & Image Popup Js Start
     ================================ */
 
-      $(".img-popup").magnificPopup({
-        type: "image",
-        gallery: {
-          enabled: true,
-        },
-      });
+      if ($('.img-popup').length && typeof $.fn.magnificPopup === 'function') {
+        $(".img-popup").magnificPopup({
+          type: "image",
+          gallery: {
+            enabled: true,
+          },
+        });
+      }
 
-      $(".video-popup").magnificPopup({
-        type: "iframe",
-        callbacks: {},
-      });
+      if ($('.video-popup').length && typeof $.fn.magnificPopup === 'function') {
+        $(".video-popup").magnificPopup({
+          type: "iframe",
+          callbacks: {},
+        });
+      }
   
       /* ================================
        Counterup Js Start
     ================================ */
 
-      $(".count").counterUp({
-        delay: 15,
-        time: 4000,
-      });
+      if ($('.count').length && typeof $.fn.counterUp === 'function') {
+        $(".count").counterUp({
+          delay: 15,
+          time: 4000,
+        });
+      }
   
       /* ================================
        Wow Animation Js Start
     ================================ */
 
-      new WOW().init();
+      if ($('.wow').length) {
+        if (canUseEnhancedMotion && typeof window.WOW === 'function') {
+          new WOW().init();
+        } else {
+          $('.wow').css({ visibility: 'visible', opacity: 1 });
+        }
+      }
   
       /* ================================
        Nice Select Js Start
     ================================ */
 
-    if ($('.single-select').length) {
+    if ($('.single-select').length && typeof $.fn.niceSelect === 'function') {
         $('.single-select').niceSelect();
     }
 
      // portfolio-slide-4
-    if (document.querySelectorAll(".gt-vertical-portfolio").length > 0) {
+    if (typeof window.Swiper === 'function' && document.querySelectorAll(".gt-vertical-portfolio").length > 0) {
     const interleaveOffset = 0.75;
     var gtVerticalPortfolioSlider = new Swiper('.gt-vertical-portfolio-slider', {
         loop: true,
@@ -161,9 +225,11 @@
             let innerOffset = swiper.height * interleaveOffset;
             let innerTranslate = slideProgress * innerOffset;
 
-            TweenMax.set(swiper.slides[i].querySelector(".slide-inner"), {
-              y: innerTranslate,
-            });
+            if (canUseEnhancedMotion && typeof window.TweenMax !== 'undefined') {
+              TweenMax.set(swiper.slides[i].querySelector(".slide-inner"), {
+                y: innerTranslate,
+              });
+            }
           }
         },
         setTransition: function (slider, speed) {
@@ -178,7 +244,7 @@
     });
     }
 
-    if (document.querySelectorAll(".gt-horizontal-portfolio").length > 0) {
+    if (typeof window.Swiper === 'function' && document.querySelectorAll(".gt-horizontal-portfolio").length > 0) {
         const interleaveOffset = 0.75;
 
         var gtHorizontalPortfolioSlider = new Swiper(".gt-horizontal-portfolio-slider", {
@@ -201,9 +267,11 @@
                 let innerOffset = swiper.width * interleaveOffset;
                 let innerTranslate = slideProgress * innerOffset;
 
-                gsap.set(swiper.slides[i].querySelector(".slide-inner"), {
-                    x: innerTranslate, // 👈 horizontal translate
-                });
+                if (canUseGsapMotion) {
+                    gsap.set(swiper.slides[i].querySelector(".slide-inner"), {
+                        x: innerTranslate, // 👈 horizontal translate
+                    });
+                }
                 }
             },
             setTransition: function (slider, speed) {
@@ -219,7 +287,7 @@
     }
     
       // parallax
-        if (document.querySelectorAll(".gt-portfolio-parallax-box-slider").length > 0) {
+        if (canUseGsapMotion && document.querySelectorAll(".gt-portfolio-parallax-box-slider").length > 0) {
             const selectAll = (e) => document.querySelectorAll(e);
             gsap.registerPlugin(ScrollTrigger);
             const tracks = selectAll(".gt-portfolio-parallax-box-slider");
@@ -269,7 +337,7 @@
        Parallaxie Js Start
     ================================ */
 
-        if ($('.parallaxie').length && $(window).width() > 991) {
+        if ($('.parallaxie').length && typeof $.fn.parallaxie === 'function' && $(window).width() > 991) {
             if ($(window).width() > 768) {
                 $('.parallaxie').parallaxie({
                     speed: 0.55,
@@ -283,7 +351,7 @@
       Testimonial Slider Js Start
     ================================ */
 
-   if ($('.testimonial-slider').length > 0) {
+   if ($('.testimonial-slider').length > 0 && typeof window.Swiper === 'function') {
     const testimonialSlider = new Swiper(".testimonial-slider", {
         spaceBetween: 30,
         speed: 1300,
@@ -322,7 +390,7 @@
       Project Slider Js Start
     ================================ */
 
-    if($('.project-slider-555').length > 0) {
+    if($('.project-slider-555').length > 0 && typeof window.Swiper === 'function') {
         const projectSlider555 = new Swiper(".project-slider-555", {
             spaceBetween: 30,
             speed: 1300,
@@ -355,7 +423,7 @@
     }
 
 
-    if($('.testimonial-slider-2').length > 0) {
+    if($('.testimonial-slider-2').length > 0 && typeof window.Swiper === 'function') {
         const testimonialSlider2 = new Swiper(".testimonial-slider-2", {
             spaceBetween: 30,
             speed: 1300,
@@ -394,7 +462,7 @@
       Brand Slider Js Start
     ================================ */
 
-    if($('.brand-slider-2').length > 0) {
+    if($('.brand-slider-2').length > 0 && typeof window.Swiper === 'function') {
         const brandSlider2 = new Swiper(".brand-slider-2", {
             spaceBetween: 30,
             speed: 1300,
@@ -430,7 +498,7 @@
         });
     }
 
-    if($('.brand-slider-3').length > 0) {
+    if($('.brand-slider-3').length > 0 && typeof window.Swiper === 'function') {
         const brandSlider3 = new Swiper(".brand-slider-3", {
             spaceBetween: 30,
             speed: 1300,
@@ -457,7 +525,7 @@
         });
     }
 
-     if($('.box-slider').length > 0) {
+     if($('.box-slider').length > 0 && typeof window.Swiper === 'function') {
         const BoxSlider = new Swiper(".box-slider", {
             spaceBetween: 30,
             speed: 1300,
@@ -492,6 +560,7 @@
        Testimonial SLider Js Start
     ================================ */
 
+    if ($('.testimonial-slider-3').length && typeof window.Swiper === 'function') {
     var testimonialSlider3 = new Swiper(".testimonial-slider-3", {
       slidesPerView: 1,
       spaceBetween: 24,
@@ -515,12 +584,13 @@
         prevEl: ".array-prev",
       },
     });
+    }
 
     /* ================================
        Project Inner Slider Js Start
     ================================ */
 
-    if($('.project-inner-slider').length > 0) {
+    if($('.project-inner-slider').length > 0 && typeof window.Swiper === 'function') {
         const projectInnerSlider = new Swiper(".project-inner-slider", {
             spaceBetween: 30,
             speed: 1300,
@@ -555,7 +625,7 @@
     /* ================================
        Reela Slider Js Start
     ================================ */
-     if($('.reels-slider').length > 0) {
+     if($('.reels-slider').length > 0 && typeof window.Swiper === 'function') {
         const ReelslSlider = new Swiper(".reels-slider", {
             spaceBetween: 30,
             speed: 1300,
@@ -590,7 +660,7 @@
     /* ================================
        Test Slider Js Start
     ================================ */
-     if($('.test-slider').length > 0) {
+     if($('.test-slider').length > 0 && typeof window.Swiper === 'function') {
         const TestlSlider = new Swiper(".test-slider", {
             spaceBetween: 30,
             speed: 1300,
@@ -632,7 +702,15 @@
     document.querySelectorAll('.skill-box-items-2').forEach((skill) => {
     const progressBar = skill.querySelector('.progress-bar');
     const countEl = skill.querySelector('.count');
+    if (!progressBar || !countEl) return;
     const target = parseInt(countEl.textContent, 10);
+    if (Number.isNaN(target)) return;
+
+    if (!canUseEnhancedMotion) {
+        countEl.textContent = target;
+        progressBar.style.width = `${target}%`;
+        return;
+    }
     const duration = 2600; // 2.6s
 
     // Reset
@@ -667,7 +745,7 @@
         Mouse Cursor Animation Js Start
     ================================ */
 
-    if ($(".mouseCursor").length > 0) {
+    if (canUseEnhancedMotion && $(".mouseCursor").length > 0) {
         function itCursor() {
             var myCursor = jQuery(".mouseCursor");
             if (myCursor.length) {
@@ -704,20 +782,11 @@
     /* ================================
         Back To Top Button Js Start
     ================================ */
-    $windowOn.on('scroll', function() {
-        var windowScrollTop = $(this).scrollTop();
-        var windowHeight = $(window).height();
-        var documentHeight = $(document).height();
-
-        if (windowScrollTop + windowHeight >= documentHeight - 10) {
-            $("#back-top").addClass("show");
-        } else {
-            $("#back-top").removeClass("show");
-        }
-    });
-
     $documentOn.on('click', '#back-top', function() {
-        $('html, body').animate({ scrollTop: 0 }, 800);
+        window.scrollTo({
+            top: 0,
+            behavior: canUseEnhancedMotion ? 'smooth' : 'auto',
+        });
         return false;
     });
 	
@@ -725,6 +794,7 @@
        Smooth Scroller And Title Animation Js Start
     ================================ */
 
+    if (canUseGsapMotion) {
 	const hasSmoothScrollShell = $('#smooth-wrapper').length && $('#smooth-content').length;
     if (hasSmoothScrollShell) {
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin);
@@ -1233,7 +1303,12 @@
 // });
 
 
+    }
+
 // === IMAGE SLIDER ===
+if (typeof window.Swiper === 'function'
+    && document.querySelector('.coverflow-slider-active')
+    && document.querySelector('.coverflow-slider-text-active')) {
 const coverflow_slider = new Swiper('.coverflow-slider-active', {
     effect: 'coverflow',
     centeredSlides: true,
@@ -1303,7 +1378,10 @@ coverflow_slider.on('slideChangeTransitionStart', function () {
 text_slider.on('slideChangeTransitionStart', function () {
     coverflow_slider.slideToLoop(text_slider.realIndex);
 });
+}
 
+
+    if (canUseGsapMotion) {
 
  
 
@@ -1538,6 +1616,7 @@ text_slider.on('slideChangeTransitionStart', function () {
             );
         });
     }
+    }
 
     /* ================================
        Button Active Js Start
@@ -1553,7 +1632,7 @@ text_slider.on('slideChangeTransitionStart', function () {
         });
     }
 
-   if ($('.gt-project-area').length > 0) {
+   if (canUseGsapMotion && $('.gt-project-area').length > 0) {
 	let project_text = gsap.timeline({
 		scrollTrigger: {
 			trigger: ".gt-project-area",
@@ -1615,61 +1694,6 @@ text_slider.on('slideChangeTransitionStart', function () {
         try { sessionStorage.setItem('preloaded', '1'); } catch (e) {}
         document.addEventListener('DOMContentLoaded', () => setTimeout(hidePreloader, 250), { once: true });
         setTimeout(hidePreloader, 800);
-        return;
-        $(window).on("load", function () {
-        const svg = document.getElementById("svg");
-        if (!svg) return; // safety check if SVG not found
-
-        const tl = gsap.timeline();
-
-        const curve = "M0 502S175 272 500 272s500 230 500 230V0H0Z";
-        const flat = "M0 2S175 1 500 1s500 1 500 1V0H0Z";
-
-        // Animate preloader text (if exists)
-        if ($(".preloader-text").length) {
-            tl.to(".preloader-text", {
-            delay: 0.3,
-            y: -100,
-            opacity: 0,
-            duration: 0.5,
-            ease: "power2.out",
-            });
-        }
-
-        // Animate SVG wave
-        tl.to(svg, {
-            duration: 0.3,
-            attr: { d: curve },
-            ease: "power2.in",
-        }).to(svg, {
-            duration: 0.5,
-            attr: { d: flat },
-            ease: "power2.out",
-        });
-
-        // Slide preloader up and hide
-        tl.to(".preloader", {
-            y: -1500,
-            duration: 0.8,
-            ease: "power2.inOut",
-        })
-            .set(".preloader", { display: "none", zIndex: -1 });
-
-        // Animate main hero image
-        if ($(".animated-image").length) {
-            tl.fromTo(
-            ".animated-image",
-            { y: 100, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                duration: 1,
-                ease: "power3.out",
-            },
-            "-=0.3"
-            );
-        }
-        });
   }
   // Init preloader
   preloader();
@@ -1684,7 +1708,7 @@ text_slider.on('slideChangeTransitionStart', function () {
     /* ==============================
         Preview + Main Slider Sync
     ============================== */
-    if ($(".fw_preview_slider_active").length) {
+    if ($(".fw_preview_slider_active").length && $(".fw_main_slider_active").length && typeof window.Swiper === 'function') {
 
         const fw_preview_slider = new Swiper(".fw_preview_slider_active", {
         speed: 500,
@@ -1713,6 +1737,7 @@ text_slider.on('slideChangeTransitionStart', function () {
     if ($(".feature-work-experience-preview-slider").length) {
 
         const $wrapper = document.querySelector(".feature-work-experience-preview-slider .swiper-wrapper");
+        if (!$wrapper) return;
         const $slides = $wrapper.querySelectorAll(".swiper-slide");
 
         const radius = 450; // circle radius
@@ -1737,19 +1762,21 @@ text_slider.on('slideChangeTransitionStart', function () {
         /* ==============================
             GSAP Scroll Rotation
         ============================== */
-        gsap.registerPlugin(ScrollTrigger);
+        if (canUseGsapMotion) {
+            gsap.registerPlugin(ScrollTrigger);
 
-        gsap.to(".feature-work-experience-preview-slider .swiper-wrapper", {
-        rotation: -40,
-        ease: "none",
-        scrollTrigger: {
-            trigger: ".feature-work-experience-preview-slider",
-            start: "top center",
-            end: "bottom top",
-            scrub: true,
-            toggleActions: "play none none reverse",
-        },
-        });
+            gsap.to(".feature-work-experience-preview-slider .swiper-wrapper", {
+            rotation: -40,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".feature-work-experience-preview-slider",
+                start: "top center",
+                end: "bottom top",
+                scrub: true,
+                toggleActions: "play none none reverse",
+            },
+            });
+        }
     }
     }
 

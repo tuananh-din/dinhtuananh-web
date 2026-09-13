@@ -2625,6 +2625,16 @@ html[data-theme="light"] .about-profile-card-label {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .wow {
+        animation: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
     .about-profile-page *,
     .about-profile-page *::before,
     .about-profile-page *::after {

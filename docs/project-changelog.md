@@ -2,6 +2,13 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Hiệu năng cuộn mobile public — 2026-09-13 (chưa commit)
+
+- Touch, thiết bị không hover và người dùng bật Reduced Motion nay giữ native scroll: không khởi tạo GSAP, ScrollTrigger, ScrollSmoother hay SplitText app effect. Desktop fine-pointer + hover vẫn giữ hiệu ứng khi các vendor cần thiết có mặt.
+- Hai callback scroll cũ được gộp thành một listener passive, cập nhật header/back-to-top bằng `requestAnimationFrame`; back-to-top và cuộn tới lỗi form dùng `auto` trên mobile/reduced-motion. WOW hiển thị nội dung ngay ở các path này.
+- Hero typing chỉ chạy khi hero/tab đang hiển thị, chỉ một timer và được dọn khi pagehide. Swiper/plugin tùy chọn có guard DOM + vendor; coverflow vẫn chạy trên mobile. Loại dead GSAP preloader code không thể chạy.
+- Bổ sung `PublicPerformanceMarkupTest` cho contract native motion, scroll listener và lifecycle typing. `node --check`, static contract và `git diff --check` pass. Chưa chạy PHPUnit/Artisan hay visual/device QA vì workspace thiếu PHP CLI, `vendor/` và local Laravel runtime; cần test sau deploy tại 375px/320px, reduced motion, desktop và thao tác menu/form/back-to-top.
+
 ## Accessibility accordion static legacy — 2026-09-13 (chưa commit)
 
 - Năm URL static legacy trực tiếp `/site/faq.html`, `/site/about.html`, `/site/index-2.html`, `/site/project-details.html` và `/site/service-details.html` nay dùng native `<details>/<summary>`.

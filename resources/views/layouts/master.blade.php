@@ -175,12 +175,14 @@
         <script src="{{ $assetVersion('site/assets/js/main.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
+            if (typeof window.toastr !== 'undefined') {
             @if(session('success'))
                 toastr.success(@json(session('success')));
             @endif
             @if(session('error'))
                 toastr.error(@json(session('error')));
             @endif
+            }
         </script>
         {{-- Dark/Light toggle: đổi + lưu localStorage, cập nhật icon. --}}
         <script>
@@ -205,6 +207,11 @@
         {{-- Slot cho các view push script phụ thuộc jQuery/main.js đã nạp xong. --}}
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                var canMatchMedia = typeof window.matchMedia === 'function';
+                var canUseEnhancedMotion = canMatchMedia
+                    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                    && window.matchMedia('(pointer: fine)').matches
+                    && window.matchMedia('(hover: hover)').matches;
                 document.querySelectorAll('form[data-submit-label]').forEach(function (form) {
                     form.addEventListener('submit', function (event) {
                         if (form.dataset.submitting === 'true') {
@@ -226,16 +233,22 @@
                 var firstError = document.querySelector('[role="alert"]');
                 if (firstError) {
                     firstError.setAttribute('tabindex', '-1');
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.scrollIntoView({ behavior: canUseEnhancedMotion ? 'smooth' : 'auto', block: 'center' });
                     firstError.focus({ preventScroll: true });
                 }
 
-                setTimeout(function () {
+                function revealWowContent() {
                     document.querySelectorAll('.wow').forEach(function (element) {
                         element.style.visibility = 'visible';
                         element.style.opacity = '1';
                     });
-                }, 1500);
+                }
+
+                if (canUseEnhancedMotion) {
+                    setTimeout(revealWowContent, 1500);
+                } else {
+                    revealWowContent();
+                }
             });
         </script>
         @stack('scripts')

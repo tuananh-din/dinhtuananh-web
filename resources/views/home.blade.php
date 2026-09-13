@@ -354,42 +354,95 @@
 
 @push('scripts')
 <script>
-$(document).ready(function () {
-    const $el = $("#typing-text");
+$(function () {
+    const el = document.getElementById('typing-text');
     const words = @json($words);
+    const canMatchMedia = typeof window.matchMedia === 'function';
+    const canUseEnhancedMotion = canMatchMedia
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        && window.matchMedia('(pointer: fine)').matches
+        && window.matchMedia('(hover: hover)').matches;
 
-    if (!$el.length || !words.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!el || !words.length || !canUseEnhancedMotion || !('IntersectionObserver' in window)) {
         return;
     }
 
-    let index = 0;
-    let letterIndex = 0;
-    let isDeleting = false;
-    let interval;
+    let index = Math.max(words.indexOf(el.textContent.trim()), 0);
+    let letterIndex = words[index].length;
+    let isDeleting = true;
+    let timer = null;
+    let isHeroVisible = false;
+    let observer = null;
 
-    function typeEffect() {
-        const currentWord = words[index];
-        if (!isDeleting && letterIndex <= currentWord.length) {
-            $el.text(currentWord.substring(0, letterIndex));
-            letterIndex++;
-        } else if (isDeleting && letterIndex >= 0) {
-            $el.text(currentWord.substring(0, letterIndex));
-            letterIndex--;
-        }
-
-        if (letterIndex > currentWord.length) {
-            isDeleting = true;
-            clearInterval(interval);
-            interval = setInterval(typeEffect, 100);
-        } else if (letterIndex < 0) {
-            isDeleting = false;
-            index = (index + 1) % words.length;
-            clearInterval(interval);
-            interval = setInterval(typeEffect, 150);
+    function stopTyping() {
+        if (timer !== null) {
+            window.clearTimeout(timer);
+            timer = null;
         }
     }
 
-    interval = setInterval(typeEffect, 150);
+    function typeNextCharacter() {
+        if (!isHeroVisible || document.visibilityState !== 'visible') {
+            stopTyping();
+            return;
+        }
+
+        const currentWord = words[index];
+        if (isDeleting) {
+            letterIndex--;
+            el.textContent = currentWord.substring(0, Math.max(letterIndex, 0));
+
+            if (letterIndex <= 0) {
+                isDeleting = false;
+                index = (index + 1) % words.length;
+            }
+        } else {
+            letterIndex++;
+            el.textContent = currentWord.substring(0, letterIndex);
+
+            if (letterIndex >= currentWord.length) {
+                isDeleting = true;
+            }
+        }
+
+        timer = window.setTimeout(typeNextCharacter, isDeleting ? 100 : 150);
+    }
+
+    function startTyping() {
+        if (timer !== null || !isHeroVisible || document.visibilityState !== 'visible') {
+            return;
+        }
+
+        timer = window.setTimeout(typeNextCharacter, 900);
+    }
+
+    function syncTypingWithVisibility() {
+        if (document.visibilityState === 'visible') {
+            startTyping();
+        } else {
+            stopTyping();
+        }
+    }
+
+    observer = new IntersectionObserver(function (entries) {
+        isHeroVisible = entries.some(function (entry) {
+            return entry.isIntersecting;
+        });
+
+        if (isHeroVisible) {
+            startTyping();
+        } else {
+            stopTyping();
+        }
+    }, { threshold: 0.1 });
+
+    observer.observe(el.closest('.hero-section') || el);
+    document.addEventListener('visibilitychange', syncTypingWithVisibility);
+    window.addEventListener('pagehide', function () {
+        stopTyping();
+        observer.disconnect();
+        document.removeEventListener('visibilitychange', syncTypingWithVisibility);
+    }, { once: true });
 });
 </script>
 @endpush
