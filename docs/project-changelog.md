@@ -2,6 +2,12 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Accessibility accordion static legacy — 2026-09-13 (chưa commit)
+
+- Năm URL static legacy trực tiếp `/site/faq.html`, `/site/about.html`, `/site/index-2.html`, `/site/project-details.html` và `/site/service-details.html` nay dùng native `<details>/<summary>`.
+- CSS/SCSS bổ sung focus, trạng thái mở nhiều mục với icon `+`/`−`, word-wrap responsive và reduced motion; chỉ gỡ handler accordion jQuery cũ sau source guard.
+- Không đổi copy, route, backend, schema hoặc migration. Browser/Sass runtime QA còn chờ; việc giữ/sửa nội dung template cũ và hướng SEO vẫn cần owner quyết định.
+
 ## Accordion trang khóa học — 2026-09-13 (chưa commit)
 
 - Chuẩn hóa 33 disclosure đang dùng thật trên ba landing khóa học bằng native `<details>/<summary>`: curriculum, FAQ và bảng số liệu. Không thêm JavaScript, ARIA mirror, route, controller, model, schema hay migration.
