@@ -2,6 +2,14 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Typography public — 2026-09-13 (chưa commit)
+
+- Thêm lớp token typography ở cuối `custom.css`: Be Vietnam Pro cho public text/display, scale semantic từ display đến meta, line-height/letter-spacing theo vai trò, và foreground token light/dark. Link text light dùng `#4d7511` (5.43:1 trên nền trắng); không thêm font, dependency hay weight mới.
+- Khôi phục focus keyboard toàn site bằng `:focus-visible` 3px thắng legacy `outline:none!important`; CTA có tối thiểu 48px, cho phép text wrap và footer newsletter xếp lại trên mobile.
+- Các landing DPM được override scope `.dpm-page`: helper, caption có thông tin, form, error/success, FAQ, metadata và CTA tối thiểu 14px/15px; input giữ 16px. Metadata case study và eyebrow article dùng token BVP trong `.article-page`.
+- Home đổi H6 trang trí thành paragraph `.type-eyebrow`; `/courses` có eyebrow paragraph và H1 đúng nghĩa. Thêm regression test `PublicTypographySemanticsTest` cho hai contract này. Không có migration, route, controller, model, CMS data hay copy thay đổi.
+- Static QA pass: `git diff --check`, kiểm tra braces CSS và cascade. Chưa chạy PHPUnit vì workspace thiếu `php` CLI và `vendor/`; chưa có visual pass vì local không render Laravel. Cần test tại 1440/768/375/320, zoom 200%, Tab/focus và light/dark sau khi có môi trường đầy đủ. Giữ import Kanit/Big Shoulders cho tới khi font network/computed-style audit đủ điều kiện xóa an toàn.
+
 ## Blog knowledge hub `/blog` — 2026-09-13 (chưa commit)
 
 - Chuyển `/blog` từ listing theme chung thành knowledge hub: hero nêu rõ Digital Marketing, Performance & Data; panel tìm kiếm/chủ đề; state kết quả rõ ràng; CTA nhẹ, có điều kiện tới khóa học. Copy chỉ dùng định vị đã chốt, không thêm nội dung, số liệu, author, tag, featured/popular/related hoặc ảnh giả.
