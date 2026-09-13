@@ -2946,3 +2946,140 @@
         }
     }
 }
+
+// Native, keyboard-accessible disclosures used by legacy static FAQ pages.
+.faq-items .accordion-box,
+.faq-inner-page-wrapper .accordion-box {
+    .legacy-disclosure {
+        display: block;
+
+        > summary {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            min-height: 48px;
+            padding: 6px 0;
+            color: #888;
+            cursor: pointer;
+            font-family: $heading-font;
+            font-size: 30px;
+            font-weight: 500;
+            line-height: 1.2;
+            list-style: none;
+            text-align: left;
+            text-transform: uppercase;
+            transition: color .2s ease, background-color .2s ease, box-shadow .2s ease;
+
+            &::-webkit-details-marker {
+                display: none;
+            }
+
+            &::marker {
+                content: "";
+            }
+
+            &:focus-visible {
+                outline: 3px solid $theme-color;
+                outline-offset: 4px;
+            }
+
+            .legacy-disclosure__label {
+                flex: 1 1 auto;
+                min-width: 0;
+                overflow-wrap: anywhere;
+            }
+
+            .legacy-disclosure__icon {
+                flex: 0 0 45px;
+                width: 45px;
+                height: 45px;
+                margin-top: -4px;
+                color: $header-color;
+                border: 1px solid rgba(255, 255, 255, 0.20);
+                border-radius: 50%;
+                font-size: 24px;
+                line-height: 41px;
+                text-align: center;
+
+                &::before {
+                    content: "+";
+                }
+            }
+        }
+
+        &[open] > summary {
+            color: $theme-color;
+            box-shadow: inset 3px 0 0 $theme-color;
+
+            .legacy-disclosure__icon {
+                border-color: $theme-color;
+                color: $theme-color;
+
+                &::before {
+                    content: "−";
+                }
+            }
+        }
+
+        .legacy-disclosure__content {
+            margin-top: 22px;
+
+            .content {
+                max-width: 570px;
+            }
+
+            .text {
+                color: #888;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.5;
+            }
+        }
+    }
+}
+
+.faq-items .accordion-box .legacy-disclosure > summary {
+    font-size: 26px;
+}
+
+@media (hover: hover) {
+    .faq-items .accordion-box .legacy-disclosure > summary:hover,
+    .faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary:hover {
+        color: $theme-color;
+    }
+}
+
+.faq-items .accordion-box .legacy-disclosure > summary:active,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary:active {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+@include breakpoint (max-xl) {
+    .faq-items .accordion-box .legacy-disclosure .legacy-disclosure__content .text,
+    .faq-inner-page-wrapper .accordion-box .legacy-disclosure .legacy-disclosure__content .text {
+        font-size: 14px;
+    }
+}
+
+@include breakpoint (max-sm) {
+    .faq-items .accordion-box .legacy-disclosure > summary,
+    .faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary {
+        gap: 12px;
+        font-size: 22px;
+        line-height: 1.6;
+    }
+}
+
+@include breakpoint (max-xxs) {
+    .faq-items .accordion-box .legacy-disclosure .legacy-disclosure__content,
+    .faq-inner-page-wrapper .accordion-box .legacy-disclosure .legacy-disclosure__content {
+        margin-top: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .faq-items .accordion-box .legacy-disclosure > summary,
+    .faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary {
+        transition: none;
+    }
+}

@@ -12239,4 +12239,134 @@ h5.preloader-text::after {
 
 .p-relative {
   position: relative;
-}/*# sourceMappingURL=main.css.map */
+}
+
+/* Native, keyboard-accessible disclosures used by legacy static FAQ pages. */
+.faq-items .accordion-box .legacy-disclosure,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure {
+  display: block;
+}
+.faq-items .accordion-box .legacy-disclosure > summary,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  min-height: 48px;
+  padding: 6px 0;
+  color: #888;
+  cursor: pointer;
+  font-family: "Big Shoulders Display", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.2;
+  list-style: none;
+  text-align: left;
+  text-transform: uppercase;
+  transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.faq-items .accordion-box .legacy-disclosure > summary::-webkit-details-marker,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.faq-items .accordion-box .legacy-disclosure > summary::marker,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary::marker {
+  content: "";
+}
+.faq-items .accordion-box .legacy-disclosure > summary:focus-visible,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary:focus-visible {
+  outline: 3px solid var(--theme);
+  outline-offset: 4px;
+}
+.faq-items .accordion-box .legacy-disclosure > summary .legacy-disclosure__label,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary .legacy-disclosure__label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.faq-items .accordion-box .legacy-disclosure > summary .legacy-disclosure__icon,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary .legacy-disclosure__icon {
+  flex: 0 0 45px;
+  width: 45px;
+  height: 45px;
+  margin-top: -4px;
+  color: var(--header);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 41px;
+  text-align: center;
+}
+.faq-items .accordion-box .legacy-disclosure > summary .legacy-disclosure__icon::before,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary .legacy-disclosure__icon::before {
+  content: "+";
+}
+.faq-items .accordion-box .legacy-disclosure[open] > summary,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure[open] > summary {
+  color: var(--theme);
+  box-shadow: inset 3px 0 0 var(--theme);
+}
+.faq-items .accordion-box .legacy-disclosure[open] > summary .legacy-disclosure__icon,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure[open] > summary .legacy-disclosure__icon {
+  border-color: var(--theme);
+  color: var(--theme);
+}
+.faq-items .accordion-box .legacy-disclosure[open] > summary .legacy-disclosure__icon::before,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure[open] > summary .legacy-disclosure__icon::before {
+  content: "−";
+}
+.faq-items .accordion-box .legacy-disclosure .legacy-disclosure__content,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure .legacy-disclosure__content {
+  margin-top: 22px;
+}
+.faq-items .accordion-box .legacy-disclosure .legacy-disclosure__content .content,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure .legacy-disclosure__content .content {
+  max-width: 570px;
+}
+.faq-items .accordion-box .legacy-disclosure .legacy-disclosure__content .text,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure .legacy-disclosure__content .text {
+  color: #888;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.faq-items .accordion-box .legacy-disclosure > summary {
+  font-size: 26px;
+}
+@media (hover: hover) {
+  .faq-items .accordion-box .legacy-disclosure > summary:hover,
+  .faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary:hover {
+    color: var(--theme);
+  }
+}
+.faq-items .accordion-box .legacy-disclosure > summary:active,
+.faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary:active {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+@media (max-width: 1199px) {
+  .faq-items .accordion-box .legacy-disclosure .legacy-disclosure__content .text,
+  .faq-inner-page-wrapper .accordion-box .legacy-disclosure .legacy-disclosure__content .text {
+    font-size: 14px;
+  }
+}
+@media (max-width: 575px) {
+  .faq-items .accordion-box .legacy-disclosure > summary,
+  .faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary {
+    gap: 12px;
+    font-size: 22px;
+    line-height: 1.6;
+  }
+}
+@media (max-width: 470px) {
+  .faq-items .accordion-box .legacy-disclosure .legacy-disclosure__content,
+  .faq-inner-page-wrapper .accordion-box .legacy-disclosure .legacy-disclosure__content {
+    margin-top: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-items .accordion-box .legacy-disclosure > summary,
+  .faq-inner-page-wrapper .accordion-box .legacy-disclosure > summary {
+    transition: none;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -626,37 +626,6 @@
     }
   
     /* ================================
-       Accordion Js Start
-    ================================ */
-
-   if ($('.accordion-box').length) {
-        $(".accordion-box").on('click', '.acc-btn', function () {
-            var outerBox = $(this).closest('.accordion-box');
-            var target = $(this).closest('.accordion');
-            var accBtn = $(this);
-            var accContent = accBtn.next('.acc-content');
-
-            if (target.hasClass('active-block')) {
-                // Already open, so close it
-                accBtn.removeClass('active');
-                target.removeClass('active-block');
-                accContent.slideUp(300);
-            } else {
-                // Close all others
-                outerBox.find('.accordion').removeClass('active-block');
-                outerBox.find('.acc-btn').removeClass('active');
-                outerBox.find('.acc-content').slideUp(300);
-
-                // Open clicked one
-                accBtn.addClass('active');
-                target.addClass('active-block');
-                accContent.slideDown(300);
-            }
-        });
-    }
-
-
-    /* ================================
        Counter Progress Js Start
     ================================ */
 
