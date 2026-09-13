@@ -10,10 +10,28 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function blogs(Request $request){
-        $search = trim((string) $request->query('search'));
-        $category = $request->query('category');
-        $blogs = Blog::where('is_published', 1)->with('categories')->when($search, fn($q) => $q->where(fn($s) => $s->where('title', 'like', "%{$search}%")->orWhere('description', 'like', "%{$search}%")))->when($category, fn($q) => $q->whereHas('categories', fn($c) => $c->where('slug', $category)))->latest()->paginate(12)->withQueryString();
-        return view('blogs', ['blogs' => $blogs, 'categories' => Category::orderBy('name')->get(), 'search' => $search, 'selectedCategory' => $category]);
+        $searchInput = $request->query('search');
+        $categoryInput = $request->query('category');
+        $search = is_string($searchInput) ? trim($searchInput) : '';
+        $categorySlug = is_string($categoryInput) ? trim($categoryInput) : '';
+        $categories = Category::query()
+            ->whereHas('blogs', fn ($query) => $query->where('is_published', 1))
+            ->orderBy('name')
+            ->get();
+        $selectedCategory = $categories->firstWhere('slug', $categorySlug);
+        $blogs = Blog::where('is_published', 1)
+            ->with('categories')
+            ->when($search !== '', fn ($query) => $query->where(fn ($searchQuery) => $searchQuery
+                ->where('title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%")))
+            ->when($categorySlug !== '', fn ($query) => $query->whereHas('categories', fn ($categoryQuery) => $categoryQuery->where('slug', $categorySlug)))
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('blogs', compact(
+            'blogs', 'categories', 'search', 'categorySlug', 'selectedCategory'
+        ));
     }
 
     public function detail($slug){

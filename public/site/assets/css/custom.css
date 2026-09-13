@@ -1784,6 +1784,381 @@ html[data-theme="light"] .homepage-final-intro {
     }
 }
 
+/* Blog knowledge hub: scoped to the public Blog listing only. */
+.blog-page {
+    overflow-x: clip;
+}
+
+.blog-page__hero {
+    padding: 164px 0 72px;
+    border-bottom: 1px solid rgba(255, 255, 255, .13);
+    background: linear-gradient(150deg, rgba(191, 247, 71, .1), transparent 42%);
+}
+
+.blog-page__hero .site-breadcrumbs {
+    margin-bottom: 32px;
+}
+
+.blog-page__eyebrow {
+    margin: 0 0 14px;
+    color: var(--theme);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    line-height: 1.4;
+}
+
+.blog-page__hero h1,
+.blog-page__listing-heading h2,
+.blog-page__section-heading h2 {
+    color: var(--white);
+    line-height: 1.1;
+}
+
+.blog-page__hero h1 {
+    max-width: 960px;
+    margin: 0;
+    font-size: clamp(40px, 5vw, 76px);
+    font-weight: 700;
+    letter-spacing: -.035em;
+}
+
+.blog-page__lead {
+    max-width: 720px;
+    margin: 22px 0 0;
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.7;
+}
+
+.blog-page__discovery,
+.blog-page__listing {
+    padding: 72px 0;
+}
+
+.blog-page__discovery {
+    border-bottom: 1px solid rgba(255, 255, 255, .13);
+}
+
+.blog-page__section-heading,
+.blog-page__listing-heading {
+    max-width: 720px;
+    margin-bottom: 28px;
+}
+
+.blog-page__section-heading h2,
+.blog-page__listing-heading h2 {
+    margin: 0;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 700;
+}
+
+.blog-page__section-heading p {
+    margin: 10px 0 0;
+}
+
+.blog-page__filters {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(210px, .36fr) auto auto;
+    gap: 16px;
+    align-items: end;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .035);
+}
+
+.blog-page__filter-field {
+    min-width: 0;
+}
+
+.blog-page__filter-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.blog-page__filter-field input,
+.blog-page__filter-field select {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-radius: 10px;
+    background: #151515;
+    color: var(--white);
+    font: inherit;
+}
+
+.blog-page__filter-field input::placeholder {
+    color: rgba(255, 255, 255, .66);
+}
+
+.blog-page__filter-field input:focus-visible,
+.blog-page__filter-field select:focus-visible,
+.blog-page__reset:focus-visible,
+.blog-page__card a:focus-visible {
+    outline: 3px solid var(--theme);
+    outline-offset: 3px;
+}
+
+.blog-page__filters .theme-btn {
+    min-height: 48px;
+    white-space: nowrap;
+}
+
+.blog-page__reset {
+    min-height: 48px;
+    padding: 13px 4px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    white-space: nowrap;
+}
+
+.blog-page__listing-heading {
+    margin-bottom: 36px;
+}
+
+.blog-page__grid > [class*="col-"] {
+    display: flex;
+}
+
+.blog-page__card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 20px;
+    background: #121212;
+}
+
+.blog-page__card .thumb {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.blog-page__card .thumb a,
+.blog-page__card .thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.blog-page__card .thumb img {
+    object-fit: cover;
+    transition: transform .2s ease;
+}
+
+.blog-page__card:hover .thumb img {
+    transform: scale(1.025);
+}
+
+.blog-page__card .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+}
+
+.blog-page .blog-category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+}
+
+.blog-page .blog-category-chip {
+    min-height: 28px;
+}
+
+.blog-page .post-date {
+    display: block;
+    margin-bottom: 14px;
+    color: rgba(255, 255, 255, .72) !important;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.blog-page__card h3 {
+    margin: 0;
+    font-size: clamp(22px, 2vw, 28px);
+    font-weight: 700;
+    line-height: 1.28;
+}
+
+.blog-page__card h3 a {
+    color: var(--white);
+}
+
+.blog-page__card h3 a:hover {
+    color: var(--theme);
+}
+
+.blog-page__card .content > p {
+    display: -webkit-box;
+    margin: 14px 0 24px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 1.65;
+}
+
+.blog-page__card .content > .theme-btn {
+    margin-top: auto;
+}
+
+.blog-page .page-nav-wrap {
+    margin-top: 48px;
+}
+
+.blog-page .pagination {
+    justify-content: center;
+    gap: 8px;
+}
+
+.blog-page .pagination .page-link {
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 10px;
+}
+
+.blog-page__course-cta {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 920px;
+    margin: 56px auto 0;
+    padding: clamp(24px, 4vw, 40px);
+    border: 1px solid rgba(191, 247, 71, .36);
+    border-radius: 20px;
+    background: rgba(191, 247, 71, .08);
+}
+
+.blog-page__course-cta p {
+    max-width: 610px;
+    margin: 0;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.blog-page__empty {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 28px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 20px;
+    background: #121212;
+    text-align: center;
+}
+
+.blog-page__empty h2 {
+    color: var(--white);
+}
+
+html[data-theme="light"] .blog-page__hero,
+html[data-theme="light"] .blog-page__discovery {
+    border-color: #dfe5ea;
+}
+
+html[data-theme="light"] .blog-page__hero {
+    background: linear-gradient(150deg, #eff8dd, transparent 46%);
+}
+
+html[data-theme="light"] .blog-page__hero h1,
+html[data-theme="light"] .blog-page__listing-heading h2,
+html[data-theme="light"] .blog-page__section-heading h2,
+html[data-theme="light"] .blog-page__filter-field label,
+html[data-theme="light"] .blog-page__card h3 a,
+html[data-theme="light"] .blog-page__course-cta p,
+html[data-theme="light"] .blog-page__empty h2,
+html[data-theme="light"] .blog-page__reset {
+    color: var(--header);
+}
+
+html[data-theme="light"] .blog-page__filters,
+html[data-theme="light"] .blog-page__card,
+html[data-theme="light"] .blog-page__empty {
+    border-color: #dfe5ea;
+    background: #fff;
+}
+
+html[data-theme="light"] .blog-page__filter-field input,
+html[data-theme="light"] .blog-page__filter-field select {
+    border-color: #c8d0d7;
+    background: #fff;
+    color: var(--header);
+}
+
+html[data-theme="light"] .blog-page__filter-field input::placeholder,
+html[data-theme="light"] .blog-page .post-date {
+    color: #5e6670 !important;
+}
+
+@media (max-width: 991px) {
+    .blog-page__filters {
+        grid-template-columns: minmax(0, 1fr) minmax(210px, .5fr) auto;
+    }
+
+    .blog-page__reset {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+}
+
+@media (max-width: 767px) {
+    .blog-page__hero {
+        padding: 116px 0 52px;
+    }
+
+    .blog-page__discovery,
+    .blog-page__listing {
+        padding: 56px 0;
+    }
+
+    .blog-page__filters {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .blog-page__filters .theme-btn,
+    .blog-page__course-cta .theme-btn {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .blog-page__reset {
+        grid-column: auto;
+    }
+
+    .blog-page__card .content {
+        padding: 22px;
+    }
+
+    .blog-page__course-cta {
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .blog-page__card .thumb img {
+        transition: none;
+    }
+}
+
 /* About instructor profile: information-first, evidence-led teaching profile. */
 .about-profile-page .section-shell {
     padding-block: clamp(68px, 9vw, 132px);
