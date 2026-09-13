@@ -108,7 +108,7 @@ html[data-theme="light"] .article-page {
     white-space: nowrap;
 }
 
-/* Eyebrow / category — CHO NAY giu font condensed lam nhan dien thuong hieu. */
+/* Eyebrow / category — use the public typeface so labels remain consistent. */
 .article-hero__eyebrow {
     display: flex;
     flex-wrap: wrap;
@@ -117,7 +117,7 @@ html[data-theme="light"] .article-page {
 }
 
 .article-hero__eyebrow a {
-    font-family: "Big Shoulders Display", "Be Vietnam Pro", sans-serif;
+    font-family: var(--font-sans, "Be Vietnam Pro", system-ui, sans-serif);
     font-size: 15px;
     font-weight: 700;
     line-height: 1;
@@ -948,4 +948,11 @@ body.is-article .mouseCursor {
     .article-hero__eyebrow a {
         transition: none;
     }
+}
+
+/* Article metadata remains readable at mobile sizes and browser zoom. */
+.article-page .case-study-meta dt,
+.article-page .case-study-kpis__item span {
+    font-size: var(--type-meta, 14px);
+    line-height: var(--line-meta, 1.45);
 }

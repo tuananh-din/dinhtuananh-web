@@ -5,8 +5,8 @@
 <section class="course-list-shell fix">
     <div class="container">
         <div class="section-title">
-            <h6>Kh&#243;a h&#7885;c</h6>
-            <h2>Danh s&#225;ch kh&#243;a h&#7885;c &#273;ang m&#7903; &#273;&#259;ng k&#253;</h2>
+            <p class="type-eyebrow">Kh&#243;a h&#7885;c</p>
+            <h1>Danh s&#225;ch kh&#243;a h&#7885;c &#273;ang m&#7903; &#273;&#259;ng k&#253;</h1>
         </div>
 
         <div class="row g-4 mt-3 course-list-grid {{ $courses->count() <= 1 ? 'course-list-grid--sparse' : '' }}">

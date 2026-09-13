@@ -2634,3 +2634,306 @@ html[data-theme="light"] .about-profile-card-label {
         animation-iteration-count: 1 !important;
     }
 }
+
+/* Public typography system: semantic roles shared by public templates.
+   Be Vietnam Pro is the documented public typeface; use only loaded 400–700. */
+:root {
+    --font-sans: "Be Vietnam Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-display: var(--font-sans);
+
+    --type-display: clamp(38px, 6vw, 80px);
+    --type-page-title: clamp(36px, 4.5vw, 72px);
+    --type-section-title: clamp(30px, 3.2vw, 48px);
+    --type-card-title: clamp(22px, 2vw, 28px);
+    --type-body-lead: clamp(16px, 1.2vw, 18px);
+    --type-body: 16px;
+    --type-ui: 15px;
+    --type-meta: 14px;
+
+    --line-display: 1.08;
+    --line-heading: 1.16;
+    --line-card: 1.3;
+    --line-body: 1.7;
+    --line-ui: 1.35;
+    --line-meta: 1.45;
+    --tracking-heading: -.01em;
+    --tracking-eyebrow: .06em;
+
+    --text-strong: #ffffff;
+    --text-default: #e9e9e7;
+    --text-muted: #b7b7b3;
+    --text-link: #bff747;
+    --focus-ring: #bff747;
+}
+
+html {
+    color-scheme: dark;
+}
+
+html[data-theme="light"] {
+    color-scheme: light;
+    --text-strong: #11151b;
+    --text-default: #23272e;
+    --text-muted: #59616c;
+    --text-link: #4d7511;
+    --focus-ring: #3f6f00;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--type-body);
+    font-synthesis: none;
+    line-height: var(--line-body);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-default);
+}
+
+body :where(p, li, label, input, textarea, select, button) {
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+}
+
+/* Theme components still set Kanit/Big Shoulders on some nested text. Keep
+   icons out of this selector, but make every public text role use BVP. */
+body :where(h1, h2, h3, h4, h5, h6, p, li, a, button, label, input, textarea, select, summary, dt, dd, th, td, figcaption, span) {
+    font-family: var(--font-sans) !important;
+}
+
+body :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+    text-transform: none;
+    color: var(--text-strong);
+    overflow-wrap: anywhere;
+}
+
+body h1 {
+    font-size: var(--type-page-title);
+    font-weight: 700;
+    line-height: var(--line-display);
+    letter-spacing: var(--tracking-heading);
+    text-wrap: balance;
+}
+
+body h2 {
+    font-size: var(--type-section-title);
+    font-weight: 700;
+    line-height: var(--line-heading);
+    letter-spacing: var(--tracking-heading);
+    text-wrap: balance;
+}
+
+body h3,
+body h4 {
+    font-size: var(--type-card-title);
+    font-weight: 600;
+    line-height: var(--line-card);
+    letter-spacing: 0;
+}
+
+body h5,
+body h6 {
+    font-size: var(--type-ui);
+    font-weight: 600;
+    line-height: var(--line-ui);
+    letter-spacing: 0;
+}
+
+.type-display,
+.type-page-title,
+.type-section-title,
+.type-card-title,
+.type-body-lead,
+.type-meta,
+.type-eyebrow {
+    font-family: var(--font-sans);
+}
+
+.type-display {
+    font-size: var(--type-display);
+    font-weight: 700;
+    line-height: var(--line-display);
+    letter-spacing: var(--tracking-heading);
+}
+
+.type-page-title {
+    font-size: var(--type-page-title);
+    font-weight: 700;
+    line-height: var(--line-display);
+    letter-spacing: var(--tracking-heading);
+}
+
+.type-section-title {
+    font-size: var(--type-section-title);
+    font-weight: 700;
+    line-height: var(--line-heading);
+    letter-spacing: var(--tracking-heading);
+}
+
+.type-card-title {
+    font-size: var(--type-card-title);
+    font-weight: 600;
+    line-height: var(--line-card);
+}
+
+.type-body-lead {
+    font-size: var(--type-body-lead);
+    line-height: var(--line-body);
+}
+
+.type-meta {
+    font-size: var(--type-meta);
+    font-weight: 500;
+    line-height: var(--line-meta);
+}
+
+.type-eyebrow {
+    margin: 0 0 14px;
+    color: var(--text-link);
+    font-size: var(--type-meta);
+    font-weight: 700;
+    line-height: var(--line-meta);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+}
+
+/* The legacy template removes link outlines with !important. This restores a
+   visible keyboard focus ring without changing mouse interaction. */
+:where(a, button, input, textarea, select, summary):focus-visible {
+    outline: 3px solid var(--focus-ring) !important;
+    outline-offset: 3px;
+}
+
+:where(input, textarea, select):focus-visible {
+    border-color: var(--focus-ring);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus-ring) 28%, transparent);
+}
+
+main :where(p, li) > a:not(.theme-btn, .dpm-button, .dpm-text-link) {
+    color: var(--text-link);
+    text-decoration: underline;
+    text-decoration-thickness: .08em;
+    text-underline-offset: .16em;
+}
+
+.header-main .main-menu ul li > a,
+.mean-container .mean-nav ul li > a,
+.footer-wrapper .footer-menu-list a,
+.footer-wrapper .icon-items a,
+.theme-btn {
+    font-family: var(--font-sans);
+    font-size: var(--type-ui);
+    font-weight: 600;
+    line-height: var(--line-ui);
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.mobile-menus.style-2 .mean-nav ul li a,
+.mobile-menus .mean-nav ul li a {
+    font-family: var(--font-sans) !important;
+}
+
+.theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    height: auto;
+    white-space: normal;
+}
+
+.theme-btn i {
+    flex: 0 0 auto;
+}
+
+.homepage-hero-guide__eyebrow,
+.blog-page__eyebrow,
+.about-profile-eyebrow,
+.about-profile-card-label,
+.blog-category-chip {
+    color: var(--text-link);
+    font-size: var(--type-meta);
+    font-weight: 700;
+    line-height: var(--line-meta);
+    letter-spacing: var(--tracking-eyebrow);
+}
+
+.brand-eyebrow,
+.featured-pill,
+.course-badge,
+.lead-form-field__optional {
+    font-size: var(--type-meta);
+    font-weight: 700;
+    line-height: var(--line-meta);
+    letter-spacing: var(--tracking-eyebrow);
+}
+
+.homepage-hero-guide li,
+.homepage-course-meta li,
+.homepage-path-card__link,
+.homepage-evidence-card__link,
+.about-profile-text-link,
+.about-profile-course-meta li,
+.lead-form-box .lead-note,
+.lead-form-shell .form-note {
+    font-size: var(--type-meta);
+    line-height: var(--line-meta);
+}
+
+.about-profile-audience-list span,
+.about-profile-topic__number,
+.homepage-hero-guide li span,
+.homepage-testimonials blockquote::before {
+    font-weight: 700;
+}
+
+html[data-theme="light"] .header-main .main-menu ul li > a.active,
+html[data-theme="light"] .offcanvas__info .main-menu ul li > a.active,
+html[data-theme="light"] .blog-page__eyebrow,
+html[data-theme="light"] .about-profile-eyebrow,
+html[data-theme="light"] .about-profile-card-label,
+html[data-theme="light"] .about-profile-text-link {
+    color: var(--text-link);
+}
+
+.footer-brand-copy form > .d-flex {
+    flex-wrap: wrap;
+}
+
+.footer-brand-copy form .form-control {
+    min-width: min(100%, 18ch);
+    flex: 1 1 18ch;
+}
+
+@media (max-width: 575px) {
+    .footer-brand-copy form > .d-flex {
+        display: grid !important;
+        gap: 12px !important;
+    }
+
+    .footer-brand-copy form .theme-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1600px) {
+    .view-portfolio-item .content .counter-box .counter-text p,
+    .page-wrap-item .hero-3 .hero-text p {
+        font-size: var(--type-meta);
+        line-height: var(--line-meta);
+    }
+}
+
+@media (max-width: 470px) {
+    .faq-items .accordion-box .block .acc-content .content .text,
+    .faq-inner-page-wrapper .accordion-box .block .acc-content .content .text {
+        font-size: var(--type-meta);
+        line-height: var(--line-body);
+    }
+}
+
+.gt-portfolio-11-slider-nav-subtittle {
+    font-size: var(--type-meta);
+    line-height: var(--line-meta);
+}

@@ -55,7 +55,7 @@
 <section class="section-shell homepage-paths" aria-labelledby="paths-title">
     <div class="container">
         <div class="section-title text-center">
-            <h6>Bắt đầu theo mục tiêu của bạn</h6>
+            <p class="type-eyebrow">Bắt đầu theo mục tiêu của bạn</p>
             <h2 id="paths-title">Bạn đang cần hỗ trợ theo hướng nào?</h2>
         </div>
         <div class="row g-4 mt-4">
@@ -90,7 +90,7 @@
 <section class="section-shell homepage-courses" id="courses" aria-labelledby="courses-title">
     <div class="container">
         <div class="section-title">
-            <h6>Khóa học</h6>
+            <p class="type-eyebrow">Khóa học</p>
             <h2 id="courses-title">Chọn khóa học theo mục tiêu hiện tại</h2>
             <p class="homepage-section-lead">Xem thông tin từng khóa để tự đánh giá mức phù hợp trước khi để lại nhu cầu.</p>
         </div>
@@ -161,7 +161,7 @@
 <section class="choose-us-section fix section-shell homepage-support" aria-labelledby="support-title">
     <div class="container">
         <div class="section-title">
-            <h6>Cách đồng hành</h6>
+            <p class="type-eyebrow">Cách đồng hành</p>
             <h2 id="support-title">Khám phá chủ đề phù hợp với cách bạn đang học hoặc triển khai</h2>
             <p class="homepage-section-lead">Các nội dung bên dưới được hiển thị từ thông tin quản trị của website.</p>
         </div>
@@ -194,7 +194,7 @@
 <section class="section-shell homepage-evidence" id="evidence" aria-labelledby="evidence-title">
     <div class="container">
         <div class="section-title">
-            <h6>Nội dung &amp; minh chứng</h6>
+            <p class="type-eyebrow">Nội dung &amp; minh chứng</p>
             <h2 id="evidence-title">Tìm hiểu trước khi quyết định</h2>
             <p class="homepage-section-lead">Xem nội dung và hình ảnh đã được công bố trên website.</p>
         </div>
@@ -270,7 +270,7 @@
 @if($featuredTestimonials->isNotEmpty())
 <section class="section-shell homepage-testimonials" aria-labelledby="testimonials-title">
     <div class="container">
-        <div class="section-title"><h6>Chia sẻ đã công bố</h6><h2 id="testimonials-title">Những chia sẻ được hiển thị trên website</h2></div>
+        <div class="section-title"><p class="type-eyebrow">Chia sẻ đã công bố</p><h2 id="testimonials-title">Những chia sẻ được hiển thị trên website</h2></div>
         <div class="row g-4 mt-4">
             @foreach($featuredTestimonials as $testimonial)
             <div class="col-lg-4 col-md-6">
@@ -296,7 +296,7 @@
         <div class="row g-4 align-items-center">
             <div class="col-lg-5"><div class="brand-card home-about-image"><img src="{{ $about->avatar ?: 'app/assets/images/others/thumb-16.jpg' }}" alt="{{ $about->name ?: 'Tuấn Anh' }}" width="600" height="680" loading="lazy" decoding="async"></div></div>
             <div class="col-lg-7">
-                <div class="section-title home-about-copy"><h6>Giới thiệu</h6><h2 id="about-title">Tìm hiểu thêm về người đồng hành cùng bạn</h2></div>
+                <div class="section-title home-about-copy"><p class="type-eyebrow">Giới thiệu</p><h2 id="about-title">Tìm hiểu thêm về người đồng hành cùng bạn</h2></div>
                 @if(filled($about->about_me) || filled($about->content))<div class="home-about-copy__body">{!! $about->about_me ?: $about->content !!}</div>@endif
                 <div class="cta-inline">
                     <a href="{{ route('about') }}" class="theme-btn">Xem hồ sơ đầy đủ <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></a>
