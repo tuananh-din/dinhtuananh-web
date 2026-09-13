@@ -2,6 +2,16 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Blog knowledge hub `/blog` — 2026-09-13 (chưa commit)
+
+- Chuyển `/blog` từ listing theme chung thành knowledge hub: hero nêu rõ Digital Marketing, Performance & Data; panel tìm kiếm/chủ đề; state kết quả rõ ràng; CTA nhẹ, có điều kiện tới khóa học. Copy chỉ dùng định vị đã chốt, không thêm nội dung, số liệu, author, tag, featured/popular/related hoặc ảnh giả.
+- Dropdown chỉ hiện chuyên mục có ít nhất một bài `is_published=1`; giữ search title/description, category, phân trang và route hiện hữu. Query dạng mảng được chuẩn hóa về rỗng để URL public không hợp lệ không gây lỗi.
+- Thêm title, meta/OG description và canonical theo contract: category hợp lệ (kể cả page hợp lệ) tự canonical; search hoặc category không hợp lệ canonical về `/blog`. OG image vẫn dùng Setting đã có qua layout, không tạo asset mới.
+- Card dùng `article`, `time`, category CMS, ảnh thật lazy 16:9 và excerpt thật từ description/content; ảnh thiếu không dùng thumbnail generic. CSS mới chỉ scope `.blog-page`, có lưới 3/2/1 cột, focus, light/dark và reduced motion.
+- Bổ sung `BlogKnowledgeHubTest` cho metadata/OG fallback, category public, canonical/filter/pagination, empty state, query không scalar và search `0`. Không có migration, route, model, footer hoặc newsletter backend/form nào thay đổi.
+- Final re-review tĩnh không còn P0/P1/P2 và `git diff --check` đã pass. Chưa chạy PHPUnit/Artisan vì workspace thiếu PHP CLI và `vendor/`; cần chạy targeted suite rồi `php artisan test` trong môi trường Laravel đầy đủ. Sau deploy cần smoke test thủ công tại 1440px/768px/375px: grid/overflow, reset ≥44px, ảnh thiếu, category/title dài, light/dark, Tab/focus/Enter, reduced motion và source meta/canonical.
+- Theo dõi SEO riêng: bài live có slug legacy bị ghép dạng `httpsdinhtuananhcom...` vẫn hoạt động. Chỉ làm sạch slug cùng một 301 redirect từ URL legacy trong phạm vi route/SEO riêng; không sửa trực tiếp trong phase này để tránh mất URL đã index.
+
 ## Trang Giới thiệu — Instructor Profile — 2026-09-13
 
 - Làm lại `/about` theo định vị học Digital Marketing thực hành: hero nêu giá trị học, nhóm nhu cầu người học, nội dung định hướng, khóa học, case study/blog đã công bố, câu chuyện CMS và CTA đến khóa học/liên hệ.
