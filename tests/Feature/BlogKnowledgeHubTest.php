@@ -114,10 +114,30 @@ class BlogKnowledgeHubTest extends TestCase
             ->assertDontSee('Bài viết khác');
     }
 
+    public function test_blog_search_finds_content_highlights_keywords_and_supports_sorting(): void
+    {
+        $this->createSiteIdentity();
+        $this->createBlog('Báo cáo tuần', 'bao-cao-tuan', true, 'Tóm tắt ngắn.', '<p>Hướng dẫn tìm insight từ dữ liệu thực tế.</p>');
+        $this->createBlog('Bài viết không liên quan', 'bai-viet-khong-lien-quan');
+
+        $this->get(route('blogs', ['search' => 'insight', 'sort' => 'relevance']))
+            ->assertOk()
+            ->assertSee('1 bài viết · Liên quan nhất')
+            ->assertSee('<mark>insight</mark>', false)
+            ->assertSee('Báo cáo tuần')
+            ->assertDontSee('Bài viết không liên quan');
+
+        $this->get(route('blogs', ['sort' => 'relevance']))
+            ->assertOk()
+            ->assertSee('2 bài viết · Mới nhất')
+            ->assertSee('<option value="latest" selected>', false);
+    }
+
     private function createSiteIdentity(): void
     {
         Setting::create([
             'name' => 'Thương hiệu thử nghiệm',
+            'url' => 'https://thuonghieu-thu-nghiem.test',
             'desc_seo' => 'Mô tả site.',
             'og_image' => '/storage/images/og.jpg',
             'favicon' => '/storage/images/favicon.jpg',

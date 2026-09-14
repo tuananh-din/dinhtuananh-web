@@ -23,6 +23,14 @@
         $file = public_path($path);
         return asset($path).(is_file($file) ? '?v='.filemtime($file) : '');
     };
+    $sectionValue = static function (string $name, string $default = '') use ($__env): string {
+        return html_entity_decode(trim((string) $__env->yieldContent($name, $default)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    };
+    $metaDescription = $sectionValue('meta_description', $seoDescription);
+    $pageTitle = $sectionValue('page_title', $siteName);
+    $ogTitle = $sectionValue('og_title', $siteName);
+    $ogDescription = $sectionValue('og_description', $seoDescription);
+    $canonicalUrl = $sectionValue('canonical', url()->current());
 @endphp
 <!DOCTYPE html>
 <html lang="vi">
@@ -32,13 +40,13 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="{{ trim($__env->yieldContent('meta_description', $seoDescription)) }}">
+        <meta name="description" content="{{ $metaDescription }}">
         <!-- ======== Page title ============ -->
-        <title>{{ trim($__env->yieldContent('page_title', $siteName)) }}</title>
+        <title>{{ $pageTitle }}</title>
         <!-- ========== Open Graph ========== -->
         <meta property="og:type" content="@yield('og_type', 'website')">
-        <meta property="og:title" content="{{ trim($__env->yieldContent('og_title', $siteName)) }}">
-        <meta property="og:description" content="{{ trim($__env->yieldContent('og_description', $seoDescription)) }}">
+        <meta property="og:title" content="{{ $ogTitle }}">
+        <meta property="og:description" content="{{ $ogDescription }}">
         @if($ogImageUrl)
         <meta property="og:image" content="{{ $ogImageUrl }}">
         <meta property="og:image:width" content="1200">
@@ -48,12 +56,12 @@
         @if($ogImageUrl)
         <meta name="twitter:card" content="summary_large_image">
         @endif
-        <meta name="twitter:title" content="{{ trim($__env->yieldContent('og_title', $siteName)) }}">
-        <meta name="twitter:description" content="{{ trim($__env->yieldContent('og_description', $seoDescription)) }}">
+        <meta name="twitter:title" content="{{ $ogTitle }}">
+        <meta name="twitter:description" content="{{ $ogDescription }}">
         @if($ogImageUrl)
         <meta name="twitter:image" content="{{ $ogImageUrl }}">
         @endif
-        <link rel="canonical" href="{{ trim($__env->yieldContent('canonical', url()->current())) }}">
+        <link rel="canonical" href="{{ $canonicalUrl }}">
         <link rel="alternate" type="application/rss+xml" title="{{ $siteName }} RSS" href="{{ route('feed') }}">
         <!--<< Favcion >>-->
         <link rel="shortcut icon" href="{{ $faviconUrl }}" type="image/x-icon" />

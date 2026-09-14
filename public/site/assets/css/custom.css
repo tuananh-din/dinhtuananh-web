@@ -2287,6 +2287,70 @@ html[data-theme="light"] .blog-page .post-date {
     }
 }
 
+/* Blog search improvements: count, suggestions, keyword emphasis and five-field filter layout. */
+.blog-page__result-count {
+    margin: 12px 0 0;
+    color: var(--text);
+    font-size: var(--type-meta);
+}
+
+.blog-page mark {
+    padding: 0 .12em;
+    color: inherit;
+    background: rgba(191, 247, 71, .35);
+    border-radius: 2px;
+}
+
+.blog-page__suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-top: 18px;
+    color: var(--text);
+    font-size: var(--type-meta);
+}
+
+.blog-page__suggestions a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 4px 10px;
+    color: var(--text-link);
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    transition: color var(--component-control-transition), background-color var(--component-control-transition);
+}
+
+.blog-page__suggestions a:hover {
+    color: var(--semantic-color-text-primary);
+    background: var(--semantic-color-interactive-primary);
+}
+
+@media (min-width: 992px) {
+    .blog-page__filters {
+        grid-template-columns: minmax(0, 1fr) repeat(2, minmax(180px, .3fr)) auto auto;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .blog-page__filters {
+        grid-template-columns: minmax(0, 1fr) minmax(210px, .5fr) auto;
+    }
+
+    .blog-page__filters .blog-page__filter-field:nth-child(3) {
+        grid-column: 1 / span 2;
+    }
+
+    .blog-page__filters .theme-btn {
+        align-self: end;
+    }
+}
+
+html[data-theme="light"] .blog-page mark {
+    background: #dcefb9;
+}
+
 /* About instructor profile: information-first, evidence-led teaching profile. */
 .about-profile-page .section-shell {
     padding-block: clamp(68px, 9vw, 132px);

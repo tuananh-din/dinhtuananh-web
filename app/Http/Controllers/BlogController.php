@@ -12,8 +12,16 @@ class BlogController extends Controller
     public function blogs(Request $request){
         $searchInput = $request->query('search');
         $categoryInput = $request->query('category');
-        $search = is_string($searchInput) ? trim($searchInput) : '';
+        $sortInput = $request->query('sort');
+        $search = is_string($searchInput) ? mb_substr(trim($searchInput), 0, 120) : '';
         $categorySlug = is_string($categoryInput) ? trim($categoryInput) : '';
+        $sort = is_string($sortInput) && in_array($sortInput, ['relevance', 'latest', 'oldest'], true)
+            ? $sortInput
+            : ($search !== '' ? 'relevance' : 'latest');
+
+        if ($search === '' && $sort === 'relevance') {
+            $sort = 'latest';
+        }
         $categories = Category::query()
             ->whereHas('blogs', fn ($query) => $query->where('is_published', 1))
             ->orderBy('name')
@@ -23,14 +31,19 @@ class BlogController extends Controller
             ->with('categories')
             ->when($search !== '', fn ($query) => $query->where(fn ($searchQuery) => $searchQuery
                 ->where('title', 'like', "%{$search}%")
-                ->orWhere('description', 'like', "%{$search}%")))
+                ->orWhere('description', 'like', "%{$search}%")
+                ->orWhere('content', 'like', "%{$search}%")))
             ->when($categorySlug !== '', fn ($query) => $query->whereHas('categories', fn ($categoryQuery) => $categoryQuery->where('slug', $categorySlug)))
-            ->latest()
+            ->when($sort === 'relevance' && $search !== '', fn ($query) => $query
+                ->orderByRaw('CASE WHEN title LIKE ? THEN 0 ELSE 1 END', ["%{$search}%"])
+                ->latest())
+            ->when($sort === 'oldest', fn ($query) => $query->oldest())
+            ->when($sort === 'latest' || ($sort === 'relevance' && $search === ''), fn ($query) => $query->latest())
             ->paginate(12)
             ->withQueryString();
 
         return view('blogs', compact(
-            'blogs', 'categories', 'search', 'categorySlug', 'selectedCategory'
+            'blogs', 'categories', 'search', 'categorySlug', 'selectedCategory', 'sort'
         ));
     }
 

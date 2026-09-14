@@ -22,6 +22,20 @@
     $resultHeading = $hasSearch
         ? 'Kết quả tìm kiếm cho “' . $search . '”'
         : ($hasValidCategory ? 'Bài viết về ' . $selectedCategory->name : ($isInvalidCategory ? 'Kết quả lọc bài viết' : 'Bài viết mới nhất'));
+    $sortLabel = match ($sort) {
+        'oldest' => 'Cũ nhất',
+        'latest' => 'Mới nhất',
+        default => 'Liên quan nhất',
+    };
+    $highlight = static function (string $value) use ($search): string {
+        $escaped = e($value);
+
+        if ($search === '') {
+            return $escaped;
+        }
+
+        return preg_replace('/(' . preg_quote($search, '/') . ')/iu', '<mark>$1</mark>', $escaped) ?? $escaped;
+    };
 @endphp
 
 @section('page_title', $pageTitle)
@@ -53,10 +67,10 @@
             <h2 id="blog-discovery-title">Tìm nội dung bạn cần</h2>
             <p>Dùng từ khóa hoặc chọn một chủ đề đang có bài viết công khai.</p>
         </div>
-        <form method="GET" action="{{ route('blogs') }}" class="blog-page__filters" role="search">
+        <form method="GET" action="{{ route('blogs') }}" class="blog-page__filters" role="search" data-blog-search-form>
             <div class="blog-page__filter-field blog-page__filter-field--search">
                 <label for="blog-search">Tìm bài viết</label>
-                <input id="blog-search" type="search" name="search" value="{{ $search }}" placeholder="Tìm theo chủ đề hoặc từ khóa…" autocomplete="off">
+                <input id="blog-search" type="search" name="search" value="{{ $search }}" maxlength="120" placeholder="Ví dụ: Facebook Ads, dữ liệu, chiến lược…" autocomplete="off">
             </div>
             <div class="blog-page__filter-field">
                 <label for="blog-category">Chủ đề</label>
@@ -67,11 +81,28 @@
                     @endforeach
                 </select>
             </div>
-            <button class="theme-btn" type="submit">Tìm bài viết <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></button>
+            <div class="blog-page__filter-field">
+                <label for="blog-sort">Sắp xếp</label>
+                <select id="blog-sort" name="sort">
+                    @if($hasSearch)<option value="relevance" {{ $sort === 'relevance' ? 'selected' : '' }}>Liên quan nhất</option>@endif
+                    <option value="latest" {{ $sort === 'latest' ? 'selected' : '' }}>Mới nhất</option>
+                    <option value="oldest" {{ $sort === 'oldest' ? 'selected' : '' }}>Cũ nhất</option>
+                </select>
+            </div>
+            <button class="theme-btn" type="submit" data-blog-search-button>Tìm bài viết <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></button>
             @if($hasSearch || $categorySlug !== '')
             <a href="{{ route('blogs') }}" class="blog-page__reset">Xóa bộ lọc</a>
             @endif
+            <p class="visually-hidden" role="status" aria-live="polite" data-blog-search-status></p>
         </form>
+        @if($categories->isNotEmpty())
+        <div class="blog-page__suggestions" aria-label="Gợi ý chủ đề">
+            <span>Gợi ý:</span>
+            @foreach($categories->take(5) as $category)
+            <a href="{{ route('blogs', ['category' => $category->slug]) }}">{{ $category->name }}</a>
+            @endforeach
+        </div>
+        @endif
     </div>
 </section>
 
@@ -80,6 +111,7 @@
         <div class="blog-page__listing-heading">
             <p class="blog-page__eyebrow">BÀI VIẾT</p>
             <h2 id="blog-results-title" aria-live="polite">{{ $resultHeading }}</h2>
+            <p class="blog-page__result-count" aria-live="polite">{{ $blogs->total() }} bài viết · {{ $sortLabel }}</p>
         </div>
         @if($blogs->isEmpty())
         <div class="blog-page__empty blog-empty-state blog-sparse-empty">
@@ -94,11 +126,25 @@
             @endif
         </div>
         @else
-        <div class="row g-4 blog-page__grid blog-list-grid {{ $blogs->count() === 1 ? 'blog-list-grid--single' : '' }}">
+        <div class="row g-4 blog-page__grid blog-list-grid {{ $blogs->count() === 1 ? 'blog-list-grid--single' : '' }}" data-blog-results>
             @foreach ($blogs as $key => $row)
             @php
-                $excerptSource = filled($row->description) ? $row->description : ($row->content ?? '');
-                $excerpt = trim(strip_tags($excerptSource));
+                $description = trim(strip_tags((string) $row->description));
+                $content = trim(strip_tags((string) $row->content));
+                $excerpt = $description !== '' ? $description : $content;
+
+                if ($hasSearch && mb_stripos($description, $search) === false && mb_stripos($content, $search) !== false) {
+                    $excerpt = $content;
+                }
+
+                if ($hasSearch && ($matchPosition = mb_stripos($excerpt, $search)) !== false) {
+                    $excerptLength = mb_strlen($excerpt);
+                    $excerptStart = max(0, $matchPosition - 55);
+                    $excerpt = ($excerptStart > 0 ? '… ' : '') . mb_substr($excerpt, $excerptStart, 155);
+                    $excerpt .= $excerptStart + 155 < $excerptLength ? '…' : '';
+                } else {
+                    $excerpt = \Illuminate\Support\Str::limit($excerpt, 155);
+                }
             @endphp
             <div class="col-xl-4 col-md-6 d-flex">
                 <article class="blog-page__card">
@@ -118,9 +164,9 @@
                         </ul>
                         @endif
                         @if($row->created_at)<time class="post-date" datetime="{{ $row->created_at->toDateString() }}">{{ $row->created_at->format('d/m/Y') }}</time>@endif
-                        <h3><a href="{{ route('blog', $row->slug) }}">{{ $row->title }}</a></h3>
+                        <h3><a href="{{ route('blog', $row->slug) }}">{!! $highlight($row->title) !!}</a></h3>
                         @if($excerpt !== '')
-                        <p>{{ \Illuminate\Support\Str::limit($excerpt, 155) }}</p>
+                        <p>{!! $highlight($excerpt) !!}</p>
                         @endif
                         <a href="{{ route('blog', $row->slug) }}" class="theme-btn">Đọc bài viết <span class="visually-hidden">: {{ $row->title }}</span><i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></a>
                     </div>
@@ -141,3 +187,26 @@
     </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+    (function () {
+        var form = document.querySelector('[data-blog-search-form]');
+        if (!form) return;
+
+        form.addEventListener('submit', function () {
+            var button = form.querySelector('[data-blog-search-button]');
+            var status = form.querySelector('[data-blog-search-status]');
+            var results = document.querySelector('[data-blog-results]');
+
+            if (button) {
+                button.disabled = true;
+                button.setAttribute('aria-disabled', 'true');
+                button.textContent = 'Đang tìm…';
+            }
+            if (status) status.textContent = 'Đang tìm bài viết';
+            if (results) results.setAttribute('aria-busy', 'true');
+        });
+    })();
+</script>
+@endpush
