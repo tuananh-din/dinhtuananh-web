@@ -311,6 +311,10 @@
     @if($leadMagnet)
     <div class="container"><div class="brand-card lead-magnet-card text-center mb-4">
         <h3>{{ $leadMagnet->name }}</h3><p>{{ $leadMagnet->description }}</p>
+        @php($leadMagnetErrors = $errors->getBag('leadMagnet'))
+        @if($leadMagnetErrors->any())
+            @include('partials.notice-banner', ['type' => 'error', 'title' => 'Vui lòng kiểm tra email', 'messages' => $leadMagnetErrors->all()])
+        @endif
         <form method="POST" action="{{ route('lead-magnet.subscribe', $leadMagnet->id) }}" data-submit-label="Đang gửi...">
             @csrf
             <input type="text" name="website" tabindex="-1" autocomplete="off" class="visually-hidden">
@@ -328,8 +332,13 @@
         <h2 id="consultation-title" class="text_invert-2">Chưa chắc nên bắt đầu từ khóa nào?</h2>
         <p class="homepage-final-intro">Để lại mục tiêu học hoặc câu hỏi của bạn để nhận tư vấn hướng phù hợp.</p>
         <div class="wow fadeInUp" data-wow-delay=".3s">
-            @if(session('success'))<div class="lead-feedback success" role="status" aria-live="polite">{{ session('success') }}</div>@endif
-            @if($errors->any())<div class="lead-feedback error" role="alert">{{ $errors->first() }}</div>@endif
+            @php($leadErrors = $errors->getBag('lead'))
+            @if(data_get(session('notice'), 'context') === 'lead')
+                @include('partials.notice-banner', array_merge(session('notice'), ['dismissible' => true]))
+            @endif
+            @if($leadErrors->any())
+                @include('partials.notice-banner', ['type' => 'error', 'title' => 'Vui lòng kiểm tra lại thông tin', 'messages' => $leadErrors->all()])
+            @endif
             <form class="lead-form-shell" action="{{ route('lead.store') }}" method="POST" data-submit-label="Đang gửi...">
                 @csrf
                 <div class="hp-wrap" aria-hidden="true"><label for="hp-website-home">Website</label><input type="text" name="website" id="hp-website-home" tabindex="-1" autocomplete="off"></div>

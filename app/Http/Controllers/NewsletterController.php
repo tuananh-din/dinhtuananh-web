@@ -11,11 +11,20 @@ class NewsletterController extends Controller
 {
     public function store(Request $request)
     {
+        $isBlogNewsletter = $request->input('source') === 'blog_detail';
+        $noticeContext = $isBlogNewsletter ? 'newsletter-blog' : 'newsletter-footer';
+        $errorBag = $isBlogNewsletter ? 'newsletterBlog' : 'newsletterFooter';
+
         if ($request->filled('website')) {
-            return redirect()->back()->with('success', 'Cảm ơn bạn đã đăng ký.');
+            return redirect()->back()->with('notice', [
+                'context' => $noticeContext,
+                'type' => 'success',
+                'title' => 'Đăng ký nhận tin thành công',
+                'message' => 'Cảm ơn bạn đã đăng ký.',
+            ]);
         }
 
-        $request->validate([
+        $request->validateWithBag($errorBag, [
             'email' => 'required|email|max:255',
             'source' => 'nullable|string|max:255',
         ]);
@@ -26,7 +35,12 @@ class NewsletterController extends Controller
         );
 
         if (!$subscriber->wasRecentlyCreated) {
-            return redirect()->back()->with('success', 'Email này đã được đăng ký. Cảm ơn bạn!');
+            return redirect()->back()->with('notice', [
+                'context' => $noticeContext,
+                'type' => 'info',
+                'title' => 'Email đã được đăng ký',
+                'message' => 'Email này đã được đăng ký. Cảm ơn bạn!',
+            ]);
         }
 
         $apiKey = config('services.brevo.api_key');
@@ -54,6 +68,11 @@ class NewsletterController extends Controller
             ]);
         }
 
-        return redirect()->route('thank.you')->with('success', 'Đăng ký newsletter thành công.');
+        return redirect()->route('thank.you')->with('notice', [
+            'context' => 'newsletter',
+            'type' => 'success',
+            'title' => 'Đăng ký nhận tin thành công',
+            'message' => 'Đăng ký newsletter thành công.',
+        ]);
     }
 }

@@ -23,11 +23,12 @@
                 <h2>&#272;&#259;ng k&#253; t&#432; v&#7845;n nhanh</h2>
             </div>
 
-            @if(session('success'))
-                <p style="color:#7af2a0;" role="status" aria-live="polite">{{ session('success') }}</p>
+            @php($leadErrors = $errors->getBag('lead'))
+            @if(data_get(session('notice'), 'context') === 'lead')
+                @include('partials.notice-banner', array_merge(session('notice'), ['dismissible' => true]))
             @endif
-            @if($errors->any())
-                <p style="color:#ff8f8f;" role="alert">{{ $errors->first() }}</p>
+            @if($leadErrors->any())
+                @include('partials.notice-banner', ['type' => 'error', 'title' => 'Vui lòng kiểm tra lại thông tin', 'messages' => $leadErrors->all()])
             @endif
 
             <form action="{{ route('lead.store') }}" method="POST" class="mt-4" data-submit-label="Đang gửi...">

@@ -1860,6 +1860,16 @@ text_slider.on('slideChangeTransitionStart', function () {
         document.querySelectorAll(selectors.join(',')).forEach(scheduleFallback);
     })();
 
+    document.addEventListener('click', function (event) {
+        const dismissButton = event.target.closest('[data-notice-dismiss]');
+        if (!dismissButton) return;
+
+        const notice = dismissButton.closest('[data-notice]');
+        if (!notice || notice.dataset.noticeDismissible !== 'true') return;
+
+        notice.hidden = true;
+    });
+
 
   
   })(jQuery); // End jQuery

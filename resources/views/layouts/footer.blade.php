@@ -27,6 +27,13 @@
                     <input type="hidden" name="source" value="footer">
                     <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
                     <label for="footer-newsletter-email">Nhận kiến thức mới qua email</label>
+                    @php($footerNewsletterErrors = $errors->getBag('newsletterFooter'))
+                    @if(data_get(session('notice'), 'context') === 'newsletter-footer')
+                        @include('partials.notice-banner', array_merge(session('notice'), ['dismissible' => true]))
+                    @endif
+                    @if($footerNewsletterErrors->any())
+                        @include('partials.notice-banner', ['type' => 'error', 'title' => 'Vui lòng kiểm tra email', 'messages' => $footerNewsletterErrors->all()])
+                    @endif
                     <div class="d-flex gap-2">
                         <input id="footer-newsletter-email" type="email" name="email" required class="form-control" placeholder="Email của bạn">
                         <button type="submit" class="theme-btn">Đăng ký</button>

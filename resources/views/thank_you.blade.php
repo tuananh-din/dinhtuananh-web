@@ -8,7 +8,11 @@
 <section class="news-grid-section1 fix">
     <div class="container text-center">
         <h1>Cảm ơn bạn!</h1>
-        <p class="mb-4">Thông tin của bạn đã được ghi nhận. Chúng tôi sẽ sớm liên hệ hoặc gửi nội dung phù hợp tới email của bạn.</p>
+        @if(session('notice'))
+            @include('partials.notice-banner', array_merge(session('notice'), ['dismissible' => true]))
+        @else
+            <p class="mb-4">Thông tin của bạn đã được ghi nhận. Chúng tôi sẽ sớm liên hệ hoặc gửi nội dung phù hợp tới email của bạn.</p>
+        @endif
         <a href="{{ route('index') }}" class="theme-btn">Về trang chủ</a>
         <a href="{{ route('courses') }}" class="theme-btn ms-2">Xem khóa học</a>
     </div>

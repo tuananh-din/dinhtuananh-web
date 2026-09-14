@@ -129,6 +129,8 @@
                     <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($blog->title) }}" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
                     <button type="button" class="btn-copy-link" data-copy-url="{{ url()->current() }}" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
                 </div>
+                @include('partials.notice-banner', ['type' => 'info', 'title' => 'Đã sao chép liên kết', 'message' => 'Bạn có thể dán đường dẫn này để chia sẻ bài viết.', 'dismissible' => true, 'id' => 'blog-copy-notice', 'hidden' => true])
+                @include('partials.notice-banner', ['type' => 'error', 'title' => 'Không thể sao chép liên kết', 'message' => 'Vui lòng thử lại hoặc sao chép đường dẫn trên thanh địa chỉ.', 'id' => 'blog-copy-error', 'hidden' => true])
 
                 <div class="other-blogs">
                     <h3>Nhận bài viết mới qua email</h3>
@@ -138,6 +140,13 @@
                         <input type="hidden" name="source" value="blog_detail">
                         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
                         <label class="visually-hidden" for="blog-newsletter-email">Email</label>
+                        @php($blogNewsletterErrors = $errors->getBag('newsletterBlog'))
+                        @if(data_get(session('notice'), 'context') === 'newsletter-blog')
+                            @include('partials.notice-banner', array_merge(session('notice'), ['dismissible' => true]))
+                        @endif
+                        @if($blogNewsletterErrors->any())
+                            @include('partials.notice-banner', ['type' => 'error', 'title' => 'Vui lòng kiểm tra email', 'messages' => $blogNewsletterErrors->all()])
+                        @endif
                         <input id="blog-newsletter-email" type="email" name="email" required class="form-control" placeholder="Email của bạn">
                         <button type="submit" class="theme-btn">Đăng ký</button>
                     </form>
@@ -200,7 +209,15 @@ document.addEventListener('click', function (e) {
     if (!btn) return;
     const url = btn.dataset.copyUrl;
     if (!url) return;
-    const done = () => { if (window.toastr) toastr.info('Đã copy link'); else alert('Đã copy link'); };
+    const showNotice = (id) => {
+        document.querySelectorAll('#blog-copy-notice, #blog-copy-error').forEach((notice) => {
+            notice.hidden = true;
+        });
+        const notice = document.getElementById(id);
+        if (notice) notice.hidden = false;
+    };
+    const done = () => showNotice('blog-copy-notice');
+    const failed = () => showNotice('blog-copy-error');
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(url).then(done).catch(() => fallback());
     } else {
@@ -209,7 +226,11 @@ document.addEventListener('click', function (e) {
     function fallback() {
         const ta = document.createElement('textarea');
         ta.value = url; document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); done(); } catch (_) {}
+        try {
+            if (document.execCommand('copy')) done(); else failed();
+        } catch (_) {
+            failed();
+        }
         document.body.removeChild(ta);
     }
 });

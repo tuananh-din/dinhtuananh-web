@@ -99,8 +99,14 @@
    <ul class="dpm-benefits"><li>Lộ trình từ nền tảng đến thực hành</li><li>Video bài giảng do Đinh Tuấn Anh hướng dẫn</li><li>Nhóm hỏi đáp và chữa bài</li><li>Tài liệu đi kèm khóa học</li><li>Thực hành lập kế hoạch, triển khai và phân tích</li></ul>
    <p class="dpm-small">Thông tin truy cập và hướng dẫn tham gia nhóm được xác nhận trong quá trình đăng ký.</p>
   </div>
-  <div class="dpm-form-card" id="dang-ky"><p class="dpm-eyebrow">TRAO ĐỔI VỀ KHÓA HỌC</p><h3>Đăng ký tư vấn</h3><p>Để lại thông tin để được tư vấn nội dung, cách học và hướng dẫn đăng ký.</p>@if(session('success'))<div class="dpm-success" role="status">{{ session('success') }}</div>@endif
-@if($errors->any())<div class="dpm-error" role="alert"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
+  <div class="dpm-form-card" id="dang-ky"><p class="dpm-eyebrow">TRAO ĐỔI VỀ KHÓA HỌC</p><h3>Đăng ký tư vấn</h3><p>Để lại thông tin để được tư vấn nội dung, cách học và hướng dẫn đăng ký.</p>
+@php($leadErrors = $errors->getBag('lead'))
+@if(data_get(session('notice'), 'context') === 'lead')
+@include('partials.notice-banner', array_merge(session('notice'), ['dismissible' => true]))
+@endif
+@if($leadErrors->any())
+@include('partials.notice-banner', ['type' => 'error', 'title' => 'Vui lòng kiểm tra lại thông tin', 'messages' => $leadErrors->all()])
+@endif
 <form action="{{ route('lead.store') }}" method="POST" data-submit-label="Đang gửi...">
 @csrf
 <input type="hidden" name="source_page" value="digital_performance_landing">

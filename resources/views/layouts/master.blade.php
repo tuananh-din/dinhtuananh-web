@@ -107,7 +107,6 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
         @stack('head')
         @stack('structured_data')
         {!! data_get($infor, 'code_header') !!}
@@ -173,17 +172,6 @@
         <script src="{{ asset('site/assets/js/wow.min.js') }}"></script>
         <!--<< Main.js >>-->
         <script src="{{ $assetVersion('site/assets/js/main.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script>
-            if (typeof window.toastr !== 'undefined') {
-            @if(session('success'))
-                toastr.success(@json(session('success')));
-            @endif
-            @if(session('error'))
-                toastr.error(@json(session('error')));
-            @endif
-            }
-        </script>
         {{-- Dark/Light toggle: đổi + lưu localStorage, cập nhật icon. --}}
         <script>
             (function () {

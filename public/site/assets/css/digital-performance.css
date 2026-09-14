@@ -114,8 +114,6 @@ html[data-theme="light"] .dpm-page{--ink:var(--header,#171a1f);--muted:#6b7280;-
 .dpm-page .dpm-form-card .dpm-button{width:100%;margin-top:22px}
 .dpm-page .dpm-form-card .dpm-small{margin-top:13px}
 .dpm-page .dpm-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
-.dpm-page .dpm-error{color:#8c2525;background:#ffefec;padding:15px;margin-top:20px;font-size:13px}
-.dpm-page .dpm-success{color:#1b5a32;background:#ebf6e6;padding:15px;margin-top:20px;font-size:13px}
 .dpm-page .dpm-faq summary{font-size:15px;font-weight:500;padding:20px 25px 20px 0;position:relative;line-height:1.7}
 .dpm-page .dpm-faq summary:after{content:'+';position:absolute;right:0;top:20px}
 .dpm-page .dpm-faq details[open] summary:after{content:'−'}
@@ -213,7 +211,7 @@ html[data-theme="light"] .dpm-page{--green:var(--text-link,#4d7511)}
 .dpm-page .dpm-button{min-height:48px;height:auto;white-space:normal}
 .dpm-page .dpm-text-link{padding-block:6px}
 .dpm-page .dpm-lead,.dpm-page .dpm-section-head>p,.dpm-page .dpm-three p,.dpm-page .dpm-muted,.dpm-page .dpm-outcome-list p,.dpm-page .dpm-asset-note,.dpm-page .dpm-curriculum details>p,.dpm-page .dpm-curriculum-footer p,.dpm-page .dpm-profile-summary,.dpm-page .dpm-faq details>p,.dpm-page .dpm-chart-reading,.dpm-page .dpm-data-table p,.dpm-page .dpm-form-card>p:not(.dpm-eyebrow){font-size:var(--type-meta,14px);line-height:var(--line-body,1.7)}
-.dpm-page .dpm-form-card label,.dpm-page .dpm-form-card small,.dpm-page .dpm-error,.dpm-page .dpm-success,.dpm-page .dpm-closing .dpm-wrap{font-size:var(--type-meta,14px);line-height:var(--line-meta,1.45)}
+.dpm-page .dpm-form-card label,.dpm-page .dpm-form-card small,.dpm-page .dpm-closing .dpm-wrap{font-size:var(--type-meta,14px);line-height:var(--line-meta,1.45)}
 .dpm-page .dpm-form-card input,.dpm-page .dpm-form-card textarea{font-family:var(--font-sans,'Be Vietnam Pro',Arial,sans-serif);font-size:var(--type-body,16px);line-height:var(--line-body,1.7)}
 .dpm-page .dpm-faq summary{font-size:var(--type-ui,15px);line-height:var(--line-body,1.7)}
 @media(max-width:760px){
