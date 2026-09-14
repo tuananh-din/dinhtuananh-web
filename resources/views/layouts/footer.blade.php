@@ -40,9 +40,11 @@
                         @include('partials.notice-banner', ['type' => 'error', 'title' => 'Vui lòng kiểm tra email', 'messages' => $footerNewsletterErrors->all()])
                     @endif
                     <div class="d-flex gap-2">
-                        <input id="footer-newsletter-email" type="email" name="email" required class="form-control" autocomplete="email" inputmode="email" placeholder="Ví dụ: ten@domain.com">
+                        <input id="footer-newsletter-email" type="email" name="email" required class="form-control @error('email', 'newsletterFooter') is-invalid @enderror" value="{{ old('email') }}" autocomplete="email" inputmode="email" placeholder="Ví dụ: ten@domain.com" aria-describedby="footer-newsletter-hint @error('email', 'newsletterFooter') footer-newsletter-error @enderror" @error('email', 'newsletterFooter') aria-invalid="true" @enderror>
                         <button type="submit" class="theme-btn">Đăng ký</button>
                     </div>
+                    <p id="footer-newsletter-hint" class="form-field-hint">Chúng tôi chỉ dùng email này để gửi kiến thức mới.</p>
+                    @error('email', 'newsletterFooter')<p id="footer-newsletter-error" class="form-field-error" role="alert">{{ $message }}</p>@enderror
                 </form>
             </div>
             <div class="icon-items-area">

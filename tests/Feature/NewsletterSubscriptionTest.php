@@ -31,4 +31,17 @@ class NewsletterSubscriptionTest extends TestCase
 
         $this->assertDatabaseCount('subscribers', 1);
     }
+
+    public function test_footer_newsletter_shows_a_field_level_validation_error(): void
+    {
+        $this->from(route('index'))
+            ->post(route('newsletter.store'), ['email' => 'khong-phai-email', 'source' => 'footer'])
+            ->assertRedirect(route('index'))
+            ->assertSessionHasErrorsIn('newsletterFooter', ['email']);
+
+        $this->get(route('index'))
+            ->assertOk()
+            ->assertSee('footer-newsletter-error', false)
+            ->assertSee('Vui lòng nhập đúng định dạng email.');
+    }
 }

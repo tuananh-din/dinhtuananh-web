@@ -32,6 +32,10 @@ class LeadController extends Controller
             'message' => 'nullable|string',
             'source_page' => 'nullable|string|max:255',
             'course_id' => 'nullable|integer',
+        ], [
+            'name.required' => 'Vui lòng nhập họ và tên.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'email.email' => 'Vui lòng nhập đúng định dạng email.',
         ]);
 
         $sourcePage = $request->source_page ?: 'unknown';

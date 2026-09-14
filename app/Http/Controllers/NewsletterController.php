@@ -27,6 +27,9 @@ class NewsletterController extends Controller
         $request->validateWithBag($errorBag, [
             'email' => 'required|email|max:255',
             'source' => 'nullable|string|max:255',
+        ], [
+            'email.required' => 'Vui lòng nhập email để đăng ký.',
+            'email.email' => 'Vui lòng nhập đúng định dạng email.',
         ]);
 
         $subscriber = Subscriber::firstOrCreate(
