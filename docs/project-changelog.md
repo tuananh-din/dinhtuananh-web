@@ -2,6 +2,12 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Design tokens public v1.2.0 — 2026-09-14
+
+- Mở rộng primitive palette, semantic color (surface/text/border/interactive/feedback) và component disabled token cho light/dark.
+- `site-notice` nay dùng feedback semantic token thay vì màu hardcode theo từng theme; icon/title duy trì ý nghĩa không phụ thuộc màu.
+- Bổ sung cặp tương phản đã đo và quy tắc brand/color-blindness trong `docs/design-tokens.md`.
+
 ## Design tokens public v1.1.0 — 2026-09-14
 
 - Thêm primitive spacing scale 4/8, semantic spacing, grid variables và utility layout cho public trong `custom.css`.

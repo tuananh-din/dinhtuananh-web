@@ -1,4 +1,4 @@
-# Design tokens public — v1.1.0
+# Design tokens public — v1.2.0
 
 ## Phạm vi
 
@@ -25,6 +25,34 @@ Typography hiện dùng lớp semantic đã có: `--font-*`, `--type-*`, `--line
 | `--semantic-color-text-link` | Liên kết văn bản cần đạt tương phản | Nền hoặc trạng thái CTA |
 | `--semantic-color-interactive-primary` | Trạng thái tương tác chính/brand | Text body thông thường |
 | `--semantic-color-focus-ring` | Viền focus keyboard | Border layout mặc định |
+
+## Color system
+
+### Primitive palette
+
+Primitive là màu thô, không gọi trực tiếp từ component mới. Các ramp hiện có: neutral (`0, 50, 100, 300, 500, 700, 900, 1000`), brand lime (`100, 200, 400, 600, 800`), brand green (`500, 700, 800`) và feedback blue/green/amber/red (`100`, màu chữ `600` hoặc `700`).
+
+### Semantic color
+
+Component mới dùng semantic token: `--semantic-color-surface-*`, `--semantic-color-text-*`, `--semantic-color-border-*`, `--semantic-color-interactive-primary-*`, `--semantic-color-feedback-{success|info|warning|error}-*`. Không dùng màu brand làm body text nếu cặp tương phản không đạt.
+
+Interactive gồm default, hover, pressed, focus (`--semantic-color-focus-ring`), disabled và selected (dùng primary default cùng indicator text/icon). Mọi trạng thái feedback luôn gồm icon và title/text, không truyền đạt ý nghĩa chỉ bằng màu.
+
+### Tương phản đã kiểm tra
+
+| Cặp màu | Light | Dark | Mức dùng |
+| --- | ---: | ---: | --- |
+| Focus ring trên page surface | 5.62:1 | 16.03:1 | UI ≥ 3:1 |
+| Link text trên page surface | 5.06:1 | 16.03:1 | Text ≥ 4.5:1 |
+| Feedback text trên success/info/warning/error surface | 14.08–14.61:1 | 15.96–16.44:1 | Text ≥ 4.5:1 |
+
+Đo theo WCAG relative luminance với surface đã composited. Khi thêm token hoặc đổi alpha, kiểm tra lại light và dark mode; màu chỉ đạt 3:1 chỉ được dùng cho UI/larger text, không cho body text.
+
+Brand lime là màu recognition/CTA dark; ở light mode text/link dùng green-800 để giữ AA. Primary green-500 trên surface light đạt 3.61:1, do đó chỉ dùng cho component UI, không dùng làm text thường.
+
+### Theme và color vision
+
+Light/dark có tập semantic riêng trong `html[data-theme="light"]`, không đảo màu tự động. Success/info/warning/error luôn có icon và title trong `partials/notice-banner.blade.php`; không phân biệt trạng thái chỉ bằng green/red. Kiểm tra màu mù (protanopia, deuteranopia, tritanopia) phải giữ được phân biệt qua icon, copy và border trước khi release.
 
 Các semantic token đổi theo `html[data-theme="light"]`; component không tự chứa giá trị màu thô khi có semantic token phù hợp.
 
@@ -74,6 +102,6 @@ Chưa có design tool được kết nối với repository nên không có đ�
 
 ## Phiên bản và thay đổi
 
-- Phiên bản hiện tại: `v1.1.0`.
+- Phiên bản hiện tại: `v1.2.0`.
 - Mọi thay đổi token phải ghi vào `docs/project-changelog.md`, gồm token bị ảnh hưởng, lý do và các bề mặt cần smoke test.
 - Thay đổi primitive chưa được tiêu thụ là patch; thêm semantic/component là minor; đổi giá trị semantic/component đang được tiêu thụ là breaking change nội bộ và phải kiểm tra light/dark, keyboard focus và mobile.
