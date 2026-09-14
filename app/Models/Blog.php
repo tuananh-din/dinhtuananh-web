@@ -31,4 +31,15 @@ class Blog extends Model
             ? $path
             : asset($path);
     }
+
+    public function getPublicSlugAttribute(): string
+    {
+        $slug = (string) $this->slug;
+
+        if (Str::contains($slug, 'dinhtuananhcom')) {
+            return Str::slug((string) $this->title) ?: $slug;
+        }
+
+        return $slug;
+    }
 }

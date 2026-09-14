@@ -19,7 +19,7 @@
 @endforeach
 @foreach ($blogs as $blog)
     <url>
-        <loc>{{ route('blog', $blog->slug) }}</loc>
+        <loc>{{ route('blog', $blog->public_slug) }}</loc>
         <lastmod>{{ optional($blog->updated_at)->toAtomString() ?? now()->toAtomString() }}</lastmod>
     </url>
 @endforeach

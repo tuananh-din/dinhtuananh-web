@@ -29,7 +29,7 @@
                     <div class="row g-3 justify-content-center">
                         @foreach($recentBlogs as $blog)
                         <div class="col-12 col-md-4">
-                            <a class="error-page__suggestion-card" href="{{ route('blog', $blog->slug) }}">{{ $blog->title }}</a>
+                            <a class="error-page__suggestion-card" href="{{ route('blog', $blog->public_slug) }}">{{ $blog->title }}</a>
                         </div>
                         @endforeach
                     </div>

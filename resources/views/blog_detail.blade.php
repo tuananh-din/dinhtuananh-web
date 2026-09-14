@@ -185,9 +185,9 @@
                                         @endforeach
                                     </div>
                                     @endif
-                                    <h3><a href="{{ route('blog', $other->slug) }}">{{ $other->title }}</a></h3>
+                                    <h3><a href="{{ route('blog', $other->public_slug) }}">{{ $other->title }}</a></h3>
                                     @if($other->description)<p>{{ \Illuminate\Support\Str::limit($other->description, 160) }}</p>@endif
-                                    <a href="{{ route('blog', $other->slug) }}">Đọc bài viết <i class="fa-solid fa-arrow-up-right"></i></a>
+                                    <a href="{{ route('blog', $other->public_slug) }}">Đọc bài viết <i class="fa-solid fa-arrow-up-right"></i></a>
                                 </div>
                             </div>
                         </div>

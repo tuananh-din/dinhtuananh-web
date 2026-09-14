@@ -150,7 +150,7 @@
                 <article class="blog-page__card">
                     @if(filled($row->image))
                     <div class="thumb">
-                        <a href="{{ route('blog', $row->slug) }}">
+                        <a href="{{ route('blog', $row->public_slug) }}">
                             <img src="{{ $row->image_url }}" alt="{{ $row->title }}" width="1200" height="675" loading="lazy" decoding="async">
                         </a>
                     </div>
@@ -164,11 +164,11 @@
                         </ul>
                         @endif
                         @if($row->created_at)<time class="post-date" datetime="{{ $row->created_at->toDateString() }}">{{ $row->created_at->format('d/m/Y') }}</time>@endif
-                        <h3><a href="{{ route('blog', $row->slug) }}">{!! $highlight($row->title) !!}</a></h3>
+                        <h3><a href="{{ route('blog', $row->public_slug) }}">{!! $highlight($row->title) !!}</a></h3>
                         @if($excerpt !== '')
                         <p>{!! $highlight($excerpt) !!}</p>
                         @endif
-                        <a href="{{ route('blog', $row->slug) }}" class="theme-btn">Đọc bài viết <span class="visually-hidden">: {{ $row->title }}</span><i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></a>
+                        <a href="{{ route('blog', $row->public_slug) }}" class="theme-btn">Đọc bài viết <span class="visually-hidden">: {{ $row->title }}</span><i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
             </div>

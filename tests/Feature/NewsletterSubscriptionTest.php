@@ -16,7 +16,8 @@ class NewsletterSubscriptionTest extends TestCase
         Http::fake(['https://api.brevo.com/*' => Http::response([], 500)]);
 
         $this->post(route('newsletter.store'), ['email' => 'newsletter@example.test', 'source' => 'footer'])
-            ->assertSessionHas('success');
+            ->assertRedirect(route('thank.you'))
+            ->assertSessionHas('notice', fn (array $notice) => $notice['context'] === 'newsletter' && $notice['type'] === 'success');
 
         $this->assertDatabaseHas('subscribers', ['email' => 'newsletter@example.test', 'source' => 'footer']);
     }
@@ -26,7 +27,7 @@ class NewsletterSubscriptionTest extends TestCase
         $this->post(route('newsletter.store'), ['email' => 'newsletter@example.test']);
 
         $this->post(route('newsletter.store'), ['email' => 'newsletter@example.test'])
-            ->assertSessionHas('success');
+            ->assertSessionHas('notice', fn (array $notice) => $notice['context'] === 'newsletter-footer' && $notice['type'] === 'info');
 
         $this->assertDatabaseCount('subscribers', 1);
     }

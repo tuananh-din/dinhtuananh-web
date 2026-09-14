@@ -48,7 +48,21 @@ class BlogController extends Controller
     }
 
     public function detail($slug){
-        $blog = Blog::where('is_published', 1)->where('slug',$slug)->firstOrFail();
+        $blog = Blog::where('is_published', 1)->where('slug', $slug)->first();
+
+        if (!$blog) {
+            $blog = Blog::where('is_published', 1)
+                ->where('slug', 'like', '%dinhtuananhcom%')
+                ->get()
+                ->first(fn (Blog $candidate) => $candidate->public_slug === $slug);
+        }
+
+        abort_unless($blog, 404);
+
+        if ($slug !== $blog->public_slug) {
+            return redirect()->route('blog', $blog->public_slug, 301);
+        }
+
         $otherBlogs = Blog::where('is_published', 1)->where('id','!=',$blog->id)->orderBy('id','DESC')->limit(3)->get();
         $featuredCourse = Course::where('is_active', 1)->where('is_featured', 1)->orderBy('sort_order')->orderByDesc('id')->first();
         if (!$featuredCourse) {

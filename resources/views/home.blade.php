@@ -253,9 +253,9 @@
                         <img src="{{ $row->image_url }}" alt="{{ $row->title }}" width="640" height="426" loading="lazy" decoding="async">
                         <div class="content">
                             <span class="post-date">{{ optional($row->created_at)->format('d/m/Y') }}</span>
-                            <h4><a href="{{ route('blog', $row->slug) }}">{{ $row->title }}</a></h4>
+                            <h4><a href="{{ route('blog', $row->public_slug) }}">{{ $row->title }}</a></h4>
                             <p>{{ $row->description }}</p>
-                            <a class="homepage-evidence-card__link" href="{{ route('blog', $row->slug) }}">Đọc bài viết <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></a>
+                            <a class="homepage-evidence-card__link" href="{{ route('blog', $row->public_slug) }}">Đọc bài viết <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></a>
                         </div>
                     </article>
                 </div>

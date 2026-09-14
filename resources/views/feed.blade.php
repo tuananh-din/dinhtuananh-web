@@ -7,8 +7,8 @@
         @foreach($blogs as $blog)
             <item>
                 <title>{{ e($blog->title) }}</title>
-                <link>{{ e(route('blog', $blog->slug)) }}</link>
-                <guid>{{ e(route('blog', $blog->slug)) }}</guid>
+                <link>{{ e(route('blog', $blog->public_slug)) }}</link>
+                <guid>{{ e(route('blog', $blog->public_slug)) }}</guid>
                 <description>{{ e(\Illuminate\Support\Str::limit(strip_tags($blog->description ?: $blog->content), 300)) }}</description>
                 <pubDate>{{ optional($blog->created_at)->toRssString() }}</pubDate>
             </item>

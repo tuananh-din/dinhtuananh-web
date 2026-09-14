@@ -32,7 +32,8 @@ class PublicLeadSubmissionTest extends TestCase
             'source_page' => 'course_detail',
         ]);
 
-        $response->assertSessionHas('success');
+        $response->assertRedirect(route('thank.you'));
+        $response->assertSessionHas('notice', fn (array $notice) => $notice['context'] === 'lead' && $notice['type'] === 'success');
         $this->assertDatabaseHas('leads', [
             'course_id' => $course->id,
             'name' => 'Nguyen Van A',
@@ -55,7 +56,7 @@ class PublicLeadSubmissionTest extends TestCase
             'website' => 'https://spam.example.com',
         ]);
 
-        $response->assertSessionHas('success');
+        $response->assertSessionHas('notice', fn (array $notice) => $notice['context'] === 'lead' && $notice['type'] === 'success');
         $this->assertDatabaseMissing('leads', [
             'name' => 'Bot User',
         ]);
@@ -71,7 +72,7 @@ class PublicLeadSubmissionTest extends TestCase
         ]);
 
         $response->assertRedirect(route('contact'));
-        $response->assertSessionHasErrors(['name', 'phone']);
+        $response->assertSessionHasErrorsIn('lead', ['name', 'phone']);
         $this->assertDatabaseCount('leads', 0);
         Mail::assertNothingSent();
     }
@@ -97,7 +98,8 @@ class PublicLeadSubmissionTest extends TestCase
             'phone' => '0900000002',
         ]);
 
-        $response->assertSessionHas('success');
+        $response->assertRedirect(route('thank.you'));
+        $response->assertSessionHas('notice', fn (array $notice) => $notice['context'] === 'lead' && $notice['type'] === 'success');
         $this->assertDatabaseHas('leads', [
             'name' => 'Nguyen Van C',
             'phone' => '0900000002',

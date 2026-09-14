@@ -109,7 +109,7 @@
         @if($blogs->isNotEmpty())
         <div class="about-profile-evidence-group"><div class="about-profile-evidence-heading"><h3>Bài viết</h3><a href="{{ route('blogs') }}" class="about-profile-text-link">Xem tất cả bài viết <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></a></div><div class="row g-4">
             @foreach($blogs as $blog)
-            <div class="col-lg-6"><article class="about-profile-evidence-card">@if($blog->image)<img src="{{ $blog->image_url }}" alt="{{ $blog->title }}" width="640" height="426" loading="lazy" decoding="async">@endif<div><p class="about-profile-card-label">{{ optional($blog->created_at)->format('d/m/Y') }}</p><h4>{{ $blog->title }}</h4>@if($blog->description)<p>{{ $blog->description }}</p>@endif<a href="{{ route('blog', $blog->slug) }}" class="about-profile-text-link">Đọc bài viết <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></a></div></article></div>
+            <div class="col-lg-6"><article class="about-profile-evidence-card">@if($blog->image)<img src="{{ $blog->image_url }}" alt="{{ $blog->title }}" width="640" height="426" loading="lazy" decoding="async">@endif<div><p class="about-profile-card-label">{{ optional($blog->created_at)->format('d/m/Y') }}</p><h4>{{ $blog->title }}</h4>@if($blog->description)<p>{{ $blog->description }}</p>@endif<a href="{{ route('blog', $blog->public_slug) }}" class="about-profile-text-link">Đọc bài viết <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></a></div></article></div>
             @endforeach
         </div></div>
         @endif

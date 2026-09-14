@@ -22,7 +22,8 @@ class LeadNotificationTest extends TestCase
             'email' => 'customer@example.test',
             'message' => 'Cần được tư vấn.',
             'source_page' => 'contact',
-        ])->assertSessionHas('success');
+        ])->assertRedirect(route('thank.you'))
+            ->assertSessionHas('notice', fn (array $notice) => $notice['context'] === 'lead' && $notice['type'] === 'success');
 
         Mail::assertSent(NewLeadNotification::class, function (NewLeadNotification $mail) {
             $mail->build();
@@ -45,7 +46,8 @@ class LeadNotificationTest extends TestCase
         $this->post(route('lead.store'), [
             'name' => 'Khách không email',
             'phone' => '0900000001',
-        ])->assertSessionHas('success');
+        ])->assertRedirect(route('thank.you'))
+            ->assertSessionHas('notice', fn (array $notice) => $notice['context'] === 'lead' && $notice['type'] === 'success');
 
         Mail::assertSent(NewLeadNotification::class, function (NewLeadNotification $mail) {
             $mail->build();

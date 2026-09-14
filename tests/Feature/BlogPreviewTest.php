@@ -30,6 +30,22 @@ class BlogPreviewTest extends TestCase
         $this->get(route('blog', $blog->slug))->assertNotFound();
     }
 
+    public function test_legacy_malformed_blog_slug_redirects_to_a_clean_public_url(): void
+    {
+        $blog = Blog::create([
+            'title' => 'Làm thuê Reflection – Phần 2.1: Thinking System',
+            'slug' => 'httpsdinhtuananhcomlam-thue-reflection-phan-21-thinking-system',
+            'content' => 'Nội dung bài viết.',
+            'is_published' => true,
+        ]);
+
+        $this->assertSame('lam-thue-reflection-phan-21-thinking-system', $blog->public_slug);
+        $this->get(route('blog', $blog->public_slug))->assertOk();
+        $this->get(route('blog', $blog->slug))
+            ->assertStatus(301)
+            ->assertRedirect(route('blog', $blog->public_slug));
+    }
+
     public function test_admin_blog_index_filters_by_search_status_and_category(): void
     {
         $category = Category::create(['name' => 'SEO', 'slug' => 'seo']);
