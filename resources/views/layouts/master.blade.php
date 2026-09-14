@@ -178,17 +178,32 @@
                 var btn = document.getElementById('theme-toggle');
                 if (!btn) return;
                 var icon = btn.querySelector('i');
+                var tooltip = document.getElementById('theme-toggle-tooltip');
                 function sync() {
                     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
                     if (icon) icon.className = dark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
                     btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+                    if (tooltip) tooltip.textContent = dark ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối';
                 }
+                function showTooltip() { if (tooltip) tooltip.hidden = false; }
+                function hideTooltip() { if (tooltip) tooltip.hidden = true; }
                 sync();
+                btn.addEventListener('mouseenter', showTooltip);
+                btn.addEventListener('mouseleave', hideTooltip);
+                btn.addEventListener('focus', showTooltip);
+                btn.addEventListener('blur', hideTooltip);
+                btn.addEventListener('keydown', function (event) {
+                    if (event.key === 'Escape') {
+                        hideTooltip();
+                        btn.blur();
+                    }
+                });
                 btn.addEventListener('click', function () {
                     var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
                     document.documentElement.setAttribute('data-theme', next);
                     try { localStorage.setItem('theme', next); } catch (e) {}
                     sync();
+                    hideTooltip();
                 });
             })();
         </script>

@@ -1268,6 +1268,37 @@ html[data-theme="light"] .hero-section1 .line-shape {
     display: none;
 }
 
+/* Tooltip cho nút chuyển theme: tương phản cao, chỉ xuất hiện khi hover/focus. */
+.theme-toggle-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.site-tooltip {
+    position: absolute;
+    z-index: 1100;
+    top: calc(100% + 10px);
+    left: 50%;
+    width: max-content;
+    max-width: min(240px, calc(100vw - 32px));
+    transform: translateX(-50%);
+    padding: 8px 10px;
+    border: 1px solid rgba(198, 255, 59, .55);
+    border-radius: 4px;
+    background: #111713;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .22);
+    pointer-events: none;
+}
+
+.site-tooltip[hidden] {
+    display: none;
+}
+
 /* Nhom 17D: trang co 0-1 item can duoc can giua, khong doi grid binh thuong. */
 .home-featured-courses--single > .col-lg-8,
 .home-featured-courses--empty > .col-lg-4,
