@@ -1859,6 +1859,24 @@ text_slider.on('slideChangeTransitionStart', function () {
     });
 
     (function () {
+        document.querySelectorAll('.dpm-page .dpm-curriculum').forEach(function (curriculum) {
+            const items = Array.from(curriculum.children).filter(function (item) {
+                return item.tagName === 'DETAILS';
+            });
+
+            items.forEach(function (item) {
+                item.addEventListener('toggle', function () {
+                    if (!item.open) return;
+
+                    items.forEach(function (otherItem) {
+                        if (otherItem !== item) otherItem.open = false;
+                    });
+                });
+            });
+        });
+    })();
+
+    (function () {
         const dialog = document.getElementById('case-study-image-dialog');
         const triggers = Array.from(document.querySelectorAll('[data-case-study-image-trigger]'));
         if (!dialog || !triggers.length || typeof dialog.showModal !== 'function') return;
