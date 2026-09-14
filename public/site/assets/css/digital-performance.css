@@ -214,7 +214,22 @@ html[data-theme="light"] .dpm-page{--green:var(--text-link,#4d7511)}
 .dpm-page .dpm-form-card label,.dpm-page .dpm-form-card small,.dpm-page .dpm-closing .dpm-wrap{font-size:var(--type-meta,14px);line-height:var(--line-meta,1.45)}
 .dpm-page .dpm-form-card input,.dpm-page .dpm-form-card textarea{font-family:var(--font-sans,'Be Vietnam Pro',Arial,sans-serif);font-size:var(--type-body,16px);line-height:var(--line-body,1.7)}
 .dpm-page .dpm-faq summary{font-size:var(--type-ui,15px);line-height:var(--line-body,1.7)}
+.dpm-page .dpm-proof{padding:42px 0;background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.dpm-page .dpm-proof-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:22px}
+.dpm-page .dpm-proof-head .dpm-eyebrow{margin:0;color:var(--green)}
+.dpm-page .dpm-proof-head h2{font-size:24px}
+.dpm-page .dpm-proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.dpm-page .dpm-proof-card{padding:22px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.dpm-page .dpm-proof-rating{margin:0 0 12px;color:var(--green);letter-spacing:.12em;font-size:13px}
+.dpm-page .dpm-proof-quote{margin:0;color:var(--ink);font-size:14px;line-height:1.7}
+.dpm-page .dpm-proof-name{margin:18px 0 2px;color:var(--ink);font-size:13px;font-weight:600}
+.dpm-page .dpm-proof-role{margin:0;color:var(--muted);font-size:12px;line-height:1.5}
+.dpm-page .dpm-closing .dpm-button{color:var(--button-ink);flex:0 0 auto}
 @media(max-width:760px){
   .dpm-page .dpm-eyebrow,.dpm-page .dpm-hero-note,.dpm-page .dpm-lead{font-size:var(--type-meta,14px)}
   .dpm-page .dpm-curriculum details>p{font-size:var(--type-meta,14px)}
+  .dpm-page .dpm-proof{padding:32px 0}
+  .dpm-page .dpm-proof-head{display:block;margin-bottom:18px}
+  .dpm-page .dpm-proof-head h2{margin-top:8px}
+  .dpm-page .dpm-proof-grid{grid-template-columns:1fr}
 }

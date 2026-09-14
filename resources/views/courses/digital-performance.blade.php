@@ -41,6 +41,7 @@
   </div>
  </div>
 </section>
+@include('partials.course-testimonials', ['testimonials' => $testimonials])
 <nav class="dpm-subnav" aria-label="Nội dung khóa học"><div class="dpm-wrap"><a href="#tong-quan">Tổng quan</a><a href="#lo-trinh">Lộ trình</a><a href="#cach-hoc">Cách học</a><a href="#giang-vien">Giảng viên</a><a href="#hoc-phi">Học phí</a><a href="#dang-ky">Đăng ký ↗</a></div></nav>
 <section class="dpm-section" id="tong-quan">
  <div class="dpm-wrap">
@@ -127,7 +128,7 @@
  <details><summary>Học phí có bao gồm ngân sách chạy quảng cáo?</summary><p>Học phí khóa học là {{ number_format($course->sale_price ?? $course->price ?? 3000000, 0, ',', '.') }} VNĐ. Nếu muốn chạy chiến dịch thật, hãy trao đổi trước về ngân sách quảng cáo và các chi phí công cụ phát sinh.</p></details>
  <details><summary>Được xem video trong bao lâu?</summary><p>Thời hạn truy cập sẽ được xác nhận khi tư vấn, trước khi bạn quyết định đăng ký.</p></details>
  </div></div></section>
-<div class="dpm-closing"><div class="dpm-wrap"><span>Học có hệ thống. Thực hành có định hướng.</span><a href="#dang-ky">Bắt đầu cùng Tuấn Anh ↗</a></div></div>
+<div class="dpm-closing"><div class="dpm-wrap"><span>Học có hệ thống. Thực hành có định hướng.</span><a class="dpm-button" href="#dang-ky">Đăng ký tư vấn <span aria-hidden="true">↗</span></a></div></div>
 </div>
 
 @endsection
