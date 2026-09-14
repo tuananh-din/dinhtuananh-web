@@ -12,7 +12,7 @@ use App\Support\ImageOptimizer;
 class AboutController extends Controller
 {
     public function index(){
-        $about = About::first();
+        $about = About::first() ?? new About();
         return view('admin.profile',compact('about'));
     }
 
@@ -26,7 +26,7 @@ class AboutController extends Controller
             'x' => 'nullable|url|max:255',
         ]);
 
-        $about = About::first();
+        $about = About::first() ?? new About();
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $path = $file->hashName('public/images');
@@ -36,7 +36,7 @@ class AboutController extends Controller
                 $this->deleteManagedUpload($about->avatar);
             }
         }else{
-            $avatar = $about->avatar ?? null;
+            $avatar = $about->avatar;
         }
         
 

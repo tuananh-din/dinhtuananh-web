@@ -16,6 +16,14 @@
     <form class="forms-sample" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" id="form-validation" >
     @csrf
         <div class="container">
+            @if(session('success'))
+                <div class="alert alert-success" role="status">{{ session('success') }}</div>
+            @endif
+            @if($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <strong>Chưa thể lưu.</strong> Vui lòng kiểm tra lại các trường được báo lỗi bên dưới.
+                </div>
+            @endif
             <div class="tab-content m-t-15">
                 <div class="tab-pane fade show active" id="tab-account" >
                     
@@ -27,23 +35,31 @@
                             <div class="media align-items-center">
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-semibold">Ảnh đại diện</label><br>
-                                    <img id="preview" src="{{ $about->avatar ?? 'app/assets/images/others/thumb-16.jpg' }}" alt="" height="80px">
+                                    <img id="preview" src="{{ $about->avatar ?: asset('app/assets/images/others/thumb-16.jpg') }}" alt="Ảnh đại diện hiện tại" height="80px">
                                     <div class="file-input">
-                                        <input class="choose" type="file" name="avatar" accept="image/*">
+                                        <input class="choose" type="file" name="avatar" accept="image/*" aria-describedby="avatar-hint">
                                         <span class="button">Thêm hình ảnh</span>
                                         <span class="label"></span>
                                     </div>
+                                    <p id="avatar-hint" class="text-muted m-t-10 m-b-10">Chọn ảnh JPG, PNG hoặc WebP, dung lượng tối đa 5 MB.</p>
+                                    @error('avatar')<div class="text-danger m-b-10">{{ $message }}</div>@enderror
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="anticon anticon-save"></i>
+                                        <span>Lưu thay đổi</span>
+                                    </button>
                                 </div>
                             </div>
                             <hr class="m-v-25">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-semibold" for="name">Họ tên:</label>
-                                    <input name="name" type="text" class="form-control" id="name" value="{{$about->name}}">
+                                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name', $about->name) }}" required>
+                                    @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-semibold" for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" value="{{$about->email}}" name="email">
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email', $about->email) }}" name="email">
+                                    @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                             </div>
                             <div class="form-row">
@@ -181,6 +197,13 @@
     .catch( error => {
         console.error( error );
     } );
+
+    document.querySelector('input[name="avatar"]')?.addEventListener('change', function (event) {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+
+        document.getElementById('preview').src = URL.createObjectURL(file);
+    });
 
     ClassicEditor
     .create( document.querySelector( '#content' ),{
