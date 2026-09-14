@@ -127,7 +127,7 @@
                     <span>Chia sẻ:</span>
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($blog->title) }}" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
-                    <button type="button" class="btn-copy-link" data-copy-url="{{ url()->current() }}" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+                    <button type="button" class="btn-copy-link" data-copy-url="{{ url()->current() }}" aria-label="Sao ch&#233;p li&#234;n k&#7871;t"><i class="fa-solid fa-link"></i></button>
                 </div>
                 @include('partials.notice-banner', ['type' => 'info', 'title' => 'Đã sao chép liên kết', 'message' => 'Bạn có thể dán đường dẫn này để chia sẻ bài viết.', 'dismissible' => true, 'id' => 'blog-copy-notice', 'hidden' => true])
                 @include('partials.notice-banner', ['type' => 'error', 'title' => 'Không thể sao chép liên kết', 'message' => 'Vui lòng thử lại hoặc sao chép đường dẫn trên thanh địa chỉ.', 'id' => 'blog-copy-error', 'hidden' => true])

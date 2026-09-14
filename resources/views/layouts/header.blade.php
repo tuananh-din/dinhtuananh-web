@@ -56,7 +56,7 @@
                     </li>
                     <li>
                         <span>CTA</span>
-                        <a href="{{ route('index') }}#final-cta">&#272;&#259;ng k&#253; h&#7885;c ngay</a>
+                        <a href="{{ route('index') }}#final-cta">Nh&#7853;n t&#432; v&#7845;n kh&#243;a h&#7885;c</a>
                     </li>
                     <li>
                         <span>Follow me</span>
@@ -108,7 +108,7 @@
                         </button>
                         <span id="theme-toggle-tooltip" class="site-tooltip" role="tooltip" hidden>Chuyển giao diện</span>
                     </span>
-                    <a href="{{ route('index') }}#final-cta" class="theme-btn">&#272;&#259;ng k&#253; h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
+                    <a href="{{ route('index') }}#final-cta" class="theme-btn">T&#432; v&#7845;n kh&#243;a h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
                     <div class="header__hamburger my-auto">
                         <button type="button" class="sidebar__toggle" aria-label="M&#7903; menu" aria-controls="site-mobile-menu" aria-expanded="false">
                             <img src="{{ asset('site/assets/img/bar.svg') }}" alt="">

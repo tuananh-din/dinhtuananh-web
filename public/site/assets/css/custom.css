@@ -3188,3 +3188,59 @@ html[data-theme="light"] .site-notice--neutral {
         font-size: 14px;
     }
 }
+
+/* Button feedback: giữ nguyên giao diện cũ, bổ sung trạng thái dễ nhận biết và vùng bấm an toàn. */
+.theme-btn {
+    transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.theme-btn:not(:disabled):not([aria-disabled="true"]):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+}
+
+.theme-btn:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.theme-btn:disabled,
+.theme-btn[aria-disabled="true"],
+.dpm-page .dpm-button:disabled,
+.dpm-page .dpm-button[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: .55;
+    pointer-events: none;
+    transform: none;
+    box-shadow: none;
+}
+
+.header-main button.sidebar__toggle {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    place-items: center;
+    border-radius: 8px;
+    transition: background-color .2s ease, box-shadow .2s ease;
+}
+
+.header-main button.sidebar__toggle:hover {
+    background: rgba(255, 255, 255, .12);
+}
+
+html[data-theme="light"] .header-main button.sidebar__toggle:hover {
+    background: rgba(0, 0, 0, .07);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-btn,
+    .header-main button.sidebar__toggle {
+        transition: none;
+    }
+
+    .theme-btn:not(:disabled):not([aria-disabled="true"]):hover,
+    .theme-btn:not(:disabled):not([aria-disabled="true"]):active {
+        transform: none;
+    }
+}
