@@ -67,7 +67,7 @@
             <h2 id="blog-discovery-title">Tìm nội dung bạn cần</h2>
             <p>Dùng từ khóa hoặc chọn một chủ đề đang có bài viết công khai.</p>
         </div>
-        <form method="GET" action="{{ route('blogs') }}" class="blog-page__filters" role="search" data-blog-search-form>
+        <form method="GET" action="{{ route('blogs') }}" class="blog-page__filters" role="search" data-submit-label="Đang tìm bài viết…" data-loading-target="[data-blog-results]">
             <div class="blog-page__filter-field blog-page__filter-field--search">
                 <label for="blog-search">Tìm bài viết</label>
                 <input id="blog-search" type="search" name="search" value="{{ $search }}" maxlength="120" placeholder="Ví dụ: Facebook Ads, dữ liệu, chiến lược…" autocomplete="off">
@@ -89,11 +89,10 @@
                     <option value="oldest" {{ $sort === 'oldest' ? 'selected' : '' }}>Cũ nhất</option>
                 </select>
             </div>
-            <button class="theme-btn" type="submit" data-blog-search-button>Tìm bài viết <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></button>
+            <button class="theme-btn" type="submit">Tìm bài viết <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></button>
             @if($hasSearch || $categorySlug !== '')
             <a href="{{ route('blogs') }}" class="blog-page__reset">Xóa bộ lọc</a>
             @endif
-            <p class="visually-hidden" role="status" aria-live="polite" data-blog-search-status></p>
         </form>
         @if($categories->isNotEmpty())
         <div class="blog-page__suggestions" aria-label="Gợi ý chủ đề">
@@ -187,26 +186,3 @@
     </div>
 </section>
 @endsection
-
-@push('scripts')
-<script>
-    (function () {
-        var form = document.querySelector('[data-blog-search-form]');
-        if (!form) return;
-
-        form.addEventListener('submit', function () {
-            var button = form.querySelector('[data-blog-search-button]');
-            var status = form.querySelector('[data-blog-search-status]');
-            var results = document.querySelector('[data-blog-results]');
-
-            if (button) {
-                button.disabled = true;
-                button.setAttribute('aria-disabled', 'true');
-                button.textContent = 'Đang tìm…';
-            }
-            if (status) status.textContent = 'Đang tìm bài viết';
-            if (results) results.setAttribute('aria-busy', 'true');
-        });
-    })();
-</script>
-@endpush

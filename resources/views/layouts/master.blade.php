@@ -240,9 +240,39 @@
 
                         form.dataset.submitting = 'true';
                         button.dataset.originalLabel = button.innerHTML;
-                        button.textContent = form.dataset.submitLabel;
                         button.disabled = true;
                         button.setAttribute('aria-disabled', 'true');
+                        form.setAttribute('aria-busy', 'true');
+
+                        var resultTarget = form.dataset.loadingTarget
+                            ? document.querySelector(form.dataset.loadingTarget)
+                            : null;
+                        if (resultTarget) resultTarget.setAttribute('aria-busy', 'true');
+
+                        // Chỉ hiện spinner khi request chưa chuyển trang sau 250ms để tránh nháy với phản hồi nhanh.
+                        window.setTimeout(function () {
+                            if (form.dataset.submitting !== 'true') return;
+
+                            button.classList.add('is-loading');
+                            button.replaceChildren();
+                            var spinner = document.createElement('span');
+                            spinner.className = 'form-loading-spinner';
+                            spinner.setAttribute('aria-hidden', 'true');
+                            button.appendChild(spinner);
+                            button.appendChild(document.createTextNode(form.dataset.submitLabel));
+
+                            var status = form.querySelector('[data-loading-status]');
+                            if (!status) {
+                                status = document.createElement('span');
+                                status.className = 'form-loading-status';
+                                status.setAttribute('data-loading-status', '');
+                                status.setAttribute('role', 'status');
+                                status.setAttribute('aria-live', 'polite');
+                                form.insertAdjacentElement('afterend', status);
+                            }
+                            status.hidden = false;
+                            status.textContent = form.dataset.submitLabel;
+                        }, 250);
                     });
                 });
 
