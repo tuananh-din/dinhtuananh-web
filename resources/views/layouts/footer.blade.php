@@ -88,6 +88,16 @@
                     </a>
                 </div>
                 @endif
+                @if(data_get($contactInfo, 'substack'))
+                <div class="icon-items">
+                    <a href="{{ data_get($contactInfo, 'substack') }}" class="icon-items__link" aria-label="Theo dõi {{ $brandName }} trên Substack">
+                        <span class="icon" aria-hidden="true">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                        </span>
+                        <span>Substack</span>
+                    </a>
+                </div>
+                @endif
             </div>
         </div>
         <div class="footer-bottom wow fadeInUp" data-wow-delay=".3s">

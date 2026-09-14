@@ -11,7 +11,7 @@
                 @if(data_get($contact, 'tel'))<a href="tel:{{ data_get($contact, 'tel') }}"><i class="fa-solid fa-phone"></i> {{ data_get($contact, 'tel') }}</a>@endif
                 @if(data_get($contact, 'email'))<a href="mailto:{{ data_get($contact, 'email') }}"><i class="fa-solid fa-envelope"></i> {{ data_get($contact, 'email') }}</a>@endif
                 <div class="contact-social-links">
-                    @foreach(['facebook' => 'Facebook', 'instagram' => 'Instagram', 'linkedin' => 'LinkedIn', 'x' => 'X'] as $key => $label)
+                    @foreach(['facebook' => 'Facebook', 'instagram' => 'Instagram', 'linkedin' => 'LinkedIn', 'x' => 'X', 'substack' => 'Substack'] as $key => $label)
                         @if(data_get($contact, $key))<a href="{{ data_get($contact, $key) }}" target="_blank" rel="noopener">{{ $label }}</a>@endif
                     @endforeach
                 </div>

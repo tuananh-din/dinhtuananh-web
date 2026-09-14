@@ -19,6 +19,7 @@
             data_get($person, 'instagram'),
             data_get($person, 'linkedin'),
             data_get($person, 'x'),
+            data_get($person, 'substack'),
         ])),
     ];
 

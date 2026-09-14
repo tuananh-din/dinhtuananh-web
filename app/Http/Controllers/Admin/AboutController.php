@@ -24,6 +24,7 @@ class AboutController extends Controller
             'instagram' => 'nullable|url|max:255',
             'linkedin' => 'nullable|url|max:255',
             'x' => 'nullable|url|max:255',
+            'substack' => 'nullable|url|max:255',
         ]);
 
         $about = About::first() ?? new About();
@@ -43,7 +44,7 @@ class AboutController extends Controller
         // Chuẩn bị dữ liệu sản phẩm
         $data = array_merge($request->only([
             'name', 'description','content','about_me','tel','email', 'address',
-            'x','instagram','facebook','linkedin'
+            'x','instagram','facebook','linkedin','substack'
         ]), [
             'avatar' => $avatar,
 

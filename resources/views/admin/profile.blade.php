@@ -166,6 +166,20 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <li class="list-group-item p-h-0">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar avatar-icon" style="color: #ff6719; background: rgba(255, 103, 25, 0.12)">
+                                                        <i class="anticon anticon-mail" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="font-size-15 font-weight-semibold m-l-15">Substack</div>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <input id="substack" class="form-control" type="url" name="substack" value="{{ old('substack', $about->substack) }}" placeholder="https://ten-ban.substack.com" autocomplete="url" aria-describedby="substack-hint">
+                                                </div>
+                                            </div>
+                                            <p id="substack-hint" class="text-muted m-t-10 m-b-0">Nhập link trang Substack công khai của bạn.</p>
+                                        </li>
                                         
                                     </ul> 
                                     <div class="m-t-15">

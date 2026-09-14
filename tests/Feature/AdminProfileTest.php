@@ -39,6 +39,25 @@ class AdminProfileTest extends TestCase
         ]);
     }
 
+    public function test_admin_can_save_a_substack_profile_url(): void
+    {
+        $user = User::factory()->create();
+
+        $this->from(route('admin.profile'))
+            ->actingAs($user)
+            ->post(route('profile.update'), [
+                'name' => 'Đinh Tuấn Anh',
+                'substack' => 'https://tuananh.substack.com',
+            ])
+            ->assertRedirect(route('admin.profile'));
+
+        $this->assertDatabaseHas('about', ['substack' => 'https://tuananh.substack.com']);
+        $this->actingAs($user)->get(route('admin.profile'))
+            ->assertOk()
+            ->assertSee('name="substack"', false)
+            ->assertSee('Nhập link trang Substack công khai của bạn.');
+    }
+
     public function test_admin_header_uses_a_clear_account_menu_with_a_safe_logout_action(): void
     {
         $user = User::factory()->create(['name' => 'Quản trị viên']);

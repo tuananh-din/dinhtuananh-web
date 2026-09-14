@@ -66,6 +66,7 @@
                             @if(data_get($contactInfo, 'instagram'))<a href="{{ data_get($contactInfo, 'instagram') }}" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>@endif
                             @if(data_get($contactInfo, 'x'))<a href="{{ data_get($contactInfo, 'x') }}" aria-label="X"><i class="fab fa-twitter" aria-hidden="true"></i></a>@endif
                             @if(data_get($contactInfo, 'linkedin'))<a href="{{ data_get($contactInfo, 'linkedin') }}" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>@endif
+                            @if(data_get($contactInfo, 'substack'))<a href="{{ data_get($contactInfo, 'substack') }}" aria-label="Substack"><i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i></a>@endif
                         </div>
                     </li>
                 </ul>

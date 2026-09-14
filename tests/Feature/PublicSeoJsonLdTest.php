@@ -39,6 +39,7 @@ class PublicSeoJsonLdTest extends TestCase
     public function test_home_renders_site_seo_metadata_and_person_json_ld(): void
     {
         $this->createSiteIdentity();
+        About::firstOrFail()->update(['substack' => 'https://tuananh.substack.com']);
 
         $response = $this->get(route('index'));
 
@@ -52,7 +53,8 @@ class PublicSeoJsonLdTest extends TestCase
         $response->assertSee('<meta property="og:image" content="http://localhost/storage/images/og.jpg">', false);
         $response->assertSee('<meta name="twitter:card" content="summary_large_image">', false);
         $response->assertSee('"name":"Nguyễn Thử Nghiệm"', false);
-        $response->assertSee('"sameAs":["https://example.test/profile"]', false);
+        $response->assertSee('"sameAs":["https://example.test/profile","https://tuananh.substack.com"]', false);
+        $response->assertSee('aria-label="Theo dõi Nguyễn Thử Nghiệm trên Substack"', false);
     }
 
     public function test_about_renders_its_own_seo_metadata_and_person_json_ld(): void
