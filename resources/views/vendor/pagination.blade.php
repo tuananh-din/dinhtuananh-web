@@ -1,20 +1,20 @@
 @if ($paginator->hasPages())
-<nav aria-label="...">
+<nav aria-label="Phân trang">
     <ul class="pagination">
         @if ($paginator->onFirstPage())
             <li class="page-item disabled">
-                <a class="page-link" tabindex="-1">Trước</a>
+                <span class="page-link" aria-disabled="true">Trước</span>
             </li>
         @else
             <li class="page-item">
-                <a class="page-link" href="{{ $paginator->previousPageUrl() }}">Trước</a>
+                <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev">Trước</a>
             </li>
         @endif
         @foreach ($elements as $element)
 
             @if (is_string($element))
                 <li class="page-item">
-                    <a class="page-link">{{ $element }}</a>
+                    <span class="page-link" aria-hidden="true">{{ $element }}</span>
                 </li>
             @endif
 
@@ -22,7 +22,7 @@
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
                         <li class="page-item active">
-                            <a class="page-link">{{ $page }}</a>
+                            <span class="page-link" aria-current="page">{{ $page }}<span class="visually-hidden">, trang hiện tại</span></span>
                         </li>
                     @else
                         <li class="page-item">
@@ -35,11 +35,11 @@
 
         @if ($paginator->hasMorePages())
             <li class="page-item">
-                <a class="page-link" href="{{ $paginator->nextPageUrl() }}">Sau</a>
+                <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">Sau</a>
             </li>
         @else
             <li class="page-item disabled">
-                <a class="page-link" >Sau</a>
+                <span class="page-link" aria-disabled="true">Sau</span>
             </li>
         @endif
     </ul>

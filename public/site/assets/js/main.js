@@ -66,6 +66,13 @@
         $(".sidebar-sticky-item").fadeOut().removeClass("active");
         });
 
+        // Khi menu mở, đưa focus vào nút đóng để người dùng bàn phím biết vị trí.
+        $(".sidebar__toggle").on("click", function () {
+            window.setTimeout(function () {
+                $(".offcanvas__close button").trigger("focus");
+            }, 0);
+        });
+
         // Close offcanvas
         $(".offcanvas__close, .offcanvas__overlay").on("click", function () {
         $(".offcanvas__info").removeClass("info-open");
@@ -75,6 +82,28 @@
 
         // Show sticky item
         $(".sidebar-sticky-item").fadeIn().addClass("active");
+        });
+
+        // Menu mobile phải luôn có đường thoát bằng bàn phím.
+        $(document).on("keydown", function (event) {
+            if (event.key === "Escape" && $(".offcanvas__info").hasClass("info-open")) {
+                $(".offcanvas__close button").trigger("click");
+            }
+
+            if (event.key !== "Tab" || !$(".offcanvas__info").hasClass("info-open")) return;
+
+            var $focusable = $(".offcanvas__info").find('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])').filter(':visible');
+            if (!$focusable.length) return;
+
+            var first = $focusable.first()[0];
+            var last = $focusable.last()[0];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
         });
 
         /* ================================

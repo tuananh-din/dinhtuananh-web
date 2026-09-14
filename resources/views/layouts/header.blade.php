@@ -35,7 +35,7 @@
 <!-- Offcanvas Area Start -->
 <div class="fix-area style-offcanvas-2">
     <div class="header-offcanvas-border">
-        <div id="site-mobile-menu" class="offcanvas__info" aria-hidden="true">
+        <div id="site-mobile-menu" class="offcanvas__info" role="dialog" aria-modal="true" aria-label="Menu điều hướng" aria-hidden="true">
             <a href="{{ route('index') }}" class="offcanvas__logo">
                 <img src="{{ $siteLogoUrl }}" height="100px" alt="{{ $brandName }}">
             </a>
@@ -62,10 +62,10 @@
                     <li>
                         <span>Follow me</span>
                         <div class="social-icon">
-                            @if(data_get($contactInfo, 'facebook'))<a href="{{ data_get($contactInfo, 'facebook') }}"><i class="fab fa-facebook-f"></i></a>@endif
-                            @if(data_get($contactInfo, 'instagram'))<a href="{{ data_get($contactInfo, 'instagram') }}"><i class="fab fa-instagram"></i></a>@endif
-                            @if(data_get($contactInfo, 'x'))<a href="{{ data_get($contactInfo, 'x') }}"><i class="fab fa-twitter"></i></a>@endif
-                            @if(data_get($contactInfo, 'linkedin'))<a href="{{ data_get($contactInfo, 'linkedin') }}"><i class="fab fa-linkedin-in"></i></a>@endif
+                            @if(data_get($contactInfo, 'facebook'))<a href="{{ data_get($contactInfo, 'facebook') }}" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>@endif
+                            @if(data_get($contactInfo, 'instagram'))<a href="{{ data_get($contactInfo, 'instagram') }}" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>@endif
+                            @if(data_get($contactInfo, 'x'))<a href="{{ data_get($contactInfo, 'x') }}" aria-label="X"><i class="fab fa-twitter" aria-hidden="true"></i></a>@endif
+                            @if(data_get($contactInfo, 'linkedin'))<a href="{{ data_get($contactInfo, 'linkedin') }}" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>@endif
                         </div>
                     </li>
                 </ul>

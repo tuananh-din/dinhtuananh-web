@@ -77,20 +77,6 @@
                 } catch (e) {}
             })();
         </script>
-        <script>
-            (function () {
-                var toggle = document.querySelector('.sidebar__toggle');
-                var close = document.querySelector('.offcanvas__close button');
-                var menu = document.getElementById('site-mobile-menu');
-                if (!toggle || !menu) return;
-                toggle.addEventListener('click', function () {
-                    setTimeout(function () {
-                        toggle.setAttribute('aria-expanded', menu.getAttribute('aria-hidden') === 'false' ? 'true' : 'false');
-                    }, 0);
-                });
-                if (close) close.addEventListener('click', function () { toggle.setAttribute('aria-expanded', 'false'); });
-            })();
-        </script>
         <!--<< Bootstrap min.css >>-->
         <link rel="stylesheet" href="{{ asset('site/assets/css/bootstrap.min.css') }}">
         <!--<< All Min Css >>-->
