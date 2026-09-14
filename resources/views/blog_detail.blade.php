@@ -147,7 +147,7 @@
                         @if($blogNewsletterErrors->any())
                             @include('partials.notice-banner', ['type' => 'error', 'title' => 'Vui lòng kiểm tra email', 'messages' => $blogNewsletterErrors->all()])
                         @endif
-                        <input id="blog-newsletter-email" type="email" name="email" required class="form-control" placeholder="Email của bạn">
+                        <input id="blog-newsletter-email" type="email" name="email" required class="form-control" autocomplete="email" inputmode="email" placeholder="Ví dụ: ten@domain.com">
                         <button type="submit" class="theme-btn">Đăng ký</button>
                     </form>
                 </div>

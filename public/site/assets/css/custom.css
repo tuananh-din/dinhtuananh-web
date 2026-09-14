@@ -1299,6 +1299,46 @@ html[data-theme="light"] .hero-section1 .line-shape {
     display: none;
 }
 
+/* Form public: label luôn hiển thị, placeholder chỉ đóng vai trò ví dụ. */
+.form-field-hint {
+    margin: 6px 0 0;
+    color: var(--text, #b8c2cc);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.contact-form-panel .form-clt > label,
+.lead-form-box .form-clt > label {
+    display: block;
+    margin: 0 0 7px;
+    color: var(--white, #fff);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.45;
+    text-transform: none;
+}
+
+.contact-form-panel .form-clt,
+.lead-form-box .form-clt {
+    margin-bottom: 18px;
+}
+
+.contact-form-panel .form-clt:has(.form-field-hint),
+.lead-form-box .form-clt:has(.form-field-hint) {
+    margin-bottom: 14px;
+}
+
+body input::placeholder,
+body textarea::placeholder {
+    color: rgba(221, 228, 237, .68);
+    opacity: 1;
+}
+
+html[data-theme="light"] body input::placeholder,
+html[data-theme="light"] body textarea::placeholder {
+    color: #69727e;
+}
+
 /* Nhom 17D: trang co 0-1 item can duoc can giua, khong doi grid binh thuong. */
 .home-featured-courses--single > .col-lg-8,
 .home-featured-courses--empty > .col-lg-4,
@@ -3087,6 +3127,12 @@ html[data-theme="light"] .about-profile-text-link {
 
 .blog-share .site-notice {
     flex-basis: 100%;
+}
+
+/* Form tư vấn ở trang chủ dùng nền sáng cả khi website đang ở dark mode. */
+.lead-form-shell input::placeholder,
+.lead-form-shell textarea::placeholder {
+    color: #68717c;
 }
 
 html[data-theme="light"] .site-notice {

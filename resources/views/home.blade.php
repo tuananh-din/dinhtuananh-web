@@ -344,11 +344,11 @@
                 <div class="hp-wrap" aria-hidden="true"><label for="hp-website-home">Website</label><input type="text" name="website" id="hp-website-home" tabindex="-1" autocomplete="off"></div>
                 <input type="hidden" name="source_page" value="home_final_cta">
                 <div class="form-row">
-                    <div class="lead-form-field"><label for="lead-name">Họ và tên <span aria-hidden="true">*</span></label><input id="lead-name" type="text" name="name" value="{{ old('name') }}" autocomplete="name" required></div>
-                    <div class="lead-form-field"><label for="lead-phone">Số điện thoại <span aria-hidden="true">*</span></label><input id="lead-phone" type="tel" name="phone" value="{{ old('phone') }}" inputmode="tel" autocomplete="tel" required></div>
+                    <div class="lead-form-field"><label for="lead-name">Họ và tên <span aria-hidden="true">*</span></label><input id="lead-name" type="text" name="name" value="{{ old('name') }}" autocomplete="name" placeholder="Ví dụ: Nguyễn Minh Anh" required></div>
+                    <div class="lead-form-field"><label for="lead-phone">Số điện thoại <span aria-hidden="true">*</span></label><input id="lead-phone" type="tel" name="phone" value="{{ old('phone') }}" inputmode="tel" autocomplete="tel" pattern="[0-9+() -]{8,30}" placeholder="Ví dụ: 0901 234 567" aria-describedby="lead-phone-hint" required><p id="lead-phone-hint" class="form-field-hint">Nhập số để nhận tư vấn nhanh.</p></div>
                 </div>
                 <div class="form-row single"><div class="lead-form-field"><label for="lead-email">Email <span class="lead-form-field__optional">Không bắt buộc</span></label><input id="lead-email" type="email" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="ten@domain.com"></div></div>
-                <div class="form-row single"><div class="lead-form-field"><label for="lead-message">Mục tiêu hoặc câu hỏi <span class="lead-form-field__optional">Không bắt buộc</span></label><textarea id="lead-message" name="message">{{ old('message') }}</textarea></div></div>
+                <div class="form-row single"><div class="lead-form-field"><label for="lead-message">Mục tiêu hoặc câu hỏi <span class="lead-form-field__optional">Không bắt buộc</span></label><textarea id="lead-message" name="message" placeholder="Ví dụ: Tôi muốn chọn khóa học phù hợp để phát triển kỹ năng Marketing.">{{ old('message') }}</textarea></div></div>
                 <div class="form-actions"><button type="submit" class="theme-btn">Gửi nhu cầu tư vấn <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i></button></div>
                 <p class="form-note">Thông tin được dùng để liên hệ tư vấn.</p>
             </form>

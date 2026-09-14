@@ -40,17 +40,22 @@
                 </div>
                 <input type="hidden" name="source_page" value="contact_page">
                 <div class="form-clt">
-                    <input type="text" name="name" placeholder="H&#7885; v&#224; t&#234;n (*)" value="{{ old('name') }}" autocomplete="name" aria-label="Họ và tên" required>
+                    <label for="contact-name">Họ và tên <span aria-hidden="true">*</span></label>
+                    <input id="contact-name" type="text" name="name" placeholder="Ví dụ: Nguyễn Minh Anh" value="{{ old('name') }}" autocomplete="name" required>
                 </div>
                 <div class="form-clt">
-                    <input type="tel" name="phone" placeholder="S&#7889; &#273;i&#7879;n tho&#7841;i (*)" value="{{ old('phone') }}" inputmode="tel" autocomplete="tel" aria-label="Số điện thoại" required>
+                    <label for="contact-phone">Số điện thoại <span aria-hidden="true">*</span></label>
+                    <input id="contact-phone" type="tel" name="phone" placeholder="Ví dụ: 0901 234 567" value="{{ old('phone') }}" inputmode="tel" autocomplete="tel" pattern="[0-9+() -]{8,30}" aria-describedby="contact-phone-hint" required>
+                    <p id="contact-phone-hint" class="form-field-hint">Nhập số để nhận tư vấn nhanh.</p>
                 </div>
                 <div class="form-clt">
-                    <input type="email" name="email" placeholder="Email (kh&#244;ng b&#7855;t bu&#7897;c)" value="{{ old('email') }}" autocomplete="email" aria-label="Email">
+                    <label for="contact-email">Email <span class="lead-form-field__optional">Không bắt buộc</span></label>
+                    <input id="contact-email" type="email" name="email" placeholder="ten@domain.com" value="{{ old('email') }}" autocomplete="email">
                 </div>
                 @php($selectedCourseId = old('course_id', $selectedCourse?->id))
                 <div class="form-clt">
-                    <select name="course_id" id="course_id" aria-label="Khóa học quan tâm">
+                    <label for="course_id">Khóa học quan tâm <span class="lead-form-field__optional">Không bắt buộc</span></label>
+                    <select name="course_id" id="course_id">
                         <option value="">Kh&#243;a h&#7885;c quan t&#226;m (kh&#244;ng b&#7855;t bu&#7897;c)</option>
                         @foreach($courses as $course)
                             <option value="{{ $course->id }}" @selected((string) $selectedCourseId === (string) $course->id)>
@@ -60,7 +65,8 @@
                     </select>
                 </div>
                 <div class="form-clt">
-                    <textarea name="message" placeholder="Nhu c&#7847;u c&#7911;a b&#7841;n (kh&#244;ng b&#7855;t bu&#7897;c)" aria-label="Nhu cầu tư vấn">{{ old('message') }}</textarea>
+                    <label for="contact-message">Mục tiêu hoặc câu hỏi <span class="lead-form-field__optional">Không bắt buộc</span></label>
+                    <textarea id="contact-message" name="message" placeholder="Ví dụ: Tôi muốn tư vấn lộ trình học phù hợp.">{{ old('message') }}</textarea>
                 </div>
                 <button type="submit" class="theme-btn">&#272;&#259;ng k&#253; t&#432; v&#7845;n <i class="fa-solid fa-arrow-up-right"></i></button>
             </form>
