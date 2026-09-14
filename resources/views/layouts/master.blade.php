@@ -215,6 +215,79 @@
                     && window.matchMedia('(pointer: fine)').matches
                     && window.matchMedia('(hover: hover)').matches;
                 document.querySelectorAll('form[data-submit-label]').forEach(function (form) {
+                    var clientErrorCount = 0;
+                    var fields = form.querySelectorAll('input, textarea, select');
+
+                    function isUserField(field) {
+                        return field.type !== 'hidden'
+                            && field.type !== 'submit'
+                            && field.type !== 'button'
+                            && field.type !== 'reset'
+                            && field.tabIndex !== -1
+                            && !field.closest('[aria-hidden="true"]');
+                    }
+
+                    function getLabel(field) {
+                        var label = field.id ? form.querySelector('label[for="' + field.id + '"]') : null;
+                        return label ? label.textContent.replace(/\*/g, '').trim() : 'Trường này';
+                    }
+
+                    function addDescribedBy(field, id) {
+                        var describedBy = (field.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+                        if (!describedBy.includes(id)) describedBy.push(id);
+                        field.setAttribute('aria-describedby', describedBy.join(' '));
+                    }
+
+                    function removeClientError(field) {
+                        var errorId = field.dataset.clientErrorId;
+                        if (errorId) {
+                            var error = document.getElementById(errorId);
+                            if (error) error.remove();
+                            delete field.dataset.clientErrorId;
+                        }
+                        field.classList.remove('has-client-error');
+
+                        // Server error được ẩn khi người dùng thử lại, không xóa khỏi DOM
+                        // để vẫn có thể được đọc nếu họ quay lại ô chưa sửa.
+                        (field.getAttribute('aria-describedby') || '').split(/\s+/).forEach(function (id) {
+                            var description = document.getElementById(id);
+                            if (description && description.classList.contains('form-field-error')) description.hidden = true;
+                        });
+                        field.removeAttribute('aria-invalid');
+                    }
+
+                    function validationMessage(field) {
+                        var label = getLabel(field);
+                        if (field.validity.typeMismatch && field.type === 'email') return 'Nhập ' + label.toLowerCase() + ' đúng định dạng, ví dụ: ten@domain.com.';
+                        if (field.validity.patternMismatch) return 'Nhập ' + label.toLowerCase() + ' theo đúng định dạng được gợi ý.';
+                        if (field.validity.tooShort) return label + ' chưa đủ số ký tự.';
+                        return 'Kiểm tra lại ' + label.toLowerCase() + '.';
+                    }
+
+                    function showClientError(field) {
+                        if (!field.value.trim() || field.validity.valid) return;
+                        removeClientError(field);
+                        clientErrorCount += 1;
+                        var error = document.createElement('p');
+                        var errorId = 'client-field-error-' + clientErrorCount;
+                        error.id = errorId;
+                        error.className = 'form-field-error form-field-error--client';
+                        error.setAttribute('role', 'alert');
+                        error.innerHTML = '<i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i><span></span>';
+                        error.querySelector('span').textContent = validationMessage(field);
+                        field.insertAdjacentElement('afterend', error);
+                        field.dataset.clientErrorId = errorId;
+                        field.classList.add('has-client-error');
+                        field.setAttribute('aria-invalid', 'true');
+                        addDescribedBy(field, errorId);
+                    }
+
+                    fields.forEach(function (field) {
+                        if (!isUserField(field)) return;
+                        field.addEventListener('blur', function () { showClientError(field); });
+                        field.addEventListener('focus', function () { removeClientError(field); });
+                    });
+
                     form.addEventListener('submit', function (event) {
                         if (form.dataset.submitting === 'true') {
                             event.preventDefault();

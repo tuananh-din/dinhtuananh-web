@@ -1384,6 +1384,32 @@ html[data-theme="light"] .hero-section1 .line-shape {
     line-height: 1.45;
 }
 
+/* Lỗi nhập tại chỗ: chỉ được JS thêm sau blur; focus lại sẽ gỡ state này. */
+.has-client-error {
+    border-color: var(--semantic-color-feedback-error-border) !important;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--semantic-color-feedback-error-border) 28%, transparent) !important;
+}
+
+.form-field-error {
+    display: flex;
+    gap: var(--semantic-space-component-gap-sm);
+    align-items: flex-start;
+    margin: var(--semantic-space-component-gap-sm) 0 0;
+    color: var(--semantic-color-feedback-error-icon);
+    font-size: var(--type-meta);
+    font-weight: 600;
+    line-height: var(--line-meta);
+}
+
+.form-field-error i {
+    flex: 0 0 auto;
+    margin-top: .15em;
+}
+
+html[data-theme="light"] .form-field-error {
+    color: var(--semantic-color-feedback-error-icon);
+}
+
 .contact-form-panel .form-clt > label,
 .lead-form-box .form-clt > label {
     display: block;
