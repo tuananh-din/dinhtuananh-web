@@ -715,8 +715,8 @@ html[data-theme="light"] .blog-toc {
     background: transparent;
     border: 1px solid currentColor;
     color: var(--header);
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -727,8 +727,17 @@ html[data-theme="light"] .blog-toc {
     margin-right: 14px;
     flex: 0 0 auto;
     opacity: .85;
-    transition: background .2s, color .2s, border-color .2s, opacity .2s;
+    transition: background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease, opacity .2s ease;
 }
+.theme-toggle i { transition: transform .2s ease; }
+.theme-toggle[aria-pressed="true"] {
+    background: var(--theme);
+    color: #060606;
+    border-color: var(--theme);
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+}
+.theme-toggle[aria-pressed="true"] i { transform: rotate(90deg); }
 .theme-toggle:hover {
     background: var(--theme);
     color: #060606;
@@ -3235,6 +3244,8 @@ html[data-theme="light"] .header-main button.sidebar__toggle:hover {
 
 @media (prefers-reduced-motion: reduce) {
     .theme-btn,
+    .theme-toggle,
+    .theme-toggle i,
     .header-main button.sidebar__toggle {
         transition: none;
     }

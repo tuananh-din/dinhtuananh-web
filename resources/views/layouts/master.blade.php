@@ -183,7 +183,12 @@
                     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
                     if (icon) icon.className = dark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
                     btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
-                    if (tooltip) tooltip.textContent = dark ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối';
+                    btn.setAttribute('aria-label', dark
+                        ? 'Chế độ tối đang bật. Chuyển sang giao diện sáng'
+                        : 'Chế độ tối đang tắt. Chuyển sang giao diện tối');
+                    if (tooltip) tooltip.textContent = dark
+                        ? 'Chế độ tối đang bật — chuyển sang giao diện sáng'
+                        : 'Chế độ tối đang tắt — chuyển sang giao diện tối';
                 }
                 function showTooltip() { if (tooltip) tooltip.hidden = false; }
                 function hideTooltip() { if (tooltip) tooltip.hidden = true; }

@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <span class="theme-toggle-wrap">
-                        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Chuy&#7875;n giao di&#7879;n s&#225;ng/t&#7889;i" aria-describedby="theme-toggle-tooltip" aria-pressed="false">
+                        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Ch&#7871; &#273;&#7897; t&#7889;i &#273;ang t&#7855;t. Chuy&#7875;n sang giao di&#7879;n t&#7889;i" aria-describedby="theme-toggle-tooltip" aria-pressed="false">
                             <i class="fa-solid fa-moon"></i>
                         </button>
                         <span id="theme-toggle-tooltip" class="site-tooltip" role="tooltip" hidden>Chuyển giao diện</span>
