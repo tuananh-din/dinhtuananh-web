@@ -82,6 +82,7 @@
    <article><span class="dpm-number">02 — LÀM & KIỂM CHỨNG</span><h3>Thực hành theo chủ đề</h3><p>Chuyển kiến thức thành kế hoạch, cách thiết lập và phân tích kết quả qua các bài thực hành.</p></article>
    <article><span class="dpm-number">03 — HỎI & CẢI THIỆN</span><h3>Nhóm hỏi đáp, chữa bài</h3><p>Trao đổi các phần chưa rõ, gửi bài thực hành và nhận góp ý để điều chỉnh cách làm.</p></article>
   </div>
+  <p class="dpm-fit-note"><strong>Phù hợp nếu bạn cần chủ động tiến độ học:</strong> nội dung chính được học qua video, còn câu hỏi và bài thực hành được trao đổi trong nhóm. Nếu bạn đang tìm một lớp live theo lịch cố định, hãy trao đổi trước để chọn hình thức phù hợp.</p>
  </div>
 </section>
 <section class="dpm-section" id="giang-vien">

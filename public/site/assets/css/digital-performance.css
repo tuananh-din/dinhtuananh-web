@@ -225,6 +225,8 @@ html[data-theme="light"] .dpm-page{--green:var(--text-link,#4d7511)}
 .dpm-page .dpm-proof-name{margin:18px 0 2px;color:var(--ink);font-size:13px;font-weight:600}
 .dpm-page .dpm-proof-role{margin:0;color:var(--muted);font-size:12px;line-height:1.5}
 .dpm-page .dpm-closing .dpm-button{color:var(--button-ink);flex:0 0 auto}
+.dpm-page .dpm-fit-note{max-width:860px;margin:30px auto 0;padding:16px 18px;border-left:3px solid var(--green);background:var(--surface);color:var(--muted);font-size:14px;line-height:1.7}
+.dpm-page .dpm-fit-note strong{color:var(--ink)}
 @media(max-width:760px){
   .dpm-page .dpm-eyebrow,.dpm-page .dpm-hero-note,.dpm-page .dpm-lead{font-size:var(--type-meta,14px)}
   .dpm-page .dpm-curriculum details>p{font-size:var(--type-meta,14px)}
