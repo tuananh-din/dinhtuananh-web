@@ -2,6 +2,12 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Design tokens public v1.1.0 — 2026-09-14
+
+- Thêm primitive spacing scale 4/8, semantic spacing, grid variables và utility layout cho public trong `custom.css`.
+- Quy ước grid: `narrow` 4 cột, `mid` 8 cột, `wide` 12 cột; không refactor spacing legacy ngoài component được chạm để tránh thay đổi giao diện không cần thiết.
+- Cập nhật `docs/DESIGN-TOKENS.md` với quy tắc component/layout spacing, density và baseline.
+
 ## Design tokens public v1.0.0 — 2026-09-14
 
 - Thêm kiến trúc token ba tầng trong `custom.css`: primitive (màu, shadow, motion), semantic (surface/text/interactive/focus) và component (control/toggle). Các token semantic đổi theo light/dark; lớp typography hiện có được giữ nguyên tên để không gây breaking change cho CSS legacy.

@@ -1,4 +1,4 @@
-# Design tokens public — v1.0.0
+# Design tokens public — v1.1.0
 
 ## Phạm vi
 
@@ -28,6 +28,37 @@ Typography hiện dùng lớp semantic đã có: `--font-*`, `--type-*`, `--line
 
 Các semantic token đổi theo `html[data-theme="light"]`; component không tự chứa giá trị màu thô khi có semantic token phù hợp.
 
+## Spacing, grid và breakpoint
+
+### Spacing scale
+
+Scale public dùng base-4/base-8: `4, 8, 12, 16, 24, 32, 48, 64, 96px`. Primitive tương ứng là `--primitive-space-1` đến `--primitive-space-9`. Không tạo số spacing mới nếu một bước trong scale đáp ứng được mục đích.
+
+| Semantic token | Dùng cho |
+| --- | --- |
+| `--semantic-space-component-gap-sm` | Khoảng cách nhỏ giữa icon/label hoặc item sát nhau |
+| `--semantic-space-component-gap` | Khoảng cách mặc định giữa phần tử trong component |
+| `--semantic-space-component-padding-sm` | Padding control/card nhỏ |
+| `--semantic-space-component-padding` | Padding control/card thông thường |
+| `--semantic-space-layout-gutter` | Gutter/side margin cấp layout |
+| `--semantic-space-layout-section` | Khoảng trắng dọc giữa section lớn |
+
+Không dùng token layout cho padding trong button/input. Không dùng token component để tách section. Các giá trị legacy không theo scale chỉ đổi khi sửa chính component đó và cần smoke test desktop/mobile.
+
+### Grid và breakpoint public
+
+| Tên | Viewport | Cột | Gutter / margin |
+| --- | --- | ---: | --- |
+| `narrow` | `< 768px` | 4 | 16px / 16px |
+| `mid` | `768–1199px` | 8 | 24px / 24px |
+| `wide` | `≥ 1200px` | 12 | 32px / 32px |
+
+Trong CSS, `--grid-columns`, `--grid-gutter`, `--grid-margin` phản ánh grid đang hoạt động; `.layout-grid` dành cho layout public mới. Vì CSS custom property không thể làm điều kiện `@media`, giá trị breakpoint vẫn viết cố định trong media query và phải đồng bộ bảng này.
+
+### Density và baseline
+
+Public site dùng một density “comfortable”; không thêm compact mode vì không có màn hình dữ liệu dày đặc. Admin chỉ thêm density variant khi có nhu cầu vận hành được xác nhận. Chiều cao control mới và spacing dọc nên bám bội số 4px để các cụm nội dung xếp đều; typography legacy chỉ chuẩn hóa khi chạm component liên quan, không refactor hàng loạt.
+
 ## Quy tắc thêm token
 
 1. Không thêm token cho một giá trị chỉ xuất hiện một lần hoặc chỉ là ngoại lệ legacy đã được xác nhận.
@@ -43,6 +74,6 @@ Chưa có design tool được kết nối với repository nên không có đ�
 
 ## Phiên bản và thay đổi
 
-- Phiên bản hiện tại: `v1.0.0`.
+- Phiên bản hiện tại: `v1.1.0`.
 - Mọi thay đổi token phải ghi vào `docs/project-changelog.md`, gồm token bị ảnh hưởng, lý do và các bề mặt cần smoke test.
 - Thay đổi primitive chưa được tiêu thụ là patch; thêm semantic/component là minor; đổi giá trị semantic/component đang được tiêu thụ là breaking change nội bộ và phải kiểm tra light/dark, keyboard focus và mobile.

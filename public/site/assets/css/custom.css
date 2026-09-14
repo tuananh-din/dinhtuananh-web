@@ -2921,6 +2921,15 @@ html[data-theme="light"] .about-profile-card-label {
     --primitive-shadow-control-hover: 0 8px 18px rgba(0, 0, 0, .18);
     --primitive-shadow-toggle-active: 0 4px 12px rgba(0, 0, 0, .2);
     --primitive-motion-fast: .2s;
+    --primitive-space-1: 4px;
+    --primitive-space-2: 8px;
+    --primitive-space-3: 12px;
+    --primitive-space-4: 16px;
+    --primitive-space-5: 24px;
+    --primitive-space-6: 32px;
+    --primitive-space-7: 48px;
+    --primitive-space-8: 64px;
+    --primitive-space-9: 96px;
 
     --semantic-color-surface-page: var(--primitive-color-neutral-900);
     --semantic-color-text-primary: var(--primitive-color-neutral-50);
@@ -2929,6 +2938,16 @@ html[data-theme="light"] .about-profile-card-label {
     --semantic-color-text-link: var(--primitive-color-brand-lime-400);
     --semantic-color-interactive-primary: var(--primitive-color-brand-lime-400);
     --semantic-color-focus-ring: var(--primitive-color-brand-lime-400);
+    --semantic-space-component-gap-sm: var(--primitive-space-2);
+    --semantic-space-component-gap: var(--primitive-space-4);
+    --semantic-space-component-padding-sm: var(--primitive-space-3);
+    --semantic-space-component-padding: var(--primitive-space-5);
+    --semantic-space-layout-gutter: var(--primitive-space-5);
+    --semantic-space-layout-section: var(--primitive-space-9);
+
+    --grid-columns: 12;
+    --grid-gutter: var(--primitive-space-4);
+    --grid-margin: var(--primitive-space-4);
 
     --component-control-transition: var(--primitive-motion-fast) ease;
     --component-control-disabled-opacity: .55;
@@ -2984,6 +3003,41 @@ html[data-theme="light"] {
     --text-link: var(--semantic-color-text-link);
     --focus-ring: var(--semantic-color-focus-ring);
 }
+
+/* Grid chuẩn public: narrow = 4 cột, mid = 8 cột, wide = 12 cột.
+   Các media query không dùng được CSS custom property, vì vậy breakpoint
+   được giữ bằng tên và giá trị cố định trong docs/design-tokens.md. */
+@media (min-width: 768px) {
+    :root {
+        --grid-columns: 8;
+        --grid-gutter: var(--primitive-space-5);
+        --grid-margin: var(--primitive-space-5);
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --grid-columns: 12;
+        --grid-gutter: var(--primitive-space-6);
+        --grid-margin: var(--primitive-space-6);
+    }
+}
+
+/* Utility chỉ dành cho layout/component mới; không thay thế Bootstrap grid
+   trên các trang legacy để tránh dịch chuyển giao diện ngoài phạm vi. */
+.layout-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    gap: var(--grid-gutter);
+    margin-inline: var(--grid-margin);
+}
+
+.layout-section {
+    padding-block: var(--semantic-space-layout-section);
+}
+
+.stack-sm > * + * { margin-block-start: var(--semantic-space-component-gap-sm); }
+.stack > * + * { margin-block-start: var(--semantic-space-component-gap); }
 
 body {
     font-family: var(--font-sans);
