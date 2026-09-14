@@ -39,6 +39,20 @@ class AdminProfileTest extends TestCase
         ]);
     }
 
+    public function test_admin_header_uses_a_clear_account_menu_with_a_safe_logout_action(): void
+    {
+        $user = User::factory()->create(['name' => 'Quản trị viên']);
+
+        $this->actingAs($user)
+            ->get(route('admin.profile'))
+            ->assertOk()
+            ->assertSee('id="admin-profile-toggle"', false)
+            ->assertSee('aria-expanded="false"', false)
+            ->assertSee('Cài đặt website')
+            ->assertSee('Đăng xuất')
+            ->assertDontSee('Notification');
+    }
+
     public function test_admin_profile_keeps_existing_avatar_when_no_new_file_is_submitted(): void
     {
         $user = User::factory()->create();

@@ -74,3 +74,22 @@
 .table thead th { color:#172036; border-top:0; }
 .btn-primary { background:#5f8f16; border-color:#5f8f16; }
 .btn-primary:hover, .btn-primary:focus { background:#4d7612; border-color:#4d7612; }
+
+/* Dropdown tài khoản: chỉ hiển thị thao tác thật, rõ trạng thái bàn phím và tách hành động đăng xuất. */
+.admin-header-icon,
+.admin-profile-toggle { border:0; background:transparent; color:inherit; cursor:pointer; }
+.admin-header-icon { display:flex; align-items:center; justify-content:center; width:42px; min-height:64px; }
+.admin-profile-toggle { display:flex; align-items:center; gap:8px; min-height:64px; padding:0 15px; font-weight:600; }
+.admin-profile-toggle__chevron { font-size:10px; transition:transform .2s ease; }
+.show > .admin-profile-toggle .admin-profile-toggle__chevron { transform:rotate(180deg); }
+.admin-header-icon:focus-visible,
+.admin-profile-toggle:focus-visible,
+.admin-profile-menu .dropdown-item:focus-visible { outline:3px solid rgba(95,143,22,.45); outline-offset:-3px; }
+.admin-profile-menu { min-width:230px; padding:8px 0; }
+.admin-profile-menu__label { margin:6px 15px 8px; color:#7a8599; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+.admin-profile-menu .dropdown-item { width:100%; border:0; background:transparent; color:#2b3342; text-align:left; }
+.admin-profile-menu .dropdown-item:hover,
+.admin-profile-menu .dropdown-item:focus { background:#f1f5ea; color:#365b08; }
+.admin-profile-menu__logout { color:#b42318 !important; }
+.admin-profile-menu__logout:hover,
+.admin-profile-menu__logout:focus { background:#fff1f0 !important; color:#8f1d13 !important; }
