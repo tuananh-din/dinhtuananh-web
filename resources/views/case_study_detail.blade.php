@@ -91,7 +91,18 @@
             <div class="case-study-gallery__grid">
                 @foreach($caseStudy->images as $galleryImage)
                 <figure class="case-study-gallery__item">
-                    <a href="{{ $galleryImage->image_url }}" class="img-popup" title="{{ $galleryImage->caption }}">
+                    <a
+                        href="{{ $galleryImage->image_url }}"
+                        class="case-study-gallery__open"
+                        target="_blank"
+                        rel="noopener"
+                        data-case-study-image-trigger
+                        data-image-src="{{ $galleryImage->image_url }}"
+                        data-image-alt="{{ $galleryImage->caption ?: $caseStudy->title }}"
+                        data-image-title="{{ $galleryImage->caption ?: 'Xem ảnh minh chứng' }}"
+                        data-image-caption="{{ $galleryImage->caption }}"
+                        aria-label="Mở ảnh phóng to: {{ $galleryImage->caption ?: $caseStudy->title }}"
+                    >
                         <img src="{{ $galleryImage->image_url }}" alt="{{ $galleryImage->caption ?: $caseStudy->title }}" loading="lazy" decoding="async">
                     </a>
                     @if($galleryImage->caption)<figcaption>{{ $galleryImage->caption }}</figcaption>@endif
@@ -99,6 +110,7 @@
                 @endforeach
             </div>
         </section>
+        @include('partials.case-study-image-dialog')
         @endif
 
         <footer class="article-footer">

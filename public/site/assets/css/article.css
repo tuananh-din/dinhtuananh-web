@@ -303,6 +303,30 @@ html[data-theme="light"] .article-page {
     display: block;
 }
 
+.article-page .case-study-gallery__open {
+    position: relative;
+}
+
+.article-page .case-study-gallery__open::after {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    color: #fff;
+    content: '\f00e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    background: rgba(12, 16, 20, .78);
+    border: 1px solid rgba(255, 255, 255, .32);
+    border-radius: 50%;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity .2s ease, transform .2s ease;
+}
+
 .article-page .case-study-gallery__item img {
     display: block;
     width: 100%;
@@ -316,11 +340,205 @@ html[data-theme="light"] .article-page {
     transform: scale(1.03);
 }
 
+.article-page .case-study-gallery__open:hover::after,
+.article-page .case-study-gallery__open:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .article-page .case-study-gallery__item figcaption {
     padding: 12px 14px;
     font-size: 14px;
     line-height: 1.55;
     color: var(--article-muted);
+}
+
+/* Native image dialog: only used by the Case Study evidence gallery. */
+body.is-article .case-study-image-dialog {
+    width: min(960px, calc(100vw - 48px));
+    max-width: none;
+    max-height: calc(100dvh - 48px);
+    margin: auto;
+    padding: 0;
+    color: #f7f9fb;
+    background: #11161c;
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 20px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .48);
+}
+
+body.is-article .case-study-image-dialog::backdrop {
+    background: rgba(4, 7, 10, .82);
+    backdrop-filter: blur(3px);
+}
+
+body.is-article .case-study-image-dialog__content {
+    display: grid;
+    max-height: calc(100dvh - 48px);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+body.is-article .case-study-image-dialog__header,
+body.is-article .case-study-image-dialog__footer {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px 24px;
+}
+
+body.is-article .case-study-image-dialog__eyebrow,
+body.is-article .case-study-image-dialog__header h2,
+body.is-article .case-study-image-dialog__header p,
+body.is-article .case-study-image-dialog__footer p,
+body.is-article .case-study-image-dialog__figure {
+    margin: 0;
+}
+
+body.is-article .case-study-image-dialog__eyebrow {
+    color: #c9f469;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+body.is-article .case-study-image-dialog__header h2 {
+    margin-top: 4px;
+    color: inherit;
+    font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+    font-size: clamp(20px, 2.4vw, 28px);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+body.is-article .case-study-image-dialog__header p:not(.case-study-image-dialog__eyebrow),
+body.is-article .case-study-image-dialog__footer p,
+body.is-article .case-study-image-dialog__figure figcaption {
+    color: #c9d0d8;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+body.is-article .case-study-image-dialog__header p:not(.case-study-image-dialog__eyebrow) {
+    margin-top: 6px;
+}
+
+body.is-article .case-study-image-dialog__close,
+body.is-article .case-study-image-dialog__controls button {
+    min-height: 44px;
+    padding: 10px 14px;
+    color: inherit;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .24);
+    border-radius: 9px;
+}
+
+body.is-article .case-study-image-dialog__close {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+body.is-article .case-study-image-dialog__figure {
+    display: grid;
+    min-height: 0;
+    padding: 0 24px;
+    place-items: center;
+    overflow: auto;
+}
+
+body.is-article .case-study-image-dialog__figure img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: min(62dvh, 680px);
+    object-fit: contain;
+}
+
+body.is-article .case-study-image-dialog__figure figcaption {
+    width: 100%;
+    margin-top: 12px;
+}
+
+body.is-article .case-study-image-dialog__footer {
+    align-items: center;
+}
+
+body.is-article .case-study-image-dialog__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+body.is-article .case-study-image-dialog__close:hover,
+body.is-article .case-study-image-dialog__controls button:hover {
+    background: rgba(201, 244, 105, .18);
+    border-color: #c9f469;
+}
+
+body.is-article .case-study-image-dialog__close:focus-visible,
+body.is-article .case-study-image-dialog__controls button:focus-visible,
+.article-page .case-study-gallery__open:focus-visible {
+    outline: 3px solid #c9f469;
+    outline-offset: 3px;
+}
+
+@media (max-width: 575px) {
+    body.is-article .case-study-image-dialog {
+        width: 100dvw;
+        max-height: 100dvh;
+        height: 100dvh;
+        border: 0;
+        border-radius: 0;
+    }
+
+    body.is-article .case-study-image-dialog__content {
+        max-height: 100dvh;
+    }
+
+    body.is-article .case-study-image-dialog__header,
+    body.is-article .case-study-image-dialog__footer,
+    body.is-article .case-study-image-dialog__figure {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    body.is-article .case-study-image-dialog__header {
+        gap: 12px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    body.is-article .case-study-image-dialog__close span {
+        display: none;
+    }
+
+    body.is-article .case-study-image-dialog__close {
+        width: 44px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    body.is-article .case-study-image-dialog__figure img {
+        max-height: 52dvh;
+    }
+
+    body.is-article .case-study-image-dialog__footer {
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    body.is-article .case-study-image-dialog__controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 /* Cover.
@@ -945,7 +1163,9 @@ body.is-article .mouseCursor {
 /* Ton trong tuy chon giam chuyen dong. */
 @media (prefers-reduced-motion: reduce) {
     .article-page .news-content a,
-    .article-hero__eyebrow a {
+    .article-hero__eyebrow a,
+    .article-page .case-study-gallery__open::after,
+    .article-page .case-study-gallery__item img {
         transition: none;
     }
 }

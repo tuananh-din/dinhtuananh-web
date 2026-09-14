@@ -145,27 +145,15 @@
         window.addEventListener('resize', requestScrollStateUpdate);
         requestScrollStateUpdate();
       }
-      
-       /* ================================
-       Video & Image Popup Js Start
-    ================================ */
 
-      if ($('.img-popup').length && typeof $.fn.magnificPopup === 'function') {
-        $(".img-popup").magnificPopup({
-          type: "image",
-          gallery: {
-            enabled: true,
-          },
-        });
-      }
-
+      /* Legacy static pages still use Magnific for video links. */
       if ($('.video-popup').length && typeof $.fn.magnificPopup === 'function') {
         $(".video-popup").magnificPopup({
           type: "iframe",
           callbacks: {},
         });
       }
-  
+
       /* ================================
        Counterup Js Start
     ================================ */
@@ -1869,6 +1857,81 @@ text_slider.on('slideChangeTransitionStart', function () {
 
         notice.hidden = true;
     });
+
+    (function () {
+        const dialog = document.getElementById('case-study-image-dialog');
+        const triggers = Array.from(document.querySelectorAll('[data-case-study-image-trigger]'));
+        if (!dialog || !triggers.length || typeof dialog.showModal !== 'function') return;
+
+        const image = document.getElementById('case-study-image-dialog-image');
+        const title = document.getElementById('case-study-image-dialog-title');
+        const caption = document.getElementById('case-study-image-dialog-caption');
+        const count = document.getElementById('case-study-image-dialog-count');
+        const previousButton = dialog.querySelector('[data-case-study-image-prev]');
+        const nextButton = dialog.querySelector('[data-case-study-image-next]');
+        let currentIndex = 0;
+        let lastTrigger = null;
+
+        function renderImage(nextIndex) {
+            currentIndex = (nextIndex + triggers.length) % triggers.length;
+            const trigger = triggers[currentIndex];
+            const imageTitle = trigger.dataset.imageTitle || 'Xem ảnh minh chứng';
+            const imageCaption = trigger.dataset.imageCaption || '';
+            const hasMultipleImages = triggers.length > 1;
+
+            image.src = trigger.dataset.imageSrc || trigger.href;
+            image.alt = trigger.dataset.imageAlt || imageTitle;
+            title.textContent = imageTitle;
+            caption.textContent = imageCaption;
+            caption.hidden = imageCaption === '';
+            count.textContent = hasMultipleImages ? `Ảnh ${currentIndex + 1} trên ${triggers.length}` : '';
+            previousButton.hidden = !hasMultipleImages;
+            nextButton.hidden = !hasMultipleImages;
+        }
+
+        function openDialog(trigger) {
+            currentIndex = triggers.indexOf(trigger);
+            lastTrigger = trigger;
+            renderImage(currentIndex);
+            dialog.showModal();
+        }
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function (event) {
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                event.preventDefault();
+                openDialog(trigger);
+            });
+        });
+
+        previousButton.addEventListener('click', function () {
+            renderImage(currentIndex - 1);
+        });
+
+        nextButton.addEventListener('click', function () {
+            renderImage(currentIndex + 1);
+        });
+
+        dialog.addEventListener('click', function (event) {
+            if (event.target === dialog) dialog.close();
+        });
+
+        dialog.addEventListener('keydown', function (event) {
+            if (triggers.length < 2) return;
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                renderImage(currentIndex - 1);
+            }
+            if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                renderImage(currentIndex + 1);
+            }
+        });
+
+        dialog.addEventListener('close', function () {
+            if (lastTrigger) lastTrigger.focus({ preventScroll: true });
+        });
+    })();
 
 
   
