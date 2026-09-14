@@ -1846,6 +1846,72 @@ html[data-theme="light"] .homepage-final-intro {
     }
 }
 
+/* Footer public: contrast rõ với nội dung, tránh link trùng và giữ vùng bấm đủ rộng. */
+.footer-section {
+    margin-top: 60px;
+    background: #151515;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+}
+
+.footer-brand-copy h3 a,
+.footer-wrapper .footer-menu-list a,
+.footer-wrapper .icon-items a,
+.footer-bottom ul li a {
+    transition: color var(--component-control-transition), text-decoration-color var(--component-control-transition);
+}
+
+.footer-brand-copy h3 a:hover,
+.footer-wrapper .footer-menu-list a:hover,
+.footer-wrapper .icon-items a:hover,
+.footer-bottom ul li a:hover {
+    color: var(--semantic-color-interactive-primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.footer-wrapper .icon-items-area .icon-items__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    gap: 10px;
+}
+
+.footer-wrapper .icon-items-area .icon-items .icon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    line-height: normal;
+    place-items: center;
+}
+
+html[data-theme="light"] .footer-section {
+    --white: #ffffff;
+    --header: #ffffff;
+    --text: #d6d9de;
+    --theme: var(--primitive-color-brand-lime-400);
+    background: #171a1f;
+    border-top-color: #313842;
+}
+
+@media (max-width: 575px) {
+    .footer-section {
+        margin-top: 40px;
+    }
+
+    .footer-wrapper .footer-menu-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        gap: 8px 16px;
+    }
+
+    .footer-wrapper .footer-menu-list li a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
+}
+
 /* Blog knowledge hub: scoped to the public Blog listing only. */
 .blog-page {
     overflow-x: clip;

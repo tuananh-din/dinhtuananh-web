@@ -4,12 +4,16 @@
     $siteLogo = data_get($siteInfo, 'logo', 'app/assets/images/others/thumb-16.jpg');
     $brandName = data_get($contactInfo, 'name') ?: data_get($siteInfo, 'name', 'Personal Brand');
     $siteSlogan = data_get($siteInfo, 'slogan', 'Xây dựng thương hiệu cá nhân, chia sẻ kiến thức ads và tư vấn chiến lược thực chiến.');
+    $siteLogoUrl = \Illuminate\Support\Str::startsWith($siteLogo, ['http://', 'https://', '//', '/'])
+        ? $siteLogo
+        : asset($siteLogo);
     $phone = data_get($contactInfo, 'tel', '');
     $email = data_get($contactInfo, 'email', '');
 @endphp
 <footer class="footer-section fix pb-0">
     <div class="container">
         <div class="footer-wrapper wow fadeInUp" data-wow-delay=".3s">
+            <nav aria-label="Điều hướng chân trang">
             <ul class="footer-menu-list">
                 <li><a href="{{ route('index') }}">Trang ch&#7911;</a></li>
                 <li><a href="{{ route('about') }}">Gi&#7899;i thi&#7879;u</a></li>
@@ -18,8 +22,9 @@
                 <li><a href="{{ route('courses') }}">Kh&#243;a h&#7885;c</a></li>
                 <li><a href="{{ route('contact') }}">Li&#234;n h&#7879;</a></li>
             </ul>
+            </nav>
             <div class="footer-brand-copy">
-                <h3>{{ $brandName }}</h3>
+                <h3><a href="{{ route('index') }}">{{ $brandName }}</a></h3>
                 <p>{{ $siteSlogan }}</p>
                 <a href="{{ route('index') }}#final-cta" class="theme-btn">Nh&#7853;n t&#432; v&#7845;n kh&#243;a h&#7885;c <i class="fa-solid fa-arrow-up-right"></i></a>
                 <form action="{{ route('newsletter.store') }}" method="POST" class="mt-4" data-submit-label="Đang gửi...">
@@ -43,44 +48,59 @@
             <div class="icon-items-area">
                 @if(data_get($contactInfo, 'facebook'))
                 <div class="icon-items">
-                    <a href="{{ data_get($contactInfo, 'facebook') }}" class="icon">
+                    <a href="{{ data_get($contactInfo, 'facebook') }}" class="icon-items__link" aria-label="Theo dõi {{ $brandName }} trên Facebook">
+                        <span class="icon" aria-hidden="true">
                         <i class="fa-brands fa-facebook-f"></i>
+                        </span>
+                        <span>Facebook</span>
                     </a>
-                    <a href="{{ data_get($contactInfo, 'facebook') }}">Facebook</a>
                 </div>
                 @endif
                 @if(data_get($contactInfo, 'instagram'))
                 <div class="icon-items">
-                    <a href="{{ data_get($contactInfo, 'instagram') }}" class="icon">
+                    <a href="{{ data_get($contactInfo, 'instagram') }}" class="icon-items__link" aria-label="Theo dõi {{ $brandName }} trên Instagram">
+                        <span class="icon" aria-hidden="true">
                         <i class="fa-brands fa-instagram"></i>
+                        </span>
+                        <span>Instagram</span>
                     </a>
-                    <a href="{{ data_get($contactInfo, 'instagram') }}">Instagram</a>
                 </div>
                 @endif
                 @if(data_get($contactInfo, 'x'))
                 <div class="icon-items">
-                    <a href="{{ data_get($contactInfo, 'x') }}" class="icon">
+                    <a href="{{ data_get($contactInfo, 'x') }}" class="icon-items__link" aria-label="Theo dõi {{ $brandName }} trên X">
+                        <span class="icon" aria-hidden="true">
                         <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span>X</span>
                     </a>
-                    <a href="{{ data_get($contactInfo, 'x') }}">X</a>
                 </div>
                 @endif
                 @if(data_get($contactInfo, 'linkedin'))
                 <div class="icon-items">
-                    <a href="{{ data_get($contactInfo, 'linkedin') }}" class="icon">
+                    <a href="{{ data_get($contactInfo, 'linkedin') }}" class="icon-items__link" aria-label="Theo dõi {{ $brandName }} trên LinkedIn">
+                        <span class="icon" aria-hidden="true">
                         <i class="fa-brands fa-linkedin-in"></i>
+                        </span>
+                        <span>LinkedIn</span>
                     </a>
-                    <a href="{{ data_get($contactInfo, 'linkedin') }}">LinkedIn</a>
                 </div>
                 @endif
             </div>
         </div>
         <div class="footer-bottom wow fadeInUp" data-wow-delay=".3s">
-            <p>Copyright &copy; <span>{{ data_get($siteInfo, 'name', $brandName) }}</span></p>
-            <a href="{{ route('index') }}" class="footer-logo"><img src="{{ $siteLogo }}" alt="{{ $brandName }}" height="100px"></a>
+            <p>&copy; {{ now()->year }} <span>{{ data_get($siteInfo, 'name', $brandName) }}</span></p>
+            <a href="{{ route('index') }}" class="footer-logo" aria-label="Về trang chủ {{ $brandName }}"><img src="{{ $siteLogoUrl }}" alt="{{ $brandName }}" height="100px"></a>
             <ul>
+                @if($phone)
                 <li><a href="tel:{{ $phone }}">Hotline: {{ $phone }}</a></li>
+                @endif
+                @if($email)
                 <li><a href="mailto:{{ $email }}">{{ $email }}</a></li>
+                @endif
+                @if(!$phone && !$email)
+                <li><a href="{{ route('contact') }}">Liên hệ tư vấn</a></li>
+                @endif
             </ul>
         </div>
     </div>
