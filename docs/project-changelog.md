@@ -2,6 +2,12 @@
 
 Ghi các thay đổi quan trọng theo phase. Mỗi mục 1 commit. Nhánh: `master`.
 
+## Design tokens public v1.0.0 — 2026-09-14
+
+- Thêm kiến trúc token ba tầng trong `custom.css`: primitive (màu, shadow, motion), semantic (surface/text/interactive/focus) và component (control/toggle). Các token semantic đổi theo light/dark; lớp typography hiện có được giữ nguyên tên để không gây breaking change cho CSS legacy.
+- Áp dụng component token cho trạng thái hover/disabled của CTA và active của theme toggle. Không refactor các giá trị hardcode legacy ngoài phạm vi này.
+- Thêm `docs/design-tokens.md`: quy ước tên, mục đích token semantic, governance, quy tắc versioning/changelog và kế hoạch đồng bộ design tool. Figma chưa kết nối nên chưa có sync tự động.
+
 ## Hiệu năng cuộn mobile public — 2026-09-13 (chưa commit)
 
 - Touch, thiết bị không hover và người dùng bật Reduced Motion nay giữ native scroll: không khởi tạo GSAP, ScrollTrigger, ScrollSmoother hay SplitText app effect. Desktop fine-pointer + hover vẫn giữ hiệu ứng khi các vendor cần thiết có mặt.

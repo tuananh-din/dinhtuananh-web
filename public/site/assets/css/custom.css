@@ -727,21 +727,21 @@ html[data-theme="light"] .blog-toc {
     margin-right: 14px;
     flex: 0 0 auto;
     opacity: .85;
-    transition: background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease, opacity .2s ease;
+    transition: background var(--component-control-transition), color var(--component-control-transition), border-color var(--component-control-transition), box-shadow var(--component-control-transition), opacity var(--component-control-transition);
 }
-.theme-toggle i { transition: transform .2s ease; }
+.theme-toggle i { transition: transform var(--component-control-transition); }
 .theme-toggle[aria-pressed="true"] {
-    background: var(--theme);
-    color: #060606;
-    border-color: var(--theme);
+    background: var(--component-toggle-surface-active);
+    color: var(--component-toggle-text-active);
+    border-color: var(--component-toggle-surface-active);
     opacity: 1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+    box-shadow: var(--component-toggle-shadow-active);
 }
 .theme-toggle[aria-pressed="true"] i { transform: rotate(90deg); }
 .theme-toggle:hover {
-    background: var(--theme);
-    color: #060606;
-    border-color: var(--theme);
+    background: var(--component-toggle-surface-active);
+    color: var(--component-toggle-text-active);
+    border-color: var(--component-toggle-surface-active);
     opacity: 1;
 }
 
@@ -2710,6 +2710,35 @@ html[data-theme="light"] .about-profile-card-label {
 /* Public typography system: semantic roles shared by public templates.
    Be Vietnam Pro is the documented public typeface; use only loaded 400–700. */
 :root {
+    /* Design tokens: primitives are raw values; semantic tokens describe intent;
+       component tokens are reserved for a single control family. */
+    --primitive-color-neutral-0: #000000;
+    --primitive-color-neutral-50: #ffffff;
+    --primitive-color-neutral-100: #e9e9e7;
+    --primitive-color-neutral-300: #b7b7b3;
+    --primitive-color-neutral-700: #23272e;
+    --primitive-color-neutral-900: #060606;
+    --primitive-color-brand-lime-400: #bff747;
+    --primitive-color-brand-green-700: #5f8f16;
+    --primitive-shadow-control-hover: 0 8px 18px rgba(0, 0, 0, .18);
+    --primitive-shadow-toggle-active: 0 4px 12px rgba(0, 0, 0, .2);
+    --primitive-motion-fast: .2s;
+
+    --semantic-color-surface-page: var(--primitive-color-neutral-900);
+    --semantic-color-text-primary: var(--primitive-color-neutral-50);
+    --semantic-color-text-default: var(--primitive-color-neutral-100);
+    --semantic-color-text-muted: var(--primitive-color-neutral-300);
+    --semantic-color-text-link: var(--primitive-color-brand-lime-400);
+    --semantic-color-interactive-primary: var(--primitive-color-brand-lime-400);
+    --semantic-color-focus-ring: var(--primitive-color-brand-lime-400);
+
+    --component-control-transition: var(--primitive-motion-fast) ease;
+    --component-control-disabled-opacity: .55;
+    --component-control-shadow-hover: var(--primitive-shadow-control-hover);
+    --component-toggle-surface-active: var(--semantic-color-interactive-primary);
+    --component-toggle-text-active: var(--primitive-color-neutral-900);
+    --component-toggle-shadow-active: var(--primitive-shadow-toggle-active);
+
     --font-sans: "Be Vietnam Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --font-display: var(--font-sans);
 
@@ -2731,11 +2760,11 @@ html[data-theme="light"] .about-profile-card-label {
     --tracking-heading: -.01em;
     --tracking-eyebrow: .06em;
 
-    --text-strong: #ffffff;
-    --text-default: #e9e9e7;
-    --text-muted: #b7b7b3;
-    --text-link: #bff747;
-    --focus-ring: #bff747;
+    --text-strong: var(--semantic-color-text-primary);
+    --text-default: var(--semantic-color-text-default);
+    --text-muted: var(--semantic-color-text-muted);
+    --text-link: var(--semantic-color-text-link);
+    --focus-ring: var(--semantic-color-focus-ring);
 }
 
 html {
@@ -2744,11 +2773,18 @@ html {
 
 html[data-theme="light"] {
     color-scheme: light;
-    --text-strong: #11151b;
-    --text-default: #23272e;
-    --text-muted: #59616c;
-    --text-link: #4d7511;
-    --focus-ring: #3f6f00;
+    --semantic-color-surface-page: #f6f7f9;
+    --semantic-color-text-primary: #11151b;
+    --semantic-color-text-default: var(--primitive-color-neutral-700);
+    --semantic-color-text-muted: #59616c;
+    --semantic-color-text-link: #4d7511;
+    --semantic-color-interactive-primary: var(--primitive-color-brand-green-700);
+    --semantic-color-focus-ring: #3f6f00;
+    --text-strong: var(--semantic-color-text-primary);
+    --text-default: var(--semantic-color-text-default);
+    --text-muted: var(--semantic-color-text-muted);
+    --text-link: var(--semantic-color-text-link);
+    --focus-ring: var(--semantic-color-focus-ring);
 }
 
 body {
@@ -2759,6 +2795,7 @@ body {
     letter-spacing: 0;
     text-transform: none;
     color: var(--text-default);
+    background-color: var(--semantic-color-surface-page);
 }
 
 body :where(p, li, label, input, textarea, select, button) {
@@ -3200,12 +3237,12 @@ html[data-theme="light"] .site-notice--neutral {
 
 /* Button feedback: giữ nguyên giao diện cũ, bổ sung trạng thái dễ nhận biết và vùng bấm an toàn. */
 .theme-btn {
-    transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    transition: color var(--component-control-transition), background-color var(--component-control-transition), border-color var(--component-control-transition), box-shadow var(--component-control-transition), transform var(--component-control-transition);
 }
 
 .theme-btn:not(:disabled):not([aria-disabled="true"]):hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+    box-shadow: var(--component-control-shadow-hover);
 }
 
 .theme-btn:not(:disabled):not([aria-disabled="true"]):active {
@@ -3218,7 +3255,7 @@ html[data-theme="light"] .site-notice--neutral {
 .dpm-page .dpm-button:disabled,
 .dpm-page .dpm-button[aria-disabled="true"] {
     cursor: not-allowed;
-    opacity: .55;
+    opacity: var(--component-control-disabled-opacity);
     pointer-events: none;
     transform: none;
     box-shadow: none;
